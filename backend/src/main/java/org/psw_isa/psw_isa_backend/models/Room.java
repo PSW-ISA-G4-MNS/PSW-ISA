@@ -1,0 +1,76 @@
+package org.psw_isa.psw_isa_backend.models;
+
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+import java.time.*;
+
+
+@Entity
+public class Room {
+	
+	@Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
+
+	
+	
+	private String title; 
+	
+	@ManyToOne
+    @JoinColumn
+	private Clinic clinic; 
+	
+	
+	private Integer capacity; 
+	
+
+	public Room() 
+	{
+	}
+	public Room(String _title, Clinic _clinic, Integer _capacity) {
+		super();
+		 
+		this.title = _title;
+		 
+		this.clinic = _clinic;
+		 
+		this.capacity = _capacity;
+		
+	}
+	
+	 
+	public String getTitle() 
+	{
+		return this.title;
+	}
+
+	public void setTitle(String newValue) 
+	{
+		this.title = newValue;
+	}
+	 
+	public Clinic getClinic() 
+	{
+		return this.clinic;
+	}
+
+	public void setClinic(Clinic newValue) 
+	{
+		this.clinic = newValue;
+	}
+	 
+	public Integer getCapacity() 
+	{
+		return this.capacity;
+	}
+
+	public void setCapacity(Integer newValue) 
+	{
+		this.capacity = newValue;
+	}
+	
+}
