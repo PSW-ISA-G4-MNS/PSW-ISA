@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import java.time.*;
 
@@ -19,7 +21,7 @@ public class User {
 	
 	@ManyToOne
     @JoinColumn
-	private Dtring firstname; 
+	private String firstname; 
 	
 	
 	private String lastname; 
@@ -40,7 +42,7 @@ public class User {
 	public User() 
 	{
 	}
-	public User(Dtring _firstname, String _lastname, String _mobilePhone, String _email, String _address, LocalDate _birthday) {
+	public User(String _firstname, String _lastname, String _mobilePhone, String _email, String _address, LocalDate _birthday) {
 		super();
 		 
 		this.firstname = _firstname;
@@ -58,12 +60,12 @@ public class User {
 	}
 	
 	 
-	public Dtring getFirstname() 
+	public String getFirstname() 
 	{
 		return this.firstname;
 	}
 
-	public void setFirstname(Dtring newValue) 
+	public void setFirstname(String newValue) 
 	{
 		this.firstname = newValue;
 	}
