@@ -19,8 +19,6 @@ public class User {
     private Long id;
 
 	
-	@ManyToOne
-    @JoinColumn
 	private String firstname; 
 	
 	
