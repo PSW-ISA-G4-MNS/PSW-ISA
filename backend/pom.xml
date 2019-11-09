@@ -13,6 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>backend</name>
 	<description>PSW ISA Project</description>
+  	<packaging>war</packaging>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -47,6 +48,35 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+        		<plugin>
+         			 <artifactId>maven-clean-plugin</artifactId>
+          
+        		</plugin>
+        		<!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+        		<plugin>
+          			<artifactId>maven-resources-plugin</artifactId>
+          
+        		</plugin>
+        		<plugin>
+          			<artifactId>maven-compiler-plugin</artifactId>
+        		</plugin>
+        		<plugin>
+          			<artifactId>maven-surefire-plugin</artifactId>
+        		</plugin>
+        		<plugin>
+          			<artifactId>maven-war-plugin</artifactId>
+        		</plugin>
+        		<plugin>
+          			<artifactId>maven-install-plugin</artifactId>
+        		</plugin>
+        		<plugin>
+          			<artifactId>maven-deploy-plugin</artifactId>
+        		</plugin>
+        		<plugin>
+                		<groupId>org.apache.maven.plugins</groupId>
+                		<artifactId>maven-site-plugin</artifactId>
+                		<version>3.7.1</version>
+            		</plugin>
 		</plugins>
 	</build>
 
