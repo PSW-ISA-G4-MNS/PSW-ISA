@@ -58,7 +58,7 @@ export default {
 		</p>
 		
 		<p>
-		<input type="LocalDate" class="form-control" placeholder="birthday" v-model="data.birthday" />
+		<input type="date" class="form-control" placeholder="birthday" v-model="data.birthday" />
 		</p>
 		
 
