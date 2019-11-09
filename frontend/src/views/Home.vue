@@ -2,7 +2,6 @@
 
 
 // import widgets for this view here
-import WidgetLoginNew from "../widgets/Auth/WidgetLoginNew.vue"
 
 export default {
     name: "Login",
@@ -21,14 +20,13 @@ export default {
         }
     },
     components: {
-    	"WidgetLoginNew": WidgetLoginNew
     }
 }
 </script>>
 
 <template>
 
-<WidgetLoginNew />
+<p>Home</p>
 
 </template>
 

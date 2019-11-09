@@ -2,7 +2,7 @@
 
 
 // import widgets for this view here
-import WidgetLoginNew from "../widgets/Auth/WidgetLoginNew.vue"
+import RegistrationForm from "../widgets/RegistrationForm/RegistrationForm.vue"
 
 export default {
     name: "Login",
@@ -21,14 +21,14 @@ export default {
         }
     },
     components: {
-    	"WidgetLoginNew": WidgetLoginNew
+    	"RegistrationForm": RegistrationForm
     }
 }
 </script>>
 
 <template>
 
-<WidgetLoginNew />
+<RegistrationForm />
 
 </template>
 
