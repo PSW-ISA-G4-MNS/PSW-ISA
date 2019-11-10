@@ -1,12 +1,13 @@
 <script>
 import LoginService from "./service";
+import router from '../../../router';
 
 export default {
     name: "WidgetLoginNew",
     data: function () {
         return {
             data: {
-	    	userName: null,
+	    	email: null,
 		password: null,
 	    	success: false
 	    },
@@ -17,8 +18,15 @@ export default {
     	submit: function() 
 	{
 		LoginService.login(this.data).then(response => {
-			if (response.data.code == 0) this.data.success = true;
-			else this.data.success = false;
+			if (response.data.code == 0) {
+				this.data.success = true;
+				localStorage.setItem("user", this.data.email);
+				router.push("/");
+			}
+			else {
+				this.data.success = false;
+				localStorage.setItem("user", null);
+			}
 
 		});
 	}
@@ -31,7 +39,7 @@ export default {
         <div class="success-box" v-if="success">Login succeded</div>
 	<div v-if="!success"> 
 		<p>
-		<input type="email" class="form-control" placeholder="Username" v-model="data.userName" />
+		<input type="email" class="form-control" placeholder="Username" v-model="data.email" />
 		</p>
 		
 		<p>
