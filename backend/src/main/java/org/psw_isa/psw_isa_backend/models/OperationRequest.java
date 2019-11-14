@@ -15,7 +15,7 @@ import java.time.*;
 public class OperationRequest {
 	
 	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
 	
