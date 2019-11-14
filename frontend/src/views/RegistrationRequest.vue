@@ -2,10 +2,10 @@
 
 
 // import widgets for this view here
-import WidgetLoginNew from "../widgets/Auth/WidgetLoginNew.vue"
+import RegistrationRequestMulti from "../widgets/RegistrationRequest/RegistrationRequestMulti.vue"
 
 export default {
-    name: "Login",
+    name: "RegistrationReques",
     data: function () {
             return {
 		data: {}
@@ -21,14 +21,14 @@ export default {
         }
     },
     components: {
-    	"WidgetLoginNew": WidgetLoginNew
+    	"RegistrationRequestMulti": RegistrationRequestMulti
     }
 }
 </script>>
 
 <template>
 
-<WidgetLoginNew />
+<RegistrationRequestMulti/>
 
 </template>
 
