@@ -22,4 +22,9 @@ export default class RegistrationRequestService
         return axios.post(API_URL + "/registrationRequests/decline/"+id);
     }
 
+    static get(id) 
+    {
+        return axios.get(API_URL + "/registrationRequests/" + id);
+    }
+
 }

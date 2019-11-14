@@ -1,5 +1,6 @@
 <script>
 import RegistrationRequest from "./service";
+import RegistrationRequestService from './service';
 
 export default {
 	name: "RegistrationRequest",
@@ -31,9 +32,12 @@ export default {
 	}
 	
 
-	}
+	},
 	
-	
+	mounted: function () 
+    {
+        RegistrationRequestService.get(this.request).then(response => this.data = response.data);
+    }
 }
 </script>
 
