@@ -15,7 +15,7 @@ import java.time.*;
 public class Vacation {
 	
 	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
 	
