@@ -16,16 +16,20 @@ public class PatientService {
 	@Autowired 
 	PatientRepository patientRepository;
 	
-	Page<Patient> findAll(Pageable pageable){
-		return patientRepository.findAll(pageable);
+	List<Patient> findAll(){
+		return patientRepository.findAll();
 	}
 	
-	List<Patient> findAllByfirstnameAndlastnameAllIgnoringCase(String firstname, String lastname){
-		return patientRepository.findAllByfirstnameAndlastnameAllIgnoringCase(firstname, lastname);
-	}
+	//List<Patient> findAllByfirstnameAndlastnameAllIgnoringCase(String firstname, String lastname){
+	//	return patientRepository.findAllByfirstnameAndlastnameAllIgnoringCase(firstname, lastname);
+	//}
 	
 	Patient findOneByinsuranceID(Long id) {
 		return patientRepository.findOneByinsuranceID(id);
+	}
+	
+	public Patient save(Patient patient) {
+		return patientRepository.save(patient);
 	}
 
 }

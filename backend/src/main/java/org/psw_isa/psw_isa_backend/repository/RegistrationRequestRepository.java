@@ -10,6 +10,8 @@ public interface RegistrationRequestRepository extends JpaRepository<Registratio
 	
 	Page<RegistrationRequest> findAll(Pageable pageable);
 	
+	public RegistrationRequest findOneById(Long id);
+	
 	
 
 }

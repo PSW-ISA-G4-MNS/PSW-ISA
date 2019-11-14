@@ -8,6 +8,7 @@ import org.psw_isa.psw_isa_backend.dtos.RegistrationRequestDTO;
 import org.psw_isa.psw_isa_backend.models.Patient;
 import org.psw_isa.psw_isa_backend.models.RegistrationRequest;
 import org.psw_isa.psw_isa_backend.repository.RegistrationRequestRepository;
+import org.psw_isa.psw_isa_backend.service.PatientService;
 import org.psw_isa.psw_isa_backend.service.RegistrationRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,6 +30,8 @@ public class RegistrationRequestController {
 	
 	@Autowired
 	private RegistrationRequestService registrationRequestService;
+	private PatientService patientService;
+
 	
 	@GetMapping(value = "/all")
 	public ResponseEntity<List<RegistrationRequestDTO>> findAll (Pageable pageable){
@@ -62,20 +65,25 @@ public class RegistrationRequestController {
 	
 	
 	@PutMapping(value = "/approved/{id}")
-	public ResponseEntity<Long> approve(@RequestBody Long id){
-		RegistrationRequestDTO registrationRequestDTO = new RegistrationRequestDTO();
+	public ResponseEntity<Long> approve(@RequestBody Long id){		
+		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
 		
+		registrationRequest.setApproved(true);
+		registrationRequestService.save(registrationRequest);
 		
-		
+		Patient patient = registrationRequest.getPatient();
+		patientService.save(patient);
 		
 		return new ResponseEntity<>(id, HttpStatus.OK);
 	}
 	
 	
 	@PutMapping(value = "/decline/{id}")
-	public ResponseEntity<Long> decline(@RequestBody Long id){
-		RegistrationRequestDTO registrationRequestDTO = new RegistrationRequestDTO();
+	public ResponseEntity<Long> decline(@RequestBody Long id){		
+		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
 		
+		registrationRequest.setApproved(false);
+		registrationRequestService.save(registrationRequest);
 		
 		
 		return new ResponseEntity<>(id, HttpStatus.OK);
