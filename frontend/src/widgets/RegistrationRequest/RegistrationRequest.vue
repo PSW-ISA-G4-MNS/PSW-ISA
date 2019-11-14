@@ -3,7 +3,7 @@ import RegistrationRequest from "./service";
 
 export default {
 	name: "RegistrationRequest",
-	props: ["id"],
+	props: ["request"],
     data: function () {
         return {
           
@@ -13,7 +13,7 @@ export default {
     methods: {
     	accept: function() 
 	{
-		RegistrationRequestService.accept(this.id).then(response => {
+		RegistrationRequestService.accept(this.request).then(response => {
 
 
 			if (response.data.code == 0) this.data.success = true;
@@ -23,7 +23,7 @@ export default {
 	},
 		decline: function() 
 	{
-		RegistrationRequestService.decline(this.id).then(response => {
+		RegistrationRequestService.decline(this.request).then(response => {
 			if (response.data.code == 0) this.data.success = true;
 			else this.data.success = false;
 

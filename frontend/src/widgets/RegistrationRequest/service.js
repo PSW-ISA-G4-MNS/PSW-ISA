@@ -7,7 +7,10 @@ export default class RegistrationRequestService
     {
         this.self = self;
     }
-
+    static list() 
+    {
+        return axios.get(API_URL + "/registrationRequestsall/");
+    }
 
     static accept(id)
     {
