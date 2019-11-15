@@ -23,4 +23,8 @@ public class RegistrationRequestService {
 		registrationRequestRepository.deleteById(id);
 	}
 	
+	public RegistrationRequest findOneById(Long id) {
+		return registrationRequestRepository.findOneById(id);
+	}
+	
 }
