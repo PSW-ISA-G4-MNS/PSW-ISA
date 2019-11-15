@@ -45,6 +45,10 @@ public class Patient {
 		return this.user;
 	}
 
+	public Long getId() {
+		return this.id;
+	}
+	
 	public void setUser(User newValue) 
 	{
 		this.user = newValue;

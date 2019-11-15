@@ -1,21 +1,21 @@
 package org.psw_isa.psw_isa_backend.models;
 
 
+import java.time.LocalDate;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
-import java.time.*;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name="users")
 public class User {
 	
 	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
 	
@@ -76,6 +76,18 @@ public class User {
 		return this.lastname;
 	}
 
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public void setLastname(String newValue) 
 	{
 		this.lastname = newValue;
