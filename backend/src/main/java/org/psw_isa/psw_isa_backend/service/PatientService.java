@@ -5,8 +5,6 @@ import java.util.List;
 import org.psw_isa.psw_isa_backend.models.Patient;
 import org.psw_isa.psw_isa_backend.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 
@@ -24,7 +22,7 @@ public class PatientService {
 	//	return patientRepository.findAllByfirstnameAndlastnameAllIgnoringCase(firstname, lastname);
 	//}
 	
-	Patient findOneByinsuranceID(Long id) {
+	public Patient findOneByinsuranceID(Long id) {
 		return patientRepository.findOneByinsuranceID(id);
 	}
 	
