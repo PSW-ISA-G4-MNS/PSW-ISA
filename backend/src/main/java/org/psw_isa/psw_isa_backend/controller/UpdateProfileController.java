@@ -35,9 +35,20 @@ public class UpdateProfileController {
 		Long id = forChange.getId();
 		
 		
-		userService.updatePatient(firstname, lastname, address, birthday, mobile_phone, id);
+		userService.updateUser(firstname, lastname, address, birthday, mobile_phone, id);
 		
 		
 		return new ResponseEntity<>(id, HttpStatus.OK);
 	}
+
+	@GetMapping(value = "")
+	public ResponseEntity<User> populateUpdateData(){
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
+		HttpSession session = attr.getRequest().getSession(true); 
+		
+		User forChange = (User) session.getAttribute("user");
+		
+		return new ResponseEntity<>(forChange, HttpStatus.OK);
+	}
+
 }

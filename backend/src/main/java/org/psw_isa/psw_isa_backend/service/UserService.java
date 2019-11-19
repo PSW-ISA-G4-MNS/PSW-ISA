@@ -18,7 +18,7 @@ public class UserService {
 	}
 
 	public int updateUser(String firstname, String lastname, String address, LocalDate birthday, String mobile_phone, Long id){
-		return userRepository.updatePatient(firstname, lastname, address, birthday, mobile_phone, id);
+		return userRepository.updateUser(firstname, lastname, address, birthday, mobile_phone, id);
 	}
 	
 }
