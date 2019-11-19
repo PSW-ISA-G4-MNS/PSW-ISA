@@ -1,6 +1,6 @@
 <script>
 
-import PatientProfileService from "./service";
+import PatientService from "./service";
 import WidgetUserSingle from "../WidgetUserSingle.vue";
 
 export default {
@@ -13,7 +13,7 @@ export default {
     },
     mounted: function()
     {
-        PatientProfileService.show().then(response => {
+        PatientProfileService.get().then(response => {
             this.data = response.data;
         })
     },

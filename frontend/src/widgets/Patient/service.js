@@ -1,16 +1,16 @@
 import { API_URL } from "../../config";
 import axios from "axios"
 
-export default class PatientProfileService
+export default class PatientService
 {
     constructor(self)
     {
         this.self = self;
     }
 
-    static show()
+    static get()
     {
-        return axios.get(API_URL + "/profile");
+        return axios.get(API_URL + "/patients");
     }
 
 }

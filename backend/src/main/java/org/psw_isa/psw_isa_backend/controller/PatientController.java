@@ -15,7 +15,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 @RestController
-@RequestMapping(value = "profile")
+@RequestMapping(value = "patients")
 public class PatientController {
 
 
