@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 import javax.servlet.http.HttpSession;
 
-import org.psw_isa.psw_isa_backend.models.Patient;
+import org.psw_isa.psw_isa_backend.models.User;
 import org.psw_isa.psw_isa_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,16 +27,15 @@ public class UpdateProfileController {
 	
 	
 	@PostMapping(value = "/submit/{firstname}/{lastname}/{address}/{birthday}/{mobile_phone}/")
-	public ResponseEntity<Long> updatePatient(@RequestBody String firstname, String lastname, String address, LocalDate birthday, String mobile_phone){
+	public ResponseEntity<Long> updateUser(@RequestBody String firstname, String lastname, String address, LocalDate birthday, String mobile_phone){
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
 		HttpSession session = attr.getRequest().getSession(true); 
 		
-		Patient forChange = (Patient) session.getAttribute("user");
+		User forChange = (User) session.getAttribute("user");
 		Long id = forChange.getId();
-		String insuranceid = forChange.getInsuranceID();
 		
 		
-		userService.updatePatient(firstname, lastname, address, birthday, mobile_phone, insuranceid);
+		userService.updatePatient(firstname, lastname, address, birthday, mobile_phone, id);
 		
 		
 		return new ResponseEntity<>(id, HttpStatus.OK);

@@ -17,8 +17,8 @@ public class UserService {
 		return userRepository.findOneByemail(email);	
 	}
 
-	public int updatePatient(String firstname, String lastname, String address, LocalDate birthday, String mobile_phone, String insuranceid){
-		return userRepository.updatePatient(firstname, lastname, address, birthday, mobile_phone, insuranceid);
+	public int updateUser(String firstname, String lastname, String address, LocalDate birthday, String mobile_phone, Long id){
+		return userRepository.updatePatient(firstname, lastname, address, birthday, mobile_phone, id);
 	}
 	
 }
