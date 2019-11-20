@@ -9,7 +9,7 @@ export default {
             data: {}
         }
     },
-    mounted: function()) 
+    mounted: function()
     {
         UserService.get(this.user).then(response => this.data = response.data);
     }
