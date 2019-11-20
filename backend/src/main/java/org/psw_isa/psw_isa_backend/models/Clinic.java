@@ -7,6 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import java.time.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 
 @Entity
@@ -23,31 +25,27 @@ public class Clinic {
 	
 	private String address; 
 	
+	private String description;
 	
-	private Long locationLat; 
+	private ArrayList<Doctor> doctors;
 	
+	private ArrayList<Room> rooms;
 	
-	private Long locationLon; 
-	
-	
-	private Integer ambulanceCarCount; 
-	
+	private HashMap<String,String> prices;
 
+	private ArrayList<String> appointment;
+	
 	public Clinic() 
 	{
 	}
-	public Clinic(String _name, String _address, Long _locationLat, Long _locationLon, Integer _ambulanceCarCount) {
+	public Clinic(String _name, String _address, String description) {
 		super();
 		 
 		this.name = _name;
 		 
 		this.address = _address;
 		 
-		this.locationLat = _locationLat;
-		 
-		this.locationLon = _locationLon;
-		 
-		this.ambulanceCarCount = _ambulanceCarCount;
+		this.setDescription(description);
 		
 	}
 	
@@ -71,35 +69,36 @@ public class Clinic {
 	{
 		this.address = newValue;
 	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public ArrayList<Doctor> getDoctors() {
+		return doctors;
+	}
+	public void setDoctors(ArrayList<Doctor> doctors) {
+		this.doctors = doctors;
+	}
+	public ArrayList<Room> getRooms() {
+		return rooms;
+	}
+	public void setRooms(ArrayList<Room> rooms) {
+		this.rooms = rooms;
+	}
+	public HashMap<String,String> getPrices() {
+		return prices;
+	}
+	public void setPrices(HashMap<String,String> prices) {
+		this.prices = prices;
+	}
+	public ArrayList<String> getAppointment() {
+		return appointment;
+	}
+	public void setAppointment(ArrayList<String> appointment) {
+		this.appointment = appointment;
+	}
 	 
-	public Long getLocationLat() 
-	{
-		return this.locationLat;
-	}
-
-	public void setLocationLat(Long newValue) 
-	{
-		this.locationLat = newValue;
-	}
-	 
-	public Long getLocationLon() 
-	{
-		return this.locationLon;
-	}
-
-	public void setLocationLon(Long newValue) 
-	{
-		this.locationLon = newValue;
-	}
-	 
-	public Integer getAmbulanceCarCount() 
-	{
-		return this.ambulanceCarCount;
-	}
-
-	public void setAmbulanceCarCount(Integer newValue) 
-	{
-		this.ambulanceCarCount = newValue;
-	}
 	
 }
