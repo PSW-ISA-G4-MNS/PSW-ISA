@@ -19,31 +19,31 @@ export default {
     	submit: function() 
 	{
 		AddAdminService.create(this.data).then(response => this.success = true);
-	}
+	},
+
+	changeJobTitle (event) {
+      this.selectedJobTitle = event.target.options[event.target.options.selectedIndex].text
+    }
 	},
 	mounted: function () 
     {
-        ReqistrationRequestService.list().then(response => this.items = response.data);
+        AddAdminService.list().then(response => this.items = response.data);
     },
 }
 </script>
 
 <template>
-    <div class="widget-user-new"> 
+    <div class="drop-down"> 
         <div v-if="success">Creation successful</div>
 	<div v-if="!success"> 
-		<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-  <span class="caret"></span></button>
-  <ul class="dropdown-menu">
-    <li v-for="item in items.filter(filter)"
+
+	<b-dropdown id="dropdown-1" text="Dropdown Button" class="m-md-2">
+    <b-dropdown-item v-for="item in items.filter(filter)"
       	:id="item.id"
-      	:key="item.id"
-        :request="item.id"
-          />
-  </li>
-  </ul>
-</div>
+      	:key="item.id">
+
+		{{item.username}}
+  </b-dropdown>
 		
 
 		<p><button v-on:click="submit">Submit</button></p>
