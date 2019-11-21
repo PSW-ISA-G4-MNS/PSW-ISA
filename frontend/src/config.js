@@ -1,1 +1,1 @@
-export const API_URL = "http://localhost/psw-isa-api";
+export const API_URL = "http://localhost:9001/";
