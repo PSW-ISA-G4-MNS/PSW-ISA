@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.psw_isa.psw_isa_backend.dtos.RegistrationDTO;
 import org.psw_isa.psw_isa_backend.dtos.RegistrationRequestDTO;
 import org.psw_isa.psw_isa_backend.models.Patient;
@@ -56,6 +58,15 @@ public class RegistrationRequestController {
 		return new ResponseEntity<>(registrationRequestDTOs, HttpStatus.OK);
 	}
 	
+	
+	@GetMapping(value = "{id}")
+	public ResponseEntity<RegistrationRequest> findOneById(@PathParam("id") Long id){
+		
+		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
+		
+		
+		return new ResponseEntity<>(registrationRequest, HttpStatus.OK);
+	}
 	
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<RegistrationRequestDTO> save(@RequestBody RegistrationDTO registrationDTO){
