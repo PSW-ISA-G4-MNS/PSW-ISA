@@ -35,7 +35,7 @@ public class LogInController {
 				ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
 				HttpSession session = attr.getRequest().getSession(true); 
 				
-				session.setAttribute("user", user.getPassword());
+				session.setAttribute("user", user.getEmail());
 				
 				return new ResponseEntity<>(id, HttpStatus.OK);
 			}else {
