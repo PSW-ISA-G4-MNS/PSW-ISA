@@ -57,6 +57,15 @@ public class RegistrationRequestController {
 	}
 	
 	
+	@GetMapping(value = "{id}")
+	public ResponseEntity<RegistrationRequest> findOneById(@RequestBody Long id){
+		
+		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
+		
+		
+		return new ResponseEntity<>(registrationRequest, HttpStatus.OK);
+	}
+	
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<RegistrationRequestDTO> save(@RequestBody RegistrationDTO registrationDTO){
 		
