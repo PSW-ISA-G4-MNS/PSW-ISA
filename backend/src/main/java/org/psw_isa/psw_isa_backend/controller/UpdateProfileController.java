@@ -47,7 +47,9 @@ public class UpdateProfileController {
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
 		HttpSession session = attr.getRequest().getSession(true); 
 		
-		User user = (User) session.getAttribute("user");
+		String email = (String) session.getAttribute("user");
+		
+		User user = userService.findOneByemail(email);
 		
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
