@@ -1,7 +1,7 @@
 <script>
 
 import PatientService from "./service";
-import WidgetUserSingle from "../WidgetUserSingle.vue";
+import WidgetUserSingle from "../User/WidgetUserSingle.vue";
 
 export default {
     name: "WidgetPatientSingle",
