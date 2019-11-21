@@ -59,13 +59,13 @@ public class RegistrationRequestController {
 	}
 	
 	
-	@GetMapping(value = "{id}")
-	public ResponseEntity<RegistrationRequest> findOneById(@PathParam("id") Long id){
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<RegistrationRequestDTO> findOneById(@PathParam("id") Long id){
 		
 		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
+		RegistrationRequestDTO registrationRequestDTO = new RegistrationRequestDTO(registrationRequest);
 		
-		
-		return new ResponseEntity<>(registrationRequest, HttpStatus.OK);
+		return new ResponseEntity<>(registrationRequestDTO, HttpStatus.OK);
 	}
 	
 	@PostMapping(consumes = "application/json")
@@ -91,7 +91,7 @@ public class RegistrationRequestController {
 	
 	
 	@PutMapping(value = "/approve/{id}")
-	public ResponseEntity<Long> approve(@RequestBody Long id){		
+	public ResponseEntity<Long> approve(@PathParam("id") Long id){		
 		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
 		
 		registrationRequest.setApproved(true);
@@ -108,7 +108,7 @@ public class RegistrationRequestController {
 	
 	
 	@PutMapping(value = "/decline/{id}")
-	public ResponseEntity<Long> decline(@RequestBody Long id){		
+	public ResponseEntity<Long> decline(@PathParam("id") Long id){		
 		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
 		
 		registrationRequest.setApproved(false);
