@@ -23,9 +23,9 @@ export default class UserService
         return axios.post(API_URL + "/User/", x);
     }
 
-    static update(id, data) 
+    static update(data) 
     {
-        return axios.post(API_URL + "/User/" + id, data);
+        return axios.post(API_URL + "/updateProfile/" + data);
     }
 
     static delete(id) 
