@@ -15,7 +15,9 @@ public class Clinic {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
+	private Long LocationLat;
 	
+	private Long LocationLog;
 	
 	private String name; 
 	
@@ -73,6 +75,18 @@ public class Clinic {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public Long getLocationLat() {
+		return LocationLat;
+	}
+	public void setLocationLat(Long locationLat) {
+		LocationLat = locationLat;
+	}
+	public Long getLocationLog() {
+		return LocationLog;
+	}
+	public void setLocationLog(Long locationLog) {
+		LocationLog = locationLog;
 	}
 
 	
