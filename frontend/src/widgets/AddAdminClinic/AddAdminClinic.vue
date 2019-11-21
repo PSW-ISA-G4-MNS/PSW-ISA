@@ -35,7 +35,7 @@ export default {
 <template>
     
     <b-dropdown-item> 
-	{{username}}
+	{{request.username}}
   </b-dropdown-item>
 		
 
