@@ -59,13 +59,13 @@ public class RegistrationRequestController {
 	}
 	
 	
-	@GetMapping(value = "{id}")
-	public ResponseEntity<RegistrationRequest> findOneById(@PathParam("id") Long id){
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<RegistrationRequestDTO> findOneById(@PathParam("id") Long id){
 		
 		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
+		RegistrationRequestDTO registrationRequestDTO = new RegistrationRequestDTO(registrationRequest);
 		
-		
-		return new ResponseEntity<>(registrationRequest, HttpStatus.OK);
+		return new ResponseEntity<>(registrationRequestDTO, HttpStatus.OK);
 	}
 	
 	@PostMapping(consumes = "application/json")
