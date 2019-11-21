@@ -8,5 +8,5 @@ docker run -it --rm \
 	--volume "$FRONTEND_DIR/dist":/usr/share/nginx/html/frontend/dist \
 	--volume "$FRONTEND_DIR/index.html":/usr/share/nginx/html/frontend/index.html \
 	--volume "$FRONTEND_DIR/../config/":/etc/nginx/ \
-	--publish 9001:80 \
+	--publish 300:80 \
 	nginx
