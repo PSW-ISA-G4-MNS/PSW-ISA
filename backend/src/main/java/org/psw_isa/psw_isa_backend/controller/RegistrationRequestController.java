@@ -21,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,7 +61,7 @@ public class RegistrationRequestController {
 	
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<RegistrationRequestDTO> findOneById(@PathParam("id") Long id){
+	public ResponseEntity<RegistrationRequestDTO> findOneById(@PathVariable("id") Long id){
 		
 		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
 		RegistrationRequestDTO registrationRequestDTO = new RegistrationRequestDTO(registrationRequest);
@@ -91,7 +92,7 @@ public class RegistrationRequestController {
 	
 	
 	@PutMapping(value = "/approve/{id}")
-	public ResponseEntity<Long> approve(@PathParam("id") Long id){		
+	public ResponseEntity<Long> approve(@PathVariable("id") Long id){		
 		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
 		
 		registrationRequest.setApproved(true);
@@ -108,7 +109,7 @@ public class RegistrationRequestController {
 	
 	
 	@PutMapping(value = "/decline/{id}")
-	public ResponseEntity<Long> decline(@PathParam("id") Long id){		
+	public ResponseEntity<Long> decline(@PathVariable("id") Long id){		
 		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
 		
 		registrationRequest.setApproved(false);
