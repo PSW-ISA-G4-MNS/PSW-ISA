@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import org.psw_isa.psw_isa_backend.Logger;
+
 @RestController
 @RequestMapping(value = "login")
 public class LogInController {
@@ -24,7 +26,7 @@ public class LogInController {
 	
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<Long> login(@RequestBody LogInDTO loginData){
-	
+		Logger.getInstance().debug("Login called");
 		User user = userService.findOneByemail(loginData.getEmail());
 		
 		if(user != null) {
