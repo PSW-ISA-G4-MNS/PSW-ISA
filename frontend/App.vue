@@ -1,9 +1,9 @@
 <script>
 
-// import WidgetUserMulti from "./src/widgets/User/WidgetUserMulti.vue";
-// import WidgetUserNew from "./src/widgets/User/WidgetUserNew.vue";
-// import WidgetLoginNew from "./src/widgets/Auth/WidgetLoginNew.vue";
-// import AdminDetail from "./src/views/AdminDetail.vue";
+import WidgetUserMulti from "./src/widgets/User/WidgetUserMulti.vue";
+import WidgetUserNew from "./src/widgets/User/WidgetUserNew.vue";
+import WidgetLoginNew from "./src/widgets/Auth/WidgetLoginNew.vue";
+import AdminDetail from "./src/views/AdminDetail.vue";
 export default {
   name: "App",
   components: {
