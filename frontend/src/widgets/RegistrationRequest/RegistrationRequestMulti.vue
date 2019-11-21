@@ -1,6 +1,6 @@
 <script>
 import ReqistrationRequestService from "./service";
-import ReqistrationRequest from "./RegistrationRequestMulti.vue";
+import ReqistrationRequest from "./RegistrationRequest.vue";
 
 
 export default {

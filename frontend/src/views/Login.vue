@@ -24,11 +24,13 @@ export default {
     	"WidgetLoginNew": WidgetLoginNew
     }
 }
-</script>>
+</script>
 
 <template>
-
+<div>
+<p>jlkfdsajflkasd</p>
 <WidgetLoginNew />
+</div>
 
 </template>
 

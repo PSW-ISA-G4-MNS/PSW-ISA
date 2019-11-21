@@ -33,7 +33,11 @@ public class RegistrationRequestController {
 	
 	@Autowired
 	private RegistrationRequestService registrationRequestService;
+	
+	@Autowired
 	private PatientService patientService;
+	
+	@Autowired
 	private UserService userService;
 
 	
@@ -60,7 +64,8 @@ public class RegistrationRequestController {
 		
 		Patient patient = new Patient(user, registrationDTO.getInsuranceid());
 		
-		
+		userService.save(user);
+		patientService.save(patient);
 		
 		RegistrationRequest registrationRequest = new RegistrationRequest();
 		registrationRequest.setPatient(patient);
