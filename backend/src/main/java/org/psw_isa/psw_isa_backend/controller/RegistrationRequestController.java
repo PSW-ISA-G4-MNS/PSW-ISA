@@ -4,12 +4,15 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.psw_isa.psw_isa_backend.dtos.RegistrationDTO;
 import org.psw_isa.psw_isa_backend.dtos.RegistrationRequestDTO;
 import org.psw_isa.psw_isa_backend.models.Patient;
 import org.psw_isa.psw_isa_backend.models.RegistrationRequest;
+import org.psw_isa.psw_isa_backend.models.User;
 import org.psw_isa.psw_isa_backend.repository.RegistrationRequestRepository;
 import org.psw_isa.psw_isa_backend.service.PatientService;
 import org.psw_isa.psw_isa_backend.service.RegistrationRequestService;
+import org.psw_isa.psw_isa_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +34,7 @@ public class RegistrationRequestController {
 	@Autowired
 	private RegistrationRequestService registrationRequestService;
 	private PatientService patientService;
+	private UserService userService;
 
 	
 	@GetMapping(value = "/all")
@@ -50,7 +54,13 @@ public class RegistrationRequestController {
 	
 	
 	@PostMapping(consumes = "application/json")
-	public ResponseEntity<RegistrationRequestDTO> save(@RequestBody Patient patient){
+	public ResponseEntity<RegistrationRequestDTO> save(@RequestBody RegistrationDTO registrationDTO){
+		
+		User user = new User(registrationDTO.getName(), registrationDTO.getLastname(), registrationDTO.getMobile_phone(), registrationDTO.getEmail(), registrationDTO.getAddress(), registrationDTO.getBirthday());
+		
+		Patient patient = new Patient(user, registrationDTO.getInsuranceid());
+		
+		
 		
 		RegistrationRequest registrationRequest = new RegistrationRequest();
 		registrationRequest.setPatient(patient);
@@ -72,6 +82,9 @@ public class RegistrationRequestController {
 		registrationRequestService.save(registrationRequest);
 		
 		Patient patient = registrationRequest.getPatient();
+		User user = patient.getUser();
+		
+		userService.save(user);
 		patientService.save(patient);
 		
 		return new ResponseEntity<>(id, HttpStatus.OK);
