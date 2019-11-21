@@ -7,7 +7,7 @@ import RegistrationRequest from './src/views/RegistrationRequest.vue';
 const routes = [
     { path: '/', component: Home },
     { path: '/login', component: Login},
-      { path: '/register', component: Registration},
+    { path: '/register', component: Registration},
 
     { path: '/regreq', component: RegistrationRequest}
 ];

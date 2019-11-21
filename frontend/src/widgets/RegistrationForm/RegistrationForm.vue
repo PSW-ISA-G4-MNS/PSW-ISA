@@ -14,8 +14,6 @@ export default {
     	submit: function() 
 	{
 		RegistrationFormService.submit(this.data).then(response => {
-			if (response.data.code == 0) this.data.success = true;
-			else this.data.success = false;
 
 		});
 	}
@@ -25,8 +23,7 @@ export default {
 
 <template>
     <div class="form-RegistrationForm"> 
-        <div class="success-box" v-if="success"></div>
-	<div v-if="!success"> 
+        <div class="success-box" ></div>
 		
 		
 		<p>

@@ -9,7 +9,6 @@ export default {
             data: {
 	    	email: null,
 		password: null,
-	    	success: false
 	    },
 
         };

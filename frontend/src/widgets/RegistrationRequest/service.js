@@ -9,7 +9,7 @@ export default class RegistrationRequestService
     }
     static list() 
     {
-        return axios.get(API_URL + "/registrationRequestsall/");
+        return axios.get(API_URL + "/registrationRequests/all/");
     }
 
     static accept(id)

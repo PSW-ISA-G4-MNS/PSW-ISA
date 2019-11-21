@@ -1,6 +1,5 @@
 <script>
-import RegistrationRequest from "./service";
-import RegistrationRequestService from './service';
+import RegistrationRequestService from "./service";
 
 export default {
 	name: "RegistrationRequest",
@@ -47,7 +46,7 @@ export default {
   <table  >    
     <tr>
       <td height="50" width="200">Jedinstveni broj</td>
-      <td id="ime">Ime</td>
+      <td id="ime">{{ this.data.patient.user.firstname }}</td>
       <td id="prezime">Prezime</td>
       <td id="grad">Grad</td>
       <td id="drzava">Drzava</td>

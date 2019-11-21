@@ -5,7 +5,7 @@
 import RegistrationForm from "../widgets/RegistrationForm/RegistrationForm.vue"
 
 export default {
-    name: "Login",
+    name: "Registration",
     data: function () {
             return {
 		data: {}
@@ -24,7 +24,7 @@ export default {
     	"RegistrationForm": RegistrationForm
     }
 }
-</script>>
+</script>
 
 <template>
 

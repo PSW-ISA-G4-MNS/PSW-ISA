@@ -5,7 +5,7 @@
 import RegistrationRequestMulti from "../widgets/RegistrationRequest/RegistrationRequestMulti.vue"
 
 export default {
-    name: "RegistrationReques",
+    name: "RegistrationRequest",
     data: function () {
             return {
 		data: {}
@@ -24,7 +24,7 @@ export default {
     	"RegistrationRequestMulti": RegistrationRequestMulti
     }
 }
-</script>>
+</script>
 
 <template>
 
