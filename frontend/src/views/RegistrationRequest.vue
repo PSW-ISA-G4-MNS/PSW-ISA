@@ -24,7 +24,7 @@ export default {
     	"RegistrationRequestMulti": RegistrationRequestMulti
     }
 }
-</script>>
+</script>
 
 <template>
 

@@ -21,4 +21,8 @@ public class UserService {
 		return userRepository.updateUser(firstname, lastname, address, birthday, mobile_phone, id);
 	}
 	
+	public User save(User user) {
+		return userRepository.save(user);
+	}
+	
 }

@@ -44,7 +44,7 @@ export default {
         "WidgetAdminMulti": WidgetAdminMulti
     }
 }
-</script>>
+</script>
 
 <template>
     <div class="Admin-detail"> 

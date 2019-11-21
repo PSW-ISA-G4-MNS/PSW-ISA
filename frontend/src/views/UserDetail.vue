@@ -40,7 +40,7 @@ export default {
         "WidgetUserMulti": WidgetUserMulti
     }
 }
-</script>>
+</script>
 
 <template>
     <div class="User-detail"> 

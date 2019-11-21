@@ -10,7 +10,7 @@ SOURCE_DIR="$BACKEND_DIR/src/main/java"
 RESOURCES_DIR="$BACKEND_DIR/src/main/resources"
 TEST_DIR="$BACKEND_DIR/src/test"
 docker run \
-	--hostname psw_isa_backend \
+	--hostname backend.psw \
 	--link PSW_ISA_postgres \
 	-it --rm \
 	--name PSW_ISA_backend \
