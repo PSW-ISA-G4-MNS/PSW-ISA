@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.psw_isa.psw_isa_backend.dtos.RegistrationDTO;
 import org.psw_isa.psw_isa_backend.dtos.RegistrationRequestDTO;
 import org.psw_isa.psw_isa_backend.models.Patient;
@@ -58,7 +60,7 @@ public class RegistrationRequestController {
 	
 	
 	@GetMapping(value = "{id}")
-	public ResponseEntity<RegistrationRequest> findOneById(@RequestBody Long id){
+	public ResponseEntity<RegistrationRequest> findOneById(@PathParam("id") Long id){
 		
 		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
 		
