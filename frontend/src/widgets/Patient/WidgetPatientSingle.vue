@@ -28,7 +28,7 @@ export default {
 <template>
     <div class="widget-patient-single"> 
     <p> Jedinstveni broj osiguranika: {{this.insuranceid}} </p>
-    <WidgetUserSingle :user="this.user_id" />
+    <WidgetUserSingle :user="this.user" />
     
     </div>
 </template>
