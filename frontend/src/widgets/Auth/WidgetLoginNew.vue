@@ -1,6 +1,6 @@
 <script>
 import LoginService from "./service";
-import router from '../../../router';
+//import router from '../../../router';
 
 export default {
     name: "WidgetLoginNew",
@@ -21,7 +21,7 @@ export default {
 			if (response.data.code == 0) {
 				this.data.success = true;
 				localStorage.setItem("user", this.data.email);
-				router.push("/");
+				window.location.href = "/";
 			}
 			else {
 				this.data.success = false;
@@ -36,8 +36,6 @@ export default {
 
 <template>
     <div class="widget-login-new"> 
-        <div class="success-box" v-if="success">Login succeded</div>
-	<div v-if="!success"> 
 		<p>
 		<input type="email" class="form-control" placeholder="Username" v-model="data.email" />
 		</p>
@@ -48,7 +46,6 @@ export default {
 		
 
 		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Submit</button>
-	</div>
     </div>
 
 </template>

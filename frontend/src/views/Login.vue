@@ -27,8 +27,10 @@ export default {
 </script>>
 
 <template>
-
+<div>
+<p>jlkfdsajflkasd</p>
 <WidgetLoginNew />
+</div>
 
 </template>
 
