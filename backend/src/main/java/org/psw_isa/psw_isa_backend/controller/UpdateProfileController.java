@@ -27,8 +27,8 @@ public class UpdateProfileController {
 	UserService userService;
 	
 	
-	@PostMapping(value = "/submit/{firstname}/{lastname}/{address}/{birthday}/{mobile_phone}/")
-	public ResponseEntity<Long> updateUser(@RequestBody String firstname, String lastname, String address, LocalDate birthday, String mobile_phone){
+	@PostMapping(consumes = "application/json")
+	public ResponseEntity<Long> updateUser(@RequestBody User user){
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
 		HttpSession session = attr.getRequest().getSession(true); 
 		
@@ -36,7 +36,7 @@ public class UpdateProfileController {
 		Long id = forChange.getId();
 		
 		
-		userService.updateUser(firstname, lastname, address, birthday, mobile_phone, id);
+		userService.updateUser(user.getFirstname(), user.getLastname(), user.getAddress(), user.getBirthday(), user.getMobilePhone(), id);
 		
 		
 		return new ResponseEntity<>(id, HttpStatus.OK);
@@ -47,9 +47,9 @@ public class UpdateProfileController {
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
 		HttpSession session = attr.getRequest().getSession(true); 
 		
-		User forChange = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute("user");
 		
-		return new ResponseEntity<>(forChange, HttpStatus.OK);
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
 }
