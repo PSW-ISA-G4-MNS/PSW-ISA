@@ -64,7 +64,7 @@ public class RegistrationRequestController {
 	}
 	
 	
-	@PutMapping(value = "/approved/{id}")
+	@PutMapping(value = "/approve/{id}")
 	public ResponseEntity<Long> approve(@RequestBody Long id){		
 		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
 		

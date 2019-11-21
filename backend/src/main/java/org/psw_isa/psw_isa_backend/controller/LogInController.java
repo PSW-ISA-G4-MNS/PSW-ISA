@@ -2,12 +2,12 @@ package org.psw_isa.psw_isa_backend.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.psw_isa.psw_isa_backend.dtos.LogInDTO;
 import org.psw_isa.psw_isa_backend.models.User;
 import org.psw_isa.psw_isa_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,25 +22,28 @@ public class LogInController {
 	@Autowired
 	UserService userService;
 	
-	@PostMapping(value = "/{email}/{password}")
-	public ResponseEntity<Long> login(@RequestBody String email, String password){
+	@PostMapping(consumes = "application/json")
+	public ResponseEntity<Long> login(@RequestBody LogInDTO loginData){
 	
-		User user = userService.findOneByemail(email);
+		User user = userService.findOneByemail(loginData.getEmail());
 		
-		Long id = user.getId();
+		if(user != null) {
+			Long id = user.getId();
 		
-		if(password.equals(user.getPassword())) {
-			
-			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
-			HttpSession session = attr.getRequest().getSession(true); 
-			
-			session.setAttribute("user", user.getPassword());
-			
-			return new ResponseEntity<>(id, HttpStatus.OK);
-		}else {
+			if(loginData.getPassword().equals(user.getPassword())) {
+				
+				ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
+				HttpSession session = attr.getRequest().getSession(true); 
+				
+				session.setAttribute("user", user.getPassword());
+				
+				return new ResponseEntity<>(id, HttpStatus.OK);
+			}else {
+				return new ResponseEntity<>(null, HttpStatus.OK);
+			}
+		} else {
 			return new ResponseEntity<>(null, HttpStatus.OK);
 		}
-		
 		
 	}
 	
