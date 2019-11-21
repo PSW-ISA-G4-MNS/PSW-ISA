@@ -6,9 +6,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Service
 public class RegistrationRequestService {
 
+	@Autowired
 	private RegistrationRequestRepository registrationRequestRepository;
 	
 	public Page<RegistrationRequest> findAll(Pageable pageable){
