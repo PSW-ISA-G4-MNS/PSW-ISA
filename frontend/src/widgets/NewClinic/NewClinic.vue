@@ -1,42 +1,61 @@
 <script>
-
+import NewClinicService from "./service";
 
 export default {
 	name: "NewClinic",
 	props: ["request"],
-    data: function () {
+     data: function () {
         return {
-          
+            data: {
+
+	    },
 
         };
     },
     methods: {
-    	accept: function() 
+    	submit: function() 
 	{
-		RegistrationRequestService.accept(this.request).then(response => {
-
-
-			if (response.data.code == 0) this.data.success = true;
-			else this.data.success = false;
+		NewClinicService.submit(this.data).then(response => {
 
 		});
-	},
-		
-
-	},
-	
-	mounted: function () 
-    {
-        RegistrationRequestService.get(this.request).then(response => this.data = response.data);
+	}
     }
 }
 </script>
 
 <template>
-    <div id="tabela">
+    <div class="form-RegistrationForm"> 
+        <div class="success-box" ></div>
+		
+		
+		<p>
+		<input type="text" class="form-control" placeholder="ID" v-model="data.id" />
+		</p>
+		
+		<p>
+		<input type="text" class="form-control" placeholder="LocationLat" v-model="data.LocationLat" />
+		</p>
+		
+		<p>
+		<input type="text" class="form-control" placeholder="LocationLog" v-model="data.LocationLog" />
+		</p>
+		
+		<p>
+		<input type="text" class="form-control" placeholder="Name" v-model="data.name" />
+		</p>
+		
+		<p>
+		<input type="email" class="form-control" placeholder="Address" v-model="data.address" />
+		</p>
+		
+		<p>
+		<input type="text" class="form-control" placeholder="Description" v-model="data.description" />
+		</p>
+		
+		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Submit</button>
+	</div>
 
  
-</div>
 
 </template>
 
