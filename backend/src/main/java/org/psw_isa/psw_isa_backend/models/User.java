@@ -62,6 +62,21 @@ public class User {
 		
 	}
 	
+	public User(String _firstname, String _lastname, String _mobilePhone, String _address, LocalDate _birthday) {
+		super();
+		 
+		this.firstname = _firstname;
+		 
+		this.lastname = _lastname;
+		 
+		this.mobilePhone = _mobilePhone;
+		 		 
+		this.address = _address;
+		 
+		this.birthday = _birthday;
+		
+	}
+	
 	 
 	public String getFirstname() 
 	{

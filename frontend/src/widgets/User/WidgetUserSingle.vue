@@ -9,7 +9,7 @@ export default {
             data: {}
         }
     },
-    mounted: function () 
+    mounted: function() 
     {
         UserService.get(this.user).then(response => this.data = response.data);
     }
@@ -27,6 +27,11 @@ export default {
   <div class="card-body">
     <h5 class="card-title">{{ data.firstname }} {{ data.lastname }}</h5>
     <p class="card-text">{{ data.email}}</p>
+    <p class="card-text">{{ data.address}}</p>
+    <p class="card-text">{{ data.mobile_phone}}</p>
+    <button v-on:click="update" style="background-color:green;color:white;height:40px;width:200px">
+              Izmena informacija
+              </button>
   </div>
 </div>
 
