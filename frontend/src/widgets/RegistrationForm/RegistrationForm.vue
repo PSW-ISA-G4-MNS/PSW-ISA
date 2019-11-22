@@ -61,7 +61,7 @@ export default {
 
 		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Submit</button>
 	</div>
-    </div>
+    
 
 </template>
 

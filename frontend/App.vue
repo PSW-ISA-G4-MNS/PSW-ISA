@@ -1,8 +1,10 @@
 <script>
 
+
 export default {
   name: "App",
   components: {
+
   }
 }
 
@@ -15,6 +17,7 @@ export default {
         <router-link to='/'>Home</router-link>
         <router-link to='/login'>Login</router-link>
         <router-link to='/register'>Registration</router-link>
+
         <router-link to='/regreq'>RegistrationRequest</router-link>
         <router-link to='/profile'>My Profile</router-link>
     </nav>
