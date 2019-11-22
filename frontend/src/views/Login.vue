@@ -28,7 +28,6 @@ export default {
 
 <template>
 <div>
-<p>jlkfdsajflkasd</p>
 <WidgetLoginNew />
 </div>
 
