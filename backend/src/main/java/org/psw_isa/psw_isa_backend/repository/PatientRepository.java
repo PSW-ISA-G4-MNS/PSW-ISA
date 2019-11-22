@@ -3,6 +3,7 @@ package org.psw_isa.psw_isa_backend.repository;
 import java.util.List;
 
 import org.psw_isa.psw_isa_backend.models.Patient;
+import org.psw_isa.psw_isa_backend.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
