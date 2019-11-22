@@ -17,10 +17,10 @@ export default {
     	submit: function() 
 	{
 		LoginService.login(this.data).then(response => {
-			if (response.data.code == 200) {
+			if (response.code == 200) {
 				this.data.success = true;
 				localStorage.setItem("user", this.data.email);
-				window.location.href = "/";
+				window.location.href = "/frontend/";
 			}
 			else {
 				this.data.success = false;
