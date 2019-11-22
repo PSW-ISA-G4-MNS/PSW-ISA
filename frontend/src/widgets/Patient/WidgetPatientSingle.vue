@@ -21,14 +21,14 @@ export default {
        "WidgetUserSingle": WidgetUserSingle
     }
 }
-</script>>
+</script>
 
 
 
 <template>
     <div class="widget-patient-single"> 
-    <p> Jedinstveni broj osiguranika: {{data.insuranceid}} </p>
-    <WidgetUserSingle :user="data.user" />
+    <p> Jedinstveni broj osiguranika: {{data.insuranceID}} </p>
+    <WidgetUserSingle :user="data.user.id" />
     
     </div>
 </template>
