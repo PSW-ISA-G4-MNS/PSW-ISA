@@ -17,7 +17,8 @@ export default {
     	submit: function() 
 	{
 		LoginService.login(this.data).then(response => {
-			if (response.code == 200) {
+			console.log(response)
+			if (response.status == 200) {
 				this.data.success = true;
 				localStorage.setItem("user", this.data.email);
 				window.location.href = "/frontend/";
