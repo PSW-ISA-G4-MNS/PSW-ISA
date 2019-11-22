@@ -29,13 +29,7 @@ public class PatientController {
     
     @GetMapping(value = "")
     public ResponseEntity<Patient> getData(){
-    	ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
-		HttpSession session = attr.getRequest().getSession(true); 
-		
-        String email = (String) session.getAttribute("user");
-	User user = userService.findOneByemail(email);
-	Patient patient = patientService.findOneByuser(user);
-        return new ResponseEntity<>(patient, HttpStatus.OK);
+        return new ResponseEntity<>(patientService.getBySession(), HttpStatus.OK);
     }
 
 
