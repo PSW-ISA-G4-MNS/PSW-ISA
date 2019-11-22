@@ -1,5 +1,7 @@
 package org.psw_isa.psw_isa_backend.service;
 
+import java.util.List;
+
 import org.psw_isa.psw_isa_backend.models.RegistrationRequest;
 import org.psw_isa.psw_isa_backend.repository.RegistrationRequestRepository;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,10 @@ public class RegistrationRequestService {
 	
 	public Page<RegistrationRequest> findAll(Pageable pageable){
 		return registrationRequestRepository.findAll(pageable);
+	}
+	
+	public List<RegistrationRequest> findAll(){
+		return registrationRequestRepository.findAll();
 	}
 	
 	public RegistrationRequest save (RegistrationRequest registrationRequest) {
