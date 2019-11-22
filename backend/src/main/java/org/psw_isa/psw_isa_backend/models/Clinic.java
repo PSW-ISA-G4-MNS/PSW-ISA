@@ -30,9 +30,13 @@ public class Clinic {
 	public Clinic() 
 	{
 	}
-	public Clinic(String _name, String _address, String description) {
+	public Clinic(Long LocationLat,Long LocationLog ,String _name, String _address, String description) {
 		super();
-		 
+		
+		this.LocationLat=LocationLat;
+		
+		this.LocationLog=LocationLog;
+		
 		this.name = _name;
 		 
 		this.address = _address;
