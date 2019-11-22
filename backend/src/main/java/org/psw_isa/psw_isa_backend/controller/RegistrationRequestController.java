@@ -72,7 +72,7 @@ public class RegistrationRequestController {
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<RegistrationRequestDTO> save(@RequestBody RegistrationDTO registrationDTO){
 		
-		User user = new User(registrationDTO.getName(), registrationDTO.getLastname(), registrationDTO.getMobile_phone(), registrationDTO.getEmail(), registrationDTO.getAddress(), registrationDTO.getBirthday());
+		User user = new User(registrationDTO.getName(), registrationDTO.getLastname(), registrationDTO.getMobile_phone(), registrationDTO.getEmail(), registrationDTO.getAddress(), registrationDTO.getBirthday(), registrationDTO.getPassword());
 		
 		Patient patient = new Patient(user, registrationDTO.getInsuranceid());
 		
