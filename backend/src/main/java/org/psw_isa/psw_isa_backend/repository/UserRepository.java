@@ -8,9 +8,13 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface UserRepository extends JpaRepository<User, Long>{
 	
+	User findOneByid(Long id);
 	User findOneByemail(String email);
+	List<User> findAll();
 
 	@Modifying
 	@Query(value = "UPDATE User u SET u.firstname = :firstname, u.lastname = :lastname, u.address = :address, u.birthday = :birthday, u.mobile_phone = :mobile_phone WHERE u.id = :id", nativeQuery = true)
