@@ -33,9 +33,6 @@ export default {
     <p class="card-text">{{ data.email}}</p>
     <p class="card-text">{{ data.address}}</p>
     <p class="card-text">{{ data.mobile_phone}}</p>
-    <button v-on:click="update" style="background-color:green;color:white;height:40px;width:200px">
-              Izmena informacija
-              </button>
   </div>
 </div>
 

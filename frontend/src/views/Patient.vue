@@ -2,7 +2,7 @@
 
 
 // import widgets for this view here
-import RegistrationRequestMulti from "../widgets/Patient/WidgetPatientSingle.vue"
+import WidgetPatientSingle from "../widgets/Patient/WidgetPatientSingle.vue"
 
 export default {
     name: "Patient",

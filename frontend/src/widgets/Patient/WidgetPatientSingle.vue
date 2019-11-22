@@ -13,7 +13,7 @@ export default {
     },
     mounted: function()
     {
-        PatientProfileService.get().then(response => {
+        PatientService.get().then(response => {
             this.data = response.data;
         })
     },
@@ -21,14 +21,14 @@ export default {
        "WidgetUserSingle": WidgetUserSingle
     }
 }
-</script>>
+</script>
 
 
 
 <template>
     <div class="widget-patient-single"> 
-    <p> Jedinstveni broj osiguranika: {{this.insuranceid}} </p>
-    <WidgetUserSingle :user="this.user" />
+    <p> Jedinstveni broj osiguranika: {{data.insuranceID}} </p>
+    <WidgetUserSingle :user="data.user.id" />
     
     </div>
 </template>

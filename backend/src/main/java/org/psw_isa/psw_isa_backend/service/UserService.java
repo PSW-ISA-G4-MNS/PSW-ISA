@@ -16,6 +16,10 @@ public class UserService {
 	public User findOneByemail(String email) {
 		return userRepository.findOneByemail(email);	
 	}
+	
+	public User findOneByid(Long id) {
+		return userRepository.findOneByid(id);	
+	}
 
 	public int updateUser(String firstname, String lastname, String address, LocalDate birthday, String mobile_phone, Long id){
 		return userRepository.updateUser(firstname, lastname, address, birthday, mobile_phone, id);

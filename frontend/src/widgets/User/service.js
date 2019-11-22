@@ -10,17 +10,17 @@ export default class UserService
 
     static list() 
     {
-        return axios.get(API_URL + "/User/");
+        return axios.get(API_URL + "/users/");
     }
 
     static get(id) 
     {
-        return axios.get(API_URL + "/User/" + id);
+        return axios.get(API_URL + "/users/" + id);
     }
 
     static create(x)
     {
-        return axios.post(API_URL + "/User/", x);
+        return axios.post(API_URL + "/users/", x);
     }
 
     static update(data) 
@@ -30,6 +30,6 @@ export default class UserService
 
     static delete(id) 
     {
-        return axios.delete(API_URL + "/User/" + id);
+        return axios.delete(API_URL + "/users/" + id);
     }
 }
