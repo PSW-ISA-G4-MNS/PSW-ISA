@@ -33,38 +33,12 @@ public class LogInController {
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<Long> login(@RequestBody LogInDTO loginData){
 		Logger.getInstance().debug("Login called");
-		User user = userService.findOneByemail(loginData.getEmail());
-		
-		if(user != null) {
-			Long id = user.getId();
-			
-			List<RegistrationRequest> registrationRequests = registrationRequestService.findAll();
-			
-			
-			if(loginData.getPassword().equals(user.getPassword())) {
-				
-				for(RegistrationRequest request : registrationRequests) {
-					if(request.getPatient().getUser().equals(id)) {
-						if(request.getApproved() == true) {	
-							ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
-							HttpSession session = attr.getRequest().getSession(true); 
-							
-							session.setAttribute("user", user.getEmail());
-							
-							return new ResponseEntity<>(id, HttpStatus.OK);
-						} else {
-							return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
-						}
-					}
-				}
-				
-			}else {
-				return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
-			}
+		int result = userService.login(loginData);
+		if(result == 1) {
+			return new ResponseEntity<>(null, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
 		}
-		return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
 	}
 	
 	
