@@ -6,7 +6,7 @@ import org.psw_isa.psw_isa_backend.models.Patient;
 import org.psw_isa.psw_isa_backend.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.psw_isa.psw_isa_backend.Logger;
 
 @Service
 public class PatientService {

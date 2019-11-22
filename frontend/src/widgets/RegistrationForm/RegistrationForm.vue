@@ -27,11 +27,11 @@ export default {
 		
 		
 		<p>
-		<input type="text" class="form-control" placeholder="insurance ID" v-model="data.insuranceID" />
+		<input type="text" class="form-control" placeholder="insurance ID" v-model="data.insuranceid" />
 		</p>
 		
 		<p>
-		<input type="text" class="form-control" placeholder="firstname" v-model="data.firstname" />
+		<input type="text" class="form-control" placeholder="firstname" v-model="data.name" />
 		</p>
 		
 		<p>
@@ -39,7 +39,7 @@ export default {
 		</p>
 		
 		<p>
-		<input type="text" class="form-control" placeholder="mobilePhone" v-model="data.mobilePhone" />
+		<input type="text" class="form-control" placeholder="mobilePhone" v-model="data.mobile_phone" />
 		</p>
 		
 		<p>

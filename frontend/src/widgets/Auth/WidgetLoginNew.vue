@@ -53,7 +53,6 @@ export default {
 
 .widget-login-new {
 	padding: 10px; 
-	background-color: #ffcccc; 
 	margin: 10px;
 	text-align: center;
 	width: 20%;

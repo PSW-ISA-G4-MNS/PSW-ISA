@@ -43,7 +43,7 @@ public class User {
 	public User() 
 	{
 	}
-	public User(String _firstname, String _lastname, String _mobilePhone, String _email, String _address, LocalDate _birthday) {
+	public User(String _firstname, String _lastname, String _mobilePhone, String _email, String _address, LocalDate _birthday, String password) {
 		super();
 		 
 		this.firstname = _firstname;
@@ -57,6 +57,8 @@ public class User {
 		this.address = _address;
 		 
 		this.birthday = _birthday;
+
+		this.password = password;
 		
 	}
 	

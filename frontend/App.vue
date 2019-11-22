@@ -24,3 +24,11 @@ export default {
     <router-view /> 
   </div>
 </template>
+
+<style scoped>
+
+#app {
+	margin: 20px;
+}
+
+</style>

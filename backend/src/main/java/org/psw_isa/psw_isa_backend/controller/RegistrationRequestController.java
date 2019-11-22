@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
 import org.psw_isa.psw_isa_backend.dtos.RegistrationDTO;
 import org.psw_isa.psw_isa_backend.dtos.RegistrationRequestDTO;
 import org.psw_isa.psw_isa_backend.models.Patient;
@@ -19,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -57,10 +60,19 @@ public class RegistrationRequestController {
 	}
 	
 	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<RegistrationRequestDTO> findOneById(@PathVariable("id") Long id){
+		
+		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
+		RegistrationRequestDTO registrationRequestDTO = new RegistrationRequestDTO(registrationRequest);
+		
+		return new ResponseEntity<>(registrationRequestDTO, HttpStatus.OK);
+	}
+	
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<RegistrationRequestDTO> save(@RequestBody RegistrationDTO registrationDTO){
 		
-		User user = new User(registrationDTO.getName(), registrationDTO.getLastname(), registrationDTO.getMobile_phone(), registrationDTO.getEmail(), registrationDTO.getAddress(), registrationDTO.getBirthday());
+		User user = new User(registrationDTO.getName(), registrationDTO.getLastname(), registrationDTO.getMobile_phone(), registrationDTO.getEmail(), registrationDTO.getAddress(), registrationDTO.getBirthday(), registrationDTO.getPassword());
 		
 		Patient patient = new Patient(user, registrationDTO.getInsuranceid());
 		
@@ -80,7 +92,7 @@ public class RegistrationRequestController {
 	
 	
 	@PutMapping(value = "/approve/{id}")
-	public ResponseEntity<Long> approve(@RequestBody Long id){		
+	public ResponseEntity<Long> approve(@PathVariable("id") Long id){		
 		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
 		
 		registrationRequest.setApproved(true);
@@ -97,7 +109,7 @@ public class RegistrationRequestController {
 	
 	
 	@PutMapping(value = "/decline/{id}")
-	public ResponseEntity<Long> decline(@RequestBody Long id){		
+	public ResponseEntity<Long> decline(@PathVariable("id") Long id){		
 		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
 		
 		registrationRequest.setApproved(false);
