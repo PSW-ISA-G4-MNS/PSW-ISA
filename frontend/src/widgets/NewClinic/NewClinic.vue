@@ -29,10 +29,6 @@ export default {
 		
 		
 		<p>
-		<input type="text" class="form-control" placeholder="ID" v-model="data.id" />
-		</p>
-		
-		<p>
 		<input type="text" class="form-control" placeholder="LocationLat" v-model="data.LocationLat" />
 		</p>
 		

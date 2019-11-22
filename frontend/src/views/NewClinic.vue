@@ -2,10 +2,10 @@
 
 
 // import widgets for this view here
-import RegistrationForm from "../widgets/NewClinic/NewClinic.vue"
+import NewClinic from "../widgets/NewClinic/NewClinic.vue"
 
 export default {
-    name: "NewClinic",
+    name: "NewClinicView",
     data: function () {
             return {
 		data: {}
