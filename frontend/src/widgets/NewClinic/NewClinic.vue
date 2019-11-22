@@ -16,7 +16,10 @@ export default {
     	submit: function() 
 	{
 		NewClinicService.submit(this.data).then(response => {
-
+			if (response.status == 200) {
+				this.data = {};
+				alert("Success!");
+			}
 		});
 	}
     }
@@ -29,11 +32,11 @@ export default {
 		
 		
 		<p>
-		<input type="text" class="form-control" placeholder="LocationLat" v-model="data.LocationLat" />
+		<input type="number" class="form-control" placeholder="LocationLat" v-model="data.LocationLat" />
 		</p>
 		
 		<p>
-		<input type="text" class="form-control" placeholder="LocationLog" v-model="data.LocationLog" />
+		<input type="number" class="form-control" placeholder="LocationLog" v-model="data.LocationLog" />
 		</p>
 		
 		<p>
