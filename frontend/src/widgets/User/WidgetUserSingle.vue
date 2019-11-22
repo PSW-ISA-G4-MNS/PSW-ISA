@@ -9,11 +9,7 @@ export default {
             data: {}
         }
     },
-<<<<<<< HEAD
-    mounted: function() 
-=======
     mounted: function()
->>>>>>> a44faf35125381a368b1e1ca73bdb4dbd86068f5
     {
         UserService.get(this.user).then(response => this.data = response.data);
     }
