@@ -1,10 +1,10 @@
 <script>
 import ReqistrationRequestService from "./service";
-import ReqistrationRequest from "./RegistrationRequestMulti.vue";
+import AddAdminClinic from "./AddAdminClinic.vue";
 
 
 export default {
-    name: "RegistrationRequestMulti",
+    name: "AddAdminClinictMulti",
     props: {
         filter: {
             type: Function,
@@ -18,22 +18,25 @@ export default {
     },
     mounted: function () 
     {
-        ReqistrationRequestService.list().then(response => this.items = response.data);
+        AddAdminClinicService.list().then(response => this.items = response.data);
     },
     components: {
-    	"ReqistrationRequest": ReqistrationRequest
+    	"AddAdminClinic": AddAdminClinic
     }
 }
 </script>
 
 <template>
-    <div class="ReqistrationRequest"> 
-      <ReqistrationRequest
-      	v-for="item in items.filter(filter)"
-      	:id="item.id"
-      	:key="item.id"
-        :request="item.id"
-          />
+    <div class="AddAdminClinicMulti"> 
+        <b-dropdown id="dropdown-1" text="Dropdown Button" class="m-md-2">
+  
+            <AddAdminClinic
+      	        v-for="item in items.filter(filter)"
+      	        :id="item.id"
+      	        :key="item.id"
+                :request="item.id"
+            />
+        </b-dropdown>
     </div>
 
 </template>

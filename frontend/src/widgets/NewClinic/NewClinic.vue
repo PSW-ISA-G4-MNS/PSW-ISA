@@ -24,7 +24,7 @@ export default {
 </script>
 
 <template>
-    <div class="form-RegistrationForm"> 
+    <div class="form-NewClinic"> 
         <div class="success-box" ></div>
 		
 		

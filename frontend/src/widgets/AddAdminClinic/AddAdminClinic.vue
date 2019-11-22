@@ -7,13 +7,13 @@ export default {
     data: function () {
         return {
           
-
+                admin: {}
         };
     },
     methods: {
     	accept: function() 
 	{
-		RegistrationRequestService.accept(this.request).then(response => {
+		AddAdminClinicService.accept(this.request).then(response => {
 
 
 			if (response.data.code == 0) this.data.success = true;
@@ -27,7 +27,12 @@ export default {
 	
 	mounted: function () 
     {
-        RegistrationRequestService.get(this.request).then(response => this.data = response.data);
+       AddAdminClinicService.get(this.request).then(response => {
+		
+		this.admin = response.data;
+		
+    }
+	);
     }
 }
 </script>
@@ -35,7 +40,7 @@ export default {
 <template>
     
     <b-dropdown-item> 
-	{{request.username}}
+	{{admin.username}}
   </b-dropdown-item>
 		
 
