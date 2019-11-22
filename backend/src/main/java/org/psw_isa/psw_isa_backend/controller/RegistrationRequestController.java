@@ -52,7 +52,9 @@ public class RegistrationRequestController {
 		List<RegistrationRequestDTO> registrationRequestDTOs = new ArrayList();
 		
 		for (RegistrationRequest registrationRequest : registrationRequests){
+			if(!registrationRequest.getApproved()) {
 			registrationRequestDTOs.add(new RegistrationRequestDTO(registrationRequest));
+			}
 		}
 		
 		
