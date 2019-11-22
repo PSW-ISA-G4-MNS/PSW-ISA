@@ -6,7 +6,8 @@ export default {
 	props: ["request"],
     data: function () {
         return {
-          	registrationrequest: {}
+          	registrationrequest: {},
+		success: false
 
         };
     },
@@ -16,16 +17,16 @@ export default {
 		RegistrationRequestService.accept(this.request).then(response => {
 
 
-			if (response.data.code == 0) this.data.success = true;
-			else this.data.success = false;
+			if (response.status == 200) this.success = true;
+			else this.success = false;
 
 		});
 	},
 		decline: function() 
 	{
 		RegistrationRequestService.decline(this.request).then(response => {
-			if (response.data.code == 0) this.data.success = true;
-			else this.data.success = false;
+			if (response.status == 200) this.success = true;
+			else this.success = false;
 
 		});
 	}
@@ -56,11 +57,11 @@ export default {
       <td id="ime">{{ registrationrequest.patient.user.firstname }}</td>
       <td id="prezime">{{ registrationrequest.patient.user.lastname}}</td>
       <td id="dugme">
-              <button v-on:click="accept" style="background-color:green;color:white;height:40px;width:200px">
+              <button v-if="!success" v-on:click="accept" style="background-color:green;color:white;height:40px;width:200px">
               Potvrdi
               </button>
               
-              <button v-on:click="decline" style="background-color:red;color:white;height:40px;width:200px">
+              <button v-if="!success" v-on:click="decline" style="background-color:red;color:white;height:40px;width:200px">
               Odbij
               </button>
         </td>
