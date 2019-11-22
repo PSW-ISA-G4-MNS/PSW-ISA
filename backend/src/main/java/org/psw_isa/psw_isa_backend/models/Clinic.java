@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import java.time.*;
 
 
 @Entity
@@ -16,38 +15,29 @@ public class Clinic {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
+	private Long LocationLat;
 	
+	private Long LocationLog;
 	
 	private String name; 
 	
-	
 	private String address; 
 	
-	
-	private Long locationLat; 
-	
-	
-	private Long locationLon; 
+	private String description;
 	
 	
-	private Integer ambulanceCarCount; 
 	
-
 	public Clinic() 
 	{
 	}
-	public Clinic(String _name, String _address, Long _locationLat, Long _locationLon, Integer _ambulanceCarCount) {
+	public Clinic(String _name, String _address, String description) {
 		super();
 		 
 		this.name = _name;
 		 
 		this.address = _address;
 		 
-		this.locationLat = _locationLat;
-		 
-		this.locationLon = _locationLon;
-		 
-		this.ambulanceCarCount = _ambulanceCarCount;
+		this.setDescription(description);
 		
 	}
 	
@@ -66,40 +56,38 @@ public class Clinic {
 	{
 		return this.address;
 	}
+	public void setId(Long newValue) 
+	{
+		this.id = newValue;
+	}
+	 
+	public Long getId() 
+	{
+		return this.id;
+	}
 
 	public void setAddress(String newValue) 
 	{
 		this.address = newValue;
 	}
-	 
-	public Long getLocationLat() 
-	{
-		return this.locationLat;
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Long getLocationLat() {
+		return LocationLat;
+	}
+	public void setLocationLat(Long locationLat) {
+		LocationLat = locationLat;
+	}
+	public Long getLocationLog() {
+		return LocationLog;
+	}
+	public void setLocationLog(Long locationLog) {
+		LocationLog = locationLog;
 	}
 
-	public void setLocationLat(Long newValue) 
-	{
-		this.locationLat = newValue;
-	}
-	 
-	public Long getLocationLon() 
-	{
-		return this.locationLon;
-	}
-
-	public void setLocationLon(Long newValue) 
-	{
-		this.locationLon = newValue;
-	}
-	 
-	public Integer getAmbulanceCarCount() 
-	{
-		return this.ambulanceCarCount;
-	}
-
-	public void setAmbulanceCarCount(Integer newValue) 
-	{
-		this.ambulanceCarCount = newValue;
-	}
 	
 }
