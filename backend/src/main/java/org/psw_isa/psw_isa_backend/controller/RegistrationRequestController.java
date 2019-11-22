@@ -76,18 +76,23 @@ public class RegistrationRequestController {
 		
 		Patient patient = new Patient(user, registrationDTO.getInsuranceid());
 		
-		userService.save(user);
-		patientService.save(patient);
-		
-		RegistrationRequest registrationRequest = new RegistrationRequest();
-		registrationRequest.setPatient(patient);
-		registrationRequest.setApproved(false);
-		registrationRequest.setTime(LocalDateTime.now());
-		
-		registrationRequestService.save(registrationRequest);
-		
-		
-		return new ResponseEntity<>(new RegistrationRequestDTO(registrationRequest), HttpStatus.CREATED);
+		User validator = userService.findOneByemail(registrationDTO.getEmail());
+		if(validator == null) {
+			userService.save(user);
+			patientService.save(patient);
+			
+			RegistrationRequest registrationRequest = new RegistrationRequest();
+			registrationRequest.setPatient(patient);
+			registrationRequest.setApproved(false);
+			registrationRequest.setTime(LocalDateTime.now());
+			
+			registrationRequestService.save(registrationRequest);
+			
+			
+			return new ResponseEntity<>(new RegistrationRequestDTO(registrationRequest), HttpStatus.CREATED);
+		} else {
+			return new ResponseEntity<>(new RegistrationRequestDTO(null), HttpStatus.FORBIDDEN);
+		}
 	}
 	
 	
