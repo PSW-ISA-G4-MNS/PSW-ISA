@@ -2,7 +2,7 @@
 [CmdletBinding()]
 param (
     [Parameter()]
-    [atring]
+    [string]
     $BackendPath
 )
 
