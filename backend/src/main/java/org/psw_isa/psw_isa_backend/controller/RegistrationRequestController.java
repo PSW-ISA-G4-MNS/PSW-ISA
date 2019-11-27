@@ -37,12 +37,6 @@ public class RegistrationRequestController {
 	@Autowired
 	private RegistrationRequestService registrationRequestService;
 	
-	@Autowired
-	private PatientService patientService;
-	
-	@Autowired
-	private UserService userService;
-
 	
 	@GetMapping(value = "/all")
 	public ResponseEntity<List<RegistrationRequestDTO>> findAllNotApproved (){
@@ -72,16 +66,9 @@ public class RegistrationRequestController {
 	public ResponseEntity<Long> approve(@PathVariable("id") Long id){		
 		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
 		
-		registrationRequest.setApproved(true);
-		registrationRequestService.save(registrationRequest);
+		Long retID = registrationRequestService.approve(id);
 		
-		Patient patient = registrationRequest.getPatient();
-		User user = patient.getUser();
-		
-		userService.save(user);
-		patientService.save(patient);
-		
-		return new ResponseEntity<>(id, HttpStatus.OK);
+		return new ResponseEntity<>(retID, HttpStatus.OK);
 	}
 	
 	
@@ -89,11 +76,9 @@ public class RegistrationRequestController {
 	public ResponseEntity<Long> decline(@PathVariable("id") Long id){		
 		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
 		
-		registrationRequest.setApproved(false);
-		registrationRequestService.save(registrationRequest);
+		Long retID = registrationRequestService.decline(id);
 		
-		
-		return new ResponseEntity<>(id, HttpStatus.OK);
+		return new ResponseEntity<>(retID, HttpStatus.OK);
 	}
 	
 	

@@ -85,4 +85,22 @@ public class RegistrationRequestService {
 		return registrationRequestRepository.findOneById(id);
 	}
 	
+	public Long approve(Long id) {
+		RegistrationRequest registrationRequest = registrationRequestRepository.findOneById(id);
+		
+		registrationRequest.setApproved(true);
+		registrationRequestRepository.save(registrationRequest);
+		
+		return registrationRequest.getId();
+	}
+	
+	public Long decline(Long id) {
+		RegistrationRequest registrationRequest = registrationRequestRepository.findOneById(id);
+		
+		registrationRequest.setApproved(false);
+		registrationRequestRepository.save(registrationRequest);
+		
+		return registrationRequest.getId();
+	}
+	
 }
