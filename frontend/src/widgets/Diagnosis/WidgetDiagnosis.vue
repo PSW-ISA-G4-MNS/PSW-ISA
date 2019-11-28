@@ -1,8 +1,8 @@
 <script>
-import NewClinicService from "./service";
+import DiagnosisService from "./service";
 
 export default {
-	name: "NewClinic",
+	name: "WidgetDiagnosis",
 	props: ["request"],
      data: function () {
         return {
@@ -15,7 +15,7 @@ export default {
     methods: {
     	submit: function() 
 	{
-		NewClinicService.submit(this.data).then(response => {
+		DiagnosisService.submit(this.data).then(response => {
 			if (response.status == 200) {
 				this.data = {};
 				alert("Success!");
@@ -27,28 +27,12 @@ export default {
 </script>
 
 <template>
-    <div class="form-NewClinic"> 
-        <div class="success-box" ></div>
+    <div class="form-Dianosis"> 
+        
 		
 		
 		<p>
-		<input type="number" class="form-control" placeholder="LocationLat" v-model="data.LocationLat" />
-		</p>
-		
-		<p>
-		<input type="number" class="form-control" placeholder="LocationLog" v-model="data.LocationLog" />
-		</p>
-		
-		<p>
-		<input type="text" class="form-control" placeholder="Name" v-model="data.name" />
-		</p>
-		
-		<p>
-		<input type="email" class="form-control" placeholder="Address" v-model="data.address" />
-		</p>
-		
-		<p>
-		<input type="text" class="form-control" placeholder="Description" v-model="data.description" />
+		<input type="text" class="form-control" placeholder="NewDiagnosis" v-model="data.diagnosis" />
 		</p>
 		
 		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Submit</button>

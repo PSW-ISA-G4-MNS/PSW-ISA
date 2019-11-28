@@ -1,7 +1,7 @@
 import { API_URL } from "../../config";
 import axios from "axios"
 
-export default class  DiagnosisService
+export default class  MedicineService
 {
     constructor(self)
     {
@@ -12,6 +12,6 @@ export default class  DiagnosisService
 
     static submit(x)
     {
-        return axios.post(API_URL + "/diagnosis", x);
+        return axios.post(API_URL + "/medicine", x);
     }
 }
