@@ -31,5 +31,14 @@ public class Medicine {
 		this.medicine = medicine;
 	}
 	
+	public void setId(Long newValue) 
+	{
+		this.id = newValue;
+	}
+	 
+	public Long getId() 
+	{
+		return this.id;
+	}
 	
 }
