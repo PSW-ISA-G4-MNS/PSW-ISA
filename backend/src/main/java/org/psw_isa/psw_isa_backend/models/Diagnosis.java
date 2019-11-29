@@ -30,5 +30,14 @@ public class Diagnosis {
 		this.diagnosis = diagnosis;
 	}
 	
+	public void setId(Long newValue) 
+	{
+		this.id = newValue;
+	}
+	 
+	public Long getId() 
+	{
+		return this.id;
+	}
 	
 }
