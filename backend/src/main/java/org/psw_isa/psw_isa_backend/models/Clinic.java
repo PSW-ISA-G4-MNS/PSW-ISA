@@ -44,6 +44,18 @@ public class Clinic {
 		this.setDescription(description);
 		
 	}
+	public void assign(Clinic other) {
+
+		this.LocationLat=other.getLocationLat();
+		
+		this.LocationLog=other.getLocationLog();
+		
+		this.name = other.getName();
+		 
+		this.address = other.getAddress();
+		 
+		this.setDescription(other.getDescription());
+	}
 	
 	 
 	public String getName() 
