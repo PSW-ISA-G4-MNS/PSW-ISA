@@ -27,7 +27,7 @@ public class AdminControler {
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<AdminClinicDTO> saveClinic(@RequestBody AdminClinicDTO acDTO){
 		
-	adminService.updateAdminClinic(acDTO.getClinic_Id(),acDTO.getAdmin_Id());
+		adminService.updateAdminClinic(acDTO.getClinic_Id(),acDTO.getAdmin_Id());
 		
 	
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -46,12 +46,7 @@ public class AdminControler {
 	
 	@GetMapping(value = "/all")
 	public ResponseEntity<List<AdminClinicDTO>> getFreeAdmins(){
-		List<AdminClinicDTO> adminClinicDTOs = new ArrayList<AdminClinicDTO>();
-		List<ClinicAdministrator> clinicAdministrators = adminService.findAllFree();
-		
-		for(ClinicAdministrator clinicAdministrator : clinicAdministrators) {
-			adminClinicDTOs.add(new AdminClinicDTO(clinicAdministrator));
-		}
+		List<AdminClinicDTO>adminClinicDTOs = adminService.findAllFree();
 		
 		return new ResponseEntity<>(adminClinicDTOs, HttpStatus.OK);
 		
