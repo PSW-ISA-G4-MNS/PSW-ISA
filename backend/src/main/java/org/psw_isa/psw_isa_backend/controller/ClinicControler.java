@@ -39,7 +39,7 @@ public class ClinicControler {
 	}
 	
 	@PostMapping(consumes = "application/json", value="/{id}")
-	public ResponseEntity<Long> save(@PathVariable("id") Long id, @RequestBody Clinic clinic){
+	public ResponseEntity<Long> update(@PathVariable("id") Long id, @RequestBody Clinic clinic){
 		
 		Clinic clinic_old = clinicService.findOneByid(id);
 
@@ -47,5 +47,12 @@ public class ClinicControler {
 		clinic_old.assign(clinic);
 		clinicService.save(clinic_old);
 		return new ResponseEntity<>(clinic.getId(),HttpStatus.OK);
+	}
+
+	@GetMapping(value="/{id}")
+	public ResponseEntity<Clinic> read(@PathVariable("id") Long id){
+		
+		Clinic clinic = clinicService.findOneByid(id);
+		return new ResponseEntity<>(clinic,HttpStatus.OK);
 	}
 }
