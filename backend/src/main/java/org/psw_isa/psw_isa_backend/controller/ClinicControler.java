@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+
 @RestController
 @RequestMapping(value = "clinic")
 public class ClinicControler {
@@ -31,6 +35,17 @@ public class ClinicControler {
 		
 		clinicService.save(clinic);
 		
+		return new ResponseEntity<>(clinic.getId(),HttpStatus.OK);
+	}
+	
+	@PostMapping(consumes = "application/json", value="/{id}")
+	public ResponseEntity<Long> save(@PathVariable("id") Long id, @RequestBody Clinic clinic){
+		
+		Clinic clinic_old = clinicService.findOneByid(id);
+
+		clinicService.save(clinic);
+		clinic_old.assign(clinic);
+		clinicService.save(clinic_old);
 		return new ResponseEntity<>(clinic.getId(),HttpStatus.OK);
 	}
 }

@@ -15,4 +15,8 @@ public class ClinicService {
 	public Clinic save(Clinic clinic) {
 		return clinicRepository.save(clinic);
 	}
+
+	public Clinic findOneByid(Long id) {
+		return clinicRepository.findOneByid(id);
+	}
 }
