@@ -1,1 +1,1 @@
-export const API_URL = "http://racrepublic.cf:300/";
+//export const API_URL = "http://racrepublic.cf:300/";
