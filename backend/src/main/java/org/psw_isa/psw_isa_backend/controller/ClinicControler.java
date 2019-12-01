@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "clinic")
 public class ClinicControler {
@@ -55,5 +57,10 @@ public class ClinicControler {
 		
 		Clinic clinic = clinicService.findOneByid(id);
 		return new ResponseEntity<>(clinic,HttpStatus.OK);
+	}
+	@GetMapping(value="")
+	public ResponseEntity<List<Clinic>> list(){
+		
+		return new ResponseEntity<>(clinicService.findAll(),HttpStatus.OK);
 	}
 }

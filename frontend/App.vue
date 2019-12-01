@@ -21,6 +21,7 @@ export default {
         <router-link to='/regreq'>RegistrationRequest</router-link>
         <router-link to='/profile'>My Profile</router-link>
         <router-link to='/clinic-new'>Create Clinic</router-link>
+        <router-link to='/clinics'>Show all clinics</router-link>
     </nav>
     <router-view /> 
   </div>
