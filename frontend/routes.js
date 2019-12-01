@@ -14,7 +14,7 @@ const routes = [
 
     { path: '/regreq', component: RegistrationRequest},
     { path: '/clinic-new', component: NewClinicView},
-    { path: '/profile', component: Patient}
+    { path: '/profile', component: Patient},
     { path: '/cares', component: CareList}
 ];
 

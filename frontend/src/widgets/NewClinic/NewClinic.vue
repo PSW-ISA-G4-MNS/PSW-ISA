@@ -32,11 +32,11 @@ export default {
 		
 		
 		<p>
-		<input type="number" class="form-control" placeholder="LocationLat" v-model="data.LocationLat" />
+		<input type="number" class="form-control" placeholder="LocationLat" v-model="data.locationLat" />
 		</p>
 		
 		<p>
-		<input type="number" class="form-control" placeholder="LocationLog" v-model="data.LocationLog" />
+		<input type="number" class="form-control" placeholder="LocationLog" v-model="data.locationLon" />
 		</p>
 		
 		<p>

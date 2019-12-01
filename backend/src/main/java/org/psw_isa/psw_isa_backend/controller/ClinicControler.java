@@ -1,5 +1,6 @@
 package org.psw_isa.psw_isa_backend.controller;
 
+import org.psw_isa.psw_isa_backend.Logger;
 import java.time.LocalDateTime;
 
 import org.psw_isa.psw_isa_backend.dtos.RegistrationRequestDTO;
@@ -32,7 +33,7 @@ public class ClinicControler {
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<Long> save(@RequestBody Clinic clinic){
 		
-		
+		Logger.getInstance().info("Saving clinic with location parameters: " + clinic.getLocationLat().toString() + " " + clinic.getLocationLon().toString());
 		clinicService.save(clinic);
 		
 		return new ResponseEntity<>(clinic.getId(),HttpStatus.OK);
