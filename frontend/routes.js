@@ -17,6 +17,7 @@ const routes = [
     { path: '/clinic-new', component: NewClinicView},
     { path: '/profile', component: Patient},
     { path: '/clinics', component: ClinicList},
+
     { path: '/cares', component: CareList}
 ];
 
