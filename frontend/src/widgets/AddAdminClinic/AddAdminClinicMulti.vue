@@ -1,5 +1,5 @@
 <script>
-import ReqistrationRequestService from "./service";
+import AddAdminClinicService from "./service";
 import AddAdminClinic from "./AddAdminClinic.vue";
 
 
@@ -37,6 +37,8 @@ export default {
                 :request="item.id"
             />
         </b-dropdown>
+
+        
     </div>
 
 </template>

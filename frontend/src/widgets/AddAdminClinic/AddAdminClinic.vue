@@ -1,5 +1,5 @@
 <script>
-import AddAdminService from "./service";
+import AddAdminClinicService from "./service";
 
 export default {
     name: "AddAdminClinic",
