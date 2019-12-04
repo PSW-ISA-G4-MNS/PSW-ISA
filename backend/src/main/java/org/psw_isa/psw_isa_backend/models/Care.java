@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Care {
@@ -31,6 +32,13 @@ public class Care {
 	private LocalDateTime startTime; 
 	
 	private LocalDateTime endTime;
+
+	private Double price;
+
+	private String comment;
+
+	@OneToOne
+	private Diagnosis diagnosis;
 
 	public Long getId() {
 		return id;
@@ -80,7 +88,7 @@ public class Care {
 		this.endTime = endTime;
 	}
 
-	public Care(Long id, Doctor doctor, Patient patient, Room room, LocalDateTime startTime, LocalDateTime endTime) {
+	public Care(Long id, Doctor doctor, Patient patient, Room room, LocalDateTime startTime, LocalDateTime endTime, Double price) {
 		super();
 		this.id = id;
 		this.doctor = doctor;
@@ -88,10 +96,36 @@ public class Care {
 		this.room = room;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.price = price;
 	} 
 	
 	public Care() {
 		
+	}
+
+
+	public Double getPrice() {
+		return price; 
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public String getComment() {
+		return comment; 
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public Diagnosis getDiagnosis() {
+		return diagnosis; 
+	}
+
+	public void setDiagnosis(Diagnosis diagnosis) {
+		this.diagnosis = diagnosis;
 	}
 	
 }
