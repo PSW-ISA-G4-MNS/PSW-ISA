@@ -9,14 +9,23 @@ import java.util.ListIterator;
 
 import org.psw_isa.psw_isa_backend.models.Care;
 import org.psw_isa.psw_isa_backend.repository.CareRepository;
+import org.psw_isa.psw_isa_backend.service.DoctorService;
+import org.psw_isa.psw_isa_backend.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.psw_isa.psw_isa_backend.dtos.CareDTO;
 
 @Service
 public class CareService {
 	
 	@Autowired
 	CareRepository careRepository;
+
+	@Autowired
+	DoctorService doctorService;
+	
+	@Autowired
+	RoomService roomService;
 	
 	
 	public List<Care> findAll() {
@@ -38,6 +47,10 @@ public class CareService {
 	
 	public Care findOneByid(Long id) {
 		return careRepository.findOneByid(id);
+	}
+	public Care save(CareDTO careDTO) {
+		return careRepository.save(new Care(null, doctorService.findOneByid(careDTO.getDoctorId()), null, roomService.findOneByid(careDTO.getRoomId()), 
+			careDTO.getStartTime(), careDTO.getEndTime(),careDTO.getPrice()));
 	}
 
 }
