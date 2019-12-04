@@ -18,6 +18,7 @@ docker run \
 	-v "$SOURCE_DIR":/usr/src/mymaven/src/main/java \
 	-v "$TEST_DIR":/usr/src/mymaven/src/test \
 	-v "$RESOURCES_DIR/application-docker.properties":/usr/src/mymaven/src/main/resources/application.properties \
+	-v "$BACKEND_DIR/.m2/":/root/.m2 \
 	-w /usr/src/mymaven \
 	--publish 9000:8080 \
 	maven mvn spring-boot:run
