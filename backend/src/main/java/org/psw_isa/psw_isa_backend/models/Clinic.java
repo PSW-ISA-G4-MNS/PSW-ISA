@@ -23,8 +23,7 @@ public class Clinic {
 	
 	private String address; 
 	
-	private String description;
-	
+	private String description;	
 	
 	
 	public Clinic() 
@@ -104,6 +103,5 @@ public class Clinic {
 	public void setLocationLon(Double locationLon) {
 		this.locationLon = locationLon;
 	}
-
 	
 }
