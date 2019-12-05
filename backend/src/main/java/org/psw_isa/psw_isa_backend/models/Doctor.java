@@ -44,6 +44,13 @@ public class Doctor {
 		this.yearsOfExperience = _yearsOfExperience;
 		
 	}
+
+	public Long getId() {
+		return this.id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	 
 	public User getUser() 
