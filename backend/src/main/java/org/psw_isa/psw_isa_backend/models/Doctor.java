@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.psw_isa.psw_isa_backend.models.*;
 import java.time.*;
 
 
@@ -25,6 +26,10 @@ public class Doctor {
 	
 	@ManyToOne
     @JoinColumn
+	private Clinic clinic; 
+	
+	@ManyToOne
+    @JoinColumn
 	private Specialization specialization; 
 	
 	
@@ -34,7 +39,7 @@ public class Doctor {
 	public Doctor() 
 	{
 	}
-	public Doctor(User _user, Specialization _specialization, Integer _yearsOfExperience) {
+	public Doctor(User _user, Specialization _specialization, Integer _yearsOfExperience, Clinic clinic) {
 		super();
 		 
 		this.user = _user;
@@ -42,6 +47,8 @@ public class Doctor {
 		this.specialization = _specialization;
 		 
 		this.yearsOfExperience = _yearsOfExperience;
+
+		this.clinic = clinic;
 		
 	}
 
@@ -71,6 +78,15 @@ public class Doctor {
 	public void setSpecialization(Specialization newValue) 
 	{
 		this.specialization = newValue;
+	}
+	public Clinic getClinic() 
+	{
+		return this.clinic;
+	}
+
+	public void setClinic(Clinic newValue) 
+	{
+		this.clinic = newValue;
 	}
 	 
 	public Integer getYearsOfExperience() 
