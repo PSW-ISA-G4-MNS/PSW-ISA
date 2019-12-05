@@ -8,29 +8,15 @@ export default class ReviewService
         this.self = self;
     }
 
-
-    static getDiagnosis() 
-    {
-        return axios.get(API_URL + "/adminClinic/all/");
-    }
-
-    static getDrugs() 
-    {
-        return axios.get(API_URL + "/adminClinic/all/");
-    }
-
     static get(id) 
     {
-        return axios.get(API_URL + "/adminClinic/" + id);
-    }
-
-    static addDrug(id) 
-    {
-        return axios.post(API_URL + "/adminClinic/" + id);
+        return axios.get(API_URL + "/care/" + id);
+    
     }
 
     static submit(id) 
     {
-        return axios.post(API_URL + "/adminClinic/" + id);
+        return axios.post(API_URL + "/care/" + id);
     }
+
 }
