@@ -32,11 +32,13 @@ export default {
 
 		});
 	},
-	selectDoctor: function(id) {
-		this.data.doctorId = id;
+	selectDoctor: function(index) {
+		console.log("Called with id = " + index);
+		this.data.doctorId = this.doctors[index].id;
 	},
-	selectRoom: function(id) {
-		this.data.roomId = id;
+	selectRoom: function(index) {
+		console.log("Called with id = " + index);
+		this.data.roomId = this.rooms[index].id;
 	}
     }
 }
@@ -52,7 +54,7 @@ export default {
 		    Select doctor
 		  </button>
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonDoctor">
-		    <a :key="doctor.id" :id="doctor.id" @click="selectDoctor(doctor.id)" v-for="doctor in this.doctors" class="dropdown-item" href="#">{{ doctor.user.firstname }} {{ doctor.user.lastname}}</a>
+		    <a :key="doctor.id" :id="doctor.id" @click="selectDoctor(index)" v-for="(doctor, index) in this.doctors" class="dropdown-item" href="#">{{ doctor.user.firstname }} {{ doctor.user.lastname}}</a>
 		  </div>
 		</div>
 		
@@ -61,7 +63,7 @@ export default {
 		    Select room
 		  </button>
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonRoom">
-		    <a :key="room.id" :id="room.id" @click="selectRoom(room.id)" v-for="room in this.rooms" class="dropdown-item" href="#">Room: {{ room.title}}</a>
+		    <a :key="room.id" :id="room.id" @click="selectRoom(index)" v-for="(room, index) in this.rooms" class="dropdown-item" href="#">Room: {{ room.title}}</a>
 		  </div>
 		</div>
 		
