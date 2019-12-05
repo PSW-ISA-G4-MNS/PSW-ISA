@@ -22,6 +22,7 @@ export default {
         <router-link to='/profile'>My Profile</router-link>
         <router-link to='/clinic-new'>Create Clinic</router-link>
         <router-link to='/clinics'>Show all clinics</router-link>
+        <router-link to='/createCare'>Add new care time</router-link>
     </nav>
     <router-view /> 
   </div>

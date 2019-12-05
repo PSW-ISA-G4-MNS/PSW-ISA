@@ -20,7 +20,7 @@ public class RoomController {
 	@Autowired 
 	RoomService roomService;
 	
-	@GetMapping(value="/all")
+	@GetMapping(value="")
 	public ResponseEntity<List<Room>> findAll(){
 		return new ResponseEntity<>(roomService.findAll(), HttpStatus.OK);
 	}
