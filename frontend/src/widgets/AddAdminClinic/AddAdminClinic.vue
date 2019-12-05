@@ -1,54 +1,73 @@
 <script>
-import AddAdminClinicService from "./service";
+import CareFormService from "./service";
+
 
 export default {
     name: "AddAdminClinic",
-    props: ["request"],
     data: function () {
         return {
-          
-                admin: {}
+            data: {
+	    },
+	    admins: [],
+	    success: false
+
         };
     },
+    mounted: function() {
+    	AdminService.list().then(response => {
+		this.admins = response.data; 
+	});
+    	
+    },
     methods: {
-    	accept: function() 
+    	submit: function() 
 	{
-		AddAdminClinicService.accept(this.request).then(response => {
-
-
+		AddAdminClinicService.submit(this.data).then(response => {
 			if (response.data.code == 0) this.data.success = true;
 			else this.data.success = false;
 
 		});
-	}
-	
-
+	},
+	selectAdmin: function(index) {
+		console.log("Dodat admin= " + index);
+		this.data.admin = this.admins[index].id;
 	},
 	
-	mounted: function () 
-    {
-       AddAdminClinicService.get(this.request).then(response => {
-		
-		this.admin = response.data;
-		
-    }
-	);
     }
 }
 </script>
 
 <template>
-    
-    <b-dropdown-item> 
-	{{admin.username}}
-  </b-dropdown-item>
+    <div class="form-AdminForm"> 
+        <div class="success-box" v-if="success">Care created</div>
+	<div v-if="!success"> 
 		
+		<div class="dropdown">
+		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonDoctor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    Select doctor
+		  </button>
+		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonAdmin">
+		    <a :key="admin.id" :id="admin.id" @click="selectDoctor(index)" v-for="(admin, index) in this.doctors" class="dropdown-item" href="#">{{ doctor.user.firstname }} {{ doctor.user.lastname}}</a>
+		  </div>
+		</div>
 
+		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonAdminDoctor" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    Select doctor
+		  </button>
+		
+		
+    </div>
 
 </template>
 
 <style scoped> 
 
 
+.success-box 
+{
+	backgrund-color: #dfd;
+	color: #0f0;
+	padding: 5px;
+}
 
 </style>
