@@ -5,7 +5,9 @@ import org.psw_isa.psw_isa_backend.service.CareService;
 import java.util.List;
 
 import org.psw_isa.psw_isa_backend.models.Care;
+import org.psw_isa.psw_isa_backend.models.Clinic;
 import org.psw_isa.psw_isa_backend.dtos.CareDTO;
+import org.psw_isa.psw_isa_backend.dtos.ClinicFilterDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,7 @@ public class CareController {
 	
 	@Autowired 
 	CareService careService;
+		
 	
 	@GetMapping(value="/all")
 	public ResponseEntity<List<Care>> findAllUnassignedAndUpcoming(){
