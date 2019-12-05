@@ -15,6 +15,8 @@ import org.psw_isa.psw_isa_backend.dtos.ClinicReportDTO;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
+import java.util.Map;
+import java.util.TreeMap;
 
 @Service
 public class ClinicService {
@@ -66,12 +68,17 @@ public class ClinicService {
 		return sum;
 	}
 
-	public ClinicReportDTO getReport(Clinic clinic) {
+	public ClinicReportDTO getReport(Clinic clinic, LocalDateTime start, LocalDateTime end) {
 		int dayCount = (int) this.findCaresForClinic(clinic).stream().filter(x -> x.getStartTime().isAfter(LocalDateTime.now().minusDays(1))).count();
-		int weekCount = 0;
-		int monthCount = 0;
-		double averageRate = 0;
-		return new ClinicReportDTO();
+		int weekCount = (int) this.findCaresForClinic(clinic).stream().filter(x -> x.getStartTime().isAfter(LocalDateTime.now().minusDays(7))).count();
+		int monthCount = (int) this.findCaresForClinic(clinic).stream().filter(x -> x.getStartTime().isAfter(LocalDateTime.now().minusDays(30))).count();
+		double averageRate = clinicRatingService.getClinicAverage(clinic);
+		Map<Long, Double> doctorRatings = new TreeMap<Long, Double>();
+		List<Doctor> doctors = doctorService.findAllByClinic(clinic);
+		for (Doctor doctor : doctors) {
+			doctorRatings.put(doctor.getId(), doctorRatingService.getDoctorAverage(doctor));
+		}
+		return new ClinicReportDTO(dayCount, weekCount, monthCount, averageRate, doctorRatings, this.getRevenue(clinic, start, end));
 
 	}
 

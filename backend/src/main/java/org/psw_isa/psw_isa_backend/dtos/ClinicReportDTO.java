@@ -6,11 +6,11 @@ import java.util.Map;
 public class ClinicReportDTO {
 	
 	
-	private List<Integer> careCountLastDay; 
+	private Integer careCountLastDay; 
 	
-	private List<Integer> careCountLastWeek; 
+	private Integer careCountLastWeek; 
 	
-	private List<Integer> careCountLastMonth; 
+	private Integer careCountLastMonth; 
 	
 	private Double averageRating; 
 	
@@ -21,7 +21,7 @@ public class ClinicReportDTO {
 	public ClinicReportDTO() 
 	{
 	}
-	public ClinicReportDTO(List<Integer> _careCountLastDay, List<Integer> _careCountLastWeek, List<Integer> _careCountLastMonth, Double _averageRating, Map<Long, Double> _averageRatingByDoctor, Double _revenue) {
+	public ClinicReportDTO(Integer _careCountLastDay, Integer _careCountLastWeek, Integer _careCountLastMonth, Double _averageRating, Map<Long, Double> _averageRatingByDoctor, Double _revenue) {
 		super();
 		 
 		this.careCountLastDay = _careCountLastDay;
@@ -39,32 +39,32 @@ public class ClinicReportDTO {
 	}
 	
 	 
-	public List<Integer> getCareCountLastDay() 
+	public Integer getCareCountLastDay() 
 	{
 		return this.careCountLastDay;
 	}
 
-	public void setCareCountLastDay(List<Integer> newValue) 
+	public void setCareCountLastDay(Integer newValue) 
 	{
 		this.careCountLastDay = newValue;
 	}
 	 
-	public List<Integer> getCareCountLastWeek() 
+	public Integer getCareCountLastWeek() 
 	{
 		return this.careCountLastWeek;
 	}
 
-	public void setCareCountLastWeek(List<Integer> newValue) 
+	public void setCareCountLastWeek(Integer newValue) 
 	{
 		this.careCountLastWeek = newValue;
 	}
 	 
-	public List<Integer> getCareCountLastMonth() 
+	public Integer getCareCountLastMonth() 
 	{
 		return this.careCountLastMonth;
 	}
 
-	public void setCareCountLastMonth(List<Integer> newValue) 
+	public void setCareCountLastMonth(Integer newValue) 
 	{
 		this.careCountLastMonth = newValue;
 	}
