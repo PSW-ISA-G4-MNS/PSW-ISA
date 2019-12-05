@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface PrescriptionRepository extends JpaRepository<Prescription, Long> {
 	
 	
-	Prescription findOneByinsuranceID(Long id);
+	Prescription findOneByid(Long id);
 	
 	List<Prescription> findAll();
 }

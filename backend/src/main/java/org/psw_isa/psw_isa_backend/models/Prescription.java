@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -16,8 +17,7 @@ public class Prescription {
 	
 	private Long id;
 	
-	@ManyToOne
-    @JoinColumn
+	
 	private ArrayList<Medicine> medicines;
 
 	
@@ -50,11 +50,5 @@ public class Prescription {
 		this.medicines = medicines;
 	}
 	
-	public void addMedicine(Medicine medicine) {
-		this.medicines.add(medicine);
-	}
 	
-	public void removeMedicine(Medicine medicine) {
-		this.medicines.remove(medicine);
-	}
 }
