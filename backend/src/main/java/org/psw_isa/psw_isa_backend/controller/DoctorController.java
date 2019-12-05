@@ -4,12 +4,15 @@ import org.psw_isa.psw_isa_backend.service.DoctorService;
 
 import java.util.List;
 
+import org.psw_isa.psw_isa_backend.dtos.ClinicFilterDTO;
 import org.psw_isa.psw_isa_backend.models.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,5 +33,9 @@ public class DoctorController {
 		return new ResponseEntity<>(doctorService.findOneByid(id), HttpStatus.OK);
 	}
 	
+	@PostMapping(value="/filter", consumes = "application/json")
+	public ResponseEntity<List<Doctor>> FreeDoctorsFromClinic(@RequestBody ClinicFilterDTO clinicFilterDTO){
+		return new ResponseEntity<>(doctorService.findFreeDoctors(clinicFilterDTO), HttpStatus.OK);
+	}
 	
 }

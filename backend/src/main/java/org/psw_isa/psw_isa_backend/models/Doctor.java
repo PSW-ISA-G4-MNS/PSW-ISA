@@ -17,7 +17,6 @@ public class Doctor {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-
 	
 	@ManyToOne
     @JoinColumn
@@ -25,7 +24,11 @@ public class Doctor {
 	
 	@ManyToOne
     @JoinColumn
-	private Specialization specialization; 
+	private CareType careType; 
+	
+	@ManyToOne
+    @JoinColumn
+    private Clinic clinic;
 	
 	
 	private Integer yearsOfExperience; 
@@ -34,18 +37,45 @@ public class Doctor {
 	public Doctor() 
 	{
 	}
-	public Doctor(User _user, Specialization _specialization, Integer _yearsOfExperience) {
+	public Doctor(User _user, CareType careType, Integer _yearsOfExperience) {
 		super();
 		 
 		this.user = _user;
 		 
-		this.specialization = _specialization;
+		this.careType = careType;
 		 
 		this.yearsOfExperience = _yearsOfExperience;
 		
 	}
 	
 	 
+	public Doctor(Long id, User user, CareType careType, Clinic clinic, Integer yearsOfExperience) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.careType = careType;
+		this.clinic = clinic;
+		this.yearsOfExperience = yearsOfExperience;
+	}
+	
+	public CareType getCareType() {
+		return careType;
+	}
+	public void setCareType(CareType careType) {
+		this.careType = careType;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Clinic getClinic() {
+		return clinic;
+	}
+	public void setClinic(Clinic clinic) {
+		this.clinic = clinic;
+	}
 	public User getUser() 
 	{
 		return this.user;
@@ -54,16 +84,6 @@ public class Doctor {
 	public void setUser(User newValue) 
 	{
 		this.user = newValue;
-	}
-	 
-	public Specialization getSpecialization() 
-	{
-		return this.specialization;
-	}
-
-	public void setSpecialization(Specialization newValue) 
-	{
-		this.specialization = newValue;
 	}
 	 
 	public Integer getYearsOfExperience() 
