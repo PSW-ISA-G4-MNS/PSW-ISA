@@ -3,6 +3,7 @@ package org.psw_isa.psw_isa_backend.controller;
 import org.psw_isa.psw_isa_backend.Logger;
 import java.time.LocalDateTime;
 
+import org.psw_isa.psw_isa_backend.dtos.ClinicFilterDTO;
 import org.psw_isa.psw_isa_backend.dtos.RegistrationRequestDTO;
 import org.psw_isa.psw_isa_backend.dtos.ClinicReportDTO;
 import org.psw_isa.psw_isa_backend.models.Clinic;
@@ -72,4 +73,11 @@ public class ClinicControler {
 		
 		return new ResponseEntity<>(clinicService.findAll(),HttpStatus.OK);
 	}
+	
+	@PostMapping(value="/filter", consumes = "application/json")
+	public ResponseEntity<List<Clinic>> listAllWithFreeDoctors(@RequestBody ClinicFilterDTO clinicFilterDTO){
+		
+		return new ResponseEntity<>(clinicService.findClinicsWithFreeDoctors(clinicFilterDTO),HttpStatus.OK);
+	}
+	
 }
