@@ -8,7 +8,10 @@ export default class  DiagnosisService
         this.self = self;
     }
 
-    
+    static list() 
+    {
+        return axios.get(API_URL + "/diagnosis/");
+    }
 
     static submit(x)
     {
