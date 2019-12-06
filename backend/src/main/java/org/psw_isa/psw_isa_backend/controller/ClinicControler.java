@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 import org.psw_isa.psw_isa_backend.dtos.ClinicFilterDTO;
 import org.psw_isa.psw_isa_backend.dtos.RegistrationRequestDTO;
+import org.psw_isa.psw_isa_backend.dtos.ClinicReportDTO;
 import org.psw_isa.psw_isa_backend.models.Clinic;
 import org.psw_isa.psw_isa_backend.models.Patient;
 import org.psw_isa.psw_isa_backend.models.RegistrationRequest;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping(value = "clinic")
@@ -58,6 +60,13 @@ public class ClinicControler {
 		
 		Clinic clinic = clinicService.findOneByid(id);
 		return new ResponseEntity<>(clinic,HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/{id}/report/{days}")
+	public ResponseEntity<ClinicReportDTO> getReport(@PathVariable("id") Long id, @PathVariable("days") Integer days){
+		
+		Clinic clinic = clinicService.findOneByid(id);
+		return new ResponseEntity<>(clinicService.getReport(clinic, LocalDateTime.now().minusDays(days), LocalDateTime.now()),HttpStatus.OK);
 	}
 	@GetMapping(value="")
 	public ResponseEntity<List<Clinic>> list(){

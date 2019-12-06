@@ -8,7 +8,7 @@ export default class AddAdminClinicService
         this.self = self;
     }
 
-    static accept(id)
+    static submit(id)
     {
         return axios.post(API_URL + "/adminClinic/"+id);
     }

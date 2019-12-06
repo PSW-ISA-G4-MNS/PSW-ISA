@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.ListIterator;
 
 import org.psw_isa.psw_isa_backend.dtos.ClinicFilterDTO;
@@ -15,6 +16,7 @@ import org.psw_isa.psw_isa_backend.models.Operation;
 import org.psw_isa.psw_isa_backend.repository.CareRepository;
 import org.psw_isa.psw_isa_backend.repository.DoctorRepository;
 import org.psw_isa.psw_isa_backend.repository.OperationRepository;
+import org.psw_isa.psw_isa_backend.models.Clinic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,6 +76,16 @@ public class DoctorService {
 			
 		}
 		return res;
+	}
+
+	public List<Doctor> findAllByClinic(Clinic clinic) {
+		List<Doctor> result = new ArrayList<Doctor>();
+		for (Doctor doc  : this.findAll()) {
+			if (doc.getClinic() != null && doc.getClinic().getId() == clinic.getId()) {
+				result.add(doc);
+			}
+		}
+		return result;
 	}
 
 }
