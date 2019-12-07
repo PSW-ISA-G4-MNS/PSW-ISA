@@ -29,9 +29,8 @@ public class Care {
     @JoinColumn
 	private Room room; 
 	
-	@ManyToOne
-    @JoinColumn
-	private CareType type;
+	
+	
 	
 	private LocalDateTime startTime; 
 	

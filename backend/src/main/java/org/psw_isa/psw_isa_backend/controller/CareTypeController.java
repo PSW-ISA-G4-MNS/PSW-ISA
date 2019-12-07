@@ -19,6 +19,7 @@ public class CareTypeController {
 	@Autowired 
 	CareTypeService careTypeService;
 	
+	
 	@GetMapping(value="")
 	public ResponseEntity<List<CareType>> findAllUnassignedAndUpcoming(){
 		return new ResponseEntity<>(careTypeService.getAll(), HttpStatus.OK);
@@ -26,7 +27,7 @@ public class CareTypeController {
 	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<CareType> findOneByid(@PathVariable("id") Long id){
-		return new ResponseEntity<>(careTypeService.findOneByid(id), HttpStatus.OK);
+		return new ResponseEntity<CareType>(careTypeService.findOneByid(id), HttpStatus.OK);
 	}
 
 }

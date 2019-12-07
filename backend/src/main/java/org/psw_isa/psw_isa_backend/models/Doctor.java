@@ -23,9 +23,8 @@ public class Doctor {
     @JoinColumn
 	private User user; 
 	
-	@ManyToOne
-  @JoinColumn
-	private CareType careType; 
+	
+	private String careType; 
 	
 	@ManyToOne
   @JoinColumn
@@ -40,7 +39,7 @@ public class Doctor {
 	{
 	}
 
-	public Doctor(User _user, CareType careType, Integer _yearsOfExperience) {
+	public Doctor(User _user, String careType, Integer _yearsOfExperience,Clinic clinic) {
 
 		super();
 		 
@@ -62,7 +61,7 @@ public class Doctor {
 	}
 	
 	 
-	public Doctor(Long id, User user, CareType careType, Clinic clinic, Integer yearsOfExperience) {
+	public Doctor(Long id, User user, String careType, Clinic clinic, Integer yearsOfExperience) {
 		super();
 		this.id = id;
 		this.user = user;
@@ -71,24 +70,13 @@ public class Doctor {
 		this.yearsOfExperience = yearsOfExperience;
 	}
 	
-	public CareType getCareType() {
+	public String getCareType() {
 		return careType;
 	}
-	public void setCareType(CareType careType) {
+	public void setCareType(String careType) {
 		this.careType = careType;
 	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public Clinic getClinic() {
-		return clinic;
-	}
-	public void setClinic(Clinic clinic) {
-		this.clinic = clinic;
-	}
+
 	public User getUser() 
 	{
 		return this.user;

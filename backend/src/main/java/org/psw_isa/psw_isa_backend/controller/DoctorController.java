@@ -32,10 +32,10 @@ public class DoctorController {
 	public ResponseEntity<Doctor> findOneByid(@PathVariable("id") Long id){
 		return new ResponseEntity<>(doctorService.findOneByid(id), HttpStatus.OK);
 	}
-	
+	/*
 	@PostMapping(value="/filter", consumes = "application/json")
 	public ResponseEntity<List<Doctor>> FreeDoctorsFromClinic(@RequestBody ClinicFilterDTO clinicFilterDTO){
 		return new ResponseEntity<>(doctorService.findFreeDoctors(clinicFilterDTO), HttpStatus.OK);
 	}
-	
+	*/
 }
