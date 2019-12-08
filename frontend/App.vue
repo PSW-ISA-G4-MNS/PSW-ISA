@@ -23,6 +23,10 @@ export default {
         <router-link to='/clinic-new'>Create Clinic</router-link>
         <router-link to='/clinics'>Show all clinics</router-link>
         <router-link to='/createCare'>Add new care time</router-link>
+        <router-link to='/review'>Review</router-link>
+        <router-link to='/addDiagnosis'>Diagnosis</router-link>
+        
+
     </nav>
     <router-view /> 
   </div>

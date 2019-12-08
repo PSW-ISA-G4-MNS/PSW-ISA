@@ -2,10 +2,10 @@
 
 
 // import widgets for this view here
-import Review from "../widgets/Review/Review.vue"
+import WidgetDiagnosis from "../widgets/Diagnosis/WidgetDiagnosis.vue"
 
 export default {
-    name: "ReviewView",
+    name: "DiagnosisAdd",
     data: function () {
             return {
 		data: {}
@@ -21,14 +21,14 @@ export default {
         }
     },
     components: {
-    	"Review": Review
+    	"WidgetDiagnosis": WidgetDiagnosis
     }
 }
 </script>
 
 <template>
 
-<Review/>
+<WidgetDiagnosis/>
 
 </template>
 
