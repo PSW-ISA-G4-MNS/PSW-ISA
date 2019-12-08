@@ -42,7 +42,7 @@ public class DoctorService {
 		return doctorRepository.findOneByid(id);
 	}
 	
-/*
+
 	public List<Doctor> findFreeDoctors(ClinicFilterDTO clinicFilterDTO){
 		List<Doctor> res = new ArrayList<>();
 		List<Doctor> allDoctors = doctorRepository.findAll();
@@ -77,7 +77,7 @@ public class DoctorService {
 		}
 		return res;
 	}
-*/
+
 	public List<Doctor> findAllByClinic(Clinic clinic) {
 		List<Doctor> result = new ArrayList<Doctor>();
 		for (Doctor doc  : this.findAll()) {
