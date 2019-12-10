@@ -1,5 +1,6 @@
 package org.psw_isa.psw_isa_backend.service;
 
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,10 @@ public class RegistrationRequestService {
 		}
 		
 		return registrationRequestDTOs;
+	}
+	
+	public List<RegistrationRequest> findAll(){
+		return registrationRequestRepository.findAll();
 	}
 	
 	public RegistrationRequest save (RegistrationRequest registrationRequest) {
