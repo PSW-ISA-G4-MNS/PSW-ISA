@@ -3,6 +3,7 @@ package org.psw_isa.psw_isa_backend.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.psw_isa.psw_isa_backend.dtos.AdminClinicDTO;
 import org.psw_isa.psw_isa_backend.models.ClinicAdministrator;
 import org.psw_isa.psw_isa_backend.models.RegistrationRequest;
 import org.psw_isa.psw_isa_backend.repository.AdminRepository;
@@ -24,9 +25,10 @@ public class AdminService {
 		return adminClinicRepository.findOneByid(id);
 	}
 	
-	public List<ClinicAdministrator> findAllFree(){
+	public List<AdminClinicDTO> findAllFree(){
 		List<ClinicAdministrator> all = adminClinicRepository.findAll();
 		List<ClinicAdministrator> free = new ArrayList<>();
+		List<AdminClinicDTO> adminClinicDTOs = new ArrayList<>();
 		
 		for(ClinicAdministrator clinicAdministrator : all) {
 			if(clinicAdministrator.getClinic() == null) {
@@ -34,6 +36,11 @@ public class AdminService {
 			}
 		}
 		
-		return free;
+		for(ClinicAdministrator clinicAdministrator : free) {
+			adminClinicDTOs.add(new AdminClinicDTO(clinicAdministrator));
+		}
+		
+		
+		return adminClinicDTOs;
 	}
 }

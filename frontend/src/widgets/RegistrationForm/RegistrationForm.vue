@@ -14,7 +14,7 @@ export default {
     	submit: function() 
 	{
 		RegistrationFormService.submit(this.data).then(response => {
-			if (response.code == 200) window.location.href = "/frontend/";
+			if (response.status < 300) window.location.href = "/frontend/";
 		});
 	}
     }

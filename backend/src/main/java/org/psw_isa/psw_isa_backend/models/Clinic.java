@@ -15,30 +15,45 @@ public class Clinic {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
-	private Long LocationLat;
+	private Double locationLat;
 	
-	private Long LocationLog;
+	private Double locationLon;
 	
 	private String name; 
 	
 	private String address; 
 	
-	private String description;
-	
+	private String description;	
 	
 	
 	public Clinic() 
 	{
 	}
-	public Clinic(String _name, String _address, String description) {
+	public Clinic(Double locationLat,Double locationLon ,String _name, String _address, String description) {
 		super();
-		 
+		
+		this.locationLat=locationLat;
+		
+		this.locationLon=locationLon;
+		
 		this.name = _name;
 		 
 		this.address = _address;
 		 
 		this.setDescription(description);
 		
+	}
+	public void assign(Clinic other) {
+
+		this.locationLat=other.getLocationLat();
+		
+		this.locationLon=other.getLocationLon();
+		
+		this.name = other.getName();
+		 
+		this.address = other.getAddress();
+		 
+		this.setDescription(other.getDescription());
 	}
 	
 	 
@@ -76,18 +91,17 @@ public class Clinic {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Long getLocationLat() {
-		return LocationLat;
+	public Double getLocationLat() {
+		return locationLat;
 	}
-	public void setLocationLat(Long locationLat) {
-		LocationLat = locationLat;
+	public void setLocationLat(Double locationLat) {
+		this.locationLat = locationLat;
 	}
-	public Long getLocationLog() {
-		return LocationLog;
+	public Double getLocationLon() {
+		return locationLon;
 	}
-	public void setLocationLog(Long locationLog) {
-		LocationLog = locationLog;
+	public void setLocationLon(Double locationLon) {
+		this.locationLon = locationLon;
 	}
-
 	
 }

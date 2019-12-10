@@ -14,12 +14,12 @@ export default class RegistrationRequestService
 
     static accept(id)
     {
-        return axios.post(API_URL + "/registrationRequests/approved/"+id);
+        return axios.put(API_URL + "/registrationRequests/approve/" + id);
     }
 
     static decline(id)
     {
-        return axios.post(API_URL + "/registrationRequests/decline/"+id);
+        return axios.put(API_URL + "/registrationRequests/decline/"+id);
     }
 
     static get(id) 
@@ -27,4 +27,8 @@ export default class RegistrationRequestService
         return axios.get(API_URL + "/registrationRequests/" + id);
     }
 
+    static sentResponse(id) 
+    {
+        return axios.get(API_URL + "/registrationRequests/response" + id);
+    }
 }

@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.psw_isa.psw_isa_backend.models.*;
 import java.time.*;
 
 
@@ -17,35 +18,66 @@ public class Doctor {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-
 	
 	@ManyToOne
     @JoinColumn
 	private User user; 
 	
 	@ManyToOne
+	@JoinColumn
+	private CareType careType; 
+	
+	@ManyToOne
     @JoinColumn
-	private Specialization specialization; 
+    private Clinic clinic;
+ 
 	
-	
+
 	private Integer yearsOfExperience; 
 	
 
 	public Doctor() 
 	{
 	}
-	public Doctor(User _user, Specialization _specialization, Integer _yearsOfExperience) {
+
+	public Doctor(User _user, CareType careType, Integer _yearsOfExperience,Clinic clinic) {
+
 		super();
 		 
 		this.user = _user;
 		 
-		this.specialization = _specialization;
+		this.careType = careType;
 		 
 		this.yearsOfExperience = _yearsOfExperience;
+
+		this.clinic = clinic;
 		
+	}
+
+	public Long getId() {
+		return this.id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	 
+	public Doctor(Long id, User user, CareType careType, Clinic clinic, Integer yearsOfExperience) {
+		super();
+		this.id = id;
+		this.user = user;
+		this.careType = careType;
+		this.clinic = clinic;
+		this.yearsOfExperience = yearsOfExperience;
+	}
+	
+	public CareType getCareType() {
+		return careType;
+	}
+	public void setCareType(CareType careType) {
+		this.careType = careType;
+	}
+
 	public User getUser() 
 	{
 		return this.user;
@@ -56,16 +88,18 @@ public class Doctor {
 		this.user = newValue;
 	}
 	 
-	public Specialization getSpecialization() 
+
+	public Clinic getClinic() 
 	{
-		return this.specialization;
+		return this.clinic;
 	}
 
-	public void setSpecialization(Specialization newValue) 
+	public void setClinic(Clinic newValue) 
 	{
-		this.specialization = newValue;
+		this.clinic = newValue;
 	}
 	 
+
 	public Integer getYearsOfExperience() 
 	{
 		return this.yearsOfExperience;

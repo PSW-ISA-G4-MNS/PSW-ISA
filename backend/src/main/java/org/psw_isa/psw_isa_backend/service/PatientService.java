@@ -2,12 +2,16 @@ package org.psw_isa.psw_isa_backend.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.psw_isa.psw_isa_backend.models.Patient;
 import org.psw_isa.psw_isa_backend.models.User;
 import org.psw_isa.psw_isa_backend.repository.UserRepository;
 import org.psw_isa.psw_isa_backend.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.psw_isa.psw_isa_backend.Logger;
 
 @Service
@@ -40,6 +44,17 @@ public class PatientService {
 	
 	public Patient save(Patient patient) {
 		return patientRepository.save(patient);
+	}
+	
+	public Patient getBySession() {
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
+		HttpSession session = attr.getRequest().getSession(true); 
+		
+        String email = (String) session.getAttribute("user");
+		User user = userRepository.findOneByemail(email);
+		Patient patient = findOneByuser(user);
+		
+		return patient;
 	}
 
 }
