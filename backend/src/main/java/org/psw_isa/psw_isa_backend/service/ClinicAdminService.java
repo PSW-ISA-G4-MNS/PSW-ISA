@@ -6,15 +6,15 @@ import java.util.List;
 import org.psw_isa.psw_isa_backend.dtos.AdminClinicDTO;
 import org.psw_isa.psw_isa_backend.models.ClinicAdministrator;
 import org.psw_isa.psw_isa_backend.models.RegistrationRequest;
-import org.psw_isa.psw_isa_backend.repository.AdminRepository;
+import org.psw_isa.psw_isa_backend.repository.ClinicAdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AdminService {
+public class ClinicAdminService {
 
 	@Autowired
-	AdminRepository adminClinicRepository;
+	ClinicAdminRepository adminClinicRepository;
 	
 	public String updateAdminClinic(Long clinic, Long id) {
 		

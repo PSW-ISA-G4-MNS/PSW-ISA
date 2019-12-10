@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-public interface AdminRepository extends JpaRepository<ClinicAdministrator,Long > {
+public interface ClinicAdminRepository extends JpaRepository<ClinicAdministrator,Long > {
 
 	@Modifying
 	@Query(value = "UPDATE ClinicAdministrator admin SET admin.clinic = :clinic WHERE admin.id = :id", nativeQuery = true)
@@ -20,4 +20,6 @@ public interface AdminRepository extends JpaRepository<ClinicAdministrator,Long 
 	ClinicAdministrator findOneByid(Long id);
 	
 	List<ClinicAdministrator> findAll();
+	
+	ClinicAdministrator findOneByuser(Long id);
 }

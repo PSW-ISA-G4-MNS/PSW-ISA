@@ -40,5 +40,11 @@ public class UserController {
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
+	@PostMapping(value = "/logOut")
+	public ResponseEntity<Long> logOut(){
+		userService.logOut();
+		return new ResponseEntity<>(null, HttpStatus.OK);
+	}
+	
 	
 }

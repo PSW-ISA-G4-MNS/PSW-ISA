@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.psw_isa.psw_isa_backend.dtos.AdminClinicDTO;
 import org.psw_isa.psw_isa_backend.models.ClinicAdministrator;
-import org.psw_isa.psw_isa_backend.service.AdminService;
+import org.psw_isa.psw_isa_backend.service.ClinicAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,16 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "adminClinic")
-public class AdminControler {
+public class ClinicAdminControler {
 
 	@Autowired
-	AdminService adminService;
+	ClinicAdminService clinicAdminService;
 	
 	
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<AdminClinicDTO> saveClinic(@RequestBody AdminClinicDTO acDTO){
 		
-		adminService.updateAdminClinic(acDTO.getClinic_Id(),acDTO.getAdmin_Id());
+		clinicAdminService.updateAdminClinic(acDTO.getClinic_Id(),acDTO.getAdmin_Id());
 		
 	
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -37,7 +37,7 @@ public class AdminControler {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<AdminClinicDTO> getAdmin(@PathVariable("id") Long id){
 		
-		ClinicAdministrator clinicAdministrator = adminService.findOneByid(id);
+		ClinicAdministrator clinicAdministrator = clinicAdminService.findOneByid(id);
 		
 		AdminClinicDTO adminClinicDTO = new AdminClinicDTO(clinicAdministrator);
 		
@@ -46,7 +46,7 @@ public class AdminControler {
 	
 	@GetMapping(value = "/all")
 	public ResponseEntity<List<AdminClinicDTO>> getFreeAdmins(){
-		List<AdminClinicDTO>adminClinicDTOs = adminService.findAllFree();
+		List<AdminClinicDTO>adminClinicDTOs = clinicAdminService.findAllFree();
 		
 		return new ResponseEntity<>(adminClinicDTOs, HttpStatus.OK);
 		
