@@ -1,7 +1,7 @@
 <script>
 
 import PatientService from "./service";
-import WidgetUserSingle from "../User/WidgetUpdateUser.vue";
+import WidgetUpdateUser from "../User/WidgetUpdateUser.vue";
 
 export default {
     name: "WidgetUpdatePatient",
@@ -26,7 +26,7 @@ export default {
 
 
 <template>
-    <div class="widget-update-patient"> 
+    <div> 
     <p> Jedinstveni broj osiguranika: {{data.insuranceID}} </p>
     <WidgetUpdateUser :user="data.user.id" />
     

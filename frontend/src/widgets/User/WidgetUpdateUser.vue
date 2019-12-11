@@ -9,6 +9,14 @@ export default {
             data: {}
         }
     },
+    methods: {
+    	update: function() 
+		{
+			UserService.update(this.data).then(response => {
+				if (response.status < 300) window.location.href = "/frontend/profile/";
+			});
+		}
+	},
     mounted: function()
     {
         UserService.get(this.user).then(response => this.data = response.data);
@@ -18,33 +26,33 @@ export default {
 
 <template>
 
-<div class="form-update-user-form"> 
-        <div class="success-box" ></div>
+<div> 
+    <div>
 	
 		<p>
-		<input type="text" class="form-control" text= {{data.firstname}} placeholder="firstname" v-model="data.name" />
+		<input type="text" class="form-control" text={{data.firstname}} v-model="data.name" />
 		</p>
 		
 		<p>
-		<input type="text" class="form-control" text={{data.lastname}} placeholder="lastname" v-model="data.lastname" />
+		<input type="text" class="form-control" text={{data.lastname}} v-model="data.lastname" />
 		</p>
 		
 		<p>
-		<input type="text" class="form-control" text={{data.mobile_phone}} placeholder="mobilePhone" v-model="data.mobile_phone" />
+		<input type="text" class="form-control" v-model="data.mobile_phone" />
 		</p>
 		
 		<p>
-		<input type="text" class="form-control" text={{data.address}} placeholder="address" v-model="data.address" />
+		<input type="text" class="form-control" text={{data.address}} v-model="data.address" />
 		</p>
 		
 		<p>
-		<input type="date" class="form-control" date={{data.birthday}} placeholder="birthday" v-model="data.birthday" />
+		<input type="date" class="form-control" placeholder="birthday" v-model="data.birthday" />
 		</p>
 		
 
 		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="update">Submit</button>
 	</div>
-
+</div>
 
 </template>
 
