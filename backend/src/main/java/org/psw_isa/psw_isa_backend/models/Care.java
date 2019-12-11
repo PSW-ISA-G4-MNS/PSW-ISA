@@ -29,7 +29,9 @@ public class Care {
     @JoinColumn
 	private Room room; 
 	
-	
+	@ManyToOne
+    @JoinColumn
+	private CareType careType; 
 	
 	
 	private LocalDateTime startTime; 
@@ -42,6 +44,16 @@ public class Care {
 
 	@OneToOne
 	private Diagnosis diagnosis;
+	
+	
+
+	public CareType getCareType() {
+		return careType;
+	}
+
+	public void setCareType(CareType careType) {
+		this.careType = careType;
+	}
 
 	public Long getId() {
 		return id;
@@ -105,7 +117,24 @@ public class Care {
 	public Care() {
 		
 	}
+	
+	
 
+
+	public Care(Long id, Doctor doctor, Patient patient, Room room, CareType careType, LocalDateTime startTime,
+			LocalDateTime endTime, Double price, String comment, Diagnosis diagnosis) {
+		super();
+		this.id = id;
+		this.doctor = doctor;
+		this.patient = patient;
+		this.room = room;
+		this.careType = careType;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.price = price;
+		this.comment = comment;
+		this.diagnosis = diagnosis;
+	}
 
 	public Double getPrice() {
 		return price; 

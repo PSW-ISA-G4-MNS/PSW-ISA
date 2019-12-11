@@ -1,9 +1,13 @@
 package org.psw_isa.psw_isa_backend.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.psw_isa.psw_isa_backend.dtos.LogInDTO;
+import org.psw_isa.psw_isa_backend.models.RegistrationRequest;
 import org.psw_isa.psw_isa_backend.models.User;
+import org.psw_isa.psw_isa_backend.service.RegistrationRequestService;
 import org.psw_isa.psw_isa_backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,30 +27,18 @@ public class LogInController {
 
 	@Autowired
 	UserService userService;
+	@Autowired
+	RegistrationRequestService registrationRequestService;
 	
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<Long> login(@RequestBody LogInDTO loginData){
 		Logger.getInstance().debug("Login called");
-		User user = userService.findOneByemail(loginData.getEmail());
-		
-		if(user != null) {
-			Long id = user.getId();
-		
-			if(loginData.getPassword().equals(user.getPassword())) {
-				
-				ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
-				HttpSession session = attr.getRequest().getSession(true); 
-				
-				session.setAttribute("user", user.getEmail());
-				
-				return new ResponseEntity<>(id, HttpStatus.OK);
-			}else {
-				return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
-			}
+		int result = userService.login(loginData);
+		if(result == 1) {
+			return new ResponseEntity<>(null, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
 		}
-		
 	}
 	
 	

@@ -66,7 +66,7 @@ public class ClinicService {
 		return clinicRepository.findAll();
 	}
 
-	/*
+	
 	public List<Clinic> findClinicsWithFreeDoctors(ClinicFilterDTO clinicFilterDTO){
 		List<Clinic> res = new ArrayList<>();
 		List<Doctor> allDoctors = doctorRepository.findAll();
@@ -105,7 +105,7 @@ public class ClinicService {
 		return res;
 	}
 
-*/
+
 	public List<Care> findCaresForClinic(Clinic clinic) {
 		List<Care> cares = new ArrayList<Care>();
 		for (Care care : careService.findAll()) {
