@@ -84,8 +84,8 @@ export default {
 
 .success-box 
 {
-	backgrund-color: #dfd;
-	color: #0f0;
+	
+	
 	padding: 5px;
 }
 
