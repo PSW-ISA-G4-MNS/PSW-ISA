@@ -35,11 +35,11 @@ export default {
         <router-link v-if='data.role == "NOT_LOGGED"' to='/login'>Login</router-link>
         <router-link v-if='data.role == "NOT_LOGGED"' to='/register'>Registration</router-link>
 
-        <router-link v-if='data.role == "ADMIN" || data.role == "CLINIC_ADMIN"' to='/regreq'>Registration Requests</router-link>
+        <router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/regreq'>Registration Requests</router-link>
         <router-link v-if="data.role != 'NOT_LOGGED'" to='/profile'>My Profile</router-link>
-        <router-link v-if="data.role == 'ADMIN'" to='/clinic-new'>Create Clinic</router-link>
+        <router-link v-if="data.role == 'ADMINISTRATOR'" to='/clinic-new'>Create Clinic</router-link>
         <router-link v-if="data.role != 'NOT_LOGGED'" to='/clinics'>Show all clinics</router-link>
-        <router-link v-if="data.role == 'CLINIC_ADMIN'" to='/createCare'>Add new care time</router-link>
+        <router-link v-if="data.role == 'CLINIC_ADMINISTRATOR'" to='/createCare'>Add new care time</router-link>
 	<p v-if="data.role != 'NOT_LOGGED'">{{ data.user.email }}</p>
     </nav>
     <router-view /> 
