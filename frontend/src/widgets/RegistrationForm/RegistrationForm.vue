@@ -25,29 +25,30 @@ export default {
     <div class="form-RegistrationForm"> 
         <div class="success-box" ></div>
 		
+		<h2>Registration</h2>
 		
 		<p>
-		<input type="text" class="form-control" placeholder="insurance ID" v-model="data.insuranceid" />
+		<input type="text" class="form-control" placeholder="Insurance ID" v-model="data.insuranceid" />
 		</p>
 		
 		<p>
-		<input type="text" class="form-control" placeholder="firstname" v-model="data.name" />
+		<input type="text" class="form-control" placeholder="Firstname" v-model="data.name" />
 		</p>
 		
 		<p>
-		<input type="text" class="form-control" placeholder="lastname" v-model="data.lastname" />
+		<input type="text" class="form-control" placeholder="Lastname" v-model="data.lastname" />
 		</p>
 		
 		<p>
-		<input type="text" class="form-control" placeholder="mobilePhone" v-model="data.mobile_phone" />
+		<input type="text" class="form-control" placeholder="MobilePhone" v-model="data.mobile_phone" />
 		</p>
 		
 		<p>
-		<input type="email" class="form-control" placeholder="email" v-model="data.email" />
+		<input type="email" class="form-control" placeholder="Email" v-model="data.email" />
 		</p>
 		
 		<p>
-		<input type="text" class="form-control" placeholder="address" v-model="data.address" />
+		<input type="text" class="form-control" placeholder="Address" v-model="data.address" />
 		</p>
 		
 		<p>
@@ -55,11 +56,15 @@ export default {
 		</p>
 		
 		<p>
-		<input type="date" class="form-control" placeholder="birthday" v-model="data.birthday" />
+		<input type="date" class="form-control" placeholder="Birthday" v-model="data.birthday" />
 		</p>
 		
 
 		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Submit</button>
+		&nbsp;
+		&nbsp;
+		<a href="http://127.0.0.1:300/frontend/#/login">If you already have account, click here to login</a>
+		
 	</div>
     
 
@@ -68,7 +73,13 @@ export default {
 <style scoped> 
 
 .form-RegistrationForm {
-
+	position:fixed;
+    top:10%;
+    left:40%;
+	padding: 10px; 
+	margin: 10px;
+	text-align: center;
+	width: 20%;
 }
 
 .success-box 

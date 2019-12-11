@@ -8,7 +8,8 @@ export default {
     name: "Login",
     data: function () {
             return {
-		data: {}
+        data: {}
+        
 	    };
 	},
     mounted: function () 
@@ -27,14 +28,13 @@ export default {
 </script>
 
 <template>
-<div>
+<div >
 <WidgetLoginNew />
 </div>
 
 </template>
 
 <style scoped> 
-
 
 
 </style>

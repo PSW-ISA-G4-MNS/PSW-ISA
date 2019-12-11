@@ -35,7 +35,10 @@ export default {
 </script>
 
 <template>
+
     <div class="widget-login-new"> 
+
+		<h2> Login</h2>
 		<p>
 		<input type="email" class="form-control" placeholder="Username" v-model="data.email" />
 		</p>
@@ -46,13 +49,21 @@ export default {
 		
 
 		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Submit</button>
+		&nbsp;
+		&nbsp;
+		<a href="http://127.0.0.1:300/frontend/#/register">If you dont have account, click here to register</a>
     </div>
 
 </template>
 
 <style scoped> 
 
+
+
 .widget-login-new {
+	position:fixed;
+    top:20%;
+    left:40%;
 	padding: 10px; 
 	margin: 10px;
 	text-align: center;
