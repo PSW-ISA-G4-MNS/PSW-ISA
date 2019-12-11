@@ -21,12 +21,14 @@ export default {
 			if (response.status == 200) {
 				this.data.success = true;
 				localStorage.setItem("user", this.data.email);
-				window.location.href = "/frontend/";
+				this.$router.push("/");
+				this.$store.commit("login", {user: this.data.email, role: ""});
 			}
 			else {
 				this.data.success = false;
 				localStorage.setItem("user", null);
 			}
+
 
 		});
 	}
