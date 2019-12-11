@@ -7,6 +7,7 @@ import NewClinicView from './src/views/NewClinic.vue';
 import CareList from './src/views/CareList.vue';
 import ClinicList from './src/views/ClinicList.vue';
 import CareFormView from './src/views/CareFormView.vue';
+import UpdateProfile from './src/views/UpdateProfile.vue';
 
 
 const routes = [
@@ -17,6 +18,7 @@ const routes = [
     { path: '/regreq', component: RegistrationRequest},
     { path: '/clinic-new', component: NewClinicView},
     { path: '/profile', component: Patient},
+    { path: '/updateUser', component: UpdateProfile},
     { path: '/clinics', component: ClinicList},
 
     { path: '/cares', component: CareList},
