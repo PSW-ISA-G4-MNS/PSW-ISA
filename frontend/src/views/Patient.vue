@@ -30,7 +30,6 @@ export default {
 
 <WidgetPatientSingle/>
 
-<router-link to='/updateUser'>Update profile</router-link>
 
 </template>
 

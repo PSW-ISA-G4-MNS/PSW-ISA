@@ -13,7 +13,7 @@ export default {
     	update: function() 
 		{
 			UserService.update(this.data).then(response => {
-				if (response.status < 300) window.location.href = "/frontend/profile/";
+				if (response.status < 300) window.location.href = "/frontend/profile";
 			});
 		}
 	},
@@ -30,19 +30,19 @@ export default {
     <div>
 	
 		<p>
-		<input type="text" class="form-control" text={{data.firstname}} v-model="data.name" />
+		<input type="text" class="form-control"  v-model="data.firstname" />
 		</p>
 		
 		<p>
-		<input type="text" class="form-control" text={{data.lastname}} v-model="data.lastname" />
+		<input type="text" class="form-control"  v-model="data.lastname" />
 		</p>
 		
 		<p>
-		<input type="text" class="form-control" v-model="data.mobile_phone" />
+		<input type="text" class="form-control" v-model="data.mobilePhone" />
 		</p>
 		
 		<p>
-		<input type="text" class="form-control" text={{data.address}} v-model="data.address" />
+		<input type="text" class="form-control"  v-model="data.address" />
 		</p>
 		
 		<p>
