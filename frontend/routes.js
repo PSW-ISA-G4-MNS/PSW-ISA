@@ -19,11 +19,11 @@ const routes = [
     { path: '/clinic-new', component: NewClinicView},
     { path: '/profile', component: Patient},
     { path: '/clinics', component: ClinicList},
-    {path: '/review', component:ReviewView},
+    
 
     { path: '/cares', component: CareList},
     { path: '/createCare', component: CareFormView},
-     {path: '/addDiagnosis', component: DiagnosisAdd}
+   
 ];
 
 export default routes;
