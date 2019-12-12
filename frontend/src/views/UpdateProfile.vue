@@ -2,10 +2,10 @@
 
 
 // import widgets for this view here
-import WidgetPatientSingle from "../widgets/Patient/WidgetPatientSingle.vue"
+import WidgetUpdatePatient from "../widgets/Patient/WidgetUpdatePatient.vue"
 
 export default {
-    name: "Patient",
+    name: "UpdateProfile",
     data: function () {
             return {
 		data: {}
@@ -21,15 +21,14 @@ export default {
         }
     },
     components: {
-    	"WidgetPatientSingle": WidgetPatientSingle
+    	"WidgetUpdatePatient": WidgetUpdatePatient
     }
 }
 </script>
 
 <template>
 
-<WidgetPatientSingle/>
-
+<WidgetUpdatePatient/>
 
 </template>
 
