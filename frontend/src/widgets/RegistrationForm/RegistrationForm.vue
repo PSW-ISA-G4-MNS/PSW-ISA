@@ -63,7 +63,7 @@ export default {
 		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Submit</button>
 		&nbsp;
 		&nbsp;
-		<a href="http://127.0.0.1:300/frontend/#/login">If you already have account, click here to login</a>
+		<a href="/frontend/#/login">If you already have account, click here to login</a>
 		
 	</div>
     

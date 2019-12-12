@@ -58,7 +58,7 @@ export default {
 		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Submit</button>
 		&nbsp;
 		&nbsp;
-		<a href="http://127.0.0.1:300/frontend/#/register">If you dont have account, click here to register</a>
+		<a href="/frontend/#/register">If you dont have account, click here to register</a>
     </div>
 
 </template>
