@@ -2,14 +2,13 @@
 
 
 // import widgets for this view here
-import WidgetLoginNew from "../widgets/Auth/WidgetLoginNew.vue"
+import WidgetDiagnosis from "../widgets/Diagnosis/WidgetDiagnosis.vue"
 
 export default {
-    name: "Login",
+    name: "DiagnosisAdd",
     data: function () {
             return {
-        data: {}
-        
+		data: {}
 	    };
 	},
     mounted: function () 
@@ -22,19 +21,19 @@ export default {
         }
     },
     components: {
-    	"WidgetLoginNew": WidgetLoginNew
+    	"WidgetDiagnosis": WidgetDiagnosis
     }
 }
 </script>
 
 <template>
-<div >
-<WidgetLoginNew />
-</div>
+
+<WidgetDiagnosis/>
 
 </template>
 
 <style scoped> 
+
 
 
 </style>

@@ -30,6 +30,7 @@ export default {
     <div class="form-NewClinic"> 
         <div class="success-box" ></div>
 		
+		<h2>Create Clinic</h2>
 		
 		<p>
 		<input type="number" class="form-control" placeholder="LocationLat" v-model="data.locationLat" />
@@ -60,14 +61,20 @@ export default {
 
 <style scoped> 
 
-table,td {
-   border: 1px solid black;
-  border-collapse: collapse;
-
+.form-NewClinic {
+	position:fixed;
+    top:20%;
+    left:40%;
+	padding: 10px; 
+	margin: 10px;
+	text-align: center;
+	width: 20%;
 }
-td{
-  width: 200px;
-  height: 80px;
+
+.success-box 
+{
+	
+	padding: 5px;
 }
 
 </style>

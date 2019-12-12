@@ -1,5 +1,6 @@
 <script>
 import LoginService from "./service";
+import CheckRoleService from "../CheckRole/service";
 //import router from '../../../router';
 
 export default {
@@ -19,14 +20,20 @@ export default {
 		LoginService.login(this.data).then(response => {
 			console.log(response)
 			if (response.status == 200) {
-				this.data.success = true;
-				localStorage.setItem("user", this.data.email);
-				window.location.href = "/frontend/";
+				CheckRoleService.get().then(response => {
+					this.data.success = true;
+					localStorage.setItem("user", this.data.email);
+					this.$store.commit("login", {user: this.data.email, role: response.data});
+					this.$router.push("/");
+
+				});
+
 			}
 			else {
 				this.data.success = false;
 				localStorage.setItem("user", null);
 			}
+
 
 		});
 	}
@@ -35,7 +42,10 @@ export default {
 </script>
 
 <template>
+
     <div class="widget-login-new"> 
+
+		<h2> Login</h2>
 		<p>
 		<input type="email" class="form-control" placeholder="Username" v-model="data.email" />
 		</p>
@@ -46,13 +56,21 @@ export default {
 		
 
 		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Submit</button>
+		&nbsp;
+		&nbsp;
+		<a href="http://127.0.0.1:300/frontend/#/register">If you dont have account, click here to register</a>
     </div>
 
 </template>
 
 <style scoped> 
 
+
+
 .widget-login-new {
+	position:fixed;
+    top:20%;
+    left:40%;
 	padding: 10px; 
 	margin: 10px;
 	text-align: center;
@@ -61,8 +79,7 @@ export default {
 
 .success-box 
 {
-	background-color: #dfd;
-	color: #0f0;
+	
 	padding: 5px;
 }
 
