@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+
 import org.psw_isa.psw_isa_backend.dtos.LogInDTO;
 import org.psw_isa.psw_isa_backend.models.RegistrationRequest;
 import org.psw_isa.psw_isa_backend.models.User;
@@ -17,7 +18,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+
 import org.psw_isa.psw_isa_backend.Logger;
+
 
 @Service
 public class UserService {
@@ -43,6 +46,13 @@ public class UserService {
 		return userRepository.save(user);
 	}
 	
+
+	public void logOut() {
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
+		HttpSession session = attr.getRequest().getSession(true); 
+		session.invalidate();
+  }
+  
 	public int login(LogInDTO loginData) {
 		User user = userRepository.findOneByemail(loginData.getEmail());
 		if(user != null) {
@@ -81,7 +91,6 @@ public class UserService {
 			return 0;
 		}
 		return 0;
-		
 		
 	}
 	
