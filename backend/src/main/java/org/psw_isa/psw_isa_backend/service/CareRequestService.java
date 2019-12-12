@@ -41,7 +41,7 @@ public class CareRequestService {
         String email = (String) session.getAttribute("user");
         User user = userRepository.findOneByemail(email);
         Long userID = user.getId();
-        Patient patient = patientRepository.findOneByuser(userID);
+        Patient patient = patientRepository.findOneByuser(user);
         if(patient != null) {
 			Care care = careRepository.findOneByid(id);
 			
