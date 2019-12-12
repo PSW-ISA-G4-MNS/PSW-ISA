@@ -38,7 +38,7 @@ export default {
 
         <router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/regreq'>Registration Requests</router-link>
         <router-link v-if="data.role != 'NOT_LOGGED'" to='/profile'>My Profile</router-link>
-        <router-link to='/updateUser'>Update profile</router-link>
+        <router-link v-if="data.role != 'NOT_LOGGED'" to='/updateUser'>Update profile</router-link>
         <router-link v-if="data.role == 'ADMINISTRATOR'" to='/clinic-new'>Create Clinic</router-link>
         <router-link v-if="data.role != 'NOT_LOGGED'" to='/clinics'>Show all clinics</router-link>
         <router-link v-if="data.role == 'CLINIC_ADMINISTRATOR'" to='/createCare'>Add new care time</router-link>
