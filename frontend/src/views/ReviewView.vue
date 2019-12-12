@@ -21,7 +21,7 @@ export default {
         }
     },
     components: {
-    	"Rreview": Review
+    	"Review": Review
     }
 }
 </script>

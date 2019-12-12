@@ -41,6 +41,7 @@ export default {
         <router-link v-if="data.role != 'NOT_LOGGED'" to='/clinics'>Show all clinics</router-link>
         <router-link v-if="data.role == 'CLINIC_ADMINISTRATOR'" to='/createCare'>Add new care time</router-link>
 	<p v-if="data.role != 'NOT_LOGGED'">{{ data.user.email }}</p>
+
     </nav>
     <router-view /> 
   </div>
