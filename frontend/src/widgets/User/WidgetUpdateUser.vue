@@ -13,7 +13,7 @@ export default {
     	update: function() 
 		{
 			UserService.update(this.data).then(response => {
-				if (response.status < 300) window.location.href = "/frontend/profile";
+				window.location.href = "/frontend/#/profile";
 			});
 		}
 	},
