@@ -36,104 +36,45 @@ public class CheckRoleService {
 	UserRepository userRepository;
 	
 	
-	public boolean checkIfLogged() {
+	public String getEmail() 
+	{
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
 		HttpSession session = attr.getRequest().getSession(true); 
 		
 		String loggedEmail = (String) session.getAttribute("user");
-		
-		if(loggedEmail == null || loggedEmail.equals("")) {
-			return false;
-		} else {
-			return true;
-		}
+		return loggedEmail;
 	}
+
+	public User getUser() 
+	{
+		String loggedEmail = getEmail();
+
+		User loggedUser = userRepository.findOneByemail(loggedEmail);
+		return loggedUser;
+	}
+
+	public boolean checkIfLogged() {
+		return getUser() != null;
+	}
+
+
 	
 	
 	public boolean checkIfClinicAdministrator() {
-		if(checkIfLogged()) {
-			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
-			HttpSession session = attr.getRequest().getSession(true); 
-			
-			String loggedEmail = (String) session.getAttribute("user");
-			
-			User loggedUser = userRepository.findOneByemail(loggedEmail);
-			
-			ClinicAdministrator loggedClinicAdmin = clinicAdminRepository.findOneByuser(loggedUser.getId());
-			
-			if(loggedClinicAdmin == null) {
-				return false;
-			} else {
-				return true;
-			}
-		} else {
-			return false;
-		}
+		return checkIfLogged() && clinicAdminRepository.findAll().stream().filter(x -> x.getUser().getId() == getUser().getId()).count() > 0;
 	}
 	
 	public boolean checkIfDoctor() {
-		if(checkIfLogged()) {
-			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
-			HttpSession session = attr.getRequest().getSession(true); 
-			
-			String loggedEmail = (String) session.getAttribute("user");
-			
-			User loggedUser = userRepository.findOneByemail(loggedEmail);
-			
-			Doctor loggedDoctor = doctorRepository.findOneByuser(loggedUser.getId());
-			
-			if(loggedDoctor == null) {
-				return false;
-			} else {
-				return true;
-			}
-		} else {
-			return false;
-		}
-		
+		return checkIfLogged() && doctorRepository.findAll().stream().filter(x -> x.getUser().getId() == getUser().getId()).count() > 0;
 	}
 	
 	
 	public boolean checkIfNurse() {
-		if(checkIfLogged()) {
-			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
-			HttpSession session = attr.getRequest().getSession(true); 
-			
-			String loggedEmail = (String) session.getAttribute("user");
-			
-			User loggedUser = userRepository.findOneByemail(loggedEmail);
-			
-			Nurse loggedNurse = nurseRepository.findOneByuser(loggedUser.getId());
-			
-			if(loggedNurse == null) {
-				return false;
-			} else {
-				return true;
-			}
-		} else {
-			return false;
-		}
+		return checkIfLogged() && nurseRepository.findAll().stream().filter(x -> x.getUser().getId() == getUser().getId()).count() > 0;
 	}
 	
 	public boolean checkIfPatient() {
-		if(checkIfLogged()) {
-			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
-			HttpSession session = attr.getRequest().getSession(true); 
-			
-			String loggedEmail = (String) session.getAttribute("user");
-			
-			User loggedUser = userRepository.findOneByemail(loggedEmail);
-			
-			Patient loggedPatient = patientRepository.findOneByuser(loggedUser.getId());
-			
-			if(loggedPatient == null) {
-				return false;
-			} else {
-				return true;
-			}
-		} else {
-			return false;
-		}
+		return checkIfLogged() && patientRepository.findAll().stream().filter(x -> x.getUser().getId() == getUser().getId()).count() > 0;
 	}
 	
 	

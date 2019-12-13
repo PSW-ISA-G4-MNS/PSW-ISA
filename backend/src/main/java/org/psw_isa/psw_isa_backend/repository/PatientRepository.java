@@ -13,8 +13,6 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 	
 	List<Patient> findAll();
 	
-	Patient findOneByuser(Long id);
-	
 	//List<Patient> findAllByfirstnameAndlastnameAllIgnoringCase(String firstname, String lastname);
 
 
