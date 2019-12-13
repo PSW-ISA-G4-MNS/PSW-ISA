@@ -27,7 +27,15 @@ export default {
 </script>
 
 <template>
-    <div class="ReqistrationRequest"> 
+<table>
+    <tr>
+        <th>Insurance ID </th>
+        <th>First Name </th>
+        <th>Last Name </th>
+        <th>Buttons </th>
+    </tr>
+    
+    
       <ReqistrationRequest
       	v-for="item in items.filter(filter)"
       	:id="item.id"
@@ -36,12 +44,20 @@ export default {
           />
 
 
-    </div>
-
+    
+</table>
 </template>
 
 <style scoped> 
 
+table,td,tr,th {
+   border: 1px solid black;
+  border-collapse: collapse;
 
+}
+td,th{
+  width: 200px;
+  height: 80px;
+}
 
 </style>

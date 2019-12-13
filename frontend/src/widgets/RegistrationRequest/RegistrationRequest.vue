@@ -49,11 +49,11 @@ export default {
 </script>
 
 <template>
-    <div id="tabela">
+    
 
-  <table  >    
+    
     <tr>
-      <td height="50" width="200">Jedinstveni broj</td>
+      <td id="insurance">{{registrationrequest.patient.insuranceID}}</td>
       <td id="ime">{{ registrationrequest.patient.user.firstname }}</td>
       <td id="prezime">{{ registrationrequest.patient.user.lastname}}</td>
       <td id="dugme">
@@ -68,8 +68,8 @@ export default {
     </tr>
     
 
-  </table>
-</div>
+  
+
 
 </template>
 
@@ -81,6 +81,12 @@ table,td {
 
 }
 td{
+  width: 200px;
+  height: 80px;
+ 
+  
+}
+tr{
   width: 200px;
   height: 80px;
 }
