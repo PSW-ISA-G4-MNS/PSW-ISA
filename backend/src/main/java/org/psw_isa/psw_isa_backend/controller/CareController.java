@@ -51,5 +51,10 @@ public class CareController {
 		return new ResponseEntity<>(care.getId(),HttpStatus.OK);
 	}
 	
+	@PostMapping(value="/reservate/{id}")
+	public ResponseEntity<Long> reservatePredefined(@PathVariable("id") Long id){
+		careService.assignPatientToCare(id);
+		return new ResponseEntity<>(null,HttpStatus.OK);
+	}
 	
 }
