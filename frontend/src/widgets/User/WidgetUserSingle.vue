@@ -20,15 +20,15 @@ export default {
     <div class="widget-user-single"> 
 
 
-<div class="card" style="width: 18rem;">
-  <div class="card-header">
+<div  >
+  <div >
     {{ data.username }}
   </div>
-  <div class="card-body">
-    <h5 class="card-title">{{ data.firstname }} {{ data.lastname }}</h5>
-    <p class="card-text">{{ data.email}}</p>
-    <p class="card-text">{{ data.address}}</p>
-    <p class="card-text">{{ data.mobile_phone}}</p>
+  <div >
+    <h5 >{{ data.firstname }} {{ data.lastname }}</h5>
+    <p >{{ data.email}}</p>
+    <p >{{ data.address}}</p>
+    <p >{{ data.mobile_phone}}</p>
   </div>
 </div>
 
