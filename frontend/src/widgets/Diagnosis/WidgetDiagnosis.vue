@@ -54,4 +54,14 @@ td{
   height: 80px;
 }
 
+.form-Dianosis{
+	position:fixed;
+    top:10%;
+    left:40%;
+	padding: 10px; 
+	margin: 10px;
+	text-align: center;
+	width: 20%;
+}
+
 </style>
