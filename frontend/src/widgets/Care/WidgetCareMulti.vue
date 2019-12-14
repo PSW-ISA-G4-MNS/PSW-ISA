@@ -34,28 +34,28 @@ export default {
         <th
           @click="sortBy(doctor)"
           :class="{ active: sortKey == doctor }">
-          Doktor
+          Doctor
           <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
           </span>
         </th>
         <th
           @click="sortBy(time)"
           :class="{ active: sortKey == time }">
-          Termin
+          Time
           <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
           </span>
         </th>
         <th
           @click="sortBy(type)"
           :class="{ active: sortKey == type }">
-          Tip
+          Type
           <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
           </span>
         </th>
         <th
           @click="sortBy(price)"
           :class="{ active: sortKey == price }">
-          Cena
+          Price
           <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
           </span>
         </th>

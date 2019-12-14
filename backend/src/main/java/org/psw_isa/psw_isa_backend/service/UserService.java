@@ -30,6 +30,9 @@ public class UserService {
 	@Autowired
 	RegistrationRequestRepository registrationRequestRepository;
 	
+	@Autowired
+	CheckRoleService checkRoleService;
+	
 	public User findOneByemail(String email) {
 		return userRepository.findOneByemail(email);	
 	}
@@ -55,6 +58,8 @@ public class UserService {
   
 	public int login(LogInDTO loginData) {
 		User user = userRepository.findOneByemail(loginData.getEmail());
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
+		HttpSession session = attr.getRequest().getSession(true); 
 		if(user != null) {
 			Long id = user.getId();
 			
@@ -62,23 +67,24 @@ public class UserService {
 			
 			
 			if(loginData.getPassword().equals(user.getPassword())) {
-				
-				for(RegistrationRequest request : registrationRequests) {
-					if(request.getPatient().getUser().getId() == id) {
-						if(request.getApproved() == true) {	
-							ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
-							HttpSession session = attr.getRequest().getSession(true); 
-							
-							session.setAttribute("user", user.getEmail());
-							
-							return 1;
-						} else {
-							
-							Logger.getInstance().debug("Request found but not approved");
-							return 0;
+				if(checkRoleService.checkIfPatient(loginData.getEmail())) {
+					for(RegistrationRequest request : registrationRequests) {
+						if(request.getPatient().getUser().getId() == id) {
+							if(request.getApproved() == true) {	
+								session.setAttribute("user", user.getEmail());
+								return 1;
+							} else {
+								
+								Logger.getInstance().debug("Request found but not approved");
+								return 0;
+							}
 						}
 					}
+				} else {
+					session.setAttribute("user", user.getEmail());
+					return 1;
 				}
+					
 				Logger.getInstance().debug("Not found approved request for this user");
 				
 			}else {

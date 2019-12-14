@@ -77,5 +77,11 @@ public class CheckRoleService {
 		return checkIfLogged() && patientRepository.findAll().stream().filter(x -> x.getUser().getId() == getUser().getId()).count() > 0;
 	}
 	
+	public boolean checkIfPatient(String email) {
+		
+		return patientRepository.findAll().stream().filter(x -> x.getUser().getEmail() == email).count() > 0;
+		
+	}
+	
 	
 }
