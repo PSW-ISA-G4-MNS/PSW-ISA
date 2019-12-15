@@ -9,8 +9,11 @@ import javax.servlet.http.HttpSession;
 import org.psw_isa.psw_isa_backend.dtos.LogInDTO;
 import org.psw_isa.psw_isa_backend.models.RegistrationRequest;
 import org.psw_isa.psw_isa_backend.models.User;
+import org.psw_isa.psw_isa_backend.models.Patient;
 import org.psw_isa.psw_isa_backend.repository.RegistrationRequestRepository;
+import org.psw_isa.psw_isa_backend.repository.PatientRepository;
 import org.psw_isa.psw_isa_backend.repository.UserRepository;
+import org.psw_isa.psw_isa_backend.service.CheckRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +32,12 @@ public class UserService {
 	UserRepository userRepository;
 	@Autowired
 	RegistrationRequestRepository registrationRequestRepository;
+
+	@Autowired
+	CheckRoleService checkRoleService;
+
+	@Autowired
+	PatientService patientService;
 	
 	public User findOneByemail(String email) {
 		return userRepository.findOneByemail(email);	
@@ -58,11 +67,24 @@ public class UserService {
 		if(user != null) {
 			Long id = user.getId();
 			
-			List<RegistrationRequest> registrationRequests = registrationRequestRepository.findAll();
-			
 			
 			if(loginData.getPassword().equals(user.getPassword())) {
 				
+				// check if user is not patient, if not, login immediately
+				Patient patient = patientService.findOneByuser(user);
+				if (patient == null)
+				{
+					Logger.getInstance().debug("Ignoring registration requests because user is not patient");
+					// we do noot need to check registration requests
+					ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
+					HttpSession session = attr.getRequest().getSession(true); 
+					
+					session.setAttribute("user", user.getEmail());
+					return 1;
+
+				}
+	
+				List<RegistrationRequest> registrationRequests = registrationRequestRepository.findAll();
 				for(RegistrationRequest request : registrationRequests) {
 					if(request.getPatient().getUser().getId() == id) {
 						if(request.getApproved() == true) {	

@@ -7,6 +7,7 @@ import NewClinicView from './src/views/NewClinic.vue';
 import CareList from './src/views/CareList.vue';
 import ClinicList from './src/views/ClinicList.vue';
 import CareFormView from './src/views/CareFormView.vue';
+import LogOut from './src/views/Logout.vue';
 
 import UpdateProfile from './src/views/UpdateProfile.vue';
 
@@ -29,6 +30,7 @@ const routes = [
 
     { path: '/cares', component: CareList},
     { path: '/createCare', component: CareFormView},
+    { path: '/logout', component: LogOut},
    
 ];
 

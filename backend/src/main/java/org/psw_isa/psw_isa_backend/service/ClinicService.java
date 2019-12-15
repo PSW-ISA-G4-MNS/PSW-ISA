@@ -55,6 +55,7 @@ public class ClinicService {
 	ClinicRatingService clinicRatingService;
 
 	public Clinic save(Clinic clinic) {
+		clinic.setId(null);
 		return clinicRepository.save(clinic);
 	}
 
