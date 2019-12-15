@@ -30,7 +30,7 @@ export default {
     <div class="form-Dianosis"> 
         
 		
-		
+		<h2>New Diagnosis</h2>
 		<p>
 		<input type="text" class="form-control" placeholder="NewDiagnosis" v-model="data.diagnosis" />
 		</p>
@@ -55,7 +55,7 @@ td{
 }
 
 .form-Dianosis{
-	position:fixed;
+	position: relative;
     top:10%;
     left:40%;
 	padding: 10px; 

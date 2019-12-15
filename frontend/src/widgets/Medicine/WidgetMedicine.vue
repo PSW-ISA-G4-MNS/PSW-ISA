@@ -29,7 +29,7 @@ export default {
 <template>
     <div class="form-NewMedicine"> 
        
-		
+		<h2>New Medicine</h2>
 		<p>
 		<input type="text" class="form-control" placeholder="Name of the medicine" v-model="data.medicine" />
 		</p>
@@ -53,7 +53,7 @@ td{
   height: 80px;
 }
 .form-NewMedicine{
-	position:fixed;
+	position: relative;
     top:10%;
     left:40%;
 	padding: 10px; 

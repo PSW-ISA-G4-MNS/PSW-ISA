@@ -68,7 +68,7 @@ export default {
 
 
 .widget-login-new {
-	position:fixed;
+	position: relative;
     top:20%;
     left:40%;
 	padding: 10px; 
