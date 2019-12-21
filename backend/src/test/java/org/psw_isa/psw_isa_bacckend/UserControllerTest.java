@@ -32,41 +32,25 @@ import org.springframework.context.annotation.Bean;
 
 import java.util.*;
 
-@ExtendWith(SpringExtension.class)
-@SpringBootTest
-public class UserServiceTest {
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 
-    @TestConfiguration
-    static class UserServiceImplTestContextConfiguration {
-  
-        @Bean
-        public UserService employeeService() {
-            return new UserService();
-        }
-    }
+import org.psw_isa.psw_isa_backend.BackendApplication;
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    @MockBean
-    private UserRepository userRepository;
-
-    private ArrayList<User> data;
-    @BeforeEach
-    public void setUp() {
-    	data = new ArrayList<User>();
-	data.add(new User());
-	when(userRepository.findOneByemail(any(String.class))).thenReturn((User) data.get(0));
-    }
-
-    @AfterEach
-    public void tearDown() {
-    }
+@SpringBootTest(
+  //SpringBootTest.WebEnvironment.MOCK,
+  classes = BackendApplication.class)
+@AutoConfigureMockMvc
+@TestPropertySource(
+  locations = "classpath:application-integrationtest.properties")
+public class UserControllerTest {
  
-    @Test 
-    public void testFindAll() {
-    	assertEquals(userService.findOneByemail("").getEmail(), data.get(0).getEmail());
-    }
+    @Autowired
+    private MockMvc mvc;
  
+    @Autowired
+    private UserRepository repository;
+ 
+    // write test cases here
 }
