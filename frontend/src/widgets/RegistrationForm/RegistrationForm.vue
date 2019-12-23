@@ -73,7 +73,7 @@ export default {
 <style scoped> 
 
 .form-RegistrationForm {
-	position:fixed;
+	position: relative;
     top:10%;
     left:40%;
 	padding: 10px; 

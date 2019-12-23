@@ -57,7 +57,9 @@ export default {
 		    <a :key="doctor.id" :id="doctor.id" @click="selectDoctor(index)" v-for="(doctor, index) in this.doctors" class="dropdown-item" href="#">{{ doctor.user.firstname }} {{ doctor.user.lastname}}</a>
 		  </div>
 		</div>
-		
+		&nbsp;
+		&nbsp;
+		&nbsp;
 		<div class="dropdown">
 		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonRoom" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    Select room
@@ -66,7 +68,9 @@ export default {
 		    <a :key="room.id" :id="room.id" @click="selectRoom(index)" v-for="(room, index) in this.rooms" class="dropdown-item" href="#">Room: {{ room.title}}</a>
 		  </div>
 		</div>
-		
+		&nbsp;
+		&nbsp;
+		&nbsp;
 		<p>
 		<input type="number" class="form-control" placeholder="Price" v-model="data.price" />
 		</p>
@@ -89,12 +93,18 @@ export default {
 <style scoped> 
 
 .form-CareForm {
-
+position:fixed;
+    top:20%;
+    left:40%;
+	padding: 10px; 
+	margin: 10px;
+	text-align: center;
+	width: 20%;
 }
 
 .success-box 
 {
-	backgrund-color: #dfd;
+	background-color: #dfd;
 	color: #0f0;
 	padding: 5px;
 }
