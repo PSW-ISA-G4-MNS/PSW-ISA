@@ -11,7 +11,7 @@ export default {
             data: {
 	    },
 	    medicines: [],
-		allDiagnosis:[],
+		allDiagnosis: [],
 	    success: false
 
         };
@@ -25,7 +25,7 @@ export default {
 	});
 
 		
-        ReviewService.getReview(this.Review).then(response => this.data = response.data);
+    ReviewService.get(this.Review).then(response => {this.data = response.data});
 		
     },
     methods: {
@@ -39,12 +39,15 @@ export default {
 	},
 	selectMedicine: function(index) {
 		console.log("Called with id = " + index);
-		newMedicine=this.medicines[index].id;
-		this.data.prescription.push(newMedicine);
+		this.data.medicine=this.medicines[index].id;
+	 	$("#dropdownMenuMedicineButton").html(this.medicines[index].medicine);
+		//this.data.prescription.push(newMedicine);
 	},
 	selectDiagnosis: function(index) {
 		console.log("Called with id = " + index);
-		this.data.diagnosis=allDiagnosis[index].id
+		//this.data.diagnosis=allDiagnosis[index].id
+		$("#dropdownMenuDiagnosisButton").html(this.allDiagnosis[index].diagnosis);
+		this.data.diagnosis=this.allDiagnosis[index].diagnosis;
 	}
     }
 }
@@ -61,20 +64,20 @@ export default {
 
 		<div class="dropdown">
 		  
-		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonMedicine">
+		  <div class="dropdown-menu" aria-labelledby="dropdownMedicine">
 		    <a :key="medicine.id" :id="medicine.id" @click="selectMedicine(index)" v-for="(medicine, index) in this.medicines" class="dropdown-item" href="#">{{ medicine.medicine }}</a>
 		  </div>
-		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonDiagnosis" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuMedicineButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    Select medicine
 		  </button>
 		</div>
 		
 		<div class="dropdown">
 		  
-		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonDiagnosis">
-		    <a :key="diagnosis.id" :id="diagnosis.id" @click="selectDiagnosis(index)" v-for="(diagnosis, index) in this.allDiagnosis" class="dropdown-item" href="#">All Diagnosis: {{ diagnosis.diagnosis}}</a>
+		  <div class="dropdown-menu" aria-labelledby="dropdownMenuDiagnosis">
+		    <a :key="diagnosisSingle.id" :id="diagnosisSingle.id" @click="selectDiagnosis(index)" v-for="(diagnosisSingle, index) in this.allDiagnosis" class="dropdown-item" href="#"> {{ diagnosisSingle.diagnosis}}</a>
 		  </div>
-		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonDiagnosis" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuDiagnosisButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    Select diagnosis
 		  </button>
 		</div>
@@ -94,7 +97,7 @@ export default {
 
 .success-box 
 {
-	backgrund-color: #dfd;
+	background-color: #dfd;
 	color: #0f0;
 	padding: 5px;
 }

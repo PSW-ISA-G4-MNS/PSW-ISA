@@ -10,7 +10,7 @@ export default class ReviewService
 
     static get(id) 
     {
-        return axios.get(API_URL + "/care/" + id);
+        return axios.get(API_URL + "/care/");
     
     }
 
