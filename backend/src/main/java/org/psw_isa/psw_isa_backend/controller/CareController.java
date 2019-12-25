@@ -50,6 +50,4 @@ public class CareController {
 		Care care = careService.save(careDTO);
 		return new ResponseEntity<>(care.getId(),HttpStatus.OK);
 	}
-	
-	
 }
