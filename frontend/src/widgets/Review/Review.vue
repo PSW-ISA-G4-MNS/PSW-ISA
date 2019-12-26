@@ -25,7 +25,7 @@ export default {
 	});
 
 		
-    ReviewService.get(this.Review).then(response => {this.data = response.data});
+    ReviewService.get(1).then(response => {this.data = response.data});
 		
     },
     methods: {
@@ -39,15 +39,17 @@ export default {
 	},
 	selectMedicine: function(index) {
 		console.log("Called with id = " + index);
-		this.data.medicine=this.medicines[index].id;
+		//this.data.medicine=this.medicines[index].id;
 	 	$("#dropdownMenuMedicineButton").html(this.medicines[index].medicine);
 		//this.data.prescription.push(newMedicine);
+		this.data.id=2;
+		
 	},
 	selectDiagnosis: function(index) {
 		console.log("Called with id = " + index);
 		//this.data.diagnosis=allDiagnosis[index].id
 		$("#dropdownMenuDiagnosisButton").html(this.allDiagnosis[index].diagnosis);
-		this.data.diagnosis=this.allDiagnosis[index].diagnosis;
+		//this.data.diagnosis=this.allDiagnosis[index].id;
 	}
     }
 }

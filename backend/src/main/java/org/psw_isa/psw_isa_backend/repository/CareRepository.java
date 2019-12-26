@@ -7,4 +7,6 @@ public interface CareRepository extends JpaRepository<Care, Long> {
 
 	public Care findOneByid(Long id);
 	
+	
+	
 }

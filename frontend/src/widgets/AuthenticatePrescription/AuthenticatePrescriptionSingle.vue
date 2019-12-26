@@ -3,7 +3,7 @@ import AuthenticatePrescriptionService from "./service";
 
 export default {
 	name: "AuthenticatePrescriptionSingle",
-	props: ["request"],
+	props: ["Authenticationrequest"],
     data: function () {
         return {
           	Authenticationrequest: {},

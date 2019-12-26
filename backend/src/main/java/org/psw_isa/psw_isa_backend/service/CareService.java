@@ -9,6 +9,7 @@ import java.util.ListIterator;
 
 import org.psw_isa.psw_isa_backend.models.Care;
 import org.psw_isa.psw_isa_backend.repository.CareRepository;
+import org.psw_isa.psw_isa_backend.repository.DiagnosisRepository;
 import org.psw_isa.psw_isa_backend.repository.DoctorRepository;
 import org.psw_isa.psw_isa_backend.service.DoctorService;
 import org.psw_isa.psw_isa_backend.service.RoomService;
@@ -24,6 +25,9 @@ public class CareService {
 
 	@Autowired
 	DoctorRepository doctorRepository;
+	
+	@Autowired 
+	DiagnosisRepository diagnosisRepository;
 	
 	@Autowired
 	RoomService roomService;
@@ -50,8 +54,10 @@ public class CareService {
 		return careRepository.findOneByid(id);
 	}
 	public Care save(CareDTO careDTO) {
-		return careRepository.save(new Care(null, doctorRepository.findOneByid(careDTO.getDoctorId()), null, roomService.findOneByid(careDTO.getRoomId()), 
-			careDTO.getStartTime(), careDTO.getEndTime(),careDTO.getPrice()));
+		
+		
+		return careRepository.save(new Care( doctorRepository.findOneByid(careDTO.getDoctorId()), null, roomService.findOneByid(careDTO.getRoomId()), 
+			careDTO.getStartTime(), careDTO.getEndTime(),careDTO.getPrice(),null,diagnosisRepository.findOneByid(careDTO.getDiagnosisId()),null,false));
 	}
 
 }
