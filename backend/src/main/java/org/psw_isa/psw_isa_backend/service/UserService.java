@@ -46,6 +46,10 @@ public class UserService {
 	public User findOneByid(Long id) {
 		return userRepository.findOneByid(id);	
 	}
+	
+	public List<User> findAll() {
+		return userRepository.findAll();
+	}
 
 	public int updateUser(String firstname, String lastname, String address, LocalDate birthday, String mobile_phone, Long id){
 		return userRepository.updateUser(firstname, lastname, address, birthday, mobile_phone, id);

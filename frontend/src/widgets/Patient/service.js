@@ -13,4 +13,13 @@ export default class PatientService
         return axios.get(API_URL + "/patients");
     }
 
+    static getAll()
+    {
+        return axios.get(API_URL + "/patients/all");
+    }
+
+    static getSingle(id){
+        return  axios.get(API_URL + "/patients/"+id);
+    }
+
 }

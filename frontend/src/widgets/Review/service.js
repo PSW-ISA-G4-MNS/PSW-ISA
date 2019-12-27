@@ -10,13 +10,13 @@ export default class ReviewService
 
     static get(id) 
     {
-        return axios.get(API_URL + "/care/");
+        return axios.get(API_URL + "/care/" + id);
     
     }
 
-    static submit(id) 
+    static submit(x) 
     {
-        return axios.post(API_URL + "/care/" + id);
+        return axios.post(API_URL + "/care/change/", x);
     }
-
+   
 }
