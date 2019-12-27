@@ -2,6 +2,7 @@ package org.psw_isa.psw_isa_backend.controller;
 
 import org.psw_isa.psw_isa_backend.service.CareService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.psw_isa.psw_isa_backend.models.Care;
@@ -49,6 +50,21 @@ public class CareController {
 		
 		Care care = careService.save(careDTO);
 		return new ResponseEntity<>(care.getId(),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/notApproved")
+	public ResponseEntity<ArrayList<Care>> findAllNotApproved() {
+		ArrayList<Care> notApproved=new ArrayList<Care>();
+		
+		List<Care> svi=careService.findAll();
+		
+		for (int i=0; i<svi.size();i++) {
+			if(svi.get(i).isApproved()==false) {
+				notApproved.add(svi.get(i));
+			}
+		}
+		
+		return new ResponseEntity<ArrayList<Care>>(notApproved, HttpStatus.OK);
 	}
 	
 	
