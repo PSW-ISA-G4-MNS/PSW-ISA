@@ -13,13 +13,7 @@ export default {
     },
     mounted: function()
     {
-        PatientService.getSingle(this.patient).then(
-
-	response => {
-		
-		this.data = response.data;
-		
-	})
+  
     },
     
 }
@@ -31,9 +25,9 @@ export default {
    
     
      <tr>
-      <td id="insurance">{{data.insuranceID}}</td>
-      <td id="ime">{{ data.user.firstname }}</td>
-      <td id="prezime">{{data.user.lastname}}</td>
+      <td id="insurance">{{patient.insuranceID}}</td>
+      <td id="ime">{{ patient.user.firstname }}</td>
+      <td id="prezime">{{patient.user.lastname}}</td>
       
     </tr>
     

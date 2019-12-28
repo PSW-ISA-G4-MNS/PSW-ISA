@@ -19,4 +19,9 @@ export default class ReviewService
         return axios.post(API_URL + "/care/change/", x);
     }
    
+
+    static accept(x) 
+    {
+        return axios.post(API_URL + "/prescription", x);
+    }
 }

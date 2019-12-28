@@ -10,44 +10,57 @@ export default {
         return {
             data: {
 	    },
-	    medicines: [],
+		allMedicines: [],
+		Prescription:{},
+		medicinesForPrescription:[],
 		allDiagnosis: [],
-	    success: false
-
+	    success: false,
+		idOfPrescription:0,
         };
     },
     mounted: function() {
     	MedicineService.list().then(response => {
-		this.medicines = response.data; 
+		this.allMedicines = response.data; 
 	});
     	DiagnosisService.list().then(response => {
 		this.allDiagnosis = response.data; 
 	});
 
-		
-    ReviewService.get(1).then(response => {this.data = response.data});
+		this.Prescription.medicines=this.medicinesForPrescription;
+    //ReviewService.get(1).then(response => {this.data = response.data});
 		
     },
     methods: {
     	submit: function() 
 	{
 		ReviewService.submit(this.data).then(response => {
-			if (response.data.code == 0) this.data.success = true;
-			else this.data.success = false;
+			
+
+		});
+	},
+
+		accept: function() 
+	{
+		ReviewService.accept(this.Prescription).then(response => {
+			if (response.status == 200) {
+				console.log("nice");
+				this.data.prescriptionId=response.data;
+			}
 
 		});
 	},
 	selectMedicine: function(index) {
 		console.log("Called with id = " + index);
 		//this.data.medicine=this.medicines[index].id;
-	 	$("#dropdownMenuMedicineButton").html(this.medicines[index].medicine);
-		//this.data.prescription.push(newMedicine);
-		this.data.id=2;
+		 $("#dropdownMenuMedicineButton").html(this.allMedicines[index].medicine);
+		 this.medicinesForPrescription.push(this.allMedicines[index]);
+		this.Prescription.medicines=this.medicinesForPrescription;
+		
 		
 	},
 	selectDiagnosis: function(index) {
 		console.log("Called with id = " + index);
-		//this.data.diagnosis=allDiagnosis[index].id
+		this.data.diagnosisId=this.allDiagnosis[index].id;
 		$("#dropdownMenuDiagnosisButton").html(this.allDiagnosis[index].diagnosis);
 		//this.data.diagnosis=this.allDiagnosis[index].id;
 	}
@@ -67,12 +80,13 @@ export default {
 		<div class="dropdown">
 		  
 		  <div class="dropdown-menu" aria-labelledby="dropdownMedicine">
-		    <a :key="medicine.id" :id="medicine.id" @click="selectMedicine(index)" v-for="(medicine, index) in this.medicines" class="dropdown-item" href="#">{{ medicine.medicine }}</a>
+		    <a :key="medicine.id" :id="medicine.id" @click="selectMedicine(index)" v-for="(medicine, index) in this.allMedicines" class="dropdown-item" href="#">{{ medicine.medicine }}</a>
 		  </div>
 		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuMedicineButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    Select medicine
 		  </button>
 		</div>
+		<button type="button" class="btn btn-primary btn-lg btn-block" @click="accept">Submit</button>
 		
 		<div class="dropdown">
 		  
