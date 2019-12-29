@@ -75,5 +75,12 @@ public class CareController {
 		return new ResponseEntity<>(id,HttpStatus.OK);
 	}
 	
+	@PostMapping(value="/review", consumes = "application/json")
+	public ResponseEntity<Long> saveCareReview(@RequestBody CareDTO careDTO){
+		
+		careService.updateCareReview(careDTO);
+		return new ResponseEntity<>(careDTO.getCareId(),HttpStatus.OK);
+	}
+	
 	
 }

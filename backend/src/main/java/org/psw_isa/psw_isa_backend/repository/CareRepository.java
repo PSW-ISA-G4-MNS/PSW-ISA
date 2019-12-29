@@ -3,6 +3,8 @@ package org.psw_isa.psw_isa_backend.repository;
 import java.time.LocalDate;
 
 import org.psw_isa.psw_isa_backend.models.Care;
+import org.psw_isa.psw_isa_backend.models.Diagnosis;
+import org.psw_isa.psw_isa_backend.models.Prescription;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,5 +20,9 @@ public interface CareRepository extends JpaRepository<Care, Long> {
 	@Query(value = "UPDATE care SET approved = :approved WHERE id = :id", nativeQuery = true)
 	public int updateCareApprovePrescription(@Param("approved") boolean approved,@Param("id") Long id);
 
-	
+	@Transactional
+	@Modifying
+	@Query(value = "UPDATE care SET comment = :comment, diagnosis_id = :diagnosis_id, prescription_id = :prescription_id, approved = :approved WHERE id = :id", nativeQuery = true)
+	public int updateCareReview(@Param("comment") String comment, @Param("diagnosis_id") Long diagnosis_id, @Param("prescription_id") Long prescription_id, @Param("approved") boolean approved,  @Param("id") Long id);
+
 }

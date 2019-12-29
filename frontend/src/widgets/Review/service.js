@@ -16,7 +16,7 @@ export default class ReviewService
 
     static submit(x) 
     {
-        return axios.post(API_URL + "/care/change/", x);
+        return axios.post(API_URL + "/care/review/", x);
     }
    
 

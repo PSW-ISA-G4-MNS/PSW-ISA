@@ -9,7 +9,8 @@ export default {
     data: function () {
         return {
             data: {
-	    },
+		},
+		Care:{},
 		allMedicines: [],
 		Prescription:{},
 		medicinesForPrescription:[],
@@ -25,9 +26,14 @@ export default {
     	DiagnosisService.list().then(response => {
 		this.allDiagnosis = response.data; 
 	});
-
+//, citace samo id,  koji ce da se nalazi u Review
+//ovo se stavi >>>>>
+//this.data.careID=Review;
 		this.Prescription.medicines=this.medicinesForPrescription;
-    	
+		
+		this.data.careId=1;
+
+		
 		
     },
     methods: {

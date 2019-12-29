@@ -68,5 +68,9 @@ public class CareService {
 	public int updateCareApprovePrescription(boolean approved,Long id){
 		return careRepository.updateCareApprovePrescription(approved, id);
 	}
+	
+	public int updateCareReview(CareDTO careDTO) {
+		return careRepository.updateCareReview(careDTO.getComment(),careDTO.getDiagnosisId(), careDTO.getPrescriptionId(), false,careDTO.getCareId());
+	}
 
 }

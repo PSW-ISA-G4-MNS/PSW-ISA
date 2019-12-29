@@ -43,9 +43,7 @@ export default {
               Accept
               </button>
               
-              <button v-if="!success" style="background-color:red;color:white;height:40px;width:200px">
-              Decline
-              </button>
+              
         </td>  
       
     </tr>
