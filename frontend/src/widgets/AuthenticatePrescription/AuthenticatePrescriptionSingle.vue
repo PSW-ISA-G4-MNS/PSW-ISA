@@ -1,5 +1,5 @@
 <script>
-
+import AuthenticatePrescriptionService from "./service";
 
 export default {
 	name: "AuthenticatePrescriptionSingle",
@@ -11,11 +11,20 @@ export default {
 
         };
     },
-    methods: function() {
+    methods: {
 	
+    accept: function() 
+	{
+		AuthenticatePrescriptionService.accept(this.Authenticationrequest.id).then(response => {
+      
+      if (response.status == 200) this.success = true;
+			else this.success = false;
+
+
+		});
+	}
     
     }
-  
 	
 }
 </script>
@@ -25,11 +34,19 @@ export default {
 
     
     <tr>
-      <td id="patient">{{	Authenticationrequest.patient.insuranceID}}</td>
-      <td id="ime">{{ 	Authenticationrequest.patient.user.firstname }}</td>
-      <td id="prezime">{{ Authenticationrequest.patient.user.lastname}}</td>
-      <td id="prescriptions"><p :key="medicineSingle.id" :id="medicineSingle.id" v-for="(medicineSingle) in this.Authenticationrequest.prescription.medicines">{{medicineSingle.medicine}}</p></td>
-
+     <td id="patient">{{	/*Authenticationrequest.patient.insuranceID*/}}</td>
+      <td id="ime">{{ /*	Authenticationrequest.patient.user.firstname*/ }}</td>
+      <td id="prezime">{{ /*Authenticationrequest.patient.user.lastname*/}}</td>
+      <td id="prescriptions"><p :key="medicineSingle.id" :id="medicineSingle.id" v-for="(medicineSingle) in this.Authenticationrequest.prescription.medicines">{{medicineSingle.medicine}}, </p></td>
+      <td id="dugme">
+              <button v-if="!success" @click="accept" style="background-color:green;color:white;height:40px;width:200px">
+              Accept
+              </button>
+              
+              <button v-if="!success" style="background-color:red;color:white;height:40px;width:200px">
+              Decline
+              </button>
+        </td>  
       
     </tr>
     

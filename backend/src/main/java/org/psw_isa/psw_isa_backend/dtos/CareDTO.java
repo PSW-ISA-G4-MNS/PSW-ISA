@@ -15,6 +15,7 @@ import org.psw_isa.psw_isa_backend.models.Prescription;
 
 public class CareDTO {
 
+	private Long careId;
 	
 	private Long doctorId; 
 	
@@ -69,8 +70,9 @@ public class CareDTO {
 		this.endTime = endTime;
 	}
 
-	public CareDTO(Long doctorId, Long roomId, LocalDateTime startTime, LocalDateTime endTime, Double price,String comment,Long diagnosisId, Long prescriptionId, Boolean approved) {
+	public CareDTO(Long careId,Long doctorId, Long roomId, LocalDateTime startTime, LocalDateTime endTime, Double price,String comment,Long diagnosisId, Long prescriptionId, Boolean approved) {
 		super();
+		this.careId=careId;
 		this.doctorId = doctorId;
 		this.roomId = roomId;
 		this.startTime = startTime;
@@ -128,6 +130,14 @@ public class CareDTO {
 
 	public void setPrescriptionId(Long prescriptionId) {
 		this.prescriptionId = prescriptionId;
+	}
+
+	public Long getCareId() {
+		return careId;
+	}
+
+	public void setCareId(Long careId) {
+		this.careId = careId;
 	}
 	
 }

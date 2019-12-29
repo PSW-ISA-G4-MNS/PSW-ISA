@@ -18,7 +18,9 @@ export default {
     },
     mounted: function () 
     {
-       
+      AuthenticatePrescriptionService.list().then(response => {
+	 this.items = response.data; 
+	});
     },
     components: {
     	"AuthenticatePrescriptionSingle": AuthenticatePrescriptionSingle
@@ -32,7 +34,8 @@ export default {
         <th>Insurance ID </th>
         <th>First Name </th>
         <th>Last Name </th>
-        <th>Buttons </th>
+        <th>Medicines </th>
+        <th>Apr or Dec</th>
     </tr>
     
     

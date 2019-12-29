@@ -12,7 +12,10 @@ export default class AuthenticatePrescriptionService
         return axios.get(API_URL + "/care/notApproved");
     }
 
-   
+    static accept(id)
+    {
+        return axios.put(API_URL + "/care/authenticatePrescription/" + id);
+    }
 
     
 }

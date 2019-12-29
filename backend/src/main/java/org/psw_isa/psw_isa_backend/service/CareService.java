@@ -1,5 +1,6 @@
 package org.psw_isa.psw_isa_backend.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -62,6 +63,10 @@ public class CareService {
 		
 		return careRepository.save(new Care( doctorRepository.findOneByid(careDTO.getDoctorId()), null, roomService.findOneByid(careDTO.getRoomId()), 
 			careDTO.getStartTime(), careDTO.getEndTime(),careDTO.getPrice(),careDTO.getComment(),diagnosisRepository.findOneByid(careDTO.getDiagnosisId()),prescriptionRepository.findOneByid(careDTO.getPrescriptionId()),false));
+	}
+	
+	public int updateCareApprovePrescription(boolean approved,Long id){
+		return careRepository.updateCareApprovePrescription(approved, id);
 	}
 
 }
