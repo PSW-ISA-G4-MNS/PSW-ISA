@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Medicine {
+public class Medicine implements java.io.Serializable {
 
 	
 	@Id

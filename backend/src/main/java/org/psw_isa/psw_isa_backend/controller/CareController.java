@@ -2,6 +2,7 @@ package org.psw_isa.psw_isa_backend.controller;
 
 import org.psw_isa.psw_isa_backend.service.CareService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.psw_isa.psw_isa_backend.models.Care;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,11 +46,40 @@ public class CareController {
 	}
 	
 	
-	@PostMapping(value="/{id}", consumes = "application/json")
+	@PostMapping(value="/change", consumes = "application/json")
 	public ResponseEntity<Long> saveWithReview(@RequestBody CareDTO careDTO){
 		
 		Care care = careService.save(careDTO);
 		return new ResponseEntity<>(care.getId(),HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/notApproved")
+	public ResponseEntity<ArrayList<Care>> findAllNotApproved() {
+		ArrayList<Care> notApproved=new ArrayList<Care>();
+		
+		List<Care> svi=careService.findAll();
+		
+		for (int i=0; i<svi.size();i++) {
+			if(svi.get(i).isApproved()==false) {
+				notApproved.add(svi.get(i));
+			}
+		}
+		
+		return new ResponseEntity<ArrayList<Care>>(notApproved, HttpStatus.OK);
+	}
+	
+	@PutMapping(value="/authenticatePrescription/{id}")
+	public ResponseEntity<Long> approvePrescription (@PathVariable("id") Long id){
+		
+		careService.updateCareApprovePrescription(true, id);
+		return new ResponseEntity<>(id,HttpStatus.OK);
+	}
+	
+	@PostMapping(value="/review", consumes = "application/json")
+	public ResponseEntity<Long> saveCareReview(@RequestBody CareDTO careDTO){
+		
+		careService.updateCareReview(careDTO);
+		return new ResponseEntity<>(careDTO.getCareId(),HttpStatus.OK);
 	}
 	
 	

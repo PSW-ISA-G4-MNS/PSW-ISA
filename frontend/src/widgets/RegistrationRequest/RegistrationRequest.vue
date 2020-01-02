@@ -6,8 +6,9 @@ export default {
 	props: ["request"],
     data: function () {
         return {
-          	registrationrequest: {},
-		success: false
+            registrationrequest: {},
+            declineResponse:{},
+		        success: false
 
         };
     },
@@ -24,7 +25,7 @@ export default {
 	},
 		decline: function() 
 	{
-		RegistrationRequestService.decline(this.request).then(response => {
+		RegistrationRequestService.decline(this.declineResponse).then(response => {
 			if (response.status == 200) this.success = true;
 			else this.success = false;
 
@@ -43,7 +44,11 @@ export default {
 		this.registrationrequest = response.data;
 		console.log(this.data);
 	}
-	);
+  );
+  this.declineResponse.to="susajunior@gmail.com";
+  this.declineResponse.subject="PORUKAA";
+  this.declineResponse.message="POZDRAV MITRE MASINO";
+
     }
 }
 </script>
