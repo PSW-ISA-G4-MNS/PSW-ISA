@@ -64,7 +64,7 @@ public class RegistrationRequestController {
 	
 	@PutMapping(value = "/approve/{id}")
 	public ResponseEntity<Long> approve(@PathVariable("id") Long id){		
-		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
+	
 		
 		Long retID = registrationRequestService.approve(id);
 		
@@ -74,7 +74,7 @@ public class RegistrationRequestController {
 	
 	@PutMapping(value = "/decline/{id}")
 	public ResponseEntity<Long> decline(@PathVariable("id") Long id){		
-		RegistrationRequest registrationRequest = registrationRequestService.findOneById(id);
+		
 		
 		Long retID = registrationRequestService.decline(id);
 		
