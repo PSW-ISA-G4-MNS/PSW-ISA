@@ -11,6 +11,7 @@ public class RegistrationRequestDTO {
 	private Patient patient;
 	private boolean approved;
 	private LocalDateTime time;
+	private boolean rejected;
 	
 	
 	
@@ -41,18 +42,25 @@ public class RegistrationRequestDTO {
 	
 	
 	public RegistrationRequestDTO(RegistrationRequest registrationRequest) {
-		this(registrationRequest.getId(), registrationRequest.getPatient(), registrationRequest.getApproved(), registrationRequest.getTime());   
+		this(registrationRequest.getId(), registrationRequest.getPatient(), registrationRequest.getApproved(), registrationRequest.getTime(),registrationRequest.getRejected());   
 	}
 	
-	public RegistrationRequestDTO(Long id, Patient patient, boolean approved, LocalDateTime time) {
+	public RegistrationRequestDTO(Long id, Patient patient, boolean approved, LocalDateTime time,boolean rejected) {
 		super();
 		this.id = id;
 		this.patient = patient;
 		this.approved = approved;
 		this.time = time;
+		this.rejected=rejected;
 	}
 	public RegistrationRequestDTO() {
 		
+	}
+	public boolean isRejected() {
+		return rejected;
+	}
+	public void setRejected(boolean rejected) {
+		this.rejected = rejected;
 	}
 	
 	

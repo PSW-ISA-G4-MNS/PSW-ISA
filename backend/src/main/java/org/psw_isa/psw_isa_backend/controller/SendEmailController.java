@@ -33,7 +33,7 @@ public class SendEmailController {
 	@PostMapping(value="/sendReject", consumes = "application/json")
 	public ResponseEntity<String> sendRejectMail(@RequestBody EmailDTO emailDTO)
 	  {
-		       
+		       System.out.println(emailDTO.getTo()+emailDTO.getSubject()+emailDTO.getMessage()+"OVO DOBIJE");
 		        SimpleMailMessage message = new SimpleMailMessage(); 
 		        message.setTo(emailDTO.getTo()); 
 		        message.setSubject(emailDTO.getSubject()); 

@@ -37,6 +37,8 @@ public class RegistrationRequestService {
 		
 		for (RegistrationRequest registrationRequest : registrationRequests){
 			if(!registrationRequest.getApproved()) {
+				
+				if(!registrationRequest.getRejected())
 				registrationRequestDTOs.add(new RegistrationRequestDTO(registrationRequest));
 			}
 		}
@@ -65,6 +67,7 @@ public class RegistrationRequestService {
 			RegistrationRequest registrationRequest = new RegistrationRequest();
 			registrationRequest.setPatient(patient);
 			registrationRequest.setApproved(false);
+			registrationRequest.setRejected(false);
 			registrationRequest.setTime(LocalDateTime.now());
 			
 			registrationRequestRepository.save(registrationRequest);
@@ -102,7 +105,7 @@ public class RegistrationRequestService {
 	public Long decline(Long id) {
 		RegistrationRequest registrationRequest = registrationRequestRepository.findOneById(id);
 		
-		registrationRequest.setApproved(false);
+		registrationRequest.setRejected(true);
 		registrationRequestRepository.save(registrationRequest);
 		
 		return registrationRequest.getId();

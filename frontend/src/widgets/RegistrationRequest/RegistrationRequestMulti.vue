@@ -40,7 +40,7 @@ export default {
       	v-for="item in items.filter(filter)"
       	:id="item.id"
       	:key="item.id"
-        :request="item.id"
+        :request="item"
           />
 
 
