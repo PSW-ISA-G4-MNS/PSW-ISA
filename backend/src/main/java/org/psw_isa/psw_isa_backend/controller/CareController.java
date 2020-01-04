@@ -31,6 +31,11 @@ public class CareController {
 		return new ResponseEntity<>(careService.findAllUnassignedAndUpcoming(), HttpStatus.OK);
 	}
 	
+	@GetMapping(value="/getPredefindedCaresForClinic/{id}")
+	public ResponseEntity<List<Care>> findAllUnassignedAndUpcomingforClinic(@PathVariable("id") Long id){
+		return new ResponseEntity<>(careService.findAllUnassignedAndUpcomingForClinic(id), HttpStatus.OK);
+	}
+	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<Care> findOneByid(@PathVariable("id") Long id){
 		return new ResponseEntity<>(careService.findOneByid(id), HttpStatus.OK);

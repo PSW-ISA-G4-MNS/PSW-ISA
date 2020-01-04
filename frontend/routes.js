@@ -22,12 +22,12 @@ const routes = [
 
     { path: '/regreq', component: RegistrationRequest},
     { path: '/clinic-new', component: NewClinicView},
+    { path: '/CareList', component: CareList },
     { path: '/profile', component: Patient},
     { path: '/updateUser', component: UpdateProfile},
     { path: '/clinics', component: ClinicList},
     
 
-    { path: '/cares', component: CareList},
     { path: '/createCare', component: CareFormView},
    
 ];

@@ -14,8 +14,8 @@ public interface CareRepository extends JpaRepository<Care, Long> {
 	
 	@Transactional
 	@Modifying
-	@Query(value = "UPDATE care SET patient = :patient WHERE id = :id", nativeQuery = true)
-	public int carePatientUpdate(@Param("patient") Long patientID, @Param("id") Long careID);
+	@Query(value = "UPDATE care SET patient_id = :patient_id WHERE id = :id", nativeQuery = true)
+	public int carePatientUpdate(@Param("patient_id") Long patientID, @Param("id") Long careID);
 
 
 	

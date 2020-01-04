@@ -18,7 +18,7 @@ export default {
     },
     mounted: function () 
     {
-        CareService.list().then(response => this.items = response.data);
+        CareService.listPredefinedCaresForClinic(localStorage.getItem("selectedClinic")).then(response => this.items = response.data);
     },
     components: {
     	"WidgetCareSingle": WidgetCareSingle
@@ -28,50 +28,35 @@ export default {
 
 
 <template>
-  <table>
-    <thead>
-      <tr>
-        <th
-          @click="sortBy(doctor)"
-          :class="{ active: sortKey == doctor }">
-          Doctor
-          <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
-          </span>
-        </th>
-        <th
-          @click="sortBy(time)"
-          :class="{ active: sortKey == time }">
-          Time
-          <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
-          </span>
-        </th>
-        <th
-          @click="sortBy(type)"
-          :class="{ active: sortKey == type }">
-          Type
-          <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
-          </span>
-        </th>
-        <th
-          @click="sortBy(price)"
-          :class="{ active: sortKey == price }">
-          Price
-          <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
-          </span>
-        </th>
-      </tr>
-    </thead>
+
+
+
+<h2 v-if = "items.length == 0">
+        There are no available predefined cares for this clinic.
+</h2>
+<div v-else = "items.length != 0">
+<h1>
+    Predefined cares for {{items[0].doctor.clinic.name}}
+</h1>
+  <table >
+    <tr>
+        <th>Time </th>
+        <th>Doctor </th>
+        <th>Care type </th>
+        <th>Price </th>
+        <th>Reservation </th>
+    </tr>
     
-     <div class="WidgetCareSingle"> 
-      <WidgetCareSingle
+      <WidgetCareSingle 
       	v-for="item in items.filter(filter)"
       	:id="item.id"
       	:key="item.id"
         :care="item.id"
           />
-    </div>
+      
     
   </table>
+</div>
 
 
 </template>
@@ -86,13 +71,14 @@ body {
 }
 
 table {
-  border: 2px solid #42b983;
+  border: 2px solid #49bcf6;
   border-radius: 3px;
   background-color: #fff;
+  width: 1320px;
 }
 
 th {
-  background-color: #42b983;
+  background-color: #49bcf6;
   color: rgba(255,255,255,0.66);
   cursor: pointer;
   -webkit-user-select: none;
@@ -102,7 +88,7 @@ th {
 }
 
 td {
-  background-color: #f9f9f9;
+  background-color: #49bcf6;
 }
 
 th, td {
