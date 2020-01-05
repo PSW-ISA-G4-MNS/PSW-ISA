@@ -1,7 +1,6 @@
-package org.psw_isa.psw_isa_backend;
+package org.psw_isa.psw_isa_backend_test;
 
 import org.psw_isa.psw_isa_backend.repository.UserRepository;
-import org.psw_isa.psw_isa_backend.service.UserService;
 import org.psw_isa.psw_isa_backend.models.User;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,9 +11,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import org.springframework.boot.test.mock.mockito.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+
 
 import static java.time.Duration.ofMillis;
 import static java.time.Duration.ofMinutes;
@@ -26,31 +23,34 @@ import static org.junit.jupiter.api.Assertions.assertTimeout;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import static org.mockito.ArgumentMatchers.*;
-import org.springframework.boot.test.context.TestConfiguration;
-import org.springframework.context.annotation.Bean;
-
-import java.util.*;
-
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-
-import org.psw_isa.psw_isa_backend.BackendApplication;
-
-@SpringBootTest(
-  //SpringBootTest.WebEnvironment.MOCK,
-  classes = BackendApplication.class)
-@AutoConfigureMockMvc
-@TestPropertySource(
-  locations = "classpath:application-integrationtest.properties")
-public class UserControllerTest {
+@ExtendWith(SpringExtension.class)
+//@SpringBootTest
+@DataJpaTest
+public class UserRepositoryTest {
  
     @Autowired
-    private MockMvc mvc;
+    private TestEntityManager entityManager;
  
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
+
+    @BeforeEach
+    public void setUp() {
+	// given
+	User user = new User();
+	entityManager.persist(user);
+	entityManager.flush();
+    }
+
+    @AfterEach
+    public void tearDown() {
+    	entityManager.clear();
+    }
  
-    // write test cases here
+    @Test 
+    public void testFindAll() {
+
+	assertEquals(userRepository.findAll().size(), 1);
+    }
+ 
 }

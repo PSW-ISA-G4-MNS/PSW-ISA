@@ -39,19 +39,12 @@ public class UserService {
 	@Autowired
 	PatientService patientService;
 	
-	@Autowired
-	CheckRoleService checkRoleService;
-	
 	public User findOneByemail(String email) {
 		return userRepository.findOneByemail(email);	
 	}
 	
 	public User findOneByid(Long id) {
 		return userRepository.findOneByid(id);	
-	}
-	
-	public List<User> findAll() {
-		return userRepository.findAll();
 	}
 
 	public int updateUser(String firstname, String lastname, String address, LocalDate birthday, String mobile_phone, Long id){
@@ -71,26 +64,11 @@ public class UserService {
   
 	public int login(LogInDTO loginData) {
 		User user = userRepository.findOneByemail(loginData.getEmail());
-		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
-		HttpSession session = attr.getRequest().getSession(true); 
 		if(user != null) {
 			Long id = user.getId();
 			
 			
 			if(loginData.getPassword().equals(user.getPassword())) {
-
-				if(checkRoleService.checkIfPatient(loginData.getEmail())) {
-					for(RegistrationRequest request : registrationRequests) {
-						if(request.getPatient().getUser().getId() == id) {
-							if(request.getApproved() == true) {	
-								session.setAttribute("user", user.getEmail());
-								return 1;
-							} else {
-								
-								Logger.getInstance().debug("Request found but not approved");
-								return 0;
-							}
-
 				
 				// check if user is not patient, if not, login immediately
 				Patient patient = patientService.findOneByuser(user);
@@ -120,14 +98,9 @@ public class UserService {
 							
 							Logger.getInstance().debug("Request found but not approved");
 							return 0;
-
 						}
 					}
-				} else {
-					session.setAttribute("user", user.getEmail());
-					return 1;
 				}
-					
 				Logger.getInstance().debug("Not found approved request for this user");
 				
 			}else {
