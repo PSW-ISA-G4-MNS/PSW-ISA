@@ -1,10 +1,10 @@
 <script>
-import ReqistrationRequestService from "./service";
-import ReqistrationRequest from "./RegistrationRequest.vue";
+import PatientService from "./service";
+import WidgetPatientSingleNurse from "./WidgetPatientSingleNurse.vue";
 
 
 export default {
-    name: "RegistrationRequestMulti",
+    name: "WidgetPatientMultiNurse",
     props: {
         filter: {
             type: Function,
@@ -18,10 +18,10 @@ export default {
     },
     mounted: function () 
     {
-        ReqistrationRequestService.list().then(response => this.items = response.data);
+        PatientService.getAll().then(response => this.items = response.data);
     },
     components: {
-    	"ReqistrationRequest": ReqistrationRequest
+    	"WidgetPatientSingleNurse": WidgetPatientSingleNurse
     }
 }
 </script>
@@ -36,11 +36,11 @@ export default {
     </tr>
     
     
-      <ReqistrationRequest
+      <WidgetPatientSingleNurse
       	v-for="item in items.filter(filter)"
       	:id="item.id"
       	:key="item.id"
-        :request="item"
+        :patient="item"
           />
 
 

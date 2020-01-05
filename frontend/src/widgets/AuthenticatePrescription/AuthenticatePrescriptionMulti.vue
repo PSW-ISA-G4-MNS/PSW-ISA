@@ -1,10 +1,10 @@
 <script>
-import ReqistrationRequestService from "./service";
-import ReqistrationRequest from "./RegistrationRequest.vue";
+import AuthenticatePrescriptionService from "./service";
+import AuthenticatePrescriptionSingle from "./AuthenticatePrescriptionSingle.vue";
 
 
 export default {
-    name: "RegistrationRequestMulti",
+    name: "AuthenticatePrescriptionMulti",
     props: {
         filter: {
             type: Function,
@@ -18,10 +18,12 @@ export default {
     },
     mounted: function () 
     {
-        ReqistrationRequestService.list().then(response => this.items = response.data);
+      AuthenticatePrescriptionService.list().then(response => {
+	 this.items = response.data; 
+	});
     },
     components: {
-    	"ReqistrationRequest": ReqistrationRequest
+    	"AuthenticatePrescriptionSingle": AuthenticatePrescriptionSingle
     }
 }
 </script>
@@ -32,15 +34,16 @@ export default {
         <th>Insurance ID </th>
         <th>First Name </th>
         <th>Last Name </th>
-        <th>Buttons </th>
+        <th>Medicines </th>
+        <th>Apr or Dec</th>
     </tr>
     
     
-      <ReqistrationRequest
+      <AuthenticatePrescriptionSingle
       	v-for="item in items.filter(filter)"
       	:id="item.id"
       	:key="item.id"
-        :request="item"
+        :Authenticationrequest="item"
           />
 
 

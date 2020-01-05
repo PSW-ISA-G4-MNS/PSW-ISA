@@ -19,7 +19,12 @@ export default class RegistrationRequestService
 
     static decline(id)
     {
-        return axios.put(API_URL + "/registrationRequests/decline/"+id);
+        return axios.put(API_URL+"/registrationRequests/decline/" + id);
+    }
+
+    static email(id)
+    {
+        return axios.post(API_URL + "/email/sendReject/",id);
     }
 
     static get(id) 

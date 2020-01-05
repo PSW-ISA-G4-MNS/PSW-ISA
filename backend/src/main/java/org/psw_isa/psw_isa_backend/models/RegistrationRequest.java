@@ -29,11 +29,13 @@ public class RegistrationRequest {
 	
 	private Boolean approved; 
 	
+	private Boolean rejected;
+	
 
 	public RegistrationRequest() 
 	{
 	}
-	public RegistrationRequest(Patient _patient, LocalDateTime _time, Boolean _approved) {
+	public RegistrationRequest(Patient _patient, LocalDateTime _time, Boolean _approved, Boolean rejected) {
 		super();
 		 
 		this.patient = _patient;
@@ -41,6 +43,8 @@ public class RegistrationRequest {
 		this.time = _time;
 		 
 		this.approved = _approved;
+		
+		this.rejected= rejected;
 		
 	}
 	
@@ -79,6 +83,12 @@ public class RegistrationRequest {
 	public void setApproved(Boolean newValue) 
 	{
 		this.approved = newValue;
+	}
+	public Boolean getRejected() {
+		return rejected;
+	}
+	public void setRejected(Boolean rejected) {
+		this.rejected = rejected;
 	}
 	
 }

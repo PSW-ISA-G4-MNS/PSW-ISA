@@ -32,9 +32,12 @@ export default {
 			else {
 				this.data.success = false;
 				localStorage.setItem("user", null);
+				alert("Error while logging in. Access forbidden or wrong credentials");
 			}
 
 
+		}).catch(error => {
+				alert("Error while logging in. Access forbidden or wrong credentials");
 		});
 	}
     }
@@ -68,7 +71,7 @@ export default {
 
 
 .widget-login-new {
-	position:fixed;
+	position: relative;
     top:20%;
     left:40%;
 	padding: 10px; 

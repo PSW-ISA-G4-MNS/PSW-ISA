@@ -9,8 +9,11 @@ import javax.servlet.http.HttpSession;
 import org.psw_isa.psw_isa_backend.dtos.LogInDTO;
 import org.psw_isa.psw_isa_backend.models.RegistrationRequest;
 import org.psw_isa.psw_isa_backend.models.User;
+import org.psw_isa.psw_isa_backend.models.Patient;
 import org.psw_isa.psw_isa_backend.repository.RegistrationRequestRepository;
+import org.psw_isa.psw_isa_backend.repository.PatientRepository;
 import org.psw_isa.psw_isa_backend.repository.UserRepository;
+import org.psw_isa.psw_isa_backend.service.CheckRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +32,12 @@ public class UserService {
 	UserRepository userRepository;
 	@Autowired
 	RegistrationRequestRepository registrationRequestRepository;
+
+	@Autowired
+	CheckRoleService checkRoleService;
+
+	@Autowired
+	PatientService patientService;
 	
 	@Autowired
 	CheckRoleService checkRoleService;
@@ -39,6 +48,10 @@ public class UserService {
 	
 	public User findOneByid(Long id) {
 		return userRepository.findOneByid(id);	
+	}
+	
+	public List<User> findAll() {
+		return userRepository.findAll();
 	}
 
 	public int updateUser(String firstname, String lastname, String address, LocalDate birthday, String mobile_phone, Long id){
@@ -63,10 +76,9 @@ public class UserService {
 		if(user != null) {
 			Long id = user.getId();
 			
-			List<RegistrationRequest> registrationRequests = registrationRequestRepository.findAll();
-			
 			
 			if(loginData.getPassword().equals(user.getPassword())) {
+
 				if(checkRoleService.checkIfPatient(loginData.getEmail())) {
 					for(RegistrationRequest request : registrationRequests) {
 						if(request.getPatient().getUser().getId() == id) {
@@ -78,6 +90,37 @@ public class UserService {
 								Logger.getInstance().debug("Request found but not approved");
 								return 0;
 							}
+
+				
+				// check if user is not patient, if not, login immediately
+				Patient patient = patientService.findOneByuser(user);
+				if (patient == null)
+				{
+					Logger.getInstance().debug("Ignoring registration requests because user is not patient");
+					// we do noot need to check registration requests
+					ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
+					HttpSession session = attr.getRequest().getSession(true); 
+					
+					session.setAttribute("user", user.getEmail());
+					return 1;
+
+				}
+	
+				List<RegistrationRequest> registrationRequests = registrationRequestRepository.findAll();
+				for(RegistrationRequest request : registrationRequests) {
+					if(request.getPatient().getUser().getId() == id) {
+						if(request.getApproved() == true) {	
+							ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
+							HttpSession session = attr.getRequest().getSession(true); 
+							
+							session.setAttribute("user", user.getEmail());
+							
+							return 1;
+						} else {
+							
+							Logger.getInstance().debug("Request found but not approved");
+							return 0;
+
 						}
 					}
 				} else {
