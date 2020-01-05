@@ -50,9 +50,14 @@ export default {
     methods: 
     {
     	deleteItem: function() 
-	{
-		ClinicService.delete(this.Clinic).then(response => this.data = {});
-	}
+        {
+            ClinicService.delete(this.Clinic).then(response => this.data = {});
+        },
+        showClinic: function()
+        {
+            localStorage.setItem('selectedClinic', this.Clinic);
+            window.location.href = "/frontend/#/CareList";
+        }
 	// add additional methods here
     }
 }
@@ -76,6 +81,7 @@ export default {
         <li class="list-group-item">Location: {{data.locationLat}} {{data.locationLon}}</li>
      </ul>
 
+    <button class="btn btn-primary" @click="showClinic">Predefined cares</button>
 
     <div class="card-body">
     </div>

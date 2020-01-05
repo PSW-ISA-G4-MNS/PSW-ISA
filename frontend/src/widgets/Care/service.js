@@ -12,9 +12,14 @@ export default class CareService
         return axios.get(API_URL + "/care/all/");
     }
 
+    static listPredefinedCaresForClinic(id) 
+    {
+        return axios.get(API_URL + "/care/getPredefindedCaresForClinic/" + id);
+    }
+
     static reservate(id)
     {
-        return axios.put(API_URL + "/careRequest/reservate/" + id);
+        return axios.post(API_URL + "/care/reservate/" + id);
     }
 
     static get(id) 

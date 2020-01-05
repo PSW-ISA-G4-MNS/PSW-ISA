@@ -1,5 +1,6 @@
 <script>
 
+import UserService from "./src/widgets/User/service";
 
 export default {
   name: "App",
@@ -13,6 +14,14 @@ export default {
   },
   components: {
 
+  },
+  methods:{
+	  logOut: function() 
+		{
+			UserService.logOut().then(response => {
+				window.location.href = "/frontend/";
+			});
+		}
   },
   mounted: function () {
 	this.$store.subscribe((mutation, state) => {
@@ -47,6 +56,7 @@ export default {
 	</div>
 	
 	<p class="my-2 my-lg-0" v-if="data.role != 'NOT_LOGGED'">Logged as: {{ data.user }}</p>
+
 
     </nav>
     <div class="view"><router-view /> </div>
