@@ -1,7 +1,7 @@
 import { API_URL } from "./../../config";
 import axios from "axios"
 
-export default class CareService
+export default class CalendarService
 {
     constructor(self) 
     {
@@ -17,9 +17,9 @@ export default class CareService
         return axios.put(API_URL + "/careRequest/reservate/" + id);
     }
 
-    static get(id) 
+    static getCares(id) 
     {
-        return axios.get(API_URL + "/care/" + id);
+        return axios.get(API_URL + "/care/careForDoctor/"+ id);
     }
 
 }

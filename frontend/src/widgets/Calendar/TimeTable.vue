@@ -1,20 +1,20 @@
 <script>
+import CalendarService from './service';
 
 
 export default {
     name: "Calendar",
-    props:[ "time","nesto"],
+    props:[ "time","datum"],
     data: function () {
         return {
             data: {},
-            pickDate:null,
+           
 
         };
     },
-        mounted: function() {
-    
-	 
 
+    
+        mounted: function() {
 
 		
 		

@@ -2,7 +2,9 @@ package org.psw_isa.psw_isa_backend.controller;
 
 import org.psw_isa.psw_isa_backend.service.CareService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.psw_isa.psw_isa_backend.models.Care;
@@ -82,5 +84,12 @@ public class CareController {
 		return new ResponseEntity<>(careDTO.getCareId(),HttpStatus.OK);
 	}
 	
+	
+	@GetMapping(value="/careForDoctor/{id}")
+	public ResponseEntity<HashMap<String,Care>> findCareForDocktor(@PathVariable("id") String date){
+		System.out.println("OVO JE DATUM"+date+"OOOO");
+		LocalDate dateReal=LocalDate.parse(date);
+		return new ResponseEntity<>(careService.findAllAssignedForDateForDoctor(dateReal), HttpStatus.OK);
+	}
 	
 }
