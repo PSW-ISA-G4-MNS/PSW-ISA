@@ -4,7 +4,7 @@ import CalendarService from './service';
 
 export default {
     name: "Calendar",
-    props:[ "time","datum"],
+    props:[ "care","datum"],
     data: function () {
         return {
             data: {},
@@ -33,7 +33,7 @@ export default {
    
 
 <tr>
-      <td id="vreme">{{this.time}}</td>
+      <td id="vreme">{{care.startTime.toString().replace(datum+"T", " ")}}</td>
       <td id="obaveza"></td>
       
       <td id="dugme">

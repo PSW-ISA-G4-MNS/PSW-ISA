@@ -86,7 +86,7 @@ public class CareController {
 	
 	
 	@GetMapping(value="/careForDoctor/{id}")
-	public ResponseEntity<HashMap<String,Care>> findCareForDocktor(@PathVariable("id") String date){
+	public ResponseEntity<ArrayList<Care>> findCareForDocktor(@PathVariable("id") String date){
 		System.out.println("OVO JE DATUM"+date+"OOOO");
 		LocalDate dateReal=LocalDate.parse(date);
 		return new ResponseEntity<>(careService.findAllAssignedForDateForDoctor(dateReal), HttpStatus.OK);

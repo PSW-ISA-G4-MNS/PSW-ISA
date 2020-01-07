@@ -82,10 +82,10 @@ public class CareService {
 	}
 	
 	
-	public HashMap<String,Care> findAllAssignedForDateForDoctor(LocalDate date) {
+	public ArrayList<Care> findAllAssignedForDateForDoctor(LocalDate date) {
 		List<Care> all = careRepository.findAll();
 		List<Care> assigned = new ArrayList<>();
-		HashMap<String, Care> vreme=new HashMap<String,Care>();
+		ArrayList<Care> vreme=new ArrayList<Care>();
 		
 		Long userID = checkRoleService.getUser().getId();
 		Long doctorID = null;
@@ -123,7 +123,7 @@ public class CareService {
 			
 			String kljuc=konvertovan.toString();
 			
-			vreme.put(kljuc, care);
+			vreme.add(care);
 			
 		}
 		
