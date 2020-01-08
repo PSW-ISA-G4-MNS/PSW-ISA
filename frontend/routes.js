@@ -20,15 +20,12 @@ const routes = [
     { path: '/', component: Home },
     { path: '/login', component: Login},
     { path: '/register', component: Registration},
-
     { path: '/regreq', component: RegistrationRequest},
     { path: '/clinic-new', component: NewClinicView},
+    { path: '/CareList', component: CareList },
     { path: '/profile', component: Profile},
     { path: '/updateUser', component: UpdateProfile},
     { path: '/clinics', component: ClinicList},
-    
-
-    { path: '/cares', component: CareList},
     { path: '/createCare', component: CareFormView},
     { path: '/logout', component: LogOut},
    

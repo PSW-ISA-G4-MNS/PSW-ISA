@@ -1,4 +1,4 @@
-package org.psw_isa.psw_isa_backend;
+package org.psw_isa.psw_isa_backend_test;
 
 import org.psw_isa.psw_isa_backend.repository.UserRepository;
 import org.psw_isa.psw_isa_backend.service.UserService;

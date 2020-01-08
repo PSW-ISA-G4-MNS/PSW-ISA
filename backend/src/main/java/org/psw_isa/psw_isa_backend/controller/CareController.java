@@ -35,6 +35,11 @@ public class CareController {
 		return new ResponseEntity<>(careService.findAllUnassignedAndUpcoming(), HttpStatus.OK);
 	}
 	
+	@GetMapping(value="/getPredefindedCaresForClinic/{id}")
+	public ResponseEntity<List<Care>> findAllUnassignedAndUpcomingforClinic(@PathVariable("id") Long id){
+		return new ResponseEntity<>(careService.findAllUnassignedAndUpcomingForClinic(id), HttpStatus.OK);
+	}
+	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<Care> findOneByid(@PathVariable("id") Long id){
 		return new ResponseEntity<>(careService.findOneByid(id), HttpStatus.OK);
@@ -55,6 +60,13 @@ public class CareController {
 		return new ResponseEntity<>(care.getId(),HttpStatus.OK);
 	}
 	
+
+	@PostMapping(value="/reservate/{id}")
+	public ResponseEntity<Long> reservatePredefined(@PathVariable("id") Long id){
+		careService.assignPatientToCare(id);
+		return new ResponseEntity<>(null,HttpStatus.OK);
+	}
+
 	@GetMapping(value="/notApproved")
 	public ResponseEntity<ArrayList<Care>> findAllNotApproved() {
 		ArrayList<Care> notApproved=new ArrayList<Care>();
@@ -84,6 +96,7 @@ public class CareController {
 		return new ResponseEntity<>(careDTO.getCareId(),HttpStatus.OK);
 	}
 	
+
 	
 	@GetMapping(value="/careForDoctor/{id}")
 	public ResponseEntity<ArrayList<Care>> findCareForDocktor(@PathVariable("id") String date){

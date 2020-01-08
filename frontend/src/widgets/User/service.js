@@ -32,4 +32,8 @@ export default class UserService
     {
         return axios.delete(API_URL + "/users/" + id);
     }
+
+    static logOut(){
+        return axios.post(API_URL + "/users/logOut");
+    }
 }
