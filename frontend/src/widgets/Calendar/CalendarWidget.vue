@@ -57,10 +57,15 @@ export default {
 
 <template>
     
-    <div>
+    <div class="form">
 		<input type="date" class="form-control" placeholder="Date" v-model="pickDate"/>
         &nbsp;
         &nbsp;
+
+        <button   style="background-color:purple;color:white;height:40px;width:200px;float:right;">
+               Request an annual
+        </button>
+
         <h3>Timetable for : {{this.pickDate}}</h3>
 
         <table>
@@ -106,6 +111,17 @@ export default {
 </template>
 
 <style scoped> 
+
+.form {
+position:relative;
+    top:20%;
+    left:20%;
+	padding: 40px; 
+	margin: 40px;
+	text-align: center;
+	width: 60%;
+}
+
 
 input{
 width: 50%;
