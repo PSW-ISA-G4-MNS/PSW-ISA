@@ -1,7 +1,8 @@
 <script>
 
-import TimeTable from "./TimeTable.vue";
+import ReviewTimeTable from "./ReviewTimeTable.vue";
 import CalendarService from"./service";
+import OperationTimeTable from "./OperationTimeTable.vue";
 
 export default {
     name: "Calendar",
@@ -9,7 +10,8 @@ export default {
         return {
             data: {},
             pickDate:null,
-            cares:{}
+            cares:{},
+            operations:{}
         };
     },
 
@@ -19,6 +21,10 @@ export default {
 
       CalendarService.getCares(this.pickDate).then(response => {
 		this.cares= response.data; 
+  });
+
+   CalendarService.getOperations(this.pickDate).then(response => {
+		this.operations= response.data; 
   });
   
       }
@@ -33,7 +39,8 @@ export default {
    
 
     components: {
-    	"TimeTable": TimeTable
+      "ReviewTimeTable": ReviewTimeTable,
+      "OperationTimeTable": OperationTimeTable
     },
     
     methods: {
@@ -66,10 +73,10 @@ export default {
 
     <tr>
      <td></td>
-     <td>PREGLEDI</td>
+     <td>REVIEWS</td>
      <td></td> 
     </tr>
-      <TimeTable
+      <ReviewTimeTable
       	v-for="item in cares"
       	:id="item"
       	:key="item.id"
@@ -77,6 +84,22 @@ export default {
         :datum="pickDate"
        
           />
+
+    <tr>
+     <td></td>
+     <td>OPERATIONS</td>
+     <td></td> 
+    </tr>
+
+      <OperationTimeTable
+      	v-for="item in operations"
+      	:id="item"
+      	:key="item.id"
+        :operation="item"
+        :datum="pickDate"
+       
+          />
+      
 
         </table>
     </div>

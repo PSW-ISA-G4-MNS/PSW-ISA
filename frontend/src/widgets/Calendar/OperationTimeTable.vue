@@ -3,8 +3,8 @@ import CalendarService from './service';
 
 
 export default {
-    name: "Calendar",
-    props:[ "care","datum"],
+    name: "OperationTimeTable",
+    props:[ "operation","datum"],
     data: function () {
         return {
             data: {},
@@ -33,18 +33,9 @@ export default {
    
 
 <tr>
-      <td id="vreme">{{care.startTime.toString().replace(datum+"T", " ")}}</td>
-      <td id="obaveza"></td>
+      <td id="vreme">{{operation.startTime.toString().replace(datum+"T", " ")}}</td>
+      <td id="obaveza">{{operation.patient.id}} {{operation.patient.user.firstname}} {{operation.patient.user.lastname}}</td>
       
-      <td id="dugme">
-              <button   style="background-color:green;color:white;height:40px;width:200px">
-            Zapocni pregled
-              </button>
-              
-              
-
-              
-        </td>
 
         
     </tr>

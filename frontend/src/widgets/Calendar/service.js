@@ -22,4 +22,9 @@ export default class CalendarService
         return axios.get(API_URL + "/care/careForDoctor/"+ id);
     }
 
+    static getOperations(id) 
+    {
+        return axios.get(API_URL + "/operation/operationForDoctor/"+ id);
+    }
+
 }
