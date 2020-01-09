@@ -5,7 +5,7 @@ import DiagnosisService from "../Diagnosis/service";
 
 export default {
 	name: "ReviewForm",
-	props: ["Review"],
+	props: ["Review","medicalRecordId"],
     data: function () {
         return {
             data: {
@@ -30,7 +30,7 @@ export default {
 //ovo se stavi >>>>>
 //this.data.careID=Review;
 		this.Prescription.medicines=this.medicinesForPrescription;
-		
+		this.data.medicalRecordId;
 		this.data.careId=1;
 
 		
@@ -75,7 +75,7 @@ export default {
 </script>
 
 <template>
-    <div class="form-CareForm"> 
+    <div class="form"> 
         <div class="success-box" v-if="success">Review Started</div>
 	<div v-if="!success"> 
 		
@@ -116,6 +116,15 @@ export default {
 <style scoped> 
 
 
+.form {
+position:relative;
+    top:10%;
+    left:20%;
+	padding: 40px; 
+	margin: 40px;
+	text-align: center;
+	width: 60%;
+}
 
 .success-box 
 {
@@ -123,5 +132,7 @@ export default {
 	color: #0f0;
 	padding: 5px;
 }
+
+
 
 </style>

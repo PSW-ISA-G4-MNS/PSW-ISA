@@ -13,6 +13,11 @@ export default class ReviewService
         return axios.get(API_URL + "/care/" + id);
     
     }
+    static getMedicalRecord(id) 
+    {
+        return axios.get(API_URL + "/medicalRecord/" + id);
+    
+    }
 
     static submit(x) 
     {
