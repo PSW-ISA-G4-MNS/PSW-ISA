@@ -65,8 +65,7 @@ public class CareService {
 	PrescriptionRepository prescriptionRepository;
 
 	
-	@Autowired
-    CheckRoleService checkRoleService;
+	
 	
 	public List<Care> findAll() {
 		return careRepository.findAll();
@@ -140,6 +139,44 @@ public class CareService {
 		for(Doctor doctor : doctorRepository.findAll()) {
 			if(doctor.getUser().getId() == userID) {
 				doctorID = doctor.getId();
+			}
+		}
+
+				LocalDate startTime = null;
+				for(Care care : all) {
+					if(care.getDoctor().getClinic().getId() == doctorID) {
+						startTime = care.getStartTime().toLocalDate();
+						//(care.getPatient() != null) &&
+						if( (startTime.isEqual(date))) {
+							assigned.add(care);
+						}
+					}
+						
+				}
+					
+				Collections.sort(assigned, new Comparator<Care>()  {
+					  @Override
+					  public int compare(Care c1, Care c2) {
+					    return c1.getStartTime().compareTo(c2.getStartTime());
+					  }
+					});
+				
+				for(Care care : assigned) {
+					LocalDateTime zaConvert=care.getStartTime();
+					
+					LocalTime konvertovan=zaConvert.toLocalTime();
+					
+					String kljuc=konvertovan.toString();
+					
+					vreme.add(care);
+					
+				}
+				
+				
+				return vreme;
+			}
+
+
 
 	public void assignPatientToCare(Long careID) {
 		
@@ -154,38 +191,6 @@ public class CareService {
 		}
 		
 
-		LocalDate startTime = null;
-		for(Care care : all) {
-			if(care.getDoctor().getClinic().getId() == doctorID) {
-				startTime = care.getStartTime().toLocalDate();
-				//(care.getPatient() != null) &&
-				if( (startTime.isEqual(date))) {
-					assigned.add(care);
-				}
-			}
-				
-		}
-			
-		Collections.sort(assigned, new Comparator<Care>()  {
-			  @Override
-			  public int compare(Care c1, Care c2) {
-			    return c1.getStartTime().compareTo(c2.getStartTime());
-			  }
-			});
-		
-		for(Care care : assigned) {
-			LocalDateTime zaConvert=care.getStartTime();
-			
-			LocalTime konvertovan=zaConvert.toLocalTime();
-			
-			String kljuc=konvertovan.toString();
-			
-			vreme.add(care);
-			
-		}
-		
-		
-		return vreme;
 
 		System.out.println("patient: " + patientID + " care: " + careID);
 		careRepository.carePatientUpdate(patientID, careID);
@@ -194,3 +199,4 @@ public class CareService {
 	}
 
 }
+
