@@ -3,7 +3,6 @@ package org.psw_isa.psw_isa_backend.controller;
 
 import java.util.List;
 
-import org.psw_isa.psw_isa_backend.models.Clinic;
 import org.psw_isa.psw_isa_backend.models.Medicine;
 import org.psw_isa.psw_isa_backend.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;

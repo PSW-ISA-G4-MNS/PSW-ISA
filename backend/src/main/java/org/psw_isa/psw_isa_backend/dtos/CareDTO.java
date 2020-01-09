@@ -8,9 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
+import org.psw_isa.psw_isa_backend.models.Diagnosis;
+import org.psw_isa.psw_isa_backend.models.Prescription;
 
 public class CareDTO {
 
+	private Long careId;
 	
 	private Long doctorId; 
 	
@@ -21,6 +26,16 @@ public class CareDTO {
 	private LocalDateTime endTime;
 
 	private Double price;
+	
+	private String comment;
+
+	
+	private Long diagnosisId;
+	
+	private Long prescriptionId;
+	
+	private boolean approved;
+
 
 
 	public Long getDoctorId() {
@@ -55,13 +70,19 @@ public class CareDTO {
 		this.endTime = endTime;
 	}
 
-	public CareDTO(Long doctorId, Long roomId, LocalDateTime startTime, LocalDateTime endTime, Double price) {
+	public CareDTO(Long careId,Long doctorId, Long roomId, LocalDateTime startTime, LocalDateTime endTime, Double price,String comment,Long diagnosisId, Long prescriptionId, Boolean approved) {
 		super();
+		this.careId=careId;
 		this.doctorId = doctorId;
 		this.roomId = roomId;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.price = price;
+		this.comment=comment;
+		this.diagnosisId=diagnosisId;
+		this.prescriptionId=prescriptionId;
+		this.approved=approved;
+	
 	} 
 	
 	public CareDTO() {
@@ -75,6 +96,48 @@ public class CareDTO {
 
 	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	
+
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
+	}
+
+	public Long getDiagnosisId() {
+		return diagnosisId;
+	}
+
+	public void setDiagnosisId(Long diagnosisId) {
+		this.diagnosisId = diagnosisId;
+	}
+
+	public Long getPrescriptionId() {
+		return prescriptionId;
+	}
+
+	public void setPrescriptionId(Long prescriptionId) {
+		this.prescriptionId = prescriptionId;
+	}
+
+	public Long getCareId() {
+		return careId;
+	}
+
+	public void setCareId(Long careId) {
+		this.careId = careId;
 	}
 	
 }

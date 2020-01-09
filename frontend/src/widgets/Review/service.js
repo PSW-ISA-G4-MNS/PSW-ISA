@@ -14,9 +14,14 @@ export default class ReviewService
     
     }
 
-    static submit(id) 
+    static submit(x) 
     {
-        return axios.post(API_URL + "/care/" + id);
+        return axios.post(API_URL + "/care/review/", x);
     }
+   
 
+    static accept(x) 
+    {
+        return axios.post(API_URL + "/prescription", x);
+    }
 }

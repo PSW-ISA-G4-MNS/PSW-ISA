@@ -12,15 +12,22 @@ export default {
         };
     },
     methods: {
-    	accept: function() 
+    	reservate: function() 
 	{
-		CareService.reservate(this.care).then(response => {
+		CareService.reservate(this.care.id).then(response => {
 
 
-			if (response.status == 200) this.success = true;
+			if (response.status == 200)this.success = true;
 			else this.success = false;
 
+    return {
+        renderComponent: true,
+      };
+
+
 		});
+  
+
 	},
 		decline: function() 
 	{
@@ -41,6 +48,7 @@ export default {
 	response => {
 		console.log(response.data);;
 		this.care = response.data;
+    
 		console.log(this.data);
 	}
 	);
@@ -51,19 +59,17 @@ export default {
 <template>
     
 
-  <tbody>    
-    <tr>
-      <td id="doctor">{{ care.doctor.firstname }} {{care.doctor.lastname}}</td>
-      <td id="time">{{ care.time}}</td>
-      <td id="type">{{ care.type.name}}</td>
+  <tr v-if="!renderComponent">
+      <td id="time">{{care.startTime.toString().replace("T", " ")}}</td>
+      <td id="doctor">{{ care.doctor.user.firstname }} {{ care.doctor.user.lastname}}</td>
+      <td id="caretype">{{ care.careType.name}}</td>
       <td id="price">{{ care.price}}</td>
-      <td id="dugme">
+      <td id="reservate">
               <button v-if="!success" v-on:click="reservate" style="background-color:green;color:white;height:40px;width:200px">
-              Rezervisi
+              Reservate
               </button>
         </td>
-    </tr>
-  </tbody>
+  </tr>
   
 </template>
 

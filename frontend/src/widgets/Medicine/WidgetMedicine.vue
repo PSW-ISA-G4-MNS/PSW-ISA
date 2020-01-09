@@ -15,7 +15,7 @@ export default {
     methods: {
     	submit: function() 
 	{
-		NewClinicService.submit(this.data).then(response => {
+		MedicineService.submit(this.data).then(response => {
 			if (response.status == 200) {
 				this.data = {};
 				alert("Success!");
@@ -29,14 +29,14 @@ export default {
 <template>
     <div class="form-NewMedicine"> 
        
-		
+		<h2>New Medicine</h2>
 		<p>
 		<input type="text" class="form-control" placeholder="Name of the medicine" v-model="data.medicine" />
 		</p>
 		
 		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Submit</button>
 	
-
+    </div>
  
 
 </template>
@@ -51,6 +51,15 @@ table,td {
 td{
   width: 200px;
   height: 80px;
+}
+.form-NewMedicine{
+	position: relative;
+    top:10%;
+    left:40%;
+	padding: 10px; 
+	margin: 10px;
+	text-align: center;
+	width: 20%;
 }
 
 </style>

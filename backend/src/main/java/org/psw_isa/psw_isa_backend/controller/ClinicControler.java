@@ -73,11 +73,11 @@ public class ClinicControler {
 		
 		return new ResponseEntity<>(clinicService.findAll(),HttpStatus.OK);
 	}
-	/*
+	
 	@PostMapping(value="/filter", consumes = "application/json")
 	public ResponseEntity<List<Clinic>> listAllWithFreeDoctors(@RequestBody ClinicFilterDTO clinicFilterDTO){
 		
 		return new ResponseEntity<>(clinicService.findClinicsWithFreeDoctors(clinicFilterDTO),HttpStatus.OK);
 	}
-	*/
+	
 }

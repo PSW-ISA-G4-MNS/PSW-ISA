@@ -23,7 +23,7 @@ public class PatientService {
 	@Autowired 
 	UserRepository userRepository;
 
-	List<Patient> findAll(){
+	public List<Patient> findAll(){
 		return patientRepository.findAll();
 	}
 	
@@ -33,6 +33,10 @@ public class PatientService {
 	
 	public Patient findOneByinsuranceID(Long id) {
 		return patientRepository.findOneByinsuranceID(id);
+	}
+	
+	public Patient findOneByid(Long id) {
+		return patientRepository.findOneByid(id);
 	}
 	
 	public Patient findOneByuser(User user) {
