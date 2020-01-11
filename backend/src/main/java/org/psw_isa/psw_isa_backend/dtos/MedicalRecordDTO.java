@@ -1,14 +1,15 @@
 package org.psw_isa.psw_isa_backend.dtos;
 
-import java.util.ArrayList;
+import org.psw_isa.psw_isa_backend.models.MedicalRecord;
+import org.psw_isa.psw_isa_backend.models.Patient;
 
-import org.psw_isa.psw_isa_backend.models.Care;
 
 
 public class MedicalRecordDTO {
 
+	private Long id;
 	
-	private Long patientId;
+	private Patient patient;
 	
 	
 	private String height;
@@ -23,13 +24,20 @@ public class MedicalRecordDTO {
 	
 
 
-private MedicalRecordDTO() {
+public MedicalRecordDTO() {
 		
 	}
+
+public MedicalRecordDTO(MedicalRecord medicalRecord) {
+	this(medicalRecord.getId(), medicalRecord.getPatient(), medicalRecord.getWidth(), medicalRecord.getHeight(),medicalRecord.getBloodType(),medicalRecord.getDiopter());   
+
+}
 	
-	private MedicalRecordDTO(Long patientId, String width, String height, String bloodType,String diopter) {
+	
+	public MedicalRecordDTO(Long id,Patient patient, String width, String height, String bloodType,String diopter) {
 		super();
-		this.patientId=patientId;
+		this.id=id;
+		this.patient=patient;
 		this.width=width;
 		this.height=height;
 		this.bloodType=bloodType;
@@ -37,13 +45,13 @@ private MedicalRecordDTO() {
 		
 	}
 	
-	public Long getPatientId() {
-		return patientId;
+	public Patient getPatient() {
+		return patient;
 	}
 
 
-	public void setPatientId(Long patientId) {
-		this.patientId = patientId;
+	public void setPatient(Patient  patient) {
+		this.patient = patient;
 	}
 
 
@@ -86,6 +94,14 @@ private MedicalRecordDTO() {
 		this.diopter = diopter;
 	}
 
+	
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id=id;
+	}
 
 
 }

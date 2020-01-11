@@ -1,32 +1,26 @@
 <script>
 import ReviewService from "./service";
-import MedicineService from "../Medicine/service";
-import DiagnosisService from "../Diagnosis/service";
+
 
 export default {
 	name: "PatientInformation",
-	props: ["medicalRecord"],
+	props: ["patientIdTest"],
     data: function () {
         return {
             data: {
 		},
+		recordDTO:{}
 		
         };
     },
     mounted: function() {
-   this.data.height=this.medicalRecord.height;	
-   this.data.width=this.medicalRecord.width;
-   this.data.bloodType=this.medicalRecord.bloodType;
-   this.data.diopter=this.medicalRecord.diopter;
+  
 
     },
     methods: {
     	submit: function() 
 	{
-		ReviewService.submit(this.data).then(response => {
-			
-
-		});
+		
 	},
 
 	
@@ -41,20 +35,20 @@ export default {
 
 
      <p> Height
-		<input type="text" class="form-control" placeholder="Height" v-model="data.height" v />
+		<input type="text" class="form-control" placeholder="Height" />
 		</p>
 		
 		<p>Width
-		<input type="text" class="form-control" placeholder="Width" v-model="data.width" />
+		<input type="text" class="form-control" placeholder="Width" v-model="this.recordDTO.width" />
 		</p>
 		
 		<p>Blood Type
-		<input type="text" class="form-control" placeholder="Blood type" v-model="data.bloodType" />
+		<input type="text" class="form-control" placeholder="Blood type" v-model="this.recordDTO.bloodType" />
 		</p>
 		
 		
 		<p>Diopter
-		<input type="text" class="form-control" placeholder="Diopter" v-model="data.diopter" />
+		<input type="text" class="form-control" placeholder="Diopter" v-model="this.recordDTO.diopter" />
 		</p>
 		
 		<button style="background-color:red;color:white;height:40px;width:200px">

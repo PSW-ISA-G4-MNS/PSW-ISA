@@ -1,6 +1,5 @@
 package org.psw_isa.psw_isa_backend.models;
 
-import java.util.ArrayList;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -102,5 +101,12 @@ public class MedicalRecord {
 		this.patient=patient;
 	}
 	
+	public Long getId() {
+		return id;
+	}
 	
+	public void setId(Long id) {
+		this.id=id;
+	}
+
 }
