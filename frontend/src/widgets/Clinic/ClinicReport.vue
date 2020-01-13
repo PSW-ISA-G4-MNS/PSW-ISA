@@ -30,7 +30,7 @@ export default {
     <span class="badge badge-pill badge-info">ClinicReport: </span>
 
     <div class="card" style="width: 18rem;">
-      <p>TOP</p>
+      <p>Clinic: {{ clinic.name }}</p>
       <div class="card-body">
         <h5 class="card-title"></h5>
         <p class="card-text item-description"></p>
