@@ -22,7 +22,7 @@ public class CheckRoleController {
 	public ResponseEntity<String> checkRole(){
 		if(checkRoleService.checkIfLogged()) {
 			if(checkRoleService.checkIfClinicAdministrator()) {
-				return new ResponseEntity<String>("CLINIC_ADMINITRATOR", HttpStatus.OK);
+				return new ResponseEntity<String>("CLINIC_ADMINISTRATOR", HttpStatus.OK);
 			} else if(checkRoleService.checkIfDoctor()) {
 				return new ResponseEntity<String>("DOCTOR", HttpStatus.OK);
 			} else if(checkRoleService.checkIfNurse()) {
