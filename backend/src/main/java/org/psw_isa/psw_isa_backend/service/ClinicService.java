@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.psw_isa.psw_isa_backend.service.CareService;
 import org.psw_isa.psw_isa_backend.models.Care;
+import org.psw_isa.psw_isa_backend.models.Room;
 import org.psw_isa.psw_isa_backend.service.DoctorService;
 import org.psw_isa.psw_isa_backend.service.ClinicRatingService;
 import org.psw_isa.psw_isa_backend.service.DoctorRatingService;
@@ -53,6 +54,9 @@ public class ClinicService {
 	
 	@Autowired
 	ClinicRatingService clinicRatingService;
+	
+	@Autowired
+	RoomService roomService;
 
 	public Clinic save(Clinic clinic) {
 		clinic.setId(null);
@@ -139,6 +143,14 @@ public class ClinicService {
 		}
 		return new ClinicReportDTO(dayCount, weekCount, monthCount, averageRate, doctorRatings, this.getRevenue(clinic, start, end));
 
+	}
+
+	public List<Room> getRoomsForClinic(Clinic clinic) {
+		List<Room> rooms = new ArrayList<>();
+		for (Room room : roomService.findAll()) {
+			if (room.getClinic().getId() == clinic.getId()) rooms.add(room);
+		}
+		return rooms;
 	}
 
 
