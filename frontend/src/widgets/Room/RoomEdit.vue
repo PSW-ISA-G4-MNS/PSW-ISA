@@ -19,7 +19,7 @@ export default {
     methods: {
     	submit: function() 
 	{
-		RoomFormService.create(this.data).then(response => {
+		RoomFormService.update(this.Room, this.data).then(response => {
 			this.data = {};
 			this.$router.push("/");
 		});
