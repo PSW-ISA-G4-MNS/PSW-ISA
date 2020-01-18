@@ -59,6 +59,7 @@ public class CareController {
 		Care care = careService.save(careDTO);
 		return new ResponseEntity<>(care.getId(),HttpStatus.OK);
 	}
+
 	
 
 	@PostMapping(value="/reservate/{id}")
@@ -105,4 +106,5 @@ public class CareController {
 		return new ResponseEntity<>(careService.findAllAssignedForDateForDoctor(dateReal), HttpStatus.OK);
 	}
 	
+
 }

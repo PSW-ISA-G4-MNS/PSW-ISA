@@ -1,6 +1,7 @@
 package org.psw_isa.psw_isa_backend.service;
 
 import java.util.List;
+
 import org.psw_isa.psw_isa_backend.dtos.MedicalRecordDTO;
 import org.psw_isa.psw_isa_backend.models.MedicalRecord;
 import org.psw_isa.psw_isa_backend.repository.MedicalRecordRepository;
@@ -8,14 +9,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+
+import org.psw_isa.psw_isa_backend.models.Care;
+import org.psw_isa.psw_isa_backend.repository.CareRepository;
+
+
+
 @Service
 public class MedicalRecordService {
+
 
 	@Autowired
 	MedicalRecordRepository medicalRecordRepository;
 	
 	@Autowired
 	PatientService patientService;
+  
+  @Autowired
+	CareRepository careRepository;
 	
 	public MedicalRecord save(MedicalRecord medicalRecord) {
 		return medicalRecordRepository.save(medicalRecord);
@@ -87,4 +98,5 @@ public class MedicalRecordService {
 		}
 		
 	 }
+
 }
