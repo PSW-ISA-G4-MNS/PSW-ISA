@@ -29,21 +29,20 @@ export default {
     <span class="badge badge-pill badge-info">Room: </span>
 
     <div class="card" style="width: 18rem;">
-      <p>TOP</p>
+      <p>Room</p>
       <div class="card-body">
-        <h5 class="card-title"></h5>
+        <h5 class="card-title">{{ data.title }}</h5>
         <p class="card-text item-description"></p>
       </div>
 
     
      <ul class="list-group list-group-flush">
-        <li class="list-group-item"></li>
+        <li class="list-group-item">Capacity: {{ data.capacity }}</li>
      </ul>
 
 
     <div class="card-body">
       <button class="btn btn-danger" @click="deleteItem" v-if="true">Delete</button>
-      <button class="btn btn-primary" @click="orderItem" v-if="true">Button</button>
     </div>
     </div>
     </div>
