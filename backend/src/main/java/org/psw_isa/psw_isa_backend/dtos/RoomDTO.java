@@ -16,7 +16,17 @@ public class RoomDTO {
 	
 	
 	public RoomDTO(Room room) {
-		// implement 
+		clinicId = room.getClinic().getId();
+		title = room.getTitle();
+		capacity = room.getCapacity();
+	}
+
+	public RoomDTO(Long id, Long clinicId, String title, Integer capacity) 
+	{
+		this.id = id; 
+		this.clinicId = clinicId; 
+		this.title = title;
+		this.capacity = capacity;
 	}
 	
 	

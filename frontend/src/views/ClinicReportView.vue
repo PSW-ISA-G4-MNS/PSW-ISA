@@ -4,6 +4,8 @@
 //import widgets for this view here
 
 import MultiClinicReport from '../widgets/Clinic/multi-ClinicReport.vue';
+import MultiRoom from '../widgets/Room/multi-Room.vue';
+import RoomForm from '../widgets/Room/RoomForm.vue';
 
 export default {
     name: "ClinicReportView",
@@ -22,15 +24,22 @@ export default {
         }
     },
     components: {
-    	"multi-ClinicReport": MultiClinicReport
+    	"multi-ClinicReport": MultiClinicReport,
+	"multi-Room": MultiRoom,
+	"RoomForm": RoomForm
     }
 }
 </script>
 
 <template>
+<div id="my-clinic-view">
+<p>Add new room</p>
+<RoomForm />
 
 <multi-ClinicReport />
 
+<multi-Room />
+</div>
 </template>
 
 <style scoped> 

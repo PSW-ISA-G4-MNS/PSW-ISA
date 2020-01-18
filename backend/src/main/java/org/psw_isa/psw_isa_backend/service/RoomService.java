@@ -7,6 +7,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import java.util.stream.Collectors;
+
+
 import org.psw_isa.psw_isa_backend.models.Room;
 import org.psw_isa.psw_isa_backend.models.Clinic;
 import org.psw_isa.psw_isa_backend.dtos.RoomDTO;
@@ -24,7 +27,11 @@ public class RoomService {
 	ClinicAdminService clinicAdminService;
 	
 	public List<Room> findAll() {
-		return roomRepository.findAll();
+		if (clinicAdminService.getClinic() != null) 
+		{
+			return roomRepository.findAll().stream().filter(room -> room.getClinic().getId() == clinicAdminService.getClinic().getId()).collect(Collectors.toList());
+		}
+		else return roomRepository.findAll();
 	}
 	
 	public List<Room> findAllInClinic(Clinic clinic) {
