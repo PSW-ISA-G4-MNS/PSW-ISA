@@ -51,10 +51,13 @@ export default {
     <div class="form" > 
 		
 		<PatientInformation style="float:left;"
-		:patientIdTest="this.patientIdTest"/>
+		
+		:medicalRecord="this.medicalRecordObj"/>
 		
 		 <Review
-		 :medicalRecordId="medicalRecordObj.id"
+		 :id="medicalRecordObj.id"
+		 :key="medicalRecordObj.id"
+		 :medicalRecordId="this.medicalRecordObj.id"
 		 />
 		
 		

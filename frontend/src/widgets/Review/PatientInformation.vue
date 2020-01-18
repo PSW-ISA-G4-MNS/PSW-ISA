@@ -4,23 +4,27 @@ import ReviewService from "./service";
 
 export default {
 	name: "PatientInformation",
-	props: ["patientIdTest"],
+	props: ["medicalRecord"],
     data: function () {
         return {
             data: {
 		},
-		recordDTO:{}
+		recordDTO:{},
+		success: false,
 		
         };
     },
     mounted: function() {
-  
+		
 
     },
     methods: {
-    	submit: function() 
+    	change: function() 
 	{
-		
+		ReviewService.change(this.medicalRecord).then(response => {
+		this.success=true;
+
+		});
 	},
 
 	
@@ -35,28 +39,26 @@ export default {
 
 
      <p> Height
-		<input type="text" class="form-control" placeholder="Height" />
+		<input type="text" class="form-control" placeholder="Height"  v-model="medicalRecord.height" />
 		</p>
 		
 		<p>Width
-		<input type="text" class="form-control" placeholder="Width" v-model="this.recordDTO.width" />
+		<input type="text" class="form-control" placeholder="Width" v-model="medicalRecord.width" />
 		</p>
 		
 		<p>Blood Type
-		<input type="text" class="form-control" placeholder="Blood type" v-model="this.recordDTO.bloodType" />
+		<input type="text" class="form-control" placeholder="Blood type" v-model="medicalRecord.bloodType" />
 		</p>
 		
 		
 		<p>Diopter
-		<input type="text" class="form-control" placeholder="Diopter" v-model="this.recordDTO.diopter" />
+		<input type="text" class="form-control" placeholder="Diopter" v-model="medicalRecord.diopter" />
 		</p>
 		
-		<button style="background-color:red;color:white;height:40px;width:200px">
-              Izmeni podatke
-              </button>
+		<p v-if="success">Data changed successfully!</p>
 		
-		<button style="background-color:red;color:white;height:40px;width:200px">
-              Potvrdi izmenu
+		<button  v-if="!success"   v-on:click="change" style="background-color:red;color:white;height:40px;width:200px">
+              Confirm change
               </button>
     </div>
 

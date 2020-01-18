@@ -123,7 +123,7 @@ public class CareService {
 	}
 	
 	public int updateCareReview(CareDTO careDTO) {
-		return careRepository.updateCareReview(careDTO.getComment(),careDTO.getDiagnosisId(), careDTO.getPrescriptionId(), false,careDTO.getCareId());
+		return careRepository.updateCareReview(careDTO.getComment(),careDTO.getDiagnosisId(), careDTO.getPrescriptionId(),careDTO.getMedicalRecordId(), false,careDTO.getCareId());
 	}
 	
 

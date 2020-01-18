@@ -30,7 +30,7 @@ export default {
 //ovo se stavi >>>>>
 //this.data.careID=Review;
 		this.Prescription.medicines=this.medicinesForPrescription;
-		this.data.medicalRecordId;
+		this.data.medicalRecordId=this.medicalRecordId;
 		this.data.careId=1;
 
 		
@@ -40,7 +40,7 @@ export default {
     	submit: function() 
 	{
 		ReviewService.submit(this.data).then(response => {
-			
+			alert("Review is complete!");
 
 		});
 	},
@@ -92,7 +92,7 @@ export default {
 		    Select medicine
 		  </button>
 		</div>
-		<button type="button" class="btn btn-primary btn-lg btn-block" @click="accept">Submit</button>
+		<button type="button" @click="accept" style="background-color:green;color:white;height:40px;width:200px">Confirm  prescription</button>
 		
 		<div class="dropdown">
 		  
@@ -107,7 +107,7 @@ export default {
 	
 		
 
-		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Submit</button>
+		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Coplete the review</button>
 	</div>
     </div>
 

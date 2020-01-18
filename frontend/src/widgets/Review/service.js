@@ -23,6 +23,12 @@ export default class ReviewService
     {
         return axios.post(API_URL + "/care/review/", x);
     }
+
+    static change(x) 
+    {
+        return axios.post(API_URL + "/medicalRecord/change/", x);
+    }
+   
    
 
     static accept(x) 

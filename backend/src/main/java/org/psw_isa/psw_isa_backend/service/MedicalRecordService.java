@@ -1,7 +1,6 @@
 package org.psw_isa.psw_isa_backend.service;
 
 import java.util.List;
-
 import org.psw_isa.psw_isa_backend.dtos.MedicalRecordDTO;
 import org.psw_isa.psw_isa_backend.models.MedicalRecord;
 import org.psw_isa.psw_isa_backend.repository.MedicalRecordRepository;
@@ -36,6 +35,9 @@ public class MedicalRecordService {
 		return medicalRecordRepository.findOneByid(id);
 	}
 	
+	public int updateMedicalRecord(MedicalRecordDTO medicalRecordDTO) {
+		return medicalRecordRepository.updateMedicalRecord(medicalRecordDTO.getHeight(),medicalRecordDTO.getWidth(), medicalRecordDTO.getBloodType(), medicalRecordDTO.getDiopter(), medicalRecordDTO.getId());
+	}
 	
 	public MedicalRecordDTO findOneMedicalById(@PathVariable("id") Long id){
 		 
@@ -67,14 +69,14 @@ public class MedicalRecordService {
 		}
 			
 			else {
-				System.out.println("OOOOOOOOOOOOOOOO"+"USOOO JE OVDEE AAAA "+"OOOOOOOOOOOOOOOOOOOOOOO");
+				
 				return pacijentovKarton;
 			}
 		
 		}
 		
 		else {
-			System.out.println("OOOOOOOOOOOOOOOO"+"URADIO JE OVO"+"OOOOOOOOOOOOOOOOOOOOOOO");
+			
 			
 			MedicalRecord novi=new MedicalRecord(patientService.findOneByid(id));
 			
