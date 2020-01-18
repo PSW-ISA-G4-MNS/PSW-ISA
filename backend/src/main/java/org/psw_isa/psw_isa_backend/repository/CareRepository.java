@@ -31,8 +31,8 @@ public interface CareRepository extends JpaRepository<Care, Long> {
 
 	@Transactional
 	@Modifying
-	@Query(value = "UPDATE care SET comment = :comment, diagnosis_id = :diagnosis_id, prescription_id = :prescription_id, approved = :approved WHERE id = :id", nativeQuery = true)
-	public int updateCareReview(@Param("comment") String comment, @Param("diagnosis_id") Long diagnosis_id, @Param("prescription_id") Long prescription_id, @Param("approved") boolean approved,  @Param("id") Long id);
+	@Query(value = "UPDATE care SET comment = :comment, diagnosis_id = :diagnosis_id, prescription_id = :prescription_id, medical_record_id= :medical_record_id, approved = :approved WHERE id = :id", nativeQuery = true)
+	public int updateCareReview(@Param("comment") String comment, @Param("diagnosis_id") Long diagnosis_id, @Param("prescription_id") Long prescription_id,@Param("medical_record_id") Long medical_record_id, @Param("approved") boolean approved,  @Param("id") Long id);
 
 
 }

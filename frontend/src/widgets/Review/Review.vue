@@ -5,7 +5,7 @@ import DiagnosisService from "../Diagnosis/service";
 
 export default {
 	name: "ReviewForm",
-	props: ["Review"],
+	props: ["Review","medicalRecordId"],
     data: function () {
         return {
             data: {
@@ -30,7 +30,7 @@ export default {
 //ovo se stavi >>>>>
 //this.data.careID=Review;
 		this.Prescription.medicines=this.medicinesForPrescription;
-		
+		this.data.medicalRecordId=this.medicalRecordId;
 		this.data.careId=1;
 
 		
@@ -40,7 +40,7 @@ export default {
     	submit: function() 
 	{
 		ReviewService.submit(this.data).then(response => {
-			
+			alert("Review is complete!");
 
 		});
 	},
@@ -75,7 +75,7 @@ export default {
 </script>
 
 <template>
-    <div class="form-CareForm"> 
+    <div class="form"> 
         <div class="success-box" v-if="success">Review Started</div>
 	<div v-if="!success"> 
 		
@@ -92,7 +92,7 @@ export default {
 		    Select medicine
 		  </button>
 		</div>
-		<button type="button" class="btn btn-primary btn-lg btn-block" @click="accept">Submit</button>
+		<button type="button" @click="accept" style="background-color:green;color:white;height:40px;width:200px">Confirm  prescription</button>
 		
 		<div class="dropdown">
 		  
@@ -107,7 +107,7 @@ export default {
 	
 		
 
-		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Submit</button>
+		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Coplete the review</button>
 	</div>
     </div>
 
@@ -116,6 +116,15 @@ export default {
 <style scoped> 
 
 
+.form {
+position:relative;
+    top:10%;
+    left:20%;
+	padding: 40px; 
+	margin: 40px;
+	text-align: center;
+	width: 60%;
+}
 
 .success-box 
 {
@@ -123,5 +132,7 @@ export default {
 	color: #0f0;
 	padding: 5px;
 }
+
+
 
 </style>
