@@ -58,6 +58,9 @@ public class ClinicService {
 	@Autowired
 	RoomService roomService;
 
+	@Autowired 
+	ClinicAdminService clinicAdminService;
+
 	public Clinic save(Clinic clinic) {
 		clinic.setId(null);
 		return clinicRepository.save(clinic);
@@ -68,6 +71,12 @@ public class ClinicService {
 	}
 
 	public List<Clinic> findAll() {
+		if (clinicAdminService.getClinic() != null) 
+		{
+			ArrayList<Clinic> result = new ArrayList<>();
+			result.add(clinicRepository.findOneByid(clinicAdminService.getClinic().getId()));
+			return result;
+		}
 		return clinicRepository.findAll();
 	}
 

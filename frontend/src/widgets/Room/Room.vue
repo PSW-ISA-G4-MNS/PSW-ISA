@@ -7,6 +7,7 @@ export default {
     data: function () {
         return {
             data: {},
+	    deleted: false,
         }
     },
     mounted: function () 
@@ -17,7 +18,13 @@ export default {
     {
     	deleteItem: function() 
 	{
-		RoomService.delete(this.Room).then(response => this.data = {});
+		RoomService.delete(this.Room).then(response => {
+			this.data = {};
+			this.deleted = true;
+		});
+	},
+	editItem: function () {
+		this.$router.push("/roomEdit/" + this.Room);
 	}
 	// add additional methods here
     }
@@ -25,7 +32,7 @@ export default {
 </script>
 
 <template>
-    <div class="widget-Room"> 
+    <div v-if="!deleted" class="widget-Room"> 
     <span class="badge badge-pill badge-info">Room: </span>
 
     <div class="card" style="width: 18rem;">
@@ -43,6 +50,7 @@ export default {
 
     <div class="card-body">
       <button class="btn btn-danger" @click="deleteItem" v-if="true">Delete</button>
+      <button class="btn btn-primary" @click="editItem" v-if="true">Edit</button>
     </div>
     </div>
     </div>

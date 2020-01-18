@@ -9,6 +9,7 @@ import ClinicList from './src/views/ClinicList.vue';
 import ClinicReportView from './src/views/ClinicReportView.vue';
 import CareFormView from './src/views/CareFormView.vue';
 import LogOut from './src/views/Logout.vue';
+import RoomEditView from './src/views/RoomEditView.vue';
 
 import UpdateProfile from './src/views/UpdateProfile.vue';
 
@@ -30,6 +31,7 @@ const routes = [
     { path: '/createCare', component: CareFormView},
     { path: '/logout', component: LogOut},
     { path: '/reports', component: ClinicReportView},
+    { path: '/roomEdit/:room', component: RoomEditView, props: true},
    
 ];
 
