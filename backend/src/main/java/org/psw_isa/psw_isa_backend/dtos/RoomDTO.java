@@ -1,0 +1,55 @@
+package org.psw_isa.psw_isa_backend.dtos;
+
+import org.psw_isa.psw_isa_backend.models.Room;
+
+public class RoomDTO {
+	private Long id;
+
+	
+	private Long clinicId;
+	
+	
+	
+	private String title;
+	
+	private Integer capacity;
+	
+	
+	public RoomDTO(Room room) {
+		// implement 
+	}
+	
+	
+	public Long getClinicId() {
+		return clinicId;
+	}
+	public void setClinicId(Long clinicId) {
+		this.clinicId = clinicId;
+	}
+	
+	
+	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	public Integer getCapacity() {
+		return capacity;
+	}
+	public void setCapacity(Integer capacity) {
+		this.capacity = capacity;
+	}
+	
+
+	public Long getId() {
+		return this.id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+}
