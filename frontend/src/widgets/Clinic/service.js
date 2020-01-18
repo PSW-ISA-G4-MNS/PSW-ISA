@@ -13,6 +13,11 @@ export default class ClinicService
         return axios.get(API_URL + "/clinic/");
     }
 
+    static report(id) 
+    {
+        return axios.get(API_URL + "/clinic/" + id + "/report/10");
+    }
+
     static get(id) 
     {
         return axios.get(API_URL + "/clinic/" + id);

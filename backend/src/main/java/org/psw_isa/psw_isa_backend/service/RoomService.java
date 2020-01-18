@@ -9,6 +9,7 @@ import java.util.ListIterator;
 
 import org.psw_isa.psw_isa_backend.models.Room;
 import org.psw_isa.psw_isa_backend.models.Clinic;
+import org.psw_isa.psw_isa_backend.dtos.RoomDTO;
 import org.psw_isa.psw_isa_backend.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ public class RoomService {
 	@Autowired
 	RoomRepository roomRepository;
 	
+	@Autowired
+	ClinicAdminService clinicAdminService;
 	
 	public List<Room> findAll() {
 		return roomRepository.findAll();
@@ -43,6 +46,21 @@ public class RoomService {
 	
 	public Room findOneByid(Long id) {
 		return roomRepository.findOneByid(id);
+	}
+	public Room save(RoomDTO room) {
+		return roomRepository.save(new Room(room.getTitle(), clinicAdminService.getClinic(), room.getCapacity()));
+	}
+	public Room update(RoomDTO room) {
+		Room newRoom = findOneByid(room.getId());
+		newRoom.setTitle(room.getTitle());
+		newRoom.setCapacity(room.getCapacity());
+		roomRepository.save(newRoom);
+		return newRoom;
+	}
+
+	public Long delete(Long id) {
+		roomRepository.delete(findOneByid(id));
+		return id;
 	}
 
 }
