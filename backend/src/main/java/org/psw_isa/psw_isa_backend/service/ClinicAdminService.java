@@ -10,12 +10,18 @@ import org.psw_isa.psw_isa_backend.models.RegistrationRequest;
 import org.psw_isa.psw_isa_backend.repository.ClinicAdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.psw_isa.psw_isa_backend.models.Doctor;
+
+import java.util.stream.Collectors;
 
 @Service
 public class ClinicAdminService {
 
 	@Autowired
 	ClinicAdminRepository adminClinicRepository;
+
+	@Autowired
+	DoctorService doctorService;
 
 	
 	@Autowired
@@ -74,5 +80,23 @@ public class ClinicAdminService {
 		
 		
 		return adminClinicDTOs;
+	}
+
+	public List<Doctor> getDoctors() 
+	{
+		return doctorService.findAll().stream().filter(x -> x.getClinic() == getClinic()).collect(Collectors.toList());
+	}
+	
+	public Doctor addDoctor(Doctor doctor){
+		Doctor d = doctorService.findOneByid(doctor.getId());
+		d.setClinic(getClinic());
+		doctorService.save(d);
+		return d;
+	}
+	public Doctor deleteDoctor(Long id){
+		Doctor d = doctorService.findOneByid(id);
+		d.setClinic(null);
+		doctorService.save(d);
+		return d;
 	}
 }
