@@ -1,11 +1,10 @@
 <script>
 
 
-// import widgets for this view here
-import ReviewPage from "../widgets/Review/ReviewPage.vue"
+import CalendarWidget from "../widgets/Calendar/CalendarWidget.vue"
 
 export default {
-    name: "ReviewView",
+    name: "CalendarView",
     data: function () {
             return {
 		data: {}
@@ -21,14 +20,14 @@ export default {
         }
     },
     components: {
-    	"ReviewPage": ReviewPage
+    	"CalendarWidget": CalendarWidget
     }
 }
 </script>
 
 <template>
 
-<ReviewPage/>
+<CalendarWidget/>
 
 </template>
 

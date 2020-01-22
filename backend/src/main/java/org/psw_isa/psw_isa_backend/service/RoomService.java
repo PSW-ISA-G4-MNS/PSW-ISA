@@ -7,8 +7,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import java.util.stream.Collectors;
+
+
 import org.psw_isa.psw_isa_backend.models.Room;
 import org.psw_isa.psw_isa_backend.models.Clinic;
+import org.psw_isa.psw_isa_backend.dtos.RoomDTO;
 import org.psw_isa.psw_isa_backend.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +23,15 @@ public class RoomService {
 	@Autowired
 	RoomRepository roomRepository;
 	
+	@Autowired
+	ClinicAdminService clinicAdminService;
 	
 	public List<Room> findAll() {
-		return roomRepository.findAll();
+		if (clinicAdminService.getClinic() != null) 
+		{
+			return roomRepository.findAll().stream().filter(room -> room.getClinic().getId() == clinicAdminService.getClinic().getId()).collect(Collectors.toList());
+		}
+		else return roomRepository.findAll();
 	}
 	
 	public List<Room> findAllInClinic(Clinic clinic) {
@@ -43,6 +53,21 @@ public class RoomService {
 	
 	public Room findOneByid(Long id) {
 		return roomRepository.findOneByid(id);
+	}
+	public Room save(RoomDTO room) {
+		return roomRepository.save(new Room(room.getTitle(), clinicAdminService.getClinic(), room.getCapacity()));
+	}
+	public Room update(RoomDTO room) {
+		Room newRoom = findOneByid(room.getId());
+		newRoom.setTitle(room.getTitle());
+		newRoom.setCapacity(room.getCapacity());
+		roomRepository.save(newRoom);
+		return newRoom;
+	}
+
+	public Long delete(Long id) {
+		roomRepository.delete(findOneByid(id));
+		return id;
 	}
 
 }

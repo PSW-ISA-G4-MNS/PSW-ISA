@@ -13,10 +13,6 @@ import org.psw_isa.psw_isa_backend.models.User;
 import org.psw_isa.psw_isa_backend.repository.PatientRepository;
 import org.psw_isa.psw_isa_backend.repository.RegistrationRequestRepository;
 import org.psw_isa.psw_isa_backend.repository.UserRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;

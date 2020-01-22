@@ -29,6 +29,7 @@ public class CareDTO {
 	
 	private String comment;
 
+	private Long  medicalRecordId;
 	
 	private Long diagnosisId;
 	
@@ -70,7 +71,7 @@ public class CareDTO {
 		this.endTime = endTime;
 	}
 
-	public CareDTO(Long careId,Long doctorId, Long roomId, LocalDateTime startTime, LocalDateTime endTime, Double price,String comment,Long diagnosisId, Long prescriptionId, Boolean approved) {
+	public CareDTO(Long careId,Long doctorId, Long roomId, LocalDateTime startTime, LocalDateTime endTime, Double price,String comment,Long diagnosisId, Long prescriptionId,Long medicalRecordId, Boolean approved) {
 		super();
 		this.careId=careId;
 		this.doctorId = doctorId;
@@ -81,6 +82,7 @@ public class CareDTO {
 		this.comment=comment;
 		this.diagnosisId=diagnosisId;
 		this.prescriptionId=prescriptionId;
+		this.medicalRecordId=medicalRecordId;
 		this.approved=approved;
 	
 	} 
@@ -138,6 +140,14 @@ public class CareDTO {
 
 	public void setCareId(Long careId) {
 		this.careId = careId;
+	}
+
+	public Long getMedicalRecordId() {
+		return medicalRecordId;
+	}
+
+	public void setMedicalRecordId(Long medicalRecordId) {
+		this.medicalRecordId = medicalRecordId;
 	}
 	
 }
