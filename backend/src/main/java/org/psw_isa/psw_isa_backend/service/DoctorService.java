@@ -43,41 +43,34 @@ public class DoctorService {
 	}
 	
 
-	public List<Doctor> findFreeDoctors(ClinicFilterDTO clinicFilterDTO){
-		List<Doctor> res = new ArrayList<>();
-		List<Doctor> allDoctors = doctorRepository.findAll();
-		List<Care> allCares = careRepository.findAll();
-		List<Operation> allOperations = operationRepository.findAll();
-		
-		int noCare = 0;
-		
-		for(Doctor doctor : allDoctors) {
-			if(doctor.getClinic().getId() == clinicFilterDTO.getClinic().getId()) {
-				if(doctor.getCareType().getId() == clinicFilterDTO.getType().getId()){
-					for(Care care : allCares) {
-						if(care.getDoctor().getId() == doctor.getId()) {
-							if((care.getStartTime().isBefore(clinicFilterDTO.getTime()) && care.getEndTime().isBefore(clinicFilterDTO.getTime())) || (care.getStartTime().isAfter(clinicFilterDTO.getTime()) &&  care.getEndTime().isAfter(clinicFilterDTO.getTime()))) {
-								noCare = 1;
-							}
-						}
-					}
-					if(noCare == 1) {
-						for(Operation operation : allOperations) {
-							if(operation.getDoctor().getId() == doctor.getId()) {
-								if((operation.getStartTime().isBefore(clinicFilterDTO.getTime()) && operation.getEndTime().isBefore(clinicFilterDTO.getTime())) || (operation.getStartTime().isAfter(clinicFilterDTO.getTime()) &&  operation.getEndTime().isAfter(clinicFilterDTO.getTime()))) {
-									res.add(doctor);
-								}
-							}
-						}
-					}
-					
-				}
-			}
-			
-		}
-		return res;
-	}
-
+	/*
+	 * public List<Doctor> findFreeDoctors(ClinicFilterDTO clinicFilterDTO){
+	 * List<Doctor> res = new ArrayList<>(); List<Doctor> allDoctors =
+	 * doctorRepository.findAll(); List<Care> allCares = careRepository.findAll();
+	 * List<Operation> allOperations = operationRepository.findAll();
+	 * 
+	 * int noCare = 0;
+	 * 
+	 * for(Doctor doctor : allDoctors) { if(doctor.getClinic().getId() ==
+	 * clinicFilterDTO.getClinic().getId()) { if(doctor.getCareType().getId() ==
+	 * clinicFilterDTO.getType().getId()){ for(Care care : allCares) {
+	 * if(care.getDoctor().getId() == doctor.getId()) {
+	 * if((care.getStartTime().isBefore(clinicFilterDTO.getTime()) &&
+	 * care.getEndTime().isBefore(clinicFilterDTO.getTime())) ||
+	 * (care.getStartTime().isAfter(clinicFilterDTO.getTime()) &&
+	 * care.getEndTime().isAfter(clinicFilterDTO.getTime()))) { noCare = 1; } } }
+	 * if(noCare == 1) { for(Operation operation : allOperations) {
+	 * if(operation.getDoctor().getId() == doctor.getId()) {
+	 * if((operation.getStartTime().isBefore(clinicFilterDTO.getTime()) &&
+	 * operation.getEndTime().isBefore(clinicFilterDTO.getTime())) ||
+	 * (operation.getStartTime().isAfter(clinicFilterDTO.getTime()) &&
+	 * operation.getEndTime().isAfter(clinicFilterDTO.getTime()))) {
+	 * res.add(doctor); } } } }
+	 * 
+	 * } }
+	 * 
+	 * } return res; }
+	 */
 	public List<Doctor> findAllByClinic(Clinic clinic) {
 		List<Doctor> result = new ArrayList<Doctor>();
 		for (Doctor doc  : this.findAll()) {

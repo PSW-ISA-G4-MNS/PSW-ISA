@@ -7,7 +7,7 @@ export default {
     data: function () {
         return {
           	care: {},
-		success: false
+		        success: false
 
         };
     },
@@ -59,13 +59,13 @@ export default {
 <template>
     
 
-  <tr v-if="!renderComponent">
+  <tr v-if="!success">
       <td id="time">{{care.startTime.toString().replace("T", " ")}}</td>
       <td id="doctor">{{ care.doctor.user.firstname }} {{ care.doctor.user.lastname}}</td>
       <td id="caretype">{{ care.careType.name}}</td>
       <td id="price">{{ care.price}}</td>
       <td id="reservate">
-              <button v-if="!success" v-on:click="reservate" style="background-color:green;color:white;height:40px;width:200px">
+              <button v-on:click="reservate" style="background-color:green;color:white;height:40px;width:200px">
               Reservate
               </button>
         </td>

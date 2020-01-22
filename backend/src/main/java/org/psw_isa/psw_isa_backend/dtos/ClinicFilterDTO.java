@@ -1,46 +1,39 @@
 package org.psw_isa.psw_isa_backend.dtos;
 
-import java.time.LocalDateTime;
 
+import java.time.LocalDate;
 import org.psw_isa.psw_isa_backend.models.CareType;
-import org.psw_isa.psw_isa_backend.models.Clinic;
 
 public class ClinicFilterDTO {
 
-	private LocalDateTime time;
-	private CareType type;
-	private Clinic clinic;
+	private LocalDate date;
+	private Long id;
 	
-	public LocalDateTime getTime() {
-		return time;
+	
+	
+	public Long getId() {
+		return id;
 	}
-	public void setTime(LocalDateTime time) {
-		this.time = time;
+	public void setId(Long id) {
+		this.id = id;
 	}
-	public CareType getType() {
-		return type;
+	public LocalDate getDate() {
+		return date;
 	}
-	public void setType(CareType type) {
-		this.type = type;
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 	
-	public Clinic getClinic() {
-		return clinic;
-	}
-	public void setClinic(Clinic clinic) {
-		this.clinic = clinic;
-	}
-	public ClinicFilterDTO(LocalDateTime time, CareType type) {
+
+	public ClinicFilterDTO(LocalDate date, CareType type) {
 		super();
-		this.time = time;
-		this.type = type;
+		this.date = date;
 	}
 	
-	public ClinicFilterDTO(LocalDateTime time, CareType type, Clinic clinic) {
+	public ClinicFilterDTO(LocalDate date, Long id) {
 		super();
-		this.time = time;
-		this.type = type;
-		this.clinic = clinic;
+		this.date = date;
+		this.id = id;
 	}
 	public ClinicFilterDTO() {
 

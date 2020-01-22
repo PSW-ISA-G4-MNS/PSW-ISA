@@ -18,7 +18,9 @@ export default class ClinicService
         return axios.get(API_URL + "/clinic/" + id);
     }
     
-    
+    static getWithFreeDoctors(id, date){
+        return axios.get(API_URL + "/clinic/getClinicsWithFreeDoctors/" + id + "/" + date);
+    }
     
     static addRoom(id, data) 
     {
