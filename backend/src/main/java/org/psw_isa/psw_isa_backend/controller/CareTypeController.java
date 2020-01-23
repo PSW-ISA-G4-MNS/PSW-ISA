@@ -43,7 +43,7 @@ public class CareTypeController {
 	public ResponseEntity<CareType> update(@PathVariable Long id, @RequestBody CareType careType) 
 	{
 		careType.setId(id);
-		return new ResponseEntity<CareType>(careTypeService.save(careType), HttpStatus.OK);
+		return new ResponseEntity<CareType>(careTypeService.update(careType), HttpStatus.OK);
 		
 	}
 

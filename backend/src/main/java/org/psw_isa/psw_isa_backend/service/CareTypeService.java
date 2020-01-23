@@ -23,6 +23,7 @@ public class CareTypeService {
 	}
 
 	public CareType save(CareType careType) {
+		careType.setId(null);
 		return careTypeRepository.save(careType);
 	}
 
