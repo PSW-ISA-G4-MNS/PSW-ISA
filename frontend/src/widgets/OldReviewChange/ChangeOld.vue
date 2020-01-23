@@ -1,5 +1,5 @@
 <script>
-import ReviewService from "./service";
+import OldReviewChangeService from "./service";
 import MedicineService from "../Medicine/service";
 import DiagnosisService from "../Diagnosis/service";
 
@@ -11,6 +11,7 @@ export default {
             data: {
 		},
 		Care:{},
+		oldReviewSelected:0,
 		allMedicines: [],
 		Prescription:{},
 		medicinesForPrescription:[],
@@ -19,7 +20,9 @@ export default {
 		idOfPrescription:0,
         };
     },
-    mounted: function() {
+	mounted:
+	
+	function() {
     	MedicineService.list().then(response => {
 		this.allMedicines = response.data; 
 	});
@@ -29,25 +32,36 @@ export default {
 //, citace samo id,  koji ce da se nalazi u Review
 //ovo se stavi >>>>>
 //this.data.careID=Review;
-		this.Prescription.medicines=this.medicinesForPrescription;
-		this.data.medicalRecordId=this.medicalRecordId;
-		this.data.careId=1;
+   
 
+		this.Prescription.medicines=this.medicinesForPrescription;
 		
+		
+
+		this.oldReviewSelected=localStorage.getItem('oldReviewSelected');
+
+		OldReviewChangeService .getOld(this.oldReviewSelected).then(response =>{
+			this.Care= response.data;
+			this.data.comment=response.data.comment;
+			this.data.careId=1;
+			this.Prescription.id=response.data.prescription.id;
+		});
+	
+
 		
     },
     methods: {
     	submit: function() 
 	{
-		ReviewService.submit(this.data).then(response => {
-			alert("Review is complete!");
+		 OldReviewChangeService.submit(this.data).then(response => {
+			alert("Review is changed!");
 
 		});
 	},
 
 		accept: function() 
 	{
-		ReviewService.accept(this.Prescription).then(response => {
+		 OldReviewChangeService.accept(this.Prescription).then(response => {
 			if (response.status == 200) {
 				console.log("nice");
 				this.data.prescriptionId=response.data;
@@ -80,7 +94,7 @@ export default {
 	<div v-if="!success"> 
 		
 		<p>
-		<input type="text" class="form-control" placeholder="Report" v-model="data.comment" />
+		<input type="text" class="form-control" placeholder="Report" v-model="this.Care.comment" />
 		</p>
 
 		<div class="dropdown">
@@ -92,15 +106,59 @@ export default {
 		    Select medicine
 		  </button>
 		</div>
-		<button type="button" @click="accept" style="background-color:green;color:white;height:40px;width:200px">Confirm  prescription</button>
+
+		<div>
+		<table v-if="this.Care.prescription.medicines.length!=0" style="float:left;">
+			<tr>
+				<th>Old Prescription</th>
+			</tr>
+
+			<tr>
+				<th v-for="item in this.Care.prescription.medicines"
+				:id="item"
+      			:key="item.medicine">
+
+				{{item.medicine}}
+
+				</th>
+
+
+				
+			</tr>
+		</table>
+
+
+		<table >
+			<tr>
+				<th>New Prescription</th>
+			</tr>
+
+			<tr>
+				<th v-for="item in this.medicinesForPrescription"
+				:id="item"
+      			:key="item.medicine">
+
+				{{item.medicine}}
+
+				</th>
+
+
+				
+			</tr>
+		</table>
+		</div>
+	
+	<button type="button" @click="accept" style="background-color:green;color:white;height:40px;width:200px">Confirm  prescription</button>
 		
+
+
 		<div class="dropdown">
 		  
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuDiagnosis">
 		    <a :key="diagnosisSingle.id" :id="diagnosisSingle.id" @click="selectDiagnosis(index)" v-for="(diagnosisSingle, index) in this.allDiagnosis" class="dropdown-item" href="#"> {{ diagnosisSingle.diagnosis}}</a>
 		  </div>
 		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuDiagnosisButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		    Select diagnosis
+		    {{this.Care.diagnosis.diagnosis}}
 		  </button>
 		</div>
 		
@@ -133,6 +191,14 @@ position:relative;
 	padding: 5px;
 }
 
+table,td,tr,th {
+   border: 1px solid black;
+  border-collapse: collapse;
 
+}
+td,th{
+  width: 150px;
+  height: 40px;
+}
 
 </style>

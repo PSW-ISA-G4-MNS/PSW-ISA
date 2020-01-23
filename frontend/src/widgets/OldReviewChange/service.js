@@ -27,7 +27,11 @@ export default class OldReviewChangeService
 
     static submit(x) 
     {
-        return axios.post(API_URL + "/care/review/", x);
+        return axios.post(API_URL + "/care/reviewOld/", x);
+    }
+
+    static getOld(x){
+        return axios.get(API_URL+ "/care/"+ x);
     }
 
     static change(x) 
@@ -39,6 +43,6 @@ export default class OldReviewChangeService
 
     static accept(x) 
     {
-        return axios.post(API_URL + "/prescription", x);
+        return axios.post(API_URL + "/prescription/changePrescription/", x);
     }
 }

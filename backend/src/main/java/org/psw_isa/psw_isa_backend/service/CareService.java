@@ -126,6 +126,9 @@ public class CareService {
 		return careRepository.updateCareReview(careDTO.getComment(),careDTO.getDiagnosisId(), careDTO.getPrescriptionId(),careDTO.getMedicalRecordId(), false,careDTO.getCareId());
 	}
 	
+	public int updateOldCareReview(CareDTO careDTO) {
+		return careRepository.updateOldCareReview(careDTO.getComment(),careDTO.getDiagnosisId(), careDTO.getPrescriptionId(),careDTO.getCareId());
+	}
 	
 	public ArrayList<Care> findAllOldCares(){
 		

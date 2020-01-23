@@ -13,13 +13,8 @@ export default {
     methods: {
     	change: function() 
 	{
-		OldReviewChangeService.change(this.request.id).then(response => {
-
-
-			if (response.status == 200) this.success = true;
-			else this.success = false;
-
-		});
+		localStorage.setItem('oldReviewSelected', this.oldCare.id);
+    window.location.href = "/frontend/#/changeoldReview";
   },
 
 	
@@ -42,7 +37,7 @@ export default {
     
     <tr>
       <td id="careId">{{this.oldCare.id}}</td>
-      <td id="date"> {{this.oldCare.startTime}}</td>
+      <td id="date"> {{this.oldCare.startTime.toString().replace("T", " ")}}</td>
       <td id="insurance">{{this.oldCare.patient.insuranceID}}</td>
       <td id="ime">{{ this.oldCare.patient.user.firstname }}</td>
       <td id="prezime">{{ this.oldCare.patient.user.lastname}}</td>
