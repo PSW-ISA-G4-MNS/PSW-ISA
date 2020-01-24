@@ -42,7 +42,7 @@ public class DiagnosisControler {
 	public ResponseEntity<Long> updateDiagnosis(@RequestBody Diagnosis diagnosis){
 		
 		
-		diagnosisService.updateDiagnosis(diagnosis);
+		diagnosisService.save(diagnosis);
 		
 		return new ResponseEntity<>(diagnosis.getId(),HttpStatus.OK);
 	}
