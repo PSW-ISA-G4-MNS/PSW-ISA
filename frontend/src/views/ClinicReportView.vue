@@ -6,12 +6,15 @@
 import MultiClinicReport from '../widgets/Clinic/multi-ClinicReport.vue';
 import MultiRoom from '../widgets/Room/multi-Room.vue';
 import RoomForm from '../widgets/Room/RoomForm.vue';
+import DoctorNew from '../widgets/Doctor/DoctorNew.vue';
+import MultiDoctor from '../widgets/Doctor/multi-ClinicDoctor.vue';
 
 export default {
     name: "ClinicReportView",
     data: function () {
             return {
-		data: {}
+		data: {},
+		addDoctor: false
 	    };
 	},
     mounted: function () 
@@ -21,12 +24,17 @@ export default {
         submit: function (event) 
         {
             
-        }
+        },
+	addDoctorClicked: function() {
+		this.addDoctor = ! this.addDoctor;
+	}
     },
     components: {
     	"multi-ClinicReport": MultiClinicReport,
 	"multi-Room": MultiRoom,
-	"RoomForm": RoomForm
+	"RoomForm": RoomForm,
+	"DoctorNew": DoctorNew,
+	"MultiDoctor": MultiDoctor
     }
 }
 </script>
@@ -39,6 +47,13 @@ export default {
 <multi-ClinicReport />
 
 <multi-Room />
+
+
+<button @click="addDoctorClicked">Add New Doctor</button>
+<DoctorNew v-if="this.addDoctor" />
+
+<MultiDoctor />
+
 </div>
 </template>
 
