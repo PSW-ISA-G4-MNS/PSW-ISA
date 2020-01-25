@@ -41,9 +41,14 @@ export default class DoctorService
     
     
     
-    static assignClinic(id, data) 
+    static submit(data) 
     {
-        return axios.post(API_URL + "/doctor/" + id + "/assignClinic", data);
+        return axios.post(API_URL + "/adminClinic/clinicDoctors/", data);
+    }
+    
+    static listForClinic() 
+    {
+        return axios.get(API_URL + "/adminClinic/clinicDoctors/");
     }
     
     
@@ -74,6 +79,6 @@ export default class DoctorService
 
     static delete(id) 
     {
-        return axios.delete(API_URL + "/doctor/" + id);
+        return axios.delete(API_URL + "/adminClinic/clinicDoctors/" + id);
     }
 }

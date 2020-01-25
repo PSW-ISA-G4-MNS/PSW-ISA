@@ -2,7 +2,7 @@
 import RegistrationFormService from "./service";
 
 export default {
-    name: "RegistrationForm",
+    name: "DoctorNew",
     data: function () {
         return {
             data: {
@@ -14,7 +14,7 @@ export default {
     	submit: function() 
 	{
 		RegistrationFormService.submit(this.data).then(response => {
-			if (response.status < 300) window.location.href = "/frontend/";
+			if (response.status < 300) this.$router.push("/");
 		});
 	}
     }
@@ -25,11 +25,7 @@ export default {
     <div class="form-RegistrationForm"> 
         <div class="success-box" ></div>
 		
-		<h2>Registration</h2>
-		
-		<p>
-		<input type="text" class="form-control" placeholder="Insurance ID" v-model="data.insuranceid" />
-		</p>
+		<h2>Doctor Registration</h2>
 		
 		<p>
 		<input type="text" class="form-control" placeholder="Firstname" v-model="data.firstname" />
@@ -61,9 +57,6 @@ export default {
 		
 
 		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Submit</button>
-		&nbsp;
-		&nbsp;
-		<a href="/frontend/#/login">If you already have account, click here to login</a>
 		
 	</div>
     

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.psw_isa.psw_isa_backend.models.Doctor;
+import org.psw_isa.psw_isa_backend.models.User;
 
 @RestController
 @RequestMapping(value = "adminClinic")
@@ -61,8 +62,8 @@ public class ClinicAdminControler {
 		return new ResponseEntity<>(doctors, HttpStatus.OK);
 	}
 	@PostMapping(value = "/clinicDoctors/")
-	public ResponseEntity<Doctor> addDoctor(Doctor doctor){
-		return new ResponseEntity<>(clinicAdminService.addDoctor(doctor), HttpStatus.OK);
+	public ResponseEntity<Doctor> addDoctor(@RequestBody User user){
+		return new ResponseEntity<>(clinicAdminService.addDoctor(user), HttpStatus.OK);
 	}
 	@DeleteMapping(value = "/clinicDoctors/{id}")
 	public ResponseEntity<Doctor> deleteDoctor(@PathVariable("id") Long id){

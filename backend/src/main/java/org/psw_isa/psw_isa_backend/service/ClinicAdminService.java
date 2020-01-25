@@ -11,7 +11,7 @@ import org.psw_isa.psw_isa_backend.repository.ClinicAdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.psw_isa.psw_isa_backend.models.Doctor;
-
+import org.psw_isa.psw_isa_backend.models.User;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,7 +23,9 @@ public class ClinicAdminService {
 	@Autowired
 	DoctorService doctorService;
 
-	
+	@Autowired
+	UserService userService;
+
 	@Autowired
 	CheckRoleService checkRoleService;
 
@@ -87,8 +89,9 @@ public class ClinicAdminService {
 		return doctorService.findAll().stream().filter(x -> x.getClinic() == getClinic()).collect(Collectors.toList());
 	}
 	
-	public Doctor addDoctor(Doctor doctor){
-		Doctor d = doctorService.findOneByid(doctor.getId());
+	public Doctor addDoctor(User user){
+		Doctor d = new Doctor();
+		d.setUser(userService.save(user));
 		d.setClinic(getClinic());
 		doctorService.save(d);
 		return d;
