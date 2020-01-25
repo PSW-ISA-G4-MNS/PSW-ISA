@@ -97,14 +97,28 @@ public class CareController {
 		return new ResponseEntity<>(careDTO.getCareId(),HttpStatus.OK);
 	}
 	
+	@PostMapping(value="/reviewOld", consumes = "application/json")
+	public ResponseEntity<Long> updateOldCareReview(@RequestBody CareDTO careDTO){
+		
+		careService.updateOldCareReview(careDTO);
+		return new ResponseEntity<>(careDTO.getCareId(),HttpStatus.OK);
+	}
 
 	
 	@GetMapping(value="/careForDoctor/{id}")
-	public ResponseEntity<ArrayList<Care>> findCareForDocktor(@PathVariable("id") String date){
+	public ResponseEntity<ArrayList<Care>> findCareForDoctor(@PathVariable("id") String date){
 		System.out.println("OVO JE DATUM"+date+"OOOO");
 		LocalDate dateReal=LocalDate.parse(date);
 		return new ResponseEntity<>(careService.findAllAssignedForDateForDoctor(dateReal), HttpStatus.OK);
 	}
 	
+	
+	@GetMapping(value="/oldReviews")
+	public ResponseEntity<ArrayList<Care>> findOldCareForDoctor(){
+		
+		
+		
+		return new ResponseEntity<>(careService.findAllOldCares(), HttpStatus.OK);
+	}
 
 }

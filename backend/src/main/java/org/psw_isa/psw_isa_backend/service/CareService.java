@@ -126,6 +126,36 @@ public class CareService {
 		return careRepository.updateCareReview(careDTO.getComment(),careDTO.getDiagnosisId(), careDTO.getPrescriptionId(),careDTO.getMedicalRecordId(), false,careDTO.getCareId());
 	}
 	
+	public int updateOldCareReview(CareDTO careDTO) {
+		return careRepository.updateOldCareReview(careDTO.getComment(),careDTO.getDiagnosisId(), careDTO.getPrescriptionId(),careDTO.getCareId());
+	}
+	
+	public ArrayList<Care> findAllOldCares(){
+		
+		List<Care> all = careRepository.findAll();
+		ArrayList<Care> assigned = new ArrayList<>();
+		
+		Long userID = checkRoleService.getUser().getId();
+		Long doctorID = null;
+		
+		for(Doctor doctor : doctorRepository.findAll()) {
+			if(doctor.getUser().getId() == userID) {
+				doctorID = doctor.getId();
+			}
+		}
+		
+		for(Care care : all) {
+			if(care.getDoctor().getClinic().getId() == doctorID) {
+				if(care.getComment()!="")
+					assigned.add(care);
+				}
+			
+				
+		}
+		
+		
+	return assigned;
+	}
 
 	
 	public ArrayList<Care> findAllAssignedForDateForDoctor(LocalDate date) {
