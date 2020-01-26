@@ -40,7 +40,7 @@ public class UpdateProfileController {
 		Long id = userService.findOneByemail(forChange).getId();
 		
 		
-		userService.updateUser(user.getFirstname(), user.getLastname(), user.getAddress(), user.getBirthday(), user.getMobilePhone(), id);
+		userService.updateUser(user.getFirstname(), user.getLastname(), user.getAddress(), user.getBirthday(), user.getMobilePhone(), user.getPassword(), id);
 		
 		
 		return new ResponseEntity<>(id, HttpStatus.OK);
