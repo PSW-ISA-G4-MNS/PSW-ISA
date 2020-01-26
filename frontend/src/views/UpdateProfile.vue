@@ -3,12 +3,16 @@
 
 // import widgets for this view here
 import WidgetUpdatePatient from "../widgets/Patient/WidgetUpdatePatient.vue"
+import WidgetUpdateUser from "../widgets/User/WidgetUpdateUser.vue"
+
 
 export default {
     name: "UpdateProfile",
     data: function () {
             return {
-		data: {}
+		data: {},
+		role: localStorage.getItem("role"),
+		user: localStorage.getItem("user_id")
 	    };
 	},
     mounted: function () 
@@ -21,15 +25,18 @@ export default {
         }
     },
     components: {
-    	"WidgetUpdatePatient": WidgetUpdatePatient
+    	WidgetUpdatePatient,
+	WidgetUpdateUser
     }
 }
 </script>
 
 <template>
-
-<WidgetUpdatePatient/>
-
+<div class="profile-update">
+<p>Update for user: {{ user.id }}</p>
+<WidgetUpdatePatient v-if="this.role == 'PATIENT'"/>
+<WidgetUpdateUser v-if="this.role == 'CLINIC_ADMINISTRATOR'" :user="this.user"/>
+</div>
 </template>
 
 <style scoped> 
