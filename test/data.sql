@@ -1,8 +1,8 @@
-insert into users ("address", "birthday", "email", "firstname", lastname, mobile_phone, password) VALUES ('A', '2019-10-10', 'admin@office.com', 'Stefan', 'Ilic', '+40255333', 'XXX');
-insert into users ("address", "birthday", "email", "firstname", lastname, mobile_phone, password) VALUES ('A', '2019-10-10', 'clinic_admin@office.com', 'Branko', 'Maric', '+40255333', 'XXX');
-insert into users ("address", "birthday", "email", "firstname", lastname, mobile_phone, password) VALUES ('A', '2019-10-10', 'doctor@office.com', 'Tamara', 'Ignjatovic', '+40255333', 'XXX');
-insert into users ("address", "birthday", "email", "firstname", lastname, mobile_phone, password) VALUES ('A', '2019-10-10', 'nurse@office.com', 'Bozica', 'Ruzic', '+40255333', 'XXX');
-insert into users ("address", "birthday", "email", "firstname", lastname, mobile_phone, password) VALUES ('A', '2019-10-10', 'patient@office.com', 'Aleksandar', 'Ivanov', '+40255333', 'XXX');
+insert into users ("address", "birthday", "email", "firstname", lastname, mobile_phone, password, number_of_logins) VALUES ('A', '2019-10-10', 'admin@office.com', 'Stefan', 'Ilic', '+40255333', 'XXX', 0);
+insert into users ("address", "birthday", "email", "firstname", lastname, mobile_phone, password, number_of_logins) VALUES ('A', '2019-10-10', 'clinic_admin@office.com', 'Branko', 'Maric', '+40255333', 'XXX', 0);
+insert into users ("address", "birthday", "email", "firstname", lastname, mobile_phone, password, number_of_logins) VALUES ('A', '2019-10-10', 'doctor@office.com', 'Tamara', 'Ignjatovic', '+40255333', 'XXX', 0);
+insert into users ("address", "birthday", "email", "firstname", lastname, mobile_phone, password, number_of_logins) VALUES ('A', '2019-10-10', 'nurse@office.com', 'Bozica', 'Ruzic', '+40255333', 'XXX', 0);
+insert into users ("address", "birthday", "email", "firstname", lastname, mobile_phone, password, number_of_logins) VALUES ('A', '2019-10-10', 'patient@office.com', 'Aleksandar', 'Ivanov', '+40255333', 'XXX', 0);
 
 insert into care_type ("id", "name") values (100, 'Medicinski radnik');
 insert into clinic ("address", "description", "location_lat", "location_lon", "name") values ('Obradoviceva 64', 'Studentska klinika', 21.0, 15.20, 'Studentska klinika');

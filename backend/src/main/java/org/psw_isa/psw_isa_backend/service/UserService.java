@@ -80,6 +80,8 @@ public class UserService {
 					HttpSession session = attr.getRequest().getSession(true); 
 					
 					session.setAttribute("user", user.getEmail());
+					user.increaseNumberOfLogins();
+					save(user);
 					return 1;
 
 				}
@@ -92,7 +94,8 @@ public class UserService {
 							HttpSession session = attr.getRequest().getSession(true); 
 							
 							session.setAttribute("user", user.getEmail());
-							
+							user.increaseNumberOfLogins();
+							save(user);
 							return 1;
 						} else {
 							
