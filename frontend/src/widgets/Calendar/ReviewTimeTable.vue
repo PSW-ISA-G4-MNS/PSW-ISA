@@ -21,9 +21,9 @@ export default {
     },
     
     methods: {
-    	submit: function() 
+    	start: function() 
 	{
-		
+		window.location.href = "/frontend/#/review";
 	}
     }
 }
@@ -37,7 +37,7 @@ export default {
       <td id="obaveza">{{care.patient.id}} {{care.patient.user.firstname}} {{care.patient.user.lastname}}</td>
       
       <td id="dugme">
-              <button   style="background-color:green;color:white;height:40px;width:200px">
+              <button @click="start"   style="background-color:green;color:white;height:40px;width:200px">
             Zapocni pregled
               </button>
               
