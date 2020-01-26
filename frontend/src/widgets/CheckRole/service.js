@@ -12,4 +12,8 @@ export default class CheckRoleService
     {
         return axios.get(API_URL + "/checkRole/");
     }
+    static info() 
+    {
+        return axios.get(API_URL + "/checkRole/info");
+    }
 }
