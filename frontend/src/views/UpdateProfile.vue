@@ -4,6 +4,7 @@
 // import widgets for this view here
 import WidgetUpdatePatient from "../widgets/Patient/WidgetUpdatePatient.vue"
 import WidgetUpdateUser from "../widgets/User/WidgetUpdateUser.vue"
+import WidgetUpdatePassword from "../widgets/User/WidgetUpdatePassword.vue"
 
 
 export default {
@@ -26,7 +27,8 @@ export default {
     },
     components: {
     	WidgetUpdatePatient,
-	WidgetUpdateUser
+	WidgetUpdateUser,
+	WidgetUpdatePassword
     }
 }
 </script>
@@ -36,6 +38,7 @@ export default {
 <p>Update for user: {{ user.id }}</p>
 <WidgetUpdatePatient v-if="this.role == 'PATIENT'"/>
 <WidgetUpdateUser v-if="this.role == 'CLINIC_ADMINISTRATOR'" :user="this.user"/>
+<WidgetUpdatePassword v-if="this.role != 'PATIENT'" :user="this.user" />
 </div>
 </template>
 
