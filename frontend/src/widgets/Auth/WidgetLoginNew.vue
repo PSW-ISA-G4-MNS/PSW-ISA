@@ -29,7 +29,11 @@ export default {
 						console.log("User info")
 						console.log(x.data);
 						localStorage.setItem("user_id", x.data.id);
-						this.$router.push("/");
+						if (x.data.numberOfLogins <= 1 && response.data != "PATIENT") 
+						{
+							this.$router.push("/updateUser");
+						}
+						else this.$router.push("/");
 					});
 
 

@@ -38,14 +38,18 @@ public class User {
 	
 	
 	private LocalDate birthday; 
+
+	private Integer numberOfLogins;
 	
 
 	public User() 
 	{
 	}
-	public User(String _firstname, String _lastname, String _mobilePhone, String _email, String _address, LocalDate _birthday, String password) {
+	public User(String _firstname, String _lastname, String _mobilePhone, String _email, String _address, LocalDate _birthday, String password, Integer numberOfLogins) {
 		super();
-		 
+		
+		this.numberOfLogins = numberOfLogins;
+
 		this.firstname = _firstname;
 		 
 		this.lastname = _lastname;
@@ -148,6 +152,21 @@ public class User {
 	public void setBirthday(LocalDate newValue) 
 	{
 		this.birthday = newValue;
+	}
+
+	public void setNumberOfLogins(Integer val) 
+	{
+		this.numberOfLogins = val;
+	}
+
+	public Integer getNumberOfLogins() 
+	{
+		return numberOfLogins;
+	}
+
+	public void increaseNumberOfLogins() 
+	{
+		numberOfLogins++;
 	}
 	
 }
