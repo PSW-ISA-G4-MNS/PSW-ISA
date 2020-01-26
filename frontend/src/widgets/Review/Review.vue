@@ -75,7 +75,14 @@ export default {
 </script>
 
 <template>
-    <div class="form"> 
+
+<div class="form">
+
+
+
+
+
+    <div > 
         <div class="success-box" v-if="success">Review Started</div>
 	<div v-if="!success"> 
 		
@@ -88,28 +95,49 @@ export default {
 		  <div class="dropdown-menu" aria-labelledby="dropdownMedicine">
 		    <a :key="medicine.id" :id="medicine.id" @click="selectMedicine(index)" v-for="(medicine, index) in this.allMedicines" class="dropdown-item" href="#">{{ medicine.medicine }}</a>
 		  </div>
-		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuMedicineButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		  <button style="height:40px;width:180px" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuMedicineButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    Select medicine
 		  </button>
 		</div>
-		<button type="button" @click="accept" style="background-color:green;color:white;height:40px;width:200px">Confirm  prescription</button>
+
+		<table >
+			<tr>
+				<th>Prescription</th>
+			</tr>
+
+			<tr  v-for="item in this.medicinesForPrescription"
+				:id="item"
+      			:key="item.medicine">
+				<th>
+
+				{{item.medicine}}
+
+				</th>
+
+
+				
+			</tr>
+		</table>
+
+		<button type="button" @click="accept" style="background-color:green;color:white;height:40px;width:180px">Confirm  prescription</button>
 		
 		<div class="dropdown">
 		  
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuDiagnosis">
 		    <a :key="diagnosisSingle.id" :id="diagnosisSingle.id" @click="selectDiagnosis(index)" v-for="(diagnosisSingle, index) in this.allDiagnosis" class="dropdown-item" href="#"> {{ diagnosisSingle.diagnosis}}</a>
 		  </div>
-		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuDiagnosisButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		  <button style="height:40px;width:180px" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuDiagnosisButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    Select diagnosis
 		  </button>
 		</div>
 		
 	
 		
-
+		
 		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Coplete the review</button>
 	</div>
     </div>
+</div>
 
 </template>
 
@@ -118,13 +146,14 @@ export default {
 
 .form {
 position:relative;
-    top:10%;
-    left:20%;
+    top:0%;
+    left:10%;
 	padding: 40px; 
-	margin: 40px;
+	margin: 20px;
 	text-align: center;
-	width: 60%;
+	width: 50%;
 }
+
 
 .success-box 
 {
@@ -133,6 +162,15 @@ position:relative;
 	padding: 5px;
 }
 
+table,td,tr,th {
+   border: 1px solid black;
+  border-collapse: collapse;
+
+}
+td,th{
+  width: 150px;
+  height: 40px;
+}
 
 
 </style>

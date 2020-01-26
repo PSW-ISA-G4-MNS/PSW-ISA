@@ -102,7 +102,7 @@ export default {
 		  <div class="dropdown-menu" aria-labelledby="dropdownMedicine">
 		    <a :key="medicine.id" :id="medicine.id" @click="selectMedicine(index)" v-for="(medicine, index) in this.allMedicines" class="dropdown-item" href="#">{{ medicine.medicine }}</a>
 		  </div>
-		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuMedicineButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		  <button style="height:40px;width:180px" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuMedicineButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    Select medicine
 		  </button>
 		</div>
@@ -133,10 +133,10 @@ export default {
 				<th>New Prescription</th>
 			</tr>
 
-			<tr>
-				<th v-for="item in this.medicinesForPrescription"
+			<tr v-for="item in this.medicinesForPrescription"
 				:id="item"
       			:key="item.medicine">
+				<th >
 
 				{{item.medicine}}
 
@@ -148,7 +148,7 @@ export default {
 		</table>
 		</div>
 	
-	<button type="button" @click="accept" style="background-color:green;color:white;height:40px;width:200px">Confirm  prescription</button>
+	<button type="button" @click="accept" style="background-color:green;color:white;height:40px;width:180px">Confirm  prescription</button>
 		
 
 
@@ -157,7 +157,7 @@ export default {
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuDiagnosis">
 		    <a :key="diagnosisSingle.id" :id="diagnosisSingle.id" @click="selectDiagnosis(index)" v-for="(diagnosisSingle, index) in this.allDiagnosis" class="dropdown-item" href="#"> {{ diagnosisSingle.diagnosis}}</a>
 		  </div>
-		  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuDiagnosisButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		  <button style="height:40px;width:180px" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuDiagnosisButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    {{this.Care.diagnosis.diagnosis}}
 		  </button>
 		</div>

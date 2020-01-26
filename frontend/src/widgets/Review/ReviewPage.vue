@@ -48,13 +48,13 @@ export default {
 </script>
 
 <template>
-    <div class="form" > 
+    <div> 
 		
 		<PatientInformation style="float:left;"
 		
 		:medicalRecord="this.medicalRecordObj"/>
 		
-		 <Review
+		 <Review style="float:left;"
 		 :id="medicalRecordObj.id"
 		 :key="medicalRecordObj.id"
 		 :medicalRecordId="this.medicalRecordObj.id"
