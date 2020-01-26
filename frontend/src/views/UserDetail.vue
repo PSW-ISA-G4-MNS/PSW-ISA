@@ -14,7 +14,8 @@ export default {
     props: ["user"],
     data: function () {
             return {
-		data: {}
+		data: {},
+		user: localStorage.getItem("user_id")
 	    };
 	},
     mounted: function () 
@@ -22,16 +23,6 @@ export default {
     	UserService.get(this.user).then(response => this.data = response.data)
     },
     methods: {
-        itemDelete: function (event) 
-        {
-            UserService.delete(this.user).then(response => 
-            {
-                if (response.status < 400) 
-                {
-                    alert("User item is deleted");
-                }
-            })
-        }
     },
     components: {
         "WidgetUserSingle": WidgetUserSingle,

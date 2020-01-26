@@ -37,7 +37,7 @@ export default {
 <div class="profile-update">
 <p>Update for user: {{ user.id }}</p>
 <WidgetUpdatePatient v-if="this.role == 'PATIENT'"/>
-<WidgetUpdateUser v-if="this.role == 'CLINIC_ADMINISTRATOR'" :user="this.user"/>
+<WidgetUpdateUser v-if="this.role != 'PATIENT' && this.role != 'NOT_LOGGED'" :user="this.user"/>
 <WidgetUpdatePassword v-if="this.role != 'PATIENT'" :user="this.user" />
 </div>
 </template>
