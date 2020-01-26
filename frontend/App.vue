@@ -51,10 +51,15 @@ export default {
         <router-link v-if="data.role != 'NOT_LOGGED'" to='/profile'>My Profile</router-link>
         <router-link v-if="data.role != 'NOT_LOGGED'" to='/updateUser'>Update profile</router-link>
         <router-link v-if="data.role == 'ADMINISTRATOR'" to='/clinic-new'>Create Clinic</router-link>
+        <router-link v-if="data.role == 'DOCTOR'" to='/doctor/myPatients'>My Patients</router-link>
+        <router-link v-if="data.role == 'DOCTOR'" to='/schedule/care'>Schedule Care</router-link>
+        <router-link v-if="data.role == 'DOCTOR'" to='/schedule/operation'>Schedule Operation</router-link>
+        <router-link v-if="data.role == 'DOCTOR' || data.role == 'CLINIC_ADMINISTRATOR'" to='/vrm'>Vacation Requests</router-link>
         <router-link v-if="data.role != 'NOT_LOGGED'" to='/clinics'>Show all clinics</router-link>
         <router-link v-if="data.role == 'CLINIC_ADMINISTRATOR'" to='/createCare'>Add new care time</router-link>
         <router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/reports'>My Clinic Reports</router-link>
         <router-link v-if="data.role != 'NOT_LOGGED'" to='/logout'>Log out</router-link>
+
 	</div>
 	
 	<p class="my-2 my-lg-0" v-if="data.role != 'NOT_LOGGED'">Logged as: {{ data.user }}</p>

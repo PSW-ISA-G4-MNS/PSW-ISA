@@ -12,7 +12,11 @@ import LogOut from './src/views/Logout.vue';
 import RoomEditView from './src/views/RoomEditView.vue';
 import CareTypeList from './src/views/CareTypeList.vue';
 import UpdateProfile from './src/views/UpdateProfile.vue';
-
+import DoctorPatients from "./src/views/DoctorPatients.vue"
+import ScheduleCare from "./src/views/ScheduleCare.vue";
+import ScheduleOperation from "./src/views/ScheduleOperation.vue";
+import VacationRequest from "./src/views/VacationRequest.vue";
+import VacationRequestList from "./src/views/VacationRequestList.vue";
 
 import ReviewView from './src/views/ReviewView.vue';
 import DiagnosisAdd from './src/views/DiagnosisAdd.vue';
@@ -31,7 +35,12 @@ const routes = [
     { path: '/createCare', component: CareFormView},
     { path: '/logout', component: LogOut},
     { path: '/reports', component: ClinicReportView},
+    { path: '/doctor/myPatients', component: DoctorPatients},
     { path: '/careTypes', component: CareTypeList},
+    { path: '/schedule/care', component: ScheduleCare},
+    { path: '/schedule/operation', component: ScheduleOperation},
+    { path: '/vrm', component: VacationRequestList},
+    { path: '/vrm/create', component: VacationRequest},
     { path: '/roomEdit/:room', component: RoomEditView, props: true},
    
 ];
