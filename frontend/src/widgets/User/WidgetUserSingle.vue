@@ -22,9 +22,6 @@ export default {
 
 <div  >
   <div >
-    {{ data.username }}
-  </div>
-  <div >
     <h5 >{{ data.firstname }} {{ data.lastname }}</h5>
     <p >{{ data.email}}</p>
     <p >{{ data.address}}</p>
