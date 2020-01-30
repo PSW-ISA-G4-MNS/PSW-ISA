@@ -13,15 +13,34 @@ export default {
     },
     data: function () {
         return {
-            items: []
+            items: [],
+            datum:{},
+            doctorsForOperation:{},
+            pickedDoctors:[]
         }
     },
     mounted: function () 
     {
         ScheduleOperationService.list().then(response => this.items = response.data);
+
+         	ScheduleOperationService.doctors().then(response => {
+		this.doctorsForOperation = response.data; 
+	});
     },
     components: {
     	"ScheduleOperationSingle": ScheduleOperationSingle
+    },
+
+    methods:{
+
+    	selectDoctor: function(index) {
+  
+    $("#dropdownMenuDoctorButton").html(this.doctorsForOperation[index].user.firstname +" "+ this.doctorsForOperation[index].user.lastname);
+		this.pickedDoctors.push(this.doctorsForOperation[index]);
+		
+    
+      }
+    
     }
 }
 </script>
@@ -30,24 +49,57 @@ export default {
 <template>
 
 
-<div>
-<h1>
-    Predefined cares for {{items[0].doctor.clinic.name}}
-</h1>
-  <table >
+<div >
+
+<h2>
+  Pick doctors and reservate
+</h2>
+
+    <div class="dropdown">
+		  
+		  <div class="dropdown-menu" aria-labelledby="dropdownMenuDiagnosis">
+		    <a :key="doctor.id" :id="doctor.id" @click="selectDoctor(index)" v-for="(doctor, index) in this.doctorsForOperation" class="dropdown-item" href="#">{{doctor.user.firstname}} {{doctor.user.firstname}}</a>
+		  </div>
+		  <button style="height:40px;width:180px" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuDoctorButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    Select Doctors
+		  </button>
+		</div>
+
+   <table >
+			<tr>
+				<th>Doctors</th>
+			</tr>
+
+			<tr v-for="item in this.pickedDoctors"
+				:id="item"
+      	:key="item.id">
+				<td >
+
+				{{item.user.firstname}} {{item.user.lastname}}
+
+				</td>
+
+
+				
+			</tr>
+		</table>
+
+  <table class='form'  >
     <tr>
-        <th>OR id</th>
+        <th>Patient id</th>
         <th>Patient Firstname </th>
         <th>Patient LastName </th>
-        <th>OR time </th>
+        <th>Planned OR time </th>
+        <th>New OR time </th>
         <th></th>
     </tr>
     
-      <WidgetCareSingle 
-      	v-for="item in items.filter(filter)"
+      <ScheduleOperationSingle
+      	v-for="item in items"
       	:id="item.id"
       	:key="item.id"
         :operationRequest="item"
+       
           />
       
     
@@ -59,6 +111,16 @@ export default {
 
 
 <style scoped>
+
+.form {
+position:relative;
+    top:10%;
+    left:10%;
+	padding: 40px; 
+	margin: 40px;
+	text-align: center;
+	width: 80%;
+}
 
 body {
   font-family: Helvetica Neue, Arial, sans-serif;
@@ -83,9 +145,7 @@ th {
   user-select: none;
 }
 
-td {
-  background-color: #49bcf6;
-}
+
 
 th, td {
   min-width: 120px;

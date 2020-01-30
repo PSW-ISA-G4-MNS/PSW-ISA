@@ -3,11 +3,12 @@ import ScheduleCareService from "./service";
 
 export default {
 	name: "ScheduleOperationSingle",
-	props: ["operationRequest"],
+	props: ["operationRequest","newDate"],
     data: function () {
         return {
           	care: {},
-		        success: false
+            success: false,
+            
 
         };
     },
@@ -15,7 +16,7 @@ export default {
     	reservate: function() 
 	{
 		ScheduleOperationService.reservate(this.operationRequest.id).then(response => {
-
+      
 		});
   
 
@@ -23,13 +24,14 @@ export default {
 		decline: function() 
 	{
 	}
-	
+  
+  
 
 	},
 	
 	mounted: function () 
     {
-     
+    
     }
 }
 </script>
@@ -38,15 +40,20 @@ export default {
     
 
   <tr >
-      <td id="id">{{operationRequest.id}}</td>
+      <td id="id">{{operationRequest.patient.user.id}}</td>
       <td id="firstname">{{operationRequest.patient.user.firstname}}</td>
       <td id="lastname">{{operationRequest.patient.user.lastname}}</td>
-      <td id="time">{{operationRequest.startTime.toString().replace("T", " ")}}</td>
+      <td id="time" v-if="operationRequest.startTime!=null">{{operationRequest.startTime.toString().replace("T", " ")}}</td>
+      <td id="time" v-else>{{"No time"}}</td>
+      <td id="realTime" v-if="newDate!=null">{{newDate}}</td>
+      
       <td id="reservate">
               <button v-on:click="reservate" style="background-color:green;color:white;height:40px;width:200px">
               Reservate
               </button>
         </td>
+
+      
   </tr>
   
 </template>
