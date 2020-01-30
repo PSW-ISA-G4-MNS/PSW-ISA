@@ -6,10 +6,15 @@ import Profile from './src/views/Profile.vue';
 import NewClinicView from './src/views/NewClinic.vue';
 import CareList from './src/views/CareList.vue';
 import ClinicList from './src/views/ClinicList.vue';
+
 import ClinicDoctorsList from './src/views/ClinicDoctorsList.vue';
+
+import ClinicReportView from './src/views/ClinicReportView.vue';
+
 import CareFormView from './src/views/CareFormView.vue';
 import LogOut from './src/views/Logout.vue';
-
+import RoomEditView from './src/views/RoomEditView.vue';
+import CareTypeList from './src/views/CareTypeList.vue';
 import UpdateProfile from './src/views/UpdateProfile.vue';
 
 
@@ -29,8 +34,15 @@ const routes = [
     { path: '/clinics', component: ClinicList},
     { path: '/createCare', component: CareFormView},
     { path: '/logout', component: LogOut},
+
     { path: '/ClinicDoctorsList', component: ClinicDoctorsList},
     
+
+    { path: '/reports', component: ClinicReportView},
+    { path: '/careTypes', component: CareTypeList},
+    { path: '/roomEdit/:room', component: RoomEditView, props: true},
+   
+
 ];
 
 export default routes;

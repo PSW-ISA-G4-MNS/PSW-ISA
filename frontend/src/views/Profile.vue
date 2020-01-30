@@ -9,7 +9,9 @@ export default {
     name: "Profile",
     data: function () {
             return {
-		data: {}
+		data: {},
+		role: localStorage.getItem("role"),
+		user: localStorage.getItem("user_id")
 	    };
 	},
     mounted: function () 
@@ -22,7 +24,8 @@ export default {
         }
     },
     components: {
-    	"WidgetPatientSingle": WidgetPatientSingle
+    	WidgetPatientSingle,
+	WidgetUserSingle
     }
 }
 </script>
@@ -32,7 +35,8 @@ export default {
 <div>
 
 <p class="p">
-<WidgetPatientSingle/>
+<WidgetPatientSingle v-if="this.role == 'PATIENT'"/>
+<WidgetUserSingle v-else :user="this.user" />
 </p>
 </div>
 </template>

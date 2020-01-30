@@ -2,7 +2,9 @@ package org.psw_isa.psw_isa_backend.controller;
 
 import org.psw_isa.psw_isa_backend.service.CareService;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.psw_isa.psw_isa_backend.models.Care;
@@ -57,6 +59,7 @@ public class CareController {
 		Care care = careService.save(careDTO);
 		return new ResponseEntity<>(care.getId(),HttpStatus.OK);
 	}
+
 	
 
 	@PostMapping(value="/reservate/{id}")
@@ -88,12 +91,34 @@ public class CareController {
 	}
 	
 	@PostMapping(value="/review", consumes = "application/json")
-	public ResponseEntity<Long> saveCareReview(@RequestBody CareDTO careDTO){
+	public ResponseEntity<Long> updateCareReview(@RequestBody CareDTO careDTO){
 		
 		careService.updateCareReview(careDTO);
 		return new ResponseEntity<>(careDTO.getCareId(),HttpStatus.OK);
 	}
 	
+	@PostMapping(value="/reviewOld", consumes = "application/json")
+	public ResponseEntity<Long> updateOldCareReview(@RequestBody CareDTO careDTO){
+		
+		careService.updateOldCareReview(careDTO);
+		return new ResponseEntity<>(careDTO.getCareId(),HttpStatus.OK);
+	}
 
 	
+	@GetMapping(value="/careForDoctor/{id}")
+	public ResponseEntity<ArrayList<Care>> findCareForDoctor(@PathVariable("id") String date){
+		System.out.println("OVO JE DATUM"+date+"OOOO");
+		LocalDate dateReal=LocalDate.parse(date);
+		return new ResponseEntity<>(careService.findAllAssignedForDateForDoctor(dateReal), HttpStatus.OK);
+	}
+	
+	
+	@GetMapping(value="/oldReviews")
+	public ResponseEntity<ArrayList<Care>> findOldCareForDoctor(){
+		
+		
+		
+		return new ResponseEntity<>(careService.findAllOldCares(), HttpStatus.OK);
+	}
+
 }

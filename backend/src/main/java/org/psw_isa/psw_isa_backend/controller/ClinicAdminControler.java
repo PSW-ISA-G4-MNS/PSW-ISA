@@ -12,9 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.psw_isa.psw_isa_backend.models.Doctor;
+import org.psw_isa.psw_isa_backend.models.User;
 
 @RestController
 @RequestMapping(value = "adminClinic")
@@ -52,5 +55,19 @@ public class ClinicAdminControler {
 		
 	}
 	
+	@GetMapping(value = "/clinicDoctors")
+	public ResponseEntity<List<Doctor>> getClinicDoctors(){
+		List<Doctor> doctors = clinicAdminService.getDoctors();
+		
+		return new ResponseEntity<>(doctors, HttpStatus.OK);
+	}
+	@PostMapping(value = "/clinicDoctors/")
+	public ResponseEntity<Doctor> addDoctor(@RequestBody User user){
+		return new ResponseEntity<>(clinicAdminService.addDoctor(user), HttpStatus.OK);
+	}
+	@DeleteMapping(value = "/clinicDoctors/{id}")
+	public ResponseEntity<Doctor> deleteDoctor(@PathVariable("id") Long id){
+		return new ResponseEntity<>(clinicAdminService.deleteDoctor(id), HttpStatus.OK);
+	}
 	
 }

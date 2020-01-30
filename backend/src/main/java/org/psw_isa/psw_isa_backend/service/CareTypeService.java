@@ -14,11 +14,27 @@ public class CareTypeService {
 	CareTypeRepository careTypeRepository;
 	
 	
-	public List<CareType> getAll(){
+	public List<CareType> findAll(){
 		return careTypeRepository.findAll();
 	}
 	
 	public CareType findOneByid(Long id) {
 		return careTypeRepository.findOneByid(id);
 	}
+
+	public CareType save(CareType careType) {
+		careType.setId(null);
+		return careTypeRepository.save(careType);
+	}
+
+	public CareType update(CareType careType) {
+		return careTypeRepository.save(careType);
+	}
+
+	public Long delete(Long id) 
+	{
+		careTypeRepository.delete(findOneByid(id));
+		return id; 
+	}
+
 }

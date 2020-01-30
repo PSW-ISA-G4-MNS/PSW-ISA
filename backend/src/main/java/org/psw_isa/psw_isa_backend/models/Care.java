@@ -42,6 +42,8 @@ public class Care {
 	private Double price;
 
 	private String comment;
+	
+	private Long medicalRecordId;
 
 	@OneToOne
 	private Diagnosis diagnosis;
@@ -169,6 +171,14 @@ public class Care {
 
 	public void setApproved(boolean approved) {
 		this.approved = approved;
+	}
+
+	public Long getMedicalRecordId() {
+		return medicalRecordId;
+	}
+
+	public void setMedicalRecordId(Long medicalRecordId) {
+		this.medicalRecordId = medicalRecordId;
 	}
 	
 }

@@ -47,8 +47,8 @@ public class UserService {
 		return userRepository.findOneByid(id);	
 	}
 
-	public int updateUser(String firstname, String lastname, String address, LocalDate birthday, String mobile_phone, Long id){
-		return userRepository.updateUser(firstname, lastname, address, birthday, mobile_phone, id);
+	public int updateUser(String firstname, String lastname, String address, LocalDate birthday, String mobile_phone, String password, Long id){
+		return userRepository.updateUser(firstname, lastname, address, birthday, mobile_phone, password, id);
 	}
 	
 	public User save(User user) {
@@ -80,6 +80,8 @@ public class UserService {
 					HttpSession session = attr.getRequest().getSession(true); 
 					
 					session.setAttribute("user", user.getEmail());
+					user.increaseNumberOfLogins();
+					save(user);
 					return 1;
 
 				}
@@ -92,7 +94,8 @@ public class UserService {
 							HttpSession session = attr.getRequest().getSession(true); 
 							
 							session.setAttribute("user", user.getEmail());
-							
+							user.increaseNumberOfLogins();
+							save(user);
 							return 1;
 						} else {
 							

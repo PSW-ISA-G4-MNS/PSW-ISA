@@ -140,4 +140,8 @@ public class DoctorService {
 		return result;
 	}
 
+	public void save(Doctor doctor) {
+		doctorRepository.save(doctor);
+	}
+
 }

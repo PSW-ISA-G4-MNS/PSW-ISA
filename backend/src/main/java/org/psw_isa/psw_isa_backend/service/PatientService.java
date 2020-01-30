@@ -50,6 +50,8 @@ public class PatientService {
 		return patientRepository.save(patient);
 	}
 	
+	
+	
 	public Patient getBySession() {
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes(); 
 		HttpSession session = attr.getRequest().getSession(true); 

@@ -26,4 +26,5 @@ public class DiagnosisService {
 	public Diagnosis findOneByid(Long id) {
 		return diagnosisRepository.findOneByid(id);
 	}
+	
 }
