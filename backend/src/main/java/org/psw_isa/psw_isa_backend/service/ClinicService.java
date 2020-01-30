@@ -157,6 +157,8 @@ public class ClinicService {
 		return res;
 	}
 	
+	
+	
 	public List<Care> findCaresForClinic(Clinic clinic) {
 		List<Care> cares = new ArrayList<Care>();
 		for (Care care : careService.findAll()) {

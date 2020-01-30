@@ -1,5 +1,6 @@
 package org.psw_isa.psw_isa_backend.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,6 +42,64 @@ public class DoctorService {
 	public Doctor findOneByid(Long id) {
 		return doctorRepository.findOneByid(id);
 	}
+	
+	
+	
+	public List<Doctor> listFreeDoctorsForClinic(Long clinicID, Long careTypeID, String date){
+		List<Doctor> res = new ArrayList<>();
+		List<Care> allCares = careRepository.findAll();
+		List<Operation> allOperations = operationRepository.findAll();
+		List<Doctor> allDoctors = doctorRepository.findAll(); 
+		List<Care> doctorsCaresForDate = new ArrayList<>();
+		List<Operation> doctorsOperationsForDate = new ArrayList<>();
+		LocalDate wantedDate = LocalDate.parse(date);
+		LocalDate startTime = null;
+		
+		
+		
+
+		for(Doctor doctor : allDoctors) {
+			doctorsCaresForDate.clear();
+			doctorsOperationsForDate.clear();
+			if(doctor.getClinic().getId() == clinicID) {
+				if(doctor.getCareType().getId() == careTypeID) {
+					for(Care care : allCares) {	
+						if(care.getDoctor().getId() == doctor.getId()) {
+							startTime = care.getStartTime().toLocalDate();
+							if((care.getPatient() != null) && (startTime.isEqual(wantedDate))) {
+								System.out.println("nasao za taj dan");
+								doctorsCaresForDate.add(care);
+							}
+						}
+					}
+					for(Operation operation : allOperations) {
+						if(operation.getDoctor().getId() == doctor.getId()) {
+							startTime = operation.getStartTime().toLocalDate();
+							if(startTime.isEqual(wantedDate)) {
+								doctorsOperationsForDate.add(operation);
+							}
+						}
+					}
+				}
+				
+				if(doctorsCaresForDate.size() + doctorsOperationsForDate.size() < 2) {
+					System.out.println("nasao da je manje od dva : " + doctorsCaresForDate.size());
+					if(!res.contains(doctor)) {
+						res.add(doctor);
+					}
+				}
+			}
+			
+			
+			
+			
+		}
+		
+		System.out.println("broj slobodnih doktora u klinici: " + res.size());
+		
+		return res;
+	}
+	
 	
 
 	/*

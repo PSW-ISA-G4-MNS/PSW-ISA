@@ -7,6 +7,7 @@ import org.psw_isa.psw_isa_backend.dtos.ClinicFilterDTO;
 import org.psw_isa.psw_isa_backend.dtos.RegistrationRequestDTO;
 import org.psw_isa.psw_isa_backend.dtos.ClinicReportDTO;
 import org.psw_isa.psw_isa_backend.models.Clinic;
+import org.psw_isa.psw_isa_backend.models.Doctor;
 import org.psw_isa.psw_isa_backend.models.Patient;
 import org.psw_isa.psw_isa_backend.models.RegistrationRequest;
 import org.psw_isa.psw_isa_backend.service.ClinicService;
@@ -80,6 +81,8 @@ public class ClinicControler {
 	  
 	  return new ResponseEntity<>(clinicService.findClinicsWithFreeDoctors(id, date), HttpStatus.OK);
 	  }
+	  
+
 	 
 	
 }
