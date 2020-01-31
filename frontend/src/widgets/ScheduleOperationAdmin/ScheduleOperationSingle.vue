@@ -1,11 +1,12 @@
 <script>
-import ScheduleCareService from "./service";
+import ScheduleOperationService from "./service";
 
 export default {
 	name: "ScheduleOperationSingle",
-	props: ["operationRequest","newDate"],
+	props: ["operationRequest","newDate", "doctors"],
     data: function () {
         return {
+            data: {},
           	care: {},
             success: false,
             
@@ -15,8 +16,8 @@ export default {
     methods: {
     	reservate: function() 
 	{
-		ScheduleOperationService.reservate(this.operationRequest.id).then(response => {
-      
+		ScheduleOperationService.reservate(this.data).then(response => {
+      console.log("Proslo")
 		});
   
 
@@ -31,6 +32,9 @@ export default {
 	
 	mounted: function () 
     {
+      this.data.patient=this.operationRequest.patient;
+      this.data.startTime=this.newDateTime;
+      this.data.doctors=this.doctors;
     
     }
 }

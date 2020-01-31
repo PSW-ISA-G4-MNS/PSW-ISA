@@ -16,4 +16,7 @@ export default class ScheduleOperationService
         return axios.get(API_URL + "/doctor/");
     }
 
+    static reservate(x){
+        return axios.post(API_URL + "/operation",x);
+    }
 }

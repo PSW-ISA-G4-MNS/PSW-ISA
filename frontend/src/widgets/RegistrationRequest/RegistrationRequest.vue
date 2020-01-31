@@ -17,8 +17,16 @@ export default {
 	{
 		RegistrationRequestService.accept(this.request.id).then(response => {
 
+        this.declineResponse.to=this.request.patient.user.email;
+        this.declineResponse.subject="Prihvacen zahtev za registraciju";
+        this.declineResponse.message="Prihvacen vam je zahtev koji ste podneli za koriscenje sajta klinike"
 
-			if (response.status == 200) this.success = true;
+      if (response.status == 200){ 
+        this.success = true;
+        
+        RegistrationRequestService.email(this.declineResponse);
+        
+      }
 			else this.success = false;
 
 		});

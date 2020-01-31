@@ -65,7 +65,7 @@ export default {
 		  </button>
 		</div>
 
-   <table >
+   <table class='doctors' >
 			<tr>
 				<th>Doctors</th>
 			</tr>
@@ -99,6 +99,7 @@ export default {
       	:id="item.id"
       	:key="item.id"
         :operationRequest="item"
+        :doctors="pickedDoctors"
        
           />
       
@@ -113,6 +114,17 @@ export default {
 <style scoped>
 
 .form {
+position:relative;
+    top:10%;
+    left:10%;
+	padding: 40px; 
+	margin: 40px;
+	text-align: center;
+	width: 80%;
+}
+
+
+.doctors {
 position:relative;
     top:10%;
     left:10%;
