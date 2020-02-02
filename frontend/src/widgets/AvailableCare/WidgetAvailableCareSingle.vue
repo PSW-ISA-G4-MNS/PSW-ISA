@@ -1,79 +1,42 @@
 <script>
-import CalendarService from './service';
-
+import AvailableCareService from "./service";
 
 export default {
-    name: "ReviewTimeTable",
-    props:[ "care","datum"],
+	name: "WidgetAvailableCareSingle",
+	props: ["availableCare"],
     data: function () {
         return {
-            data: {},
-           
+          	availableCare: {},
+		        success: false
 
         };
     },
-
-    
-        mounted: function() {
-
-		
-		
-    },
-    
     methods: {
-    	start: function() 
-	{
-		window.location.href = "/frontend/#/review";
-	}
+      sendCareRequest: function()
+      {
+          AvailableCareService.sendCareRequest(this.availableCare);
+      }
     }
 }
 </script>
 
 <template>
-   
+    
 
-<tr>
-      <td id="vreme">{{care.startTime.toString().replace(datum+"T", " ")}}</td>
-      <td id="obaveza">{{care.patient.id}} {{care.patient.user.firstname}} {{care.patient.user.lastname}}</td>
-      
-      <td id="dugme">
-              <button @click="start"   style="background-color:green;color:white;height:40px;width:200px">
-            Zapocni pregled
+  <tr v-if="!success">
+      <td id="name">{{ availableCare.doctor.user.firstname }} {{ availableCare.doctor.user.lastname}}</td>
+      <td id="caretype">{{ availableCare.doctor.careType.name}}</td>
+      <td id="time">{{ availableCare.startTime}}</td>
+      <td id="availableCares">
+              <button v-on:click="sendCareRequest" style="background-color:green;color:white;height:40px;width:200px">
+                Send care request
               </button>
-              
-              
-
-              
         </td>
-
-        
-    </tr>
-
-
+  </tr>
+  
 </template>
 
-<style scoped> 
-
-input{
-width: 50%;
-  padding: 12px 20px;
-  
-  box-sizing: border-box;
-}
-
-td{
-  width: 200px;
-  height: 50px;
- background-color: #f9f9f9;
-  
-}
-tr{
-  width: 200px;
-  height: 50px;
-  min-width: 120px;
-  padding: 10px 20px;
-}
-
+<style scoped>
 body {
   font-family: Helvetica Neue, Arial, sans-serif;
   font-size: 14px;
@@ -96,7 +59,14 @@ th {
   user-select: none;
 }
 
+td {
+  background-color: #f9f9f9;
+}
 
+th, td {
+  min-width: 120px;
+  padding: 10px 20px;
+}
 
 th.active {
   color: #fff;
@@ -126,4 +96,5 @@ th.active .arrow {
   border-right: 4px solid transparent;
   border-top: 4px solid #fff;
 }
-</style>
+
+</style>>

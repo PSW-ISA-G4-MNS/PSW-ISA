@@ -13,7 +13,7 @@ import java.time.*;
 
 
 @Entity
-public class Doctor {
+public class Doctor implements java.io.Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)

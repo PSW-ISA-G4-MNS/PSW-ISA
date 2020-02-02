@@ -19,7 +19,7 @@ public class CareRequest {
 	
 	@ManyToOne
     @JoinColumn
-	private Care care;
+	private Doctor doctor;
 	
 	@ManyToOne
     @JoinColumn
@@ -37,12 +37,12 @@ public class CareRequest {
 		this.id = id;
 	}
 
-	public Care getCare() {
-		return care;
+	public Doctor getDoctor() {
+		return doctor;
 	}
 
-	public void setCare(Care care) {
-		this.care = care;
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
 	}
 
 	public LocalDateTime getTime() {
@@ -70,18 +70,18 @@ public class CareRequest {
 		this.patient = patient;
 	}
 
-	public CareRequest(Long id, Care care, LocalDateTime time, Boolean approved) {
+	public CareRequest(Long id, Doctor doctor, LocalDateTime time, Boolean approved) {
 		super();
 		this.id = id;
-		this.care = care;
+		this.doctor = doctor;
 		this.time = time;
 		this.approved = approved;
 	} 
 	
-	public CareRequest(Patient patient, Care care, LocalDateTime time, Boolean approved) {
+	public CareRequest(Patient patient, Doctor doctor, LocalDateTime time, Boolean approved) {
 		super();
 		this.patient = patient;
-		this.care = care;
+		this.doctor = doctor;
 		this.time = time;
 		this.approved = approved;
 	} 

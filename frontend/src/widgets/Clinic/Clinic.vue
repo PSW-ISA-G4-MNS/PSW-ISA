@@ -16,11 +16,16 @@ export default {
     data: function () {
         return {
             data: {},
-	    map: null
+	    map: null,
+        other: {}
         }
     },
     mounted: function () 
     {
+
+        this.other.careTypeId = localStorage.getItem('selectedCareType');
+        this.other.date = localStorage.getItem('selectedDate');
+
         ClinicService.get(this.Clinic).then(response => {
 		this.data = response.data
 		this.map = new Map({
@@ -57,6 +62,16 @@ export default {
         {
             localStorage.setItem('selectedClinic', this.Clinic);
             window.location.href = "/frontend/#/CareList";
+        },
+        showDoctors: function()
+        {
+            if(this.other.selectedDate !== undefined && this.other.selectedCareType !== undefined){
+                localStorage.setItem('selectedClinic', this.Clinic);
+                window.location.href = "/frontend/#/ClinicDoctorsList";
+            } else 
+            {
+                alert('Please select preffered date and care type to view available doctors.');
+            }
         }
 	// add additional methods here
     }
@@ -82,6 +97,7 @@ export default {
      </ul>
 
     <button class="btn btn-primary" @click="showClinic">Predefined cares</button>
+    <button class="btn btn-primary" @click="showDoctors">Available doctors</button>
 
     <div class="card-body">
     </div>
