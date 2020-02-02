@@ -151,7 +151,7 @@ public List<Clinic> findClinicsWithFreeDoctors(Long id, String date){
 			
 			
 			for(Vacation vacation : doctorsVacations) {
-				if(wantedDate.isAfter(vacation.getStartTime().toLocalDate()) && wantedDate.isBefore(vacation.getEndTime().toLocalDate())) {
+				if(wantedDate.isAfter(vacation.getStartTime()) && wantedDate.isBefore(vacation.getEndTime())) {
 					onVacation = 1;
 				}
 			}
