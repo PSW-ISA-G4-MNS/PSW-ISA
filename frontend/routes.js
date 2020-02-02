@@ -13,8 +13,13 @@ import ClinicReportView from './src/views/ClinicReportView.vue';
 
 import CareFormView from './src/views/CareFormView.vue';
 import LogOut from './src/views/Logout.vue';
+
+import AvailableCaresForDoctor from './src/views/AvailableCaresForDoctor.vue';
+
+
 import RoomEditView from './src/views/RoomEditView.vue';
 import CareTypeList from './src/views/CareTypeList.vue';
+
 import UpdateProfile from './src/views/UpdateProfile.vue';
 
 
@@ -39,6 +44,7 @@ const routes = [
     { path: '/logout', component: LogOut},
 
     { path: '/ClinicDoctorsList', component: ClinicDoctorsList},
+    { path: '/AvailableCaresForDoctor', component: AvailableCaresForDoctor},
     
 
     { path: '/reports', component: ClinicReportView},

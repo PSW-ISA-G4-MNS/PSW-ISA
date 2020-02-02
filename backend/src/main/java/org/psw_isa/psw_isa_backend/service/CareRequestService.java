@@ -6,12 +6,14 @@ import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
+import org.psw_isa.psw_isa_backend.dtos.CareRequestDTO;
 import org.psw_isa.psw_isa_backend.models.Care;
 import org.psw_isa.psw_isa_backend.models.CareRequest;
 import org.psw_isa.psw_isa_backend.models.Patient;
 import org.psw_isa.psw_isa_backend.models.User;
 import org.psw_isa.psw_isa_backend.repository.CareRepository;
 import org.psw_isa.psw_isa_backend.repository.CareRequestRepository;
+import org.psw_isa.psw_isa_backend.repository.DoctorRepository;
 import org.psw_isa.psw_isa_backend.repository.PatientRepository;
 import org.psw_isa.psw_isa_backend.repository.UserRepository;
 import org.psw_isa.psw_isa_backend.service.CheckRoleService;
@@ -28,6 +30,12 @@ public class CareRequestService {
 	private CareRepository careRepository;
 	
 	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired
+	private DoctorRepository doctorRepository;
+	
+	@Autowired
 	private CareRequestRepository careRequestRepository;
 	
 	@Autowired
@@ -37,26 +45,32 @@ public class CareRequestService {
 	private PatientRepository patientRepository;
 	
 	
-	public Long newCareRequest(Long id) {
-	User user = checkRoleService.getUser();
-	if (user == null) 
-	{
-		return null;
-	}
-        Optional<Patient> maybePatient = patientRepository.findAll().stream().filter(x -> x.getUser().getId() == user.getId()).findFirst();
-        if(maybePatient.isPresent()) {
-			Patient patient = maybePatient.get();
-			Care care = careRepository.findOneByid(id);
+	
+	public int createRequest(CareRequestDTO careRequestDTO) {
+		User user = checkRoleService.getUser();
+		List<Patient> allPatients = patientRepository.findAll();
+		if (user == null) 
+		{
+			return 0;
+		}else {
+			Patient patient = new Patient();
 			
-			CareRequest careRequest = new CareRequest(patient, care, LocalDateTime.now(), false);
+			for(Patient checkPatient : allPatients) {
+				if(checkPatient.getUser().getId() == user.getId()) {
+					patient = checkPatient;
+				}
+			}
+			
+			CareRequest careRequest = new CareRequest();
+			careRequest.setApproved(false);
+			careRequest.setDoctor(careRequestDTO.getDoctor());
+			careRequest.setTime(careRequestDTO.getStartTime());
+			careRequest.setPatient(patient);
+			
 			careRequestRepository.save(careRequest);
-		
-			return id;
-        } else {
-        	return null;
-        }
-		
-		
+			
+			return 1;
+		}
 	}
 	
 	
