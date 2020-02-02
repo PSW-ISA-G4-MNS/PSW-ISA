@@ -45,9 +45,8 @@ export default class ClinicService
     {
         return axios.get(API_URL + "/clinic/" + id + "/listEmployees");
     }
-    
-    
-    
+
+
     static listRooms(id) 
     {
         return axios.get(API_URL + "/clinic/" + id + "/listRooms");

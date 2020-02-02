@@ -57,19 +57,23 @@ public class RegistrationRequestService {
 		
 		User validator = userRepository.findOneByemail(registrationDTO.getEmail());
 		if(validator == null) {
-			userRepository.save(user);
-			patientRepository.save(patient);
-			
-			RegistrationRequest registrationRequest = new RegistrationRequest();
-			registrationRequest.setPatient(patient);
-			registrationRequest.setApproved(false);
-			registrationRequest.setRejected(false);
-			registrationRequest.setTime(LocalDateTime.now());
-			
-			registrationRequestRepository.save(registrationRequest);
-			
-			
-			return registrationRequest;
+			if(registrationDTO.getPassword().equals(registrationDTO.getPassword2())) {
+				userRepository.save(user);
+				patientRepository.save(patient);
+				
+				RegistrationRequest registrationRequest = new RegistrationRequest();
+				registrationRequest.setPatient(patient);
+				registrationRequest.setApproved(false);
+				registrationRequest.setRejected(false);
+				registrationRequest.setTime(LocalDateTime.now());
+				
+				registrationRequestRepository.save(registrationRequest);
+				
+				
+				return registrationRequest;
+			} else {
+				return null;
+			}
 		} else {
 			return null;
 		}

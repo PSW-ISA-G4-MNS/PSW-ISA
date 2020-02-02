@@ -65,12 +65,13 @@ export default {
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonCareType">
 		    <a :key="careType.id" :id="careType.id" @click="selectCareType(index)" v-for="(careType, index) in this.careTypes" class="dropdown-item" href="#">{{ careType.name }}</a>
 		  </div>
-        <input type="text" class="form-control" placeholder="Type name" v-if="show" v-model="data.nameSearch" />
+        
         <div>
             <button v-on:click="filterClinics" style="background-color:green;color:white;height:40px;width:200px">
                 Search
                 </button>
 		</div>
+        
 
         <div class="multi-Clinic"> 
         <Clinic
