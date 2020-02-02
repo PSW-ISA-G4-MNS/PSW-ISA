@@ -110,7 +110,7 @@ public class DoctorService {
 							}
 						}
 						for(Operation operation : allOperations) {
-							if(operation.getDoctor().getId() == doctor.getId()) {
+							if(operation.getDoctors().contains(doctor)) {
 								startTime = operation.getStartTime().toLocalDate();
 								if(startTime.isEqual(wantedDate)) {
 									doctorsOperationsForDate.add(operation);
@@ -212,7 +212,7 @@ public class DoctorService {
 			
 			
 			for(Operation operation : allOperations) {
-				if(operation.getDoctor().getId() == doctorID) {
+				if(operation.getDoctors().contains(doctorRepository.findOneByid(doctorID))) {
 					doctorsOperations.add(operation);
 				}
 			}

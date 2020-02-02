@@ -168,7 +168,7 @@ public List<Clinic> findClinicsWithFreeDoctors(Long id, String date){
 						}
 					}
 					for(Operation operation : allOperations) {
-						if(operation.getDoctor().getId() == doctor.getId()) {
+						if(operation.getDoctors().contains(doctor)) {
 							startTime = operation.getStartTime().toLocalDate();
 							if(startTime.isEqual(wantedDate)) {
 								doctorsOperationsForDate.add(operation);
