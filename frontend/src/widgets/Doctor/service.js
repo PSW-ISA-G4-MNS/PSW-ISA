@@ -18,7 +18,10 @@ export default class DoctorService
         return axios.get(API_URL + "/doctor/" + id);
     }
     
-    
+    static listFreeDoctorsForClinic(clinicID, careTypeID, date)
+    {
+        return axios.get(API_URL + "/doctor/getFreeDoctorsForClinic/" + clinicID + "/" + careTypeID + "/" + date);
+    }
     
     static password(id, data) 
     {
