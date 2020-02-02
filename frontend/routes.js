@@ -22,7 +22,6 @@ import CareTypeList from './src/views/CareTypeList.vue';
 
 import UpdateProfile from './src/views/UpdateProfile.vue';
 
-import ScheduleOperation from './src/views/ScheduleOperation.vue';
 
 import DoctorPatients from "./src/views/DoctorPatients.vue"
 import ScheduleCare from "./src/views/ScheduleCare.vue";

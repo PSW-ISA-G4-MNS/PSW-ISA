@@ -8,8 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import org.psw_isa.psw_isa_backend.dtos.OperationRequestDTO;
 
 @RestController
 @RequestMapping(value = "operationRequest")
@@ -22,5 +26,10 @@ public class OperationRequestController {
 	@GetMapping(value="")
 	public ResponseEntity<List<OperationRequest>> findAll(){
 		return new ResponseEntity<>(operationRequestService.findAll(), HttpStatus.OK);
+	}
+
+	@PostMapping(value="")
+	public ResponseEntity<OperationRequest> save(@RequestBody OperationRequestDTO dto) {
+		return new ResponseEntity<>(operationRequestService.save(dto), HttpStatus.OK);
 	}
 }
