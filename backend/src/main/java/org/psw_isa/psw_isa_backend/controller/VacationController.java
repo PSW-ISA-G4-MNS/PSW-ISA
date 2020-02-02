@@ -36,18 +36,16 @@ public class VacationController {
 		return new ResponseEntity<>(vacationService.findOneByid(id), HttpStatus.OK);
 	}
 	
-	/*@PostMapping(consumes = "application/json")
-	public ResponseEntity<Long> save(@RequestBody VacationDTO dto){
-		
-		Vacation vacation = vacationService.save(dto);
-		return new ResponseEntity<>(vacation.getId(),HttpStatus.OK);
+	@PostMapping(consumes = "application/json")
+	public ResponseEntity<Long> save(@RequestBody Vacation dto){
+		Long id = vacationService.save(dto);
+		return new ResponseEntity<>(id,HttpStatus.OK);
 	}
 	
 	
 	@PostMapping(value="/{id}", consumes = "application/json")
-	public ResponseEntity<Long> update(@RequestBody VacationDTO dto){
+	public ResponseEntity<Long> update(@PathVariable("id") Long id, @RequestBody Vacation dto){
 		
-		Vacation data = vacationService.save(dto);
-		return new ResponseEntity<>(data.getId(),HttpStatus.OK);
-	}*/
+		return new ResponseEntity<>(vacationService.update(id, dto),HttpStatus.OK);
+	}
 }

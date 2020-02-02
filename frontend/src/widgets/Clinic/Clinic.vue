@@ -57,6 +57,11 @@ export default {
         {
             localStorage.setItem('selectedClinic', this.Clinic);
             window.location.href = "/frontend/#/CareList";
+        },
+        showDoctors: function()
+        {
+            localStorage.setItem('selectedClinic', this.Clinic);
+            window.location.href = "/frontend/#/ClinicDoctorsList";
         }
 	// add additional methods here
     }
@@ -82,6 +87,7 @@ export default {
      </ul>
 
     <button class="btn btn-primary" @click="showClinic">Predefined cares</button>
+    <button class="btn btn-primary" @click="showDoctors">Available doctors</button>
 
     <div class="card-body">
     </div>

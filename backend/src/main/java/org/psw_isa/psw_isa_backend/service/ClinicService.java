@@ -18,6 +18,7 @@ import org.psw_isa.psw_isa_backend.service.DoctorService;
 import org.psw_isa.psw_isa_backend.service.ClinicRatingService;
 import org.psw_isa.psw_isa_backend.service.DoctorRatingService;
 import org.psw_isa.psw_isa_backend.models.Doctor;
+import org.psw_isa.psw_isa_backend.models.Patient;
 import org.psw_isa.psw_isa_backend.dtos.ClinicReportDTO;
 
 import java.util.ArrayList;
@@ -60,6 +61,9 @@ public class ClinicService {
 
 	@Autowired 
 	ClinicAdminService clinicAdminService;
+
+	@Autowired
+	PatientService patientService;
 
 	public Clinic save(Clinic clinic) {
 		clinic.setId(null);
@@ -138,13 +142,15 @@ public class ClinicService {
 					}
 				}
 				for(Operation operation : allOperations) {
-					if(operation.getDoctor().getId() == doctor.getId()) {
+					for(Doctor doctor2 : operation.getDoctors()) {
+					if(doctor2.getId() == doctor.getId()) {
 						startTime = operation.getStartTime().toLocalDate();
 						if(startTime.isEqual(wantedDate)) {
 							doctorsOperationsForDate.add(operation);
 						}
 					}
 				}
+			}
 			}
 			if(doctorsCaresForDate.size() + doctorsOperationsForDate.size() < 2) {
 				System.out.println("nasao da je manje od dva : " + doctorsCaresForDate.size());
@@ -170,6 +176,8 @@ public class ClinicService {
 		return res;
 	}
 	
+	
+	
 	public List<Care> findCaresForClinic(Clinic clinic) {
 		List<Care> cares = new ArrayList<Care>();
 		for (Care care : careService.findAll()) {
@@ -179,6 +187,22 @@ public class ClinicService {
 			}
 		}
 		return cares;
+	}
+	
+	public List<Patient> findPatientsForClinic(Clinic clinic) {
+		List<Patient> res = new ArrayList<>();
+		List<Patient> patients = patientService.findAll();
+		List<Care> cares = findCaresForClinic(clinic);
+		for (Patient patient : patientService.findAll()) 
+		{
+			boolean found = false;
+			for (Care care : cares) 
+			{
+				if (care.getPatient() != null && patient.getId() == care.getPatient().getId()) found = true;
+			}
+			if (found) res.add(patient);
+		}
+		return res;
 	}
 
 	public Double getRevenue(Clinic clinic, LocalDateTime start, LocalDateTime end) {

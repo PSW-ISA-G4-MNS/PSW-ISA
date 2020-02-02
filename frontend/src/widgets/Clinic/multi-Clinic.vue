@@ -29,12 +29,14 @@ export default {
         selectCareType: function(index) {
             console.log("Called with id = " + index);
             this.data.careTypeId = this.careTypes[index].id;
+            localStorage.setItem("selectedCareType", this.careTypes[index].id)
             console.log("ID kertajpa = " + this.careTypes[index].id);
             this.careTypeName = this.careTypes[index].name;
         },
         filterClinics: function(){
             ClinicService.getWithFreeDoctors(this.data.careTypeId, this.data.date).then(response => this.items = response.data);
             console.log("kliknuto");
+            localStorage.setItem("selectedDate", this.data.date);
         }
     },
     components: {
