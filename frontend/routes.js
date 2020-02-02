@@ -33,13 +33,14 @@ import MedicineAdd from './src/views/MedicineAdd.vue';
 import ReviewView from './src/views/ReviewView.vue';
 import DiagnosisAdd from './src/views/DiagnosisAdd.vue';
 import ChangeReviewView from './src/views/ChangeReviewView.vue';
-
+import AllPatientsView from "./src/views/AllPatientsView.vue";
 const routes = [
     { path: '/', component: Home },
     { path: '/login', component: Login},
     { path: '/register', component: Registration},
     { path: '/regreq', component: RegistrationRequest},
     { path: '/clinic-new', component: NewClinicView},
+    { path: '/patients', component: AllPatientsView},
     { path: '/CareList', component: CareList },
     { path: '/profile', component: Profile},
     { path: '/updateUser', component: UpdateProfile},
