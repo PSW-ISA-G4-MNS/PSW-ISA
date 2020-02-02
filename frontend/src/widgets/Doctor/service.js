@@ -12,6 +12,11 @@ export default class DoctorService
     {
         return axios.get(API_URL + "/doctor/");
     }
+    
+    static patients() 
+    {
+        return axios.get(API_URL + "/doctor/patients");
+    }
 
     static get(id) 
     {

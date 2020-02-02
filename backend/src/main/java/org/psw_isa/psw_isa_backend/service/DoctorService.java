@@ -32,6 +32,9 @@ public class DoctorService {
 	
 	@Autowired
 	OperationRepository operationRepository;
+
+	@Autowired
+	CheckRoleService checkRoleService;
 	
 	
 	public List<Doctor> findAll() {
@@ -130,6 +133,12 @@ public class DoctorService {
 	 * 
 	 * } return res; }
 	 */
+	
+	public Clinic getClinic() {
+		for (Doctor d : findAll()) if (checkRoleService.getUser() != null && d.getUser().getId() == checkRoleService.getUser().getId()) return d.getClinic();
+		return null;
+	}
+
 	public List<Doctor> findAllByClinic(Clinic clinic) {
 		List<Doctor> result = new ArrayList<Doctor>();
 		for (Doctor doc  : this.findAll()) {

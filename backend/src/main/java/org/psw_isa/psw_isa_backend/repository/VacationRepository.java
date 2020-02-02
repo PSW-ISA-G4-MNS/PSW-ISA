@@ -12,4 +12,6 @@ public interface VacationRepository extends JpaRepository<Vacation, Long> {
 	
 	public List<Vacation> findAll();
 	
+	public Vacation save(Vacation vacation);
+	
 }
