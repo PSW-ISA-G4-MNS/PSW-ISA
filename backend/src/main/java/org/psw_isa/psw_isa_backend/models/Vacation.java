@@ -156,5 +156,10 @@ public class Vacation {
 	{
 		return this.id;
 	}
+
+	public void setId(Long id) 
+	{
+		this.id = id;
+	}
 	
 }

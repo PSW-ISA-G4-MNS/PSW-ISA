@@ -22,4 +22,17 @@ public class VacationService {
 	public List<Vacation> findAll() {
 		return vacationRepository.findAll();
 	}
+
+	public Long save(Vacation vacation) 
+	{
+		vacation.setId(null);
+		Vacation v = vacationRepository.save(vacation);
+		return v.getId();
+	}
+	public Long update(Long id, Vacation vacation) 
+	{
+		vacation.setId(id);
+		Vacation v = vacationRepository.save(vacation);
+		return v.getId();
+	}
 }

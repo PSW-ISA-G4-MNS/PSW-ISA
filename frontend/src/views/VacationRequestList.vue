@@ -3,18 +3,13 @@
 
 // import widgets for this view here
 
-import ScheduleOperationMulti from "../widgets/ScheduleOperationAdmin/ScheduleOperationMulti.vue"
-
-
 export default {
-    name: "ScheduleOperation",
+    name: "VacationRequestList",
     data: function () {
             return {
-
 		data: {},
 		role: localStorage.getItem("role"),
 		user: localStorage.getItem("user_id"),
-
 	    };
 	},
     mounted: function () 
@@ -27,19 +22,15 @@ export default {
         }
     },
     components: {
-
-    	"ScheduleOperationMulti": ScheduleOperationMulti
-
     }
 }
 </script>
 
 <template>
-
-
-<ScheduleOperationMulti/>
-
-
+<div class="scheduling">
+<router-link to="/vrm/create">New Vacation Request<router-link>
+<p>Vacation Requests</p>
+</div>
 </template>
 
 <style scoped> 

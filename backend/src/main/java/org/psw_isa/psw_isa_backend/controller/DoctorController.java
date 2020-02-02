@@ -1,6 +1,8 @@
 package org.psw_isa.psw_isa_backend.controller;
 
 import org.psw_isa.psw_isa_backend.service.DoctorService;
+import org.psw_isa.psw_isa_backend.service.ClinicService;
+import org.psw_isa.psw_isa_backend.models.Patient;
 
 import java.util.List;
 
@@ -22,6 +24,9 @@ public class DoctorController {
 	
 	@Autowired 
 	DoctorService doctorService;
+
+	@Autowired
+	ClinicService clinicService;
 	
 	@GetMapping(value="/")
 	public ResponseEntity<List<Doctor>> findAll(){
@@ -32,10 +37,21 @@ public class DoctorController {
 	public ResponseEntity<Doctor> findOneByid(@PathVariable("id") Long id){
 		return new ResponseEntity<>(doctorService.findOneByid(id), HttpStatus.OK);
 	}
+	
+	@GetMapping(value="/patients")
+	public ResponseEntity<List<Patient>> findPatients(){
+		return new ResponseEntity<>(clinicService.findPatientsForClinic(doctorService.getClinic()), HttpStatus.OK);
+	}
 	/*
 	@PostMapping(value="/filter", consumes = "application/json")
 	public ResponseEntity<List<Doctor>> FreeDoctorsFromClinic(@RequestBody ClinicFilterDTO clinicFilterDTO){
 		return new ResponseEntity<>(doctorService.findFreeDoctors(clinicFilterDTO), HttpStatus.OK);
 	}
 	*/
+	
+  @GetMapping(value="/getFreeDoctorsForClinic/{clinicID}/{careTypeID}/{date}") 
+  	public ResponseEntity<List<Doctor>>listFreeDoctorsForClinic(@PathVariable("clinicID") Long clinicID, @PathVariable("careTypeID") Long careTypeID, @PathVariable("date") String date){
+  
+	  return new ResponseEntity<>(doctorService.listFreeDoctorsForClinic(clinicID, careTypeID, date), HttpStatus.OK);
+	  }
 }
