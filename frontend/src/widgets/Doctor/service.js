@@ -12,13 +12,21 @@ export default class DoctorService
     {
         return axios.get(API_URL + "/doctor/");
     }
+    
+    static patients() 
+    {
+        return axios.get(API_URL + "/doctor/patients");
+    }
 
     static get(id) 
     {
         return axios.get(API_URL + "/doctor/" + id);
     }
     
-    
+    static listFreeDoctorsForClinic(clinicID, careTypeID, date)
+    {
+        return axios.get(API_URL + "/doctor/getFreeDoctorsForClinic/" + clinicID + "/" + careTypeID + "/" + date);
+    }
     
     static password(id, data) 
     {

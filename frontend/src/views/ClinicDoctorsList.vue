@@ -2,19 +2,13 @@
 
 
 // import widgets for this view here
-
-import ScheduleOperationMulti from "../widgets/ScheduleOperationAdmin/ScheduleOperationMulti.vue"
-
+import WidgetDoctorMulti from "../widgets/Doctor/WidgetDoctorMulti.vue"
 
 export default {
-    name: "ScheduleOperation",
+    name: "ClinicDoctorsList",
     data: function () {
             return {
-
-		data: {},
-		role: localStorage.getItem("role"),
-		user: localStorage.getItem("user_id"),
-
+		data: {}
 	    };
 	},
     mounted: function () 
@@ -27,18 +21,14 @@ export default {
         }
     },
     components: {
-
-    	"ScheduleOperationMulti": ScheduleOperationMulti
-
+    	"WidgetDoctorMulti": WidgetDoctorMulti
     }
 }
 </script>
 
 <template>
 
-
-<ScheduleOperationMulti/>
-
+<WidgetDoctorMulti/>
 
 </template>
 

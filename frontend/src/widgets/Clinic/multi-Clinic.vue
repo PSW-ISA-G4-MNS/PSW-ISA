@@ -18,6 +18,7 @@ export default {
             careTypes: [],
             careTypeName: "Select care type",
             data: {},
+            show: false
         }
     },
     mounted: function () 
@@ -29,12 +30,19 @@ export default {
         selectCareType: function(index) {
             console.log("Called with id = " + index);
             this.data.careTypeId = this.careTypes[index].id;
+            localStorage.setItem("selectedCareType", this.careTypes[index].id)
             console.log("ID kertajpa = " + this.careTypes[index].id);
             this.careTypeName = this.careTypes[index].name;
         },
         filterClinics: function(){
-            ClinicService.getWithFreeDoctors(this.data.careTypeId, this.data.date).then(response => this.items = response.data);
-            console.log("kliknuto");
+            if(this.data.careTypeId !== undefined && localStorage.getItem(this.data.date) !== undefined){
+                ClinicService.getWithFreeDoctors(this.data.careTypeId, this.data.date).then(response => this.items = response.data);
+                console.log("kliknuto");
+                localStorage.setItem("selectedDate", this.data.date);
+                this.show = true;
+            } else {
+                alert('Please select preffered date and care type to filter clinics.');
+            }
         }
     },
     components: {
@@ -57,7 +65,7 @@ export default {
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonCareType">
 		    <a :key="careType.id" :id="careType.id" @click="selectCareType(index)" v-for="(careType, index) in this.careTypes" class="dropdown-item" href="#">{{ careType.name }}</a>
 		  </div>
-
+        <input type="text" class="form-control" placeholder="Type name" v-if="show" v-model="data.nameSearch" />
         <div>
             <button v-on:click="filterClinics" style="background-color:green;color:white;height:40px;width:200px">
                 Search
