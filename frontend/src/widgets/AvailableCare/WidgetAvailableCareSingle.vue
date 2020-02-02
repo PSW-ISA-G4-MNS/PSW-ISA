@@ -1,33 +1,21 @@
 <script>
-import DoctorService from "./service";
+import AvailableCareService from "./service";
 
 export default {
-	name: "WidgetDoctorSingle",
-	props: ["doctor"],
+	name: "WidgetAvailableCareSingle",
+	props: ["availableCare"],
     data: function () {
         return {
-          	doctor: {},
+          	availableCare: {},
 		        success: false
 
         };
     },
     methods: {
-      availableCaresForDoctor: function(){
-        localStorage.setItem('selectedDoctor', this.doctor.id);
-        window.location.href = "/frontend/#/AvailableCaresForDoctor";
+      sendCareRequest: function()
+      {
+          AvailableCareService.sendCareRequest(this.availableCare);
       }
-    },
-	mounted: function () 
-    {
-        DoctorService.get(this.doctor).then(
-
-	response => {
-		console.log(response.data);;
-		this.doctor = response.data;
-    
-		console.log(this.data);
-	}
-	);
     }
 }
 </script>
@@ -36,11 +24,12 @@ export default {
     
 
   <tr v-if="!success">
-      <td id="name">{{ doctor.user.firstname }} {{ doctor.user.lastname}}</td>
-      <td id="caretype">{{ doctor.careType.name}}</td>
+      <td id="name">{{ availableCare.doctor.user.firstname }} {{ availableCare.doctor.user.lastname}}</td>
+      <td id="caretype">{{ availableCare.doctor.careType.name}}</td>
+      <td id="time">{{ availableCare.startTime}}</td>
       <td id="availableCares">
-              <button v-on:click="availableCaresForDoctor" style="background-color:green;color:white;height:40px;width:200px">
-                Available cares
+              <button v-on:click="sendCareRequest" style="background-color:green;color:white;height:40px;width:200px">
+                Send care request
               </button>
         </td>
   </tr>

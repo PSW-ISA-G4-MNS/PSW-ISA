@@ -5,10 +5,12 @@ import org.psw_isa.psw_isa_backend.models.Care;
 import org.psw_isa.psw_isa_backend.models.Clinic;
 import org.psw_isa.psw_isa_backend.models.Doctor;
 import org.psw_isa.psw_isa_backend.models.Operation;
+import org.psw_isa.psw_isa_backend.models.Vacation;
 import org.psw_isa.psw_isa_backend.repository.CareRepository;
 import org.psw_isa.psw_isa_backend.repository.ClinicRepository;
 import org.psw_isa.psw_isa_backend.repository.DoctorRepository;
 import org.psw_isa.psw_isa_backend.repository.OperationRepository;
+import org.psw_isa.psw_isa_backend.repository.VacationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.psw_isa.psw_isa_backend.service.CareService;
@@ -41,6 +43,9 @@ public class ClinicService {
 
 	@Autowired
 	OperationRepository operationRepository;
+	
+	@Autowired
+	VacationRepository vacationRepository;
 
 	@Autowired
 	CareService careService;
@@ -107,33 +112,56 @@ public class ClinicService {
 		List<Doctor> allDoctors = doctorRepository.findAll(); 
 		List<Care> doctorsCaresForDate = new ArrayList<>();
 		List<Operation> doctorsOperationsForDate = new ArrayList<>();
+		List<Vacation> allVacations = vacationRepository.findAll();
+		List<Vacation> doctorsVacations = new ArrayList<Vacation>();
 		LocalDate wantedDate = LocalDate.parse(date);
 		LocalDate startTime = null;
 		Boolean hasDoctor = false;
+		int onVacation = 0;
 
 		for(Doctor doctor : allDoctors) {
+			onVacation = 0;
+			doctorsVacations.clear();
 			doctorsCaresForDate.clear();
 			doctorsOperationsForDate.clear();
-			if(doctor.getCareType().getId() == id) {
-				for(Care care : allCares) {	
-					if(care.getDoctor().getId() == doctor.getId()) {
-						startTime = care.getStartTime().toLocalDate();
-						if((care.getPatient() != null) && (startTime.isEqual(wantedDate))) {
-							System.out.println("nasao za taj dan");
-							doctorsCaresForDate.add(care);
+			
+			
+			for(Vacation vacation : allVacations) {
+				if(vacation.getUser().getId() == doctor.getUser().getId()) {
+					doctorsVacations.add(vacation);
+				}
+			}
+			
+			
+			for(Vacation vacation : doctorsVacations) {
+				if(wantedDate.isAfter(vacation.getStartTime().toLocalDate()) && wantedDate.isBefore(vacation.getEndTime().toLocalDate())) {
+					onVacation = 1;
+				}
+			}
+			
+			if(onVacation == 0) {
+				if(doctor.getCareType().getId() == id) {
+					for(Care care : allCares) {	
+						if(care.getDoctor().getId() == doctor.getId()) {
+							startTime = care.getStartTime().toLocalDate();
+							if((care.getPatient() != null) && (startTime.isEqual(wantedDate))) {
+								System.out.println("nasao za taj dan");
+								doctorsCaresForDate.add(care);
+							}
 						}
 					}
-				}
-				for(Operation operation : allOperations) {
-					if(operation.getDoctor().getId() == doctor.getId()) {
-						startTime = operation.getStartTime().toLocalDate();
-						if(startTime.isEqual(wantedDate)) {
-							doctorsOperationsForDate.add(operation);
+					for(Operation operation : allOperations) {
+						if(operation.getDoctor().getId() == doctor.getId()) {
+							startTime = operation.getStartTime().toLocalDate();
+							if(startTime.isEqual(wantedDate)) {
+								doctorsOperationsForDate.add(operation);
+							}
 						}
 					}
 				}
 			}
-			if(doctorsCaresForDate.size() + doctorsOperationsForDate.size() < 2) {
+				
+			if(doctorsCaresForDate.size() + doctorsOperationsForDate.size() < 22 && onVacation == 0) {
 				System.out.println("nasao da je manje od dva : " + doctorsCaresForDate.size());
 				if(!res.contains(doctor.getClinic())) {
 		//			for(Clinic clinic : allClinics) {
