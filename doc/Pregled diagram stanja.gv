@@ -1,0 +1,26 @@
+digraph G {
+	START [shape=point, width=1];
+	START -> PREGLED_NEREZERVISAN;
+	PREGLED_NEREZERVISAN -> CEKA_ODOBRENJE [label="Pacijet salje upit"];
+	CEKA_ODOBRENJE -> CEKA_NA_SALU [label="Administrator odobrava pregled"];
+	CEKA_ODOBRENJE -> ODBIJEN [label = "Administrator odbija zahtev"];
+	CEKA_NA_SALU -> DODELJENA_SALA [label="Administrator kliniike dodeljuje salu"];
+	CEKA_NA_SALU -> DODELJENA_SALA [label="Sala dodeljena automatski"];
+	DODELJENA_SALA -> U_TOKU [label="Lekar zapocinje pregled"];
+	U_TOKU -> DIJAGNOSTIKOVANO [label="Lekar pise dijagnozu"];
+	DIJAGNOSTIKOVANO -> UNETO_U_KARTON [label="Lekar popunjava zdravstveni karton"];
+	DIJAGNOSTIKOVANO -> DODELJEN_LEK [label="Lekar prepisuje lek pacijentu"];
+	DIJAGNOSTIKOVANO -> CEKA_NA_SALU [label="Lekar dodeljuje novi pregled"];
+	DODELJEN_LEK -> UNETO_U_KARTON [label="Lekar upisuje u zdravstveni karton pacijenta"];
+	DODELJEN_LEK -> CEKA_NA_SALU [label="Lekar rezervise novi pregled"];
+	UNETO_U_KARTON -> CEKA_NA_SALU [label="Lekar zakazuje ponovni pregled"];
+	UNETO_U_KARTON -> KRAJ;
+	UNETO_U_KARTON -> OPERACIJA_CEKA_NA_SALU [label = "Lekar zakazuje operaciju"];
+	OPERACIJA_CEKA_NA_SALU -> SALA_DODELJENA_OPERACIJI [label="Administrator klinike dodeljuje salu"];
+	OPERACIJA_CEKA_NA_SALU -> SALA_DODELJENA_OPERACIJI [label="Automatski se dodeljuje sala"];
+	SALA_DODELJENA_OPERACIJI -> OPERACIJA_U_TOKU [label = "Lekar zapocinje operaciju"];
+	OPERACIJA_U_TOKU -> UNETO_U_KARTON [label = "Lekar popunjava zdravstveni karton"];
+
+
+
+}
