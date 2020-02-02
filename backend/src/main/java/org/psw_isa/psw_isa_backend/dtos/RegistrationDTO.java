@@ -9,11 +9,12 @@ public class RegistrationDTO {
 	private String email;
 	private String mobile_phone;
 	private String password;
+	private String password2;
 	private String address;
 	private String insuranceid;
 	private LocalDate birthday;
 	
-	public RegistrationDTO(String name, String lastname, String email, String password, String address,
+	public RegistrationDTO(String name, String lastname, String email, String password, String password2, String address,
 			String insuranceid, String mobile_phone, LocalDate birthday) {
 		super();
 		this.name = name;
@@ -21,6 +22,7 @@ public class RegistrationDTO {
 		this.email = email;
 		this.mobile_phone = mobile_phone;
 		this.password = password;
+		this.password2 = password2;
 		this.address = address;
 		this.insuranceid = insuranceid;
 		this.birthday = birthday;
@@ -56,6 +58,14 @@ public class RegistrationDTO {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getPassword2() {
+		return password2;
+	}
+
+	public void setPassword2(String password2) {
+		this.password2 = password2;
 	}
 
 	public String getAddress() {

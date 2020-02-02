@@ -63,7 +63,6 @@ const routes = [
     
 
     { path: '/reports', component: ClinicReportView},
-    { path: '/doctor/myPatients', component: DoctorPatients},
     { path: '/careTypes', component: CareTypeList},
     { path: '/schedule/care', component: ScheduleCare},
     { path: '/schedule/operation', component: ScheduleOperation},

@@ -13,9 +13,17 @@ export default {
     methods: {
     	submit: function() 
 	{
-		RegistrationFormService.submit(this.data).then(response => {
-			if (response.status < 300) window.location.href = "/frontend/";
-		});
+		if(this.data.password === this.data.password2){
+			if(this.data.insuranceid.length === 13){
+				RegistrationFormService.submit(this.data).then(response => {
+					if (response.status < 300) window.location.href = "/frontend/";
+				});
+			} else {
+				alert('Insurance ID must contain 13 characters.');
+			}
+		}else{
+			alert("Passwords don't match");
+		}
 	}
     }
 }
@@ -53,6 +61,10 @@ export default {
 		
 		<p>
 		<input type="password" class="form-control" placeholder="Password" v-model="data.password" />
+		</p>
+
+		<p>
+		<input type="password" class="form-control" placeholder="Repeat password" v-model="data.password2" />
 		</p>
 		
 		<p>
