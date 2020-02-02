@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import java.time.*;
+import java.util.ArrayList;
 
 
 @Entity
@@ -28,6 +29,8 @@ public class Room {
 	
 	
 	private Integer capacity; 
+	
+	private ArrayList<LocalDateTime> schedule=new ArrayList<LocalDateTime>();
 	
 
 	public Room() 
@@ -74,5 +77,23 @@ public class Room {
 	{
 		this.capacity = newValue;
 	}
+
+	public Long getId() {
+		return id;
+	}
 	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public ArrayList<LocalDateTime> getSchedule() {
+		return schedule;
+	}
+	public void setSchedule(ArrayList<LocalDateTime> schedule) {
+		this.schedule = schedule;
+	}
+	
+	public void addTime(LocalDateTime time) {
+		
+		this.schedule.add(time);
+	}
 }

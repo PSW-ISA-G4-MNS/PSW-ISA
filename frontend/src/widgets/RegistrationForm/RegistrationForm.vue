@@ -32,7 +32,7 @@ export default {
 		</p>
 		
 		<p>
-		<input type="text" class="form-control" placeholder="Firstname" v-model="data.name" />
+		<input type="text" class="form-control" placeholder="Firstname" v-model="data.firstname" />
 		</p>
 		
 		<p>

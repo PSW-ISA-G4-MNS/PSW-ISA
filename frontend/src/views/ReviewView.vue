@@ -2,7 +2,7 @@
 
 
 // import widgets for this view here
-import Review from "../widgets/Review/Review.vue"
+import ReviewPage from "../widgets/Review/ReviewPage.vue"
 
 export default {
     name: "ReviewView",
@@ -21,14 +21,14 @@ export default {
         }
     },
     components: {
-    	"Review": Review
+    	"ReviewPage": ReviewPage
     }
 }
 </script>
 
 <template>
 
-<Review/>
+<ReviewPage/>
 
 </template>
 

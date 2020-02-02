@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import java.time.*;
+import java.util.ArrayList;
 
 
 @Entity
@@ -19,9 +20,8 @@ public class Operation {
     private Long id;
 
 	
-	@ManyToOne
-    @JoinColumn
-	private Doctor doctor; 
+	
+	private ArrayList<Doctor> doctors; 
 	
 	@ManyToOne
     @JoinColumn
@@ -45,10 +45,10 @@ public class Operation {
 	public Operation() 
 	{
 	}
-	public Operation(Doctor _doctor, Patient _patient, Room _room, OperationRequest _operationRequest, LocalDateTime _startTime, LocalDateTime _endTime) {
+	public Operation(ArrayList<Doctor> _doctors, Patient _patient, Room _room, OperationRequest _operationRequest, LocalDateTime _startTime, LocalDateTime _endTime) {
 		super();
 		 
-		this.doctor = _doctor;
+		this.doctors = _doctors;
 		 
 		this.patient = _patient;
 		 
@@ -63,14 +63,14 @@ public class Operation {
 	}
 	
 	 
-	public Doctor getDoctor() 
+	public ArrayList<Doctor> getDoctors() 
 	{
-		return this.doctor;
+		return this.doctors;
 	}
 
-	public void setDoctor(Doctor newValue) 
+	public void setDoctors(ArrayList<Doctor> newValue) 
 	{
-		this.doctor = newValue;
+		this.doctors = newValue;
 	}
 	 
 	public Patient getPatient() 
@@ -122,5 +122,7 @@ public class Operation {
 	{
 		this.endTime = newValue;
 	}
-	
+	public Long getId() {
+		return this.id;
+	}
 }

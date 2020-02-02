@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.psw_isa.psw_isa_backend.models.User;
 
 @RestController
 @RequestMapping(value = "checkRole")
@@ -22,7 +23,7 @@ public class CheckRoleController {
 	public ResponseEntity<String> checkRole(){
 		if(checkRoleService.checkIfLogged()) {
 			if(checkRoleService.checkIfClinicAdministrator()) {
-				return new ResponseEntity<String>("CLINIC_ADMINITRATOR", HttpStatus.OK);
+				return new ResponseEntity<String>("CLINIC_ADMINISTRATOR", HttpStatus.OK);
 			} else if(checkRoleService.checkIfDoctor()) {
 				return new ResponseEntity<String>("DOCTOR", HttpStatus.OK);
 			} else if(checkRoleService.checkIfNurse()) {
@@ -36,6 +37,10 @@ public class CheckRoleController {
 			return new ResponseEntity<String>("NOT_LOGGED", HttpStatus.FORBIDDEN);
 		}
 		
+	}
+	@GetMapping(value="/info")
+	public ResponseEntity<User> info(){
+		return new ResponseEntity<>(checkRoleService.getUser(), HttpStatus.OK);
 	}
 
 }

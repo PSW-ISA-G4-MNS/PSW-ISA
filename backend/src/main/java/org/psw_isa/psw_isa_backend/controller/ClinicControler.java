@@ -11,6 +11,7 @@ import org.psw_isa.psw_isa_backend.models.Doctor;
 import org.psw_isa.psw_isa_backend.models.Patient;
 import org.psw_isa.psw_isa_backend.models.RegistrationRequest;
 import org.psw_isa.psw_isa_backend.service.ClinicService;
+import org.psw_isa.psw_isa_backend.service.CheckRoleService;
 import org.psw_isa.psw_isa_backend.service.RegistrationRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,9 @@ public class ClinicControler {
 	
 	@Autowired
 	private ClinicService clinicService;
+	
+	@Autowired
+	private CheckRoleService checkRoleService;
 	
 	
 	@PostMapping(consumes = "application/json")
@@ -66,8 +70,15 @@ public class ClinicControler {
 	@GetMapping(value="/{id}/report/{days}")
 	public ResponseEntity<ClinicReportDTO> getReport(@PathVariable("id") Long id, @PathVariable("days") Integer days){
 		
-		Clinic clinic = clinicService.findOneByid(id);
-		return new ResponseEntity<>(clinicService.getReport(clinic, LocalDateTime.now().minusDays(days), LocalDateTime.now()),HttpStatus.OK);
+		if (checkRoleService.checkIfClinicAdministrator()) {
+			// TODO additional checks here needed
+			Clinic clinic = clinicService.findOneByid(id);
+			return new ResponseEntity<>(clinicService.getReport(clinic, LocalDateTime.now().minusDays(days), LocalDateTime.now()),HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<>(null,HttpStatus.FORBIDDEN);
+		}
+
 	}
 	@GetMapping(value="")
 	public ResponseEntity<List<Clinic>> list(){

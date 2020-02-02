@@ -15,10 +15,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.psw_isa.psw_isa_backend.service.CareService;
 import org.psw_isa.psw_isa_backend.models.Care;
+import org.psw_isa.psw_isa_backend.models.Room;
 import org.psw_isa.psw_isa_backend.service.DoctorService;
 import org.psw_isa.psw_isa_backend.service.ClinicRatingService;
 import org.psw_isa.psw_isa_backend.service.DoctorRatingService;
 import org.psw_isa.psw_isa_backend.models.Doctor;
+import org.psw_isa.psw_isa_backend.models.Patient;
 import org.psw_isa.psw_isa_backend.dtos.ClinicReportDTO;
 
 import java.util.ArrayList;
@@ -58,6 +60,15 @@ public class ClinicService {
 
 	@Autowired
 	ClinicRatingService clinicRatingService;
+	
+	@Autowired
+	RoomService roomService;
+
+	@Autowired 
+	ClinicAdminService clinicAdminService;
+
+	@Autowired
+	PatientService patientService;
 
 	public Clinic save(Clinic clinic) {
 		clinic.setId(null);
@@ -69,6 +80,12 @@ public class ClinicService {
 	}
 
 	public List<Clinic> findAll() {
+		if (clinicAdminService.getClinic() != null) 
+		{
+			ArrayList<Clinic> result = new ArrayList<>();
+			result.add(clinicRepository.findOneByid(clinicAdminService.getClinic().getId()));
+			return result;
+		}
 		return clinicRepository.findAll();
 	}
 
@@ -104,7 +121,7 @@ public class ClinicService {
 	 * 
 	 */
 	
-	public List<Clinic> findClinicsWithFreeDoctors(Long id, String date){
+public List<Clinic> findClinicsWithFreeDoctors(Long id, String date){
 		List<Clinic> res = new ArrayList<>();
 		List<Clinic> allClinics = clinicRepository.findAll(); 
 		List<Care> allCares = careRepository.findAll();
@@ -197,6 +214,22 @@ public class ClinicService {
 		}
 		return cares;
 	}
+	
+	public List<Patient> findPatientsForClinic(Clinic clinic) {
+		List<Patient> res = new ArrayList<>();
+		List<Patient> patients = patientService.findAll();
+		List<Care> cares = findCaresForClinic(clinic);
+		for (Patient patient : patientService.findAll()) 
+		{
+			boolean found = false;
+			for (Care care : cares) 
+			{
+				if (care.getPatient() != null && patient.getId() == care.getPatient().getId()) found = true;
+			}
+			if (found) res.add(patient);
+		}
+		return res;
+	}
 
 	public Double getRevenue(Clinic clinic, LocalDateTime start, LocalDateTime end) {
 		Double sum = 0.0;
@@ -225,5 +258,17 @@ public class ClinicService {
 				this.getRevenue(clinic, start, end));
 
 	}
+
+
+	public List<Room> getRoomsForClinic(Clinic clinic) {
+		List<Room> rooms = new ArrayList<>();
+		for (Room room : roomService.findAll()) {
+			if (room.getClinic().getId() == clinic.getId()) rooms.add(room);
+		}
+		return rooms;
+	}
+
+
+
 
 }

@@ -8,6 +8,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface VacationRepository extends JpaRepository<Vacation, Long> {
 
 	
+
 	List<Vacation> findAll();
+
+	public Vacation findOneByid(Long id);
+	
+	public List<Vacation> findAll();
+	
+	public Vacation save(Vacation vacation);
+
 	
 }

@@ -13,10 +13,6 @@ import org.psw_isa.psw_isa_backend.models.User;
 import org.psw_isa.psw_isa_backend.repository.PatientRepository;
 import org.psw_isa.psw_isa_backend.repository.RegistrationRequestRepository;
 import org.psw_isa.psw_isa_backend.repository.UserRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +51,7 @@ public class RegistrationRequestService {
 	}
 	
 	public RegistrationRequest newRegistrationRequest(RegistrationDTO registrationDTO) {
-		User user = new User(registrationDTO.getName(), registrationDTO.getLastname(), registrationDTO.getMobile_phone(), registrationDTO.getEmail(), registrationDTO.getAddress(), registrationDTO.getBirthday(), registrationDTO.getPassword());
+		User user = new User(registrationDTO.getName(), registrationDTO.getLastname(), registrationDTO.getMobile_phone(), registrationDTO.getEmail(), registrationDTO.getAddress(), registrationDTO.getBirthday(), registrationDTO.getPassword(), 0);
 		
 		Patient patient = new Patient(user, registrationDTO.getInsuranceid());
 		

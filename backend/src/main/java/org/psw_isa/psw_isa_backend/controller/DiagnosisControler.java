@@ -37,4 +37,13 @@ public class DiagnosisControler {
 		
 		return new ResponseEntity<>(diagnosisService.findAll(),HttpStatus.OK);
 	}
+	
+	@PostMapping(value="/updateDiagnosis" ,consumes = "application/json")
+	public ResponseEntity<Long> updateDiagnosis(@RequestBody Diagnosis diagnosis){
+		
+		
+		diagnosisService.save(diagnosis);
+		
+		return new ResponseEntity<>(diagnosis.getId(),HttpStatus.OK);
+	}
 }

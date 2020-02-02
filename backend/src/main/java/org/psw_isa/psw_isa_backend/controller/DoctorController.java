@@ -1,6 +1,8 @@
 package org.psw_isa.psw_isa_backend.controller;
 
 import org.psw_isa.psw_isa_backend.service.DoctorService;
+import org.psw_isa.psw_isa_backend.service.ClinicService;
+import org.psw_isa.psw_isa_backend.models.Patient;
 
 import java.util.List;
 
@@ -20,6 +22,9 @@ public class DoctorController {
 	
 	@Autowired 
 	DoctorService doctorService;
+
+	@Autowired
+	ClinicService clinicService;
 	
 	@GetMapping(value="/")
 	public ResponseEntity<List<Doctor>> findAll(){
@@ -29,6 +34,11 @@ public class DoctorController {
 	@GetMapping(value="/{id}")
 	public ResponseEntity<Doctor> findOneByid(@PathVariable("id") Long id){
 		return new ResponseEntity<>(doctorService.findOneByid(id), HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/patients")
+	public ResponseEntity<List<Patient>> findPatients(){
+		return new ResponseEntity<>(clinicService.findPatientsForClinic(doctorService.getClinic()), HttpStatus.OK);
 	}
 	/*
 	@PostMapping(value="/filter", consumes = "application/json")

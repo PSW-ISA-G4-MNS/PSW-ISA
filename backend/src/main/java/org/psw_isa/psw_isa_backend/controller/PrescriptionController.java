@@ -28,4 +28,16 @@ public class PrescriptionController {
 			
 			return new ResponseEntity<>(prescription.getId(),HttpStatus.OK);
 		}
+		
+		@PostMapping(value="/changePrescription", consumes = "application/json")
+		public ResponseEntity<Long> updatePrescription(@RequestBody Prescription prescription){
+			
+		
+			
+			prescriptionService.save(prescription);
+			
+			return new ResponseEntity<>(prescription.getId(),HttpStatus.OK);
+		}
+		
+		
 }

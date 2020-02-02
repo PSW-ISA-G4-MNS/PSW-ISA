@@ -3,6 +3,7 @@ package org.psw_isa.psw_isa_backend.service;
 import java.util.List;
 
 import org.psw_isa.psw_isa_backend.models.Diagnosis;
+import org.psw_isa.psw_isa_backend.models.Patient;
 import org.psw_isa.psw_isa_backend.models.Prescription;
 import org.psw_isa.psw_isa_backend.repository.PrescriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,4 +28,6 @@ public class PrescriptionService {
 	public Prescription findOneByid(Long id) {
 		return prescriptionRepository.findOneByid(id);
 	}
+	
+
 }
