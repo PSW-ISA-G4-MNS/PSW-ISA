@@ -59,6 +59,7 @@ export default {
         <router-link v-if="data.role == 'CLINIC_ADMINISTRATOR'" to='/createCare'>Add new care time</router-link>
         <router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/reports'>My Clinic Reports</router-link>
         <router-link v-if="data.role != 'NOT_LOGGED'" to='/logout'>Log out</router-link>
+	<router-link v-if="data.role == 'DOCTOR' || data.role == 'CLINIC_ADMINISTRATOR' || data.role == 'NURSE'" to="/vrm">Vacation Requests</router-link>
 
 	</div>
 	
