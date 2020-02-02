@@ -68,27 +68,6 @@ public class CareController {
 		return new ResponseEntity<>(null,HttpStatus.OK);
 	}
 
-	@GetMapping(value="/notApproved")
-	public ResponseEntity<ArrayList<Care>> findAllNotApproved() {
-		ArrayList<Care> notApproved=new ArrayList<Care>();
-		
-		List<Care> svi=careService.findAll();
-		
-		for (int i=0; i<svi.size();i++) {
-			if(svi.get(i).isApproved()==false) {
-				notApproved.add(svi.get(i));
-			}
-		}
-		
-		return new ResponseEntity<ArrayList<Care>>(notApproved, HttpStatus.OK);
-	}
-	
-	@PutMapping(value="/authenticatePrescription/{id}")
-	public ResponseEntity<Long> approvePrescription (@PathVariable("id") Long id){
-		
-		careService.updateCareApprovePrescription(true, id);
-		return new ResponseEntity<>(id,HttpStatus.OK);
-	}
 	
 	@PostMapping(value="/review", consumes = "application/json")
 	public ResponseEntity<Long> updateCareReview(@RequestBody CareDTO careDTO){
