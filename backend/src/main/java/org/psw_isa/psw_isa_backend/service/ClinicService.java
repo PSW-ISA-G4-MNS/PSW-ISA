@@ -142,13 +142,15 @@ public class ClinicService {
 					}
 				}
 				for(Operation operation : allOperations) {
-					if(operation.getDoctor().getId() == doctor.getId()) {
+					for(Doctor doctor2 : operation.getDoctors()) {
+					if(doctor2.getId() == doctor.getId()) {
 						startTime = operation.getStartTime().toLocalDate();
 						if(startTime.isEqual(wantedDate)) {
 							doctorsOperationsForDate.add(operation);
 						}
 					}
 				}
+			}
 			}
 			if(doctorsCaresForDate.size() + doctorsOperationsForDate.size() < 2) {
 				System.out.println("nasao da je manje od dva : " + doctorsCaresForDate.size());

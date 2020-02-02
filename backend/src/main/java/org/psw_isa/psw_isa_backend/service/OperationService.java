@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.psw_isa.psw_isa_backend.dtos.CareDTO;
 import org.psw_isa.psw_isa_backend.models.Care;
 import org.psw_isa.psw_isa_backend.models.Doctor;
 import org.psw_isa.psw_isa_backend.models.Operation;
@@ -29,6 +30,11 @@ public class OperationService {
 	@Autowired
 	DoctorRepository doctorRepository;
 	
+	
+	public Operation save(Operation operation) {
+		return operationRepository.save(operation);
+	}
+	
 	public ArrayList<Operation> findAllOperationsForDateForDoctor(LocalDate date) {
 		List<Operation> all = operationRepository.findAll();
 		List<Operation> assigned = new ArrayList<>();
@@ -46,13 +52,16 @@ public class OperationService {
 		
 		LocalDate startTime = null;
 		for(Operation operation : all) {
-			if(operation.getDoctor().getClinic().getId() == doctorID) {
+			
+			for(Doctor doc :operation.getDoctors()) {
+			if(doc.getClinic().getId() == doctorID) {
 				startTime = operation.getStartTime().toLocalDate();
 				//(care.getPatient() != null) &&
 				if( (startTime.isEqual(date))) {
 					assigned.add(operation);
 				}
 			}
+		}
 				
 		}
 			

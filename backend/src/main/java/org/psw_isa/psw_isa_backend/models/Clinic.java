@@ -9,7 +9,7 @@ import javax.persistence.Id;
 
 
 @Entity
-public class Clinic {
+public class Clinic implements java.io.Serializable {
 	
 	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

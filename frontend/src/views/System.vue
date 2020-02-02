@@ -2,19 +2,13 @@
 
 
 // import widgets for this view here
-
-import ScheduleOperationMulti from "../widgets/ScheduleOperationAdmin/ScheduleOperationMulti.vue"
-
+import SystemWidget from "../widgets/SystemWidget/SystemWidget.vue"
 
 export default {
-    name: "ScheduleOperation",
+    name: "System",
     data: function () {
             return {
-
-		data: {},
-		role: localStorage.getItem("role"),
-		user: localStorage.getItem("user_id"),
-
+		data: {}
 	    };
 	},
     mounted: function () 
@@ -27,18 +21,14 @@ export default {
         }
     },
     components: {
-
-    	"ScheduleOperationMulti": ScheduleOperationMulti
-
+    	"SystemWidget": SystemWidget
     }
 }
 </script>
 
 <template>
 
-
-<ScheduleOperationMulti/>
-
+<SystemWidget/>
 
 </template>
 
