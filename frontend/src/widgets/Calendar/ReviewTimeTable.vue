@@ -8,7 +8,7 @@ export default {
     data: function () {
         return {
             data: {},
-           
+        
 
         };
     },
@@ -23,11 +23,9 @@ export default {
     methods: {
     	start: function() 
 	{
-    localStorage.setItem('careIdFromCalendar', this.care.id);
-    localStorage.setItem('patientIdFromCalendar', this.care.patient.id);
-    window.location.href = "/frontend/#/review";
-    
    
+    
+   this.$router.push("/review/" + this.care.patient.id + "/" +this.care.id);
 	}
     }
 }

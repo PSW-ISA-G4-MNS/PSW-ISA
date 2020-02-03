@@ -5,7 +5,7 @@ import DiagnosisService from "../Diagnosis/service";
 
 export default {
 	name: "Review",
-	props: ["Review","medicalRecordId"],
+	props: ["careId","medicalRecordId"],
     data: function () {
         return {
             data: {
@@ -26,12 +26,10 @@ export default {
     	DiagnosisService.list().then(response => {
 		this.allDiagnosis = response.data; 
 	});
-//, citace samo id,  koji ce da se nalazi u Review
-//ovo se stavi >>>>>
-//this.data.careID=Review;
+
 		this.Prescription.medicines=this.medicinesForPrescription;
 		this.data.medicalRecordId=this.medicalRecordId;
-		this.data.careId=localStorage.getItem('careIdFromCalendar');
+		this.data.careId=this.careId;
 
 		
 		

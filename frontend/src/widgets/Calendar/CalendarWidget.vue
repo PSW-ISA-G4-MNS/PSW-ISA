@@ -54,7 +54,7 @@ export default {
   
     annual: function()
     {
-      window.location.href = "/frontend/#/vrm";
+      this.$router.push("/vrm");
    
 
      }

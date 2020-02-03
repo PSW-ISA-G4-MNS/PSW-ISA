@@ -8,7 +8,11 @@ export default {
     name: "AllPatientsView",
     data: function () {
             return {
-		data: {}
+        data: {
+            nameSearch:"",
+        idSearch:""
+        },
+        
 	    };
 	},
     mounted: function () 
@@ -30,12 +34,11 @@ export default {
 <div>
 
 <input type="text" class="form-control" placeholder="Type name"  v-model="data.nameSearch" style="width:250px;"/>
-<input type="number" placeholder="Type patient id" v-model="data.idSearch" style="width:250px;"/>      
+<input type="text" placeholder="Type patient id" v-model="data.idSearch" style="width:250px;"/>      
 
-    <WidgetPatientMultiNurse v-if = "this.data.nameSearch !== '' && this.data.nameSearch !== undefined " :filter = "x => ((x.user.firstname + ' ' + x.user.lastname).match(this.data.nameSearch))"/>
-    <WidgetPatientMultiNurse v-if = "this.data.idSearch !== '' && this.data.idSearch !== undefined" :filter = "x => ((x.insuranceID).match(this.data.idSearch)) " />
-    <WidgetPatientMultiNurse v-if = "this.data.nameSearch === ''" />
-    <WidgetPatientMultiNurse v-if = "this.data.nameSearch === undefined" />
+
+<WidgetPatientMultiNurse  :filter = "x => ((x.user.firstname + ' ' + x.user.lastname).includes(this.data.nameSearch)) && (x.insuranceID).includes(this.data.idSearch)"/>
+  
 
 
 </div>

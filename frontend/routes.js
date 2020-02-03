@@ -72,6 +72,7 @@ const routes = [
     {path: '/changeoldReview', component:ChangeReviewView},
     {path: '/scheduleOperation', component:ScheduleOperation},
     {path: '/review', component: ReviewView},
+    {path: "/review/:patientIdFromCalendar/:careIdFromCalendar", component: ReviewView, props: true},
     {path: '/addDiagnosis', component: DiagnosisAdd},
     {path: '/addMedicine', component: MedicineAdd},
 
