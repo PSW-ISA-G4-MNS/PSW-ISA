@@ -26,7 +26,6 @@ import ScheduleOperation from './src/views/ScheduleOperation.vue';
 
 import DoctorPatients from "./src/views/DoctorPatients.vue"
 import ScheduleCare from "./src/views/ScheduleCare.vue";
-import ScheduleOperation from "./src/views/ScheduleOperation.vue";
 import VacationRequestList from "./src/views/VacationRequestList.vue";
 
 
@@ -40,6 +39,8 @@ import ChangeReviewView from './src/views/ChangeReviewView.vue';
 
 import System from './src/views/System.vue';
 import AuthenticatePrescriptionView from './src/views/AuthenticatePrescriptionView.vue';
+
+import PatientDetail from "./src/views/PatientDetail.vue";
 
 
 import AllPatientsView from "./src/views/AllPatientsView.vue";
@@ -76,6 +77,7 @@ const routes = [
     {path: '/addMedicine', component: MedicineAdd},
 
     { path: '/roomEdit/:room', component: RoomEditView, props: true},
+    { path: "/patients/:patient", component: PatientDetail, props: true},
    {path: '/sys', component: System},
    {path: '/prescription', component: AuthenticatePrescriptionView},
    

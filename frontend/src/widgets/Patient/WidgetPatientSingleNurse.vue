@@ -2,7 +2,6 @@
 
 import PatientService from "./service";
 
-
 export default {
     name: "WidgetPatientSingleNurse",
     props: ["patient"],
@@ -25,7 +24,7 @@ export default {
    
     
      <tr>
-      <td id="insurance">{{patient.insuranceID}}</td>
+      <td id="insurance"><router-link :to="'/patients/' + patient.id">{{patient.insuranceID}}</router-link></td>
       <td id="ime">{{ patient.user.firstname }}</td>
       <td id="prezime">{{patient.user.lastname}}</td>
       
