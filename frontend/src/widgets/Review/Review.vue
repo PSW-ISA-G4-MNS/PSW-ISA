@@ -4,7 +4,7 @@ import MedicineService from "../Medicine/service";
 import DiagnosisService from "../Diagnosis/service";
 
 export default {
-	name: "ReviewForm",
+	name: "Review",
 	props: ["Review","medicalRecordId"],
     data: function () {
         return {
@@ -31,7 +31,7 @@ export default {
 //this.data.careID=Review;
 		this.Prescription.medicines=this.medicinesForPrescription;
 		this.data.medicalRecordId=this.medicalRecordId;
-		this.data.careId=1;
+		this.data.careId=localStorage.getItem('careIdFromCalendar');
 
 		
 		

@@ -50,7 +50,14 @@ export default {
     	submit: function() 
 	{
 		
-	}
+  },
+  
+    annual: function()
+    {
+      window.location.href = "/frontend/#/vrm";
+   
+
+     }
     }
 }
 </script>
@@ -62,7 +69,7 @@ export default {
         &nbsp;
         &nbsp;
 
-        <button   style="background-color:purple;color:white;height:40px;width:200px;float:right;">
+        <button @click="annual"  style="background-color:purple;color:white;height:40px;width:200px;float:right;">
                Request an annual
         </button>
 

@@ -23,7 +23,11 @@ export default {
     methods: {
     	start: function() 
 	{
-		window.location.href = "/frontend/#/review";
+    localStorage.setItem('careIdFromCalendar', this.care.id);
+    localStorage.setItem('patientIdFromCalendar', this.care.patient.id);
+    window.location.href = "/frontend/#/review";
+    
+   
 	}
     }
 }

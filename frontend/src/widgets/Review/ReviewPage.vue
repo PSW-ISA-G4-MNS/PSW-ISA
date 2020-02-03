@@ -23,10 +23,8 @@ export default {
     },
 
     mounted: function() {
-	this.patientIdTest=2;
-	
-
-	ReviewService.getMedicalRecord(1).then(response => {
+	this.patientIdTest=localStorage.getItem('patientIdFromCalendar');
+	ReviewService.getMedicalRecord(this.patientIdTest).then(response => {
 			this.medicalRecordObj=response.data;
 			
 		});
