@@ -54,23 +54,7 @@ export default {
 
 <style scoped> 
 
-.form {
-position:relative;
-    top:20%;
-    left:20%;
-	padding: 40px; 
-	margin: 40px;
-	text-align: center;
-	width: 60%;
-}
 
-
-input{
-width: 50%;
-  padding: 12px 20px;
-  
-  box-sizing: border-box;
-}
 
 body {
   font-family: Helvetica Neue, Arial, sans-serif;

@@ -31,10 +31,10 @@ export default {
 </script>
 
 <template>
-<div>
+<div class="form">
 
-<input type="text" class="form-control" placeholder="Type name"  v-model="data.nameSearch" style="width:250px;"/>
-<input type="text" placeholder="Type patient id" v-model="data.idSearch" style="width:250px;"/>      
+<input type="text"  placeholder="Type name"  v-model="data.nameSearch" />
+<input type="text" placeholder="Type patient id" v-model="data.idSearch"/>      
 
 
 <WidgetPatientMultiNurse  :filter = "x => ((x.user.firstname + ' ' + x.user.lastname).includes(this.data.nameSearch)) && (x.insuranceID).includes(this.data.idSearch)"/>
@@ -45,7 +45,21 @@ export default {
 </template>
 
 <style scoped> 
+.form {
+position:relative;
+    top:20%;
+    left:20%;
+	padding: 40px; 
+	margin: 40px;
+	text-align: center;
+	width: 60%;
+}
 
-
+input{
+width: 50%;
+  padding: 12px 20px;
+  
+  box-sizing: border-box;
+}
 
 </style>
