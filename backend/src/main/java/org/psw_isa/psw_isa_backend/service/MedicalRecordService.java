@@ -3,8 +3,12 @@ package org.psw_isa.psw_isa_backend.service;
 import java.util.List;
 
 import org.psw_isa.psw_isa_backend.dtos.MedicalRecordDTO;
+import org.psw_isa.psw_isa_backend.dtos.PatientInfoDTO;
 import org.psw_isa.psw_isa_backend.models.MedicalRecord;
+import org.psw_isa.psw_isa_backend.models.Patient;
+import org.psw_isa.psw_isa_backend.models.User;
 import org.psw_isa.psw_isa_backend.repository.MedicalRecordRepository;
+import org.psw_isa.psw_isa_backend.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,14 +28,41 @@ public class MedicalRecordService {
 	
 	@Autowired
 	PatientService patientService;
+	
+	@Autowired
+	PatientRepository patientRepository;
   
-  @Autowired
+	@Autowired
 	CareRepository careRepository;
+	
+	@Autowired
+	CheckRoleService checkRoleService;
 	
 	public MedicalRecord save(MedicalRecord medicalRecord) {
 		return medicalRecordRepository.save(medicalRecord);
 	}
 	
+	
+	public PatientInfoDTO getOneBySession() {
+		User user = checkRoleService.getUser();
+		List<Patient> allPatients = patientRepository.findAll();
+		MedicalRecord medicalRecord = null;
+		PatientInfoDTO patientInfoDTO = new PatientInfoDTO();
+		
+		if(user == null) {
+			return null;
+		} else {
+			for(Patient patient : allPatients) {
+				if(patient.getUser().getId() == user.getId()) {
+					medicalRecord = medicalRecordRepository.findOneBypatient_id(patient.getId());
+					patientInfoDTO.setMedicalRecord(medicalRecord);
+					patientInfoDTO.setPatient(patient);
+				}
+			}
+		}
+		
+		return patientInfoDTO;
+	}
 	
 	public List<MedicalRecord> findAll() {
 		return medicalRecordRepository.findAll();

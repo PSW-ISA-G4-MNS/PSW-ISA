@@ -1,10 +1,10 @@
 <script>
-
+import WidgetPatientMedicalRecord from '../widgets/PatientMedicalRecord/WidgetPatientMedicalRecord.vue';
 
 // import widgets for this view here
 
 export default {
-    name: "Login",
+    name: "PatientMedicalRecord",
     data: function () {
             return {
 		data: {}
@@ -20,15 +20,14 @@ export default {
         }
     },
     components: {
-        
+        "WidgetPatientMedicalRecord": WidgetPatientMedicalRecord
     }
 }
 </script>
 
 <template>
 
-<p>Home</p>
-
+<WidgetPatientMedicalRecord />
 
 
 </template>

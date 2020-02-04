@@ -3,6 +3,8 @@ package org.psw_isa.psw_isa_backend.controller;
 
 
 import org.psw_isa.psw_isa_backend.dtos.MedicalRecordDTO;
+import org.psw_isa.psw_isa_backend.dtos.PatientInfoDTO;
+import org.psw_isa.psw_isa_backend.models.MedicalRecord;
 import org.psw_isa.psw_isa_backend.service.MedicalRecordService;
 import org.psw_isa.psw_isa_backend.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,16 @@ public class MedicalRecordController {
 		public ResponseEntity<MedicalRecordDTO> findOneById(@PathVariable("id") Long id){
 	
 		return new ResponseEntity<MedicalRecordDTO>(medicalRecordService.findOneMedicalById(id), HttpStatus.OK);
+	 }
+	 
+	 @GetMapping(value = "")
+		public ResponseEntity<PatientInfoDTO> findOneBySession(){
+		 	PatientInfoDTO patientInfoDTO = medicalRecordService.getOneBySession();
+		 	if(patientInfoDTO != null) {
+		 		return new ResponseEntity<PatientInfoDTO>(patientInfoDTO, HttpStatus.OK);
+		 	} else {
+		 		return new ResponseEntity<PatientInfoDTO>(patientInfoDTO, HttpStatus.FORBIDDEN);
+		 	}
 	 }
 	 
 	 @PostMapping(value="/change", consumes = "application/json")
