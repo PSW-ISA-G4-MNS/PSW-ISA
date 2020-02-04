@@ -8,6 +8,7 @@ import CareList from './src/views/CareList.vue';
 import ClinicList from './src/views/ClinicList.vue';
 
 import PatientMedicalRecord from './src/views/PatientMedicalRecord.vue';
+import CareHistory from './src/views/CareHistory.vue';
 
 import ClinicDoctorsList from './src/views/ClinicDoctorsList.vue';
 
@@ -50,7 +51,7 @@ const routes = [
     
 
     { path: '/patientMedicalRecord', component: PatientMedicalRecord},
-
+    { path: '/patientCareHistory', component: CareHistory},
 
     { path: '/reports', component: ClinicReportView},
     { path: '/careTypes', component: CareTypeList},

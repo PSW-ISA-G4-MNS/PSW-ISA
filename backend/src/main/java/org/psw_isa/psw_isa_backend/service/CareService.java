@@ -65,7 +65,99 @@ public class CareService {
 	PrescriptionRepository prescriptionRepository;
 
 	
+	public List<Care> careHistory(){
+		User user = checkRoleService.getUser();
+		List<Care> res = new ArrayList<Care>();
+		List<Care> patientsCares = new ArrayList<Care>();
+		List<Care> allCares = careRepository.findAll();
+		List<Patient> allPatients = patientRepository.findAll();
+		
+		if(user == null) {
+			System.out.println("NEMA USERA");
+			res = null;
+		} else {
+			for(Patient patient : allPatients) {
+				if(patient.getUser().getId() == user.getId()) {
+					System.out.println("NASAO USERA");
+					for(Care care : allCares) {
+						if(care.getPatient() != null) {
+							if(care.getPatient().getId() == patient.getId()){
+								System.out.println("NASAO MU JEDAN PREGLED");
+								patientsCares.add(care);
+							}
+						}
+					}
+				}
+			}
+			
+			for(Care care : patientsCares) {
+				if(care.getEndTime().isBefore(LocalDateTime.now())) {
+					System.out.println("PREGLED OD RANIJE");
+					res.add(care);
+				}
+			}
+			
+		}
+		
+		
+		
+		return res;
+		
+	}
 	
+	public List<Care> filterCareHistory(Long careTypeID, String date){
+		
+		User user = checkRoleService.getUser();
+		List<Care> res = new ArrayList<Care>();
+		List<Care> patientsCaresHistory = new ArrayList<Care>();
+		List<Care> patientsCares = new ArrayList<Care>();
+		List<Care> allCares = careRepository.findAll();
+		List<Patient> allPatients = patientRepository.findAll();
+		
+		LocalDate wantedDate = LocalDate.parse(date);
+		LocalDate startTime = null;
+		
+		if(user == null) {
+			System.out.println("NEMA USERA");
+			res = null;
+		} else {
+			for(Patient patient : allPatients) {
+				if(patient.getUser().getId() == user.getId()) {
+					System.out.println("NASAO USERA");
+					for(Care care : allCares) {
+						if(care.getPatient() != null) {
+							if(care.getPatient().getId() == patient.getId()){
+								System.out.println("NASAO MU JEDAN PREGLED");
+								patientsCares.add(care);
+							}
+						}
+					}
+				}
+			}
+			
+			for(Care care : patientsCares) {
+				if(care.getEndTime().isBefore(LocalDateTime.now())) {
+					System.out.println("PREGLED OD RANIJE");
+					patientsCaresHistory.add(care);
+				}
+			}
+			
+			for(Care care : patientsCaresHistory) {
+				startTime = care.getStartTime().toLocalDate();
+				if(careTypeID == care.getCareType().getId()) {
+					System.out.println("MASAO TAJ KERTAJP");
+					if(startTime.isEqual(wantedDate)) {
+						System.out.println("NASAO TAJ DATUM");
+						res.add(care);
+					}
+				}
+			}
+			
+		}
+		
+		
+		return res;
+	}
 	
 	public List<Care> findAll() {
 		return careRepository.findAll();
