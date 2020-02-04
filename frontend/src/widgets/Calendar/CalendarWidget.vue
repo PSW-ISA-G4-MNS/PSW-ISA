@@ -12,13 +12,16 @@ export default {
             pickDate:null,
             cares:{},
             operations:{},
-            vacation:{}
+            vacation:{},
+			      role: localStorage.getItem("role")
         };
     },
 
     watch: { 
     
       pickDate:function() {
+
+      if(this.role=="DOCTOR"){
 
       CalendarService.getCares(this.pickDate).then(response => {
 		this.cares= response.data; 
@@ -27,6 +30,8 @@ export default {
    CalendarService.getOperations(this.pickDate).then(response => {
 		this.operations= response.data; 
   });
+  
+      }
 
   CalendarService.getVacation(this.pickDate).then(response => {
 		this.vacation= response.data; 

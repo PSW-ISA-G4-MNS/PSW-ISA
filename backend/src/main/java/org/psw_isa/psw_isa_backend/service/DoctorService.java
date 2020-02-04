@@ -258,30 +258,7 @@ public class DoctorService {
 	
 	
 	
-	public Long findVacation(String date) {
-		
-		
-		List<Vacation> allVacations = vacationRepository.findAll();
-		List<Vacation> doctorsVacations = new ArrayList<Vacation>();
-		LocalDate wantedDate = LocalDate.parse(date);
-		
-		Long onVacation =  (long) 0;
-		
-		for(Vacation vacation : allVacations) {
-			if(vacation.getUser().getId() == checkRoleService.getUser().getId()) {
-				doctorsVacations.add(vacation);
-			}
-		}
-		
-		
-		for(Vacation vacation : doctorsVacations) {
-			if((wantedDate.isEqual(vacation.getStartTime())) || (wantedDate.isAfter(vacation.getStartTime()) && wantedDate.isBefore(vacation.getEndTime()))) {
-				onVacation =(long) 1;
-			}
-		}
-		
-		return onVacation;
-	}
+	
 	
 	public Clinic getClinic() {
 		for (Doctor d : findAll()) if (checkRoleService.getUser() != null && d.getUser().getId() == checkRoleService.getUser().getId()) return d.getClinic();

@@ -29,7 +29,7 @@ export default class CalendarService
 
     static getVacation(id) 
     {
-        return axios.get(API_URL + "/doctor/vacationDoctor/"+ id);
+        return axios.get(API_URL + "/vacation/vacationUser/"+ id);
     }
 
 }

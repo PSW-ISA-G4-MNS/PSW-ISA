@@ -58,7 +58,7 @@ export default {
         <router-link v-if="data.role != 'NOT_LOGGED'" to='/clinics'>Show all clinics</router-link>
 		<router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/addMedicine'>Add Medicine</router-link>
 		<router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/addDiagnosis'>Add Diagnosis</router-link>
-		<router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR" || data.role =="DOCTOR"' to='/calendar'>Calendar</router-link>
+		<router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR" || data.role =="DOCTOR" || data.role =="NURSE"' to='/calendar'>Calendar</router-link>
 		<router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/review'></router-link>
 		<router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/changeoldReview'></router-link>
         <router-link v-if="data.role == 'CLINIC_ADMINISTRATOR'" to='/createCare'>Add new care time</router-link>

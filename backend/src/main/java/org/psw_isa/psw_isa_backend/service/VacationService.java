@@ -1,5 +1,7 @@
 package org.psw_isa.psw_isa_backend.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.psw_isa.psw_isa_backend.models.Vacation;
@@ -37,5 +39,30 @@ public class VacationService {
 		vacation.setId(id);
 		Vacation v = vacationRepository.save(vacation);
 		return v.getId();
+	}
+	
+public Long findVacation(String date) {
+		
+		
+		List<Vacation> allVacations = vacationRepository.findAll();
+		List<Vacation> vacations = new ArrayList<Vacation>();
+		LocalDate wantedDate = LocalDate.parse(date);
+		
+		Long onVacation =  (long) 0;
+		
+		for(Vacation vacation : allVacations) {
+			if(vacation.getUser().getId() == checkRoleService.getUser().getId()) {
+				vacations.add(vacation);
+			}
+		}
+		
+		
+		for(Vacation vacation : vacations) {
+			if((wantedDate.isEqual(vacation.getStartTime())) || (wantedDate.isAfter(vacation.getStartTime()) && wantedDate.isBefore(vacation.getEndTime()))) {
+				onVacation =(long) 1;
+			}
+		}
+		
+		return onVacation;
 	}
 }
