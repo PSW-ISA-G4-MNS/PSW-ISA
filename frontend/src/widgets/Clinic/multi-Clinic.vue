@@ -35,7 +35,8 @@ export default {
             this.careTypeName = this.careTypes[index].name;
         },
         filterClinics: function(){
-            if(this.data.careTypeId !== undefined && localStorage.getItem(this.data.date) !== undefined){
+            localStorage.setItem("selectedDate", this.data.date);
+            if(this.data.careTypeId !== undefined && this.data.date !== undefined){
                 ClinicService.getWithFreeDoctors(this.data.careTypeId, this.data.date).then(response => this.items = response.data);
                 console.log("kliknuto");
                 localStorage.setItem("selectedDate", this.data.date);

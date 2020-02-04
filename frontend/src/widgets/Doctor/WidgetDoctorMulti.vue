@@ -18,6 +18,7 @@ export default {
     },
     mounted: function () 
     {
+
         DoctorService.listFreeDoctorsForClinic(localStorage.getItem("selectedClinic"), localStorage.getItem("selectedCareType"), localStorage.getItem("selectedDate")).then(response => this.items = response.data);
     },
     components: {
@@ -32,10 +33,11 @@ export default {
 
 
 <h2 v-if = "items.length == 0">
+  There are no available doctors for selected date and care type.
 </h2>
 <div v-else = "items.length != 0">
 <h1>
-    Available doctors for {{items[0].clinic.name}}
+    Available doctors for {{items[0].clinic.name}} 
 </h1>
   <table >
     <tr>

@@ -7,7 +7,8 @@ export default {
     data: function () {
         return {
           	care: {},
-		        success: false
+		        success: false,
+            role: localStorage.getItem('role')
 
         };
     },
@@ -64,7 +65,7 @@ export default {
       <td id="doctor">{{ care.doctor.user.firstname }} {{ care.doctor.user.lastname}}</td>
       <td id="caretype">{{ care.careType.name}}</td>
       <td id="price">{{ care.price}}</td>
-      <td id="reservate">
+      <td v-if="role == 'PATIENT' " id="reservate">
               <button v-on:click="reservate" style="background-color:green;color:white;height:40px;width:200px">
               Reservate
               </button>
