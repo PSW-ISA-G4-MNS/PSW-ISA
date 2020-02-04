@@ -27,4 +27,9 @@ export default class CalendarService
         return axios.get(API_URL + "/operation/operationForDoctor/"+ id);
     }
 
+    static getVacation(id) 
+    {
+        return axios.get(API_URL + "/vacation/vacationUser/"+ id);
+    }
+
 }

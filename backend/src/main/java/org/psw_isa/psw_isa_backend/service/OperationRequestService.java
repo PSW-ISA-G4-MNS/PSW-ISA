@@ -18,4 +18,8 @@ public class OperationRequestService {
 	public List<OperationRequest> findAll() {
 		return operationRequestRepository.findAll();
 	}
+	
+	public void deleteOneById(Long id) {
+		operationRequestRepository.deleteById(id);
+	}
 }

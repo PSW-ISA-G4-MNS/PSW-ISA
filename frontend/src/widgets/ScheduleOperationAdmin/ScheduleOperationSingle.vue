@@ -15,12 +15,24 @@ export default {
     },
     methods: {
     	reservate: function() 
-      {
+
+	{
+		ScheduleOperationService.reservate(this.data).then(response => {
+      
+      ScheduleOperationService.deleteOperationRequest(this.operationRequest.id).then(response => {
+      console.log("Proslo")
+		});
+      
+		});
+  
+
 
       },
 		decline: function() 
 	{
-	}
+  },
+  
+ 
   
   
 

@@ -33,7 +33,7 @@ export default {
     <input type="text" class="form-control" placeholder="Type name"  v-model="data.nameSearch" style="width:250px;"/>
        
 
-    <multi-Clinic v-if = "this.data.nameSearch !== '' && this.data.nameSearch !== undefined"" :filter = "x => x.name.includes(this.data.nameSearch)"/>
+    <multi-Clinic v-if = "this.data.nameSearch !== '' && this.data.nameSearch !== undefined" :filter = "x => x.name.match(this.data.nameSearch)"/>
     <multi-Clinic v-if = "this.data.nameSearch === ''" />
     <multi-Clinic v-if = "this.data.nameSearch === undefined" />
 </div>

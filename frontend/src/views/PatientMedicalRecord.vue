@@ -1,12 +1,10 @@
 <script>
-
+import WidgetPatientMedicalRecord from '../widgets/PatientMedicalRecord/WidgetPatientMedicalRecord.vue';
 
 // import widgets for this view here
-import ReviewPage from "../widgets/Review/ReviewPage.vue"
 
 export default {
-    name: "ReviewView",
-    props: ["patientIdFromCalendar","careIdFromCalendar"],
+    name: "PatientMedicalRecord",
     data: function () {
             return {
 		data: {}
@@ -22,17 +20,15 @@ export default {
         }
     },
     components: {
-    	"ReviewPage": ReviewPage
+        "WidgetPatientMedicalRecord": WidgetPatientMedicalRecord
     }
 }
 </script>
 
 <template>
 
-<ReviewPage
-:patientId="this.patientIdFromCalendar"
-:careId="this.careIdFromCalendar"
-/>
+<WidgetPatientMedicalRecord />
+
 
 </template>
 

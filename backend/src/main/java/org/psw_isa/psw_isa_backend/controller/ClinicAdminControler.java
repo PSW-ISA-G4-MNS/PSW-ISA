@@ -37,6 +37,16 @@ public class ClinicAdminControler {
 		
 	}
 	
+	@PostMapping(value="/addClinic",consumes = "application/json")
+	public ResponseEntity<AdminClinicDTO> saveClinicToAdmin(@RequestBody AdminClinicDTO adminClinicDTO){
+		
+		clinicAdminService.AddClinic(adminClinicDTO);
+		
+	
+		return new ResponseEntity<>(HttpStatus.OK);
+		
+	}
+	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<AdminClinicDTO> getAdmin(@PathVariable("id") Long id){
 		
@@ -48,8 +58,8 @@ public class ClinicAdminControler {
 	}
 	
 	@GetMapping(value = "/all")
-	public ResponseEntity<List<AdminClinicDTO>> getFreeAdmins(){
-		List<AdminClinicDTO>adminClinicDTOs = clinicAdminService.findAllFree();
+	public ResponseEntity<List<ClinicAdministrator>> getFreeAdmins(){
+		List<ClinicAdministrator>adminClinicDTOs = clinicAdminService.findAllFree();
 		
 		return new ResponseEntity<>(adminClinicDTOs, HttpStatus.OK);
 		
