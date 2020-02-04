@@ -37,6 +37,7 @@ public class OperationRequestController {
 	@PostMapping(value="")
 	public ResponseEntity<OperationRequest> save(@RequestBody OperationRequestDTO dto) {
 		return new ResponseEntity<>(operationRequestService.save(dto), HttpStatus.OK);
+	}
 
 	
 	@GetMapping(value="/delete/{id}")

@@ -9,7 +9,7 @@ export default {
           	care: {},
 
 		        success: false,
-            role: localStorage.getItem('role')
+            role: localStorage.getItem('role'),
 
 		        finalized: false,
 
