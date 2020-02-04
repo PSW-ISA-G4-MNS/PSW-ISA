@@ -8,8 +8,8 @@ export default {
         return {
           	care: {},
 
-            success: false,
-		        role: localStorage.getItem("role"),
+		        success: false,
+            role: localStorage.getItem('role')
 
 		        finalized: false,
 

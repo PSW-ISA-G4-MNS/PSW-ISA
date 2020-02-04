@@ -44,6 +44,7 @@ import ChangeReviewView from './src/views/ChangeReviewView.vue';
 import System from './src/views/System.vue';
 import AuthenticatePrescriptionView from './src/views/AuthenticatePrescriptionView.vue';
 
+
 import AddAdminClinicView from './src/views/AddAdminClinicView.vue';
 
 

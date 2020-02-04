@@ -74,6 +74,7 @@ export default {
 
 
 
+
 	</div>
 	
 	<p class="my-2 my-lg-0" v-if="data.role != 'NOT_LOGGED'">Logged as: {{ data.user }}</p>
