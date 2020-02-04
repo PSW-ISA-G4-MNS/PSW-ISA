@@ -13,7 +13,9 @@ public class VacationService {
 	
 	@Autowired
 	VacationRepository vacationRepository;
-	
+
+	@Autowired
+	CheckRoleService checkRoleService;
 	
 	public Vacation findOneByid(Long id) {
 		return vacationRepository.findOneByid(id);
@@ -26,6 +28,7 @@ public class VacationService {
 	public Long save(Vacation vacation) 
 	{
 		vacation.setId(null);
+		vacation.setUser(checkRoleService.getUser());
 		Vacation v = vacationRepository.save(vacation);
 		return v.getId();
 	}

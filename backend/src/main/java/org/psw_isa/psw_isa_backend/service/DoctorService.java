@@ -88,7 +88,7 @@ public class DoctorService {
 			
 			
 			for(Vacation vacation : doctorsVacations) {
-				if(wantedDate.isAfter(vacation.getStartTime().toLocalDate()) && wantedDate.isBefore(vacation.getEndTime().toLocalDate())) {
+				if(wantedDate.isAfter(vacation.getStartTime()) && wantedDate.isBefore(vacation.getEndTime())) {
 					onVacation = 1;
 				}
 			}
@@ -191,7 +191,7 @@ public class DoctorService {
 		
 		
 		for(Vacation vacation : doctorsVacations) {
-			if(wantedDate.isAfter(vacation.getStartTime().toLocalDate()) && wantedDate.isBefore(vacation.getEndTime().toLocalDate())) {
+			if(wantedDate.isAfter(vacation.getStartTime()) && wantedDate.isBefore(vacation.getEndTime())) {
 				onVacation = 1;
 			}
 		}

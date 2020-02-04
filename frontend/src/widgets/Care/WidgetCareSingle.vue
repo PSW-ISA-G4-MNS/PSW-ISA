@@ -1,14 +1,16 @@
 <script>
 import CareService from "./service";
-
+import ReviewPage from "../Review/ReviewPage.vue";
 export default {
 	name: "WidgetCareSingle",
 	props: ["care"],
     data: function () {
         return {
           	care: {},
-		        success: false,
-            role: localStorage.getItem('role')
+            success: false,
+		        role: localStorage.getItem("role"),
+		        finalized: false,
+
 
         };
     },
@@ -30,7 +32,11 @@ export default {
   
 
 	},
-		decline: function() 
+	finalizeCare: function () {
+		this.finalized = true;
+	},
+
+	decline: function() 
 	{
 		CareService.decline(this.care).then(response => {
 			if (response.status == 200) this.success = true;
@@ -53,7 +59,11 @@ export default {
 		console.log(this.data);
 	}
 	);
+    },
+    components: {
+	ReviewPage
     }
+
 }
 </script>
 
@@ -69,6 +79,8 @@ export default {
               <button v-on:click="reservate" style="background-color:green;color:white;height:40px;width:200px">
               Reservate
               </button>
+	      <button v-if="this.role == 'DOCTOR' && !this.finalized" @click="finalizeCare">Finalize</button>
+	      <ReviewPage v-if="this.finalized" :careId="care.id" :patientId="care.patient.id" />
         </td>
   </tr>
   
@@ -135,4 +147,4 @@ th.active .arrow {
   border-top: 4px solid #fff;
 }
 
-</style>>
+</style>
