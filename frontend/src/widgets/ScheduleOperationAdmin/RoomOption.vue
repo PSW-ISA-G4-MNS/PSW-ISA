@@ -16,16 +16,16 @@ export default {
     },
     methods: {
     	reservate: function() 
-	{
-      this.request.patient=this.operationRequest.patient;
-      this.request.startTime=this.data.next;
-      this.request.doctors=this.doctors;
-		ScheduleOperationService.reservate(this.request).then(response => {
-      console.log("Proslo")
-		});
-  
+	    {
+        this.request.patient=this.operationRequest.patient;
+        this.request.startTime=this.data.next;
+        this.request.doctors=this.doctors;
+        ScheduleOperationService.reservate(this.request).then(response => {
+          console.log("Proslo")
+        });
+      
 
-	},
+	  },
 		decline: function() 
 	{
 	}

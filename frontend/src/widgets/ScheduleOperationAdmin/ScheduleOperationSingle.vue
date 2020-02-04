@@ -15,13 +15,9 @@ export default {
     },
     methods: {
     	reservate: function() 
-	{
-		ScheduleOperationService.reservate(this.data).then(response => {
-      console.log("Proslo")
-		});
-  
+      {
 
-	},
+      },
 		decline: function() 
 	{
 	}
@@ -52,13 +48,10 @@ export default {
       <td id="realTime" v-if="newDate!=null">{{newDate}}</td>
       
       <td id="reservate">
-              <button v-on:click="reservate" style="background-color:green;color:white;height:40px;width:200px">
-              Reservate
-              </button>
-        </td>
-
-      
+          <RoomSelection :doctors="doctors" :operationRequest="operationRequest" />
+      </td>
   </tr>
+
   
 </template>
 
