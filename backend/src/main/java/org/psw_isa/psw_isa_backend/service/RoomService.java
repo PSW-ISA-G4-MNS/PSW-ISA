@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
+import org.psw_isa.psw_isa_backend.Logger;
 
 @Service
 public class RoomService {
@@ -101,20 +102,34 @@ public class RoomService {
 			add(" 17:00");
 			add(" 17:30");
 		}};
+		Logger.getInstance().debug("Creating formatter....");
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 		LocalDate date = LocalDate.now();
+		Logger.getInstance().debug("Got new date " + date.toString());
 		boolean found = false;
 		Room room = findOneByid(roomId);
+		if (room == null) {
+			Logger.getInstance().error("Room not found");
+			return null;
+		}
 		while (!found) {
 			for(String time : times) {
 				String checkTimeStr = date.toString() + time;
 				LocalDateTime checkTime = LocalDateTime.parse(checkTimeStr, formatter);
+				Logger.getInstance().debug("Checking if room has scheduled time: " + checkTime.toString());
+				if (room.getSchedule() == null) {
+					Logger.getInstance().debug("Schedule not initialized, creating one and saving");
+					room.setSchedule(new ArrayList<LocalDateTime>());
+					roomRepository.save(room);
+				}
 				if (!room.getSchedule().contains(checkTime)) {					
 					found = true;
+					Logger.getInstance().debug("FOUND");
 					return checkTime;
 				}
 			}
 			if (!found) {
+				Logger.getInstance().debug("NOT FOUND: advancing one day");
 				date = date.plusDays(1);
 			}
 		}
