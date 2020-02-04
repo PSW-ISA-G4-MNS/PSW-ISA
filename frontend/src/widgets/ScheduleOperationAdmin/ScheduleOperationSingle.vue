@@ -1,5 +1,5 @@
 <script>
-import ScheduleOperationService from "./service";
+import RoomSelection from "./RoomSelection.vue";
 
 export default {
 	name: "ScheduleOperationSingle",
@@ -32,6 +32,9 @@ export default {
       this.data.startTime=this.newDateTime;
       this.data.doctors=this.doctors;
     
+    },
+    components: {
+      RoomSelection
     }
 }
 </script>
@@ -40,14 +43,12 @@ export default {
     
 
   <tr >
-      <td id="id">{{operationRequest.patient.user.id}}</td>
-      <td id="firstname">{{operationRequest.patient.user.firstname}}</td>
-      <td id="lastname">{{operationRequest.patient.user.lastname}}</td>
-      <td id="time" v-if="operationRequest.startTime!=null">{{operationRequest.startTime.toString().replace("T", " ")}}</td>
-      <td id="time" v-else>{{"No time"}}</td>
-      <td id="realTime" v-if="newDate!=null">{{newDate}}</td>
-      
-      <td id="reservate">
+      <td>{{operationRequest.patient.user.id}}</td>
+      <td>{{operationRequest.patient.user.firstname}}</td>
+      <td>{{operationRequest.patient.user.lastname}}</td>
+      <td v-if="operationRequest.startTime!=null">{{operationRequest.startTime.toString().replace("T", " ")}}</td>
+      <td  v-else>{{"No time"}}</td>      
+      <td>
           <RoomSelection :doctors="doctors" :operationRequest="operationRequest" />
       </td>
   </tr>

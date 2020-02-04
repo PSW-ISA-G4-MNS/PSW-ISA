@@ -1,5 +1,5 @@
 <script>
-import ScheduleOperationService from "./service";
+import Service from "./service";
 import ScheduleOperationSingle from "./ScheduleOperationSingle.vue";
 
 
@@ -21,9 +21,9 @@ export default {
     },
     mounted: function () 
     {
-        ScheduleOperationService.list().then(response => this.items = response.data);
+        Service.list().then(response => this.items = response.data);
 
-         	ScheduleOperationService.doctors().then(response => {
+         	Service.doctors().then(response => {
 		this.doctorsForOperation = response.data; 
 	});
     },

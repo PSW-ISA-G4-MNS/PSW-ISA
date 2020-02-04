@@ -1,13 +1,15 @@
 <script>
 import RoomService from "../Room/service";
-import Room from "./RoomOption.vue";
+import RoomOption from "./RoomOption.vue";
+
 export default {
 	name: "RoomSelection",
 	props: ["operationRequest","doctors"],
     data: function () {
         return {
-            items: {},
+            items: [],
           	care: {},
+            search: "",
             success: false,
             
 
@@ -25,20 +27,20 @@ export default {
       })
     },
     components: {
-        Room
+        RoomOption
     }
 }
 </script>
 
 <template>
-
+<div>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" :data-target="'Modal-' + operationRequest.id">
-  Launch demo modal
+<button type="button" class="btn btn-primary" data-toggle="modal" :data-target="'#Modal-' + operationRequest.id">
+  Schedule
 </button>
 
 <!-- Modal -->
-<div class="modal fade" :id="'Modal' + operationRequest.id" tabindex="-1" role="dialog" :aria-labelledby="'ModalLabel' + operationRequest.id" aria-hidden="true">
+<div class="modal fade" :id="'Modal-' + operationRequest.id" tabindex="-1" role="dialog" :aria-labelledby="'ModalLabel' + operationRequest.id" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -48,7 +50,11 @@ export default {
         </button>
       </div>
       <div class="modal-body">
-        <Room v-for="item in items" :operationRequest="operationRequest" :doctors="doctors" :key="item.id" :room="item.id" />
+        <div>
+          <input type="text" placeholder="Room name" v-model="search.name" />
+          <RoomOption v-for="item in items.filter(x => x.clinic.id == this.operationRequest.clinic.id)" 
+            :operationRequest="operationRequest" :doctors="doctors" :key="item.id" :room="item.id" />
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -56,7 +62,7 @@ export default {
     </div>
   </div>
 </div>
-
+</div>
 </template>
 
 <style scoped>
