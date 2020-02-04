@@ -13,4 +13,5 @@ public interface OperationRequestRepository extends JpaRepository<OperationReque
 	
 	public OperationRequest findOneById(Long id);
 	
+	public void deleteById(Long id);
 }
