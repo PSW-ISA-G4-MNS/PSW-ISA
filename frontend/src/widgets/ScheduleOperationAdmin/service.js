@@ -19,4 +19,8 @@ export default class ScheduleOperationService
     static reservate(x){
         return axios.post(API_URL + "/operation",x);
     }
+
+    static deleteOperationRequest(id){
+        return axios.get(API_URL + "/operationRequest/delete/"+id);
+    }
 }

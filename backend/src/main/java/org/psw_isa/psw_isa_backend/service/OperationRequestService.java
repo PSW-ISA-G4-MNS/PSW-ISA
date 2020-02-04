@@ -26,6 +26,7 @@ public class OperationRequestService {
 		return operationRequestRepository.findAll();
 	}
 
+
 	public OperationRequest save(OperationRequestDTO dto) 
 	{
 		OperationRequest operationRequest = new OperationRequest();
@@ -33,5 +34,11 @@ public class OperationRequestService {
 		operationRequest.setPatient(patientService.findOneByid(dto.getPatientId()));
 		operationRequest.setTime(dto.getTime());
 		return operationRequestRepository.save(operationRequest);
+}
+
+	
+	public void deleteOneById(Long id) {
+		operationRequestRepository.deleteById(id);
+
 	}
 }

@@ -13,7 +13,8 @@ export default {
     },
     data: function () {
         return {
-            items: []
+            items: [],
+            role: localStorage.getItem('role')
         }
     },
     mounted: function () 
@@ -44,7 +45,7 @@ export default {
         <th>Doctor </th>
         <th>Care type </th>
         <th>Price </th>
-        <th>Reservation </th>
+        <th v-if="role == 'PATIENT' ">Reservation </th>
     </tr>
     
       <WidgetCareSingle 

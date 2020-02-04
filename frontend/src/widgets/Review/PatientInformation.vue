@@ -43,7 +43,7 @@ export default {
 		</p>
 		
 		<p>Width
-		<input type="text" class="form-control" placeholder="Width" v-model="medicalRecord.width" />
+		<input type="text" class="form-control" placeholder="Weight" v-model="medicalRecord.width" />
 		</p>
 		
 		<p>Blood Type

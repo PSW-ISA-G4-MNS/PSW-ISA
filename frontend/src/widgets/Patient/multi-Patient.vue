@@ -1,9 +1,10 @@
 <script>
-import DoctorService from "./service";
-import Doctor from "./Doctor.vue";
+import PatientService from "./service";
+import Patient from "./WidgetPatientSingle.vue";
+
 
 export default {
-    name: "multi-DoctorPatient",
+    name: "multi-Patient",
     props: {
         filter: {
             type: Function,
@@ -17,22 +18,22 @@ export default {
     },
     mounted: function () 
     {
-        DoctorService.patients().then(response => this.items = response.data);
+        PatientService.list().then(response => this.items = response.data);
     },
     components: {
-    	"Doctor": Doctor
+    	"Patient": Patient
     }
 }
 </script>
 
 <template>
-    <div class="multi-DoctorPatient"> 
-      <p
+    <div class="multi-Patient"> 
+      <Patient
       	v-for="item in items.filter(filter)"
       	:id="item.id"
-      	:key="item.id">
-		<router-link :to="'/patients/' + item.id">{{ item.user.firstname}} {{ item.user.lastname}}</router-link>
-        </p>
+      	:key="item.id"
+        :Patient="item.id"
+          />
     </div>
 
 </template>

@@ -1,12 +1,11 @@
 <script>
+import WidgetCareHistoryMulti from '../widgets/PatientCareHistory/WidgetCareHistoryMulti.vue';
 
 
 // import widgets for this view here
-import ReviewPage from "../widgets/Review/ReviewPage.vue"
 
 export default {
-    name: "ReviewView",
-    props: ["patientIdFromCalendar","careIdFromCalendar"],
+    name: "CareHistory",
     data: function () {
             return {
 		data: {}
@@ -14,6 +13,7 @@ export default {
 	},
     mounted: function () 
     {
+
     },
     methods: {
         submit: function (event) 
@@ -22,17 +22,15 @@ export default {
         }
     },
     components: {
-    	"ReviewPage": ReviewPage
+        "WidgetCareHistoryMulti": WidgetCareHistoryMulti
     }
 }
 </script>
 
 <template>
 
-<ReviewPage
-:patientId="this.patientIdFromCalendar"
-:careId="this.careIdFromCalendar"
-/>
+<WidgetCareHistoryMulti/>
+
 
 </template>
 

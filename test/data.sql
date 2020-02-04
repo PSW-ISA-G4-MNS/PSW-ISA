@@ -19,3 +19,4 @@ insert into patient ("id", "insuranceid", "user_id") values (10, '156156156', 5)
 insert into registration_request ("approved", "time", "patient_id") values (true, '2019-10-10', 10);
 insert into room ("title", "capacity", "clinic_id") values ('Soba 23', 10, 1);
 
+insert into operation_request ("id", "patient_id", "clinic_id") values (100, 10, 1);
