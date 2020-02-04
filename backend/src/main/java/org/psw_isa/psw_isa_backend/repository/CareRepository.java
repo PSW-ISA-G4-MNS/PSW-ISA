@@ -26,9 +26,7 @@ public interface CareRepository extends JpaRepository<Care, Long> {
 
 	
 
-	@Query(value = "UPDATE care SET approved = :approved WHERE id = :id", nativeQuery = true)
-	public int updateCareApprovePrescription(@Param("approved") boolean approved,@Param("id") Long id);
-
+	
 	@Transactional
 	@Modifying
 	@Query(value = "UPDATE care SET comment = :comment, diagnosis_id = :diagnosis_id, prescription_id = :prescription_id, medical_record_id= :medical_record_id, approved = :approved WHERE id = :id", nativeQuery = true)

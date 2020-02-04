@@ -29,4 +29,9 @@ public interface PrescriptionRepository extends JpaRepository<Prescription, Long
 	public int updatePrescription(@Param("medicines") ArrayList<Medicine> medicines,   @Param("id") Long id);
 
 	
+	@Transactional
+	@Modifying
+	@Query(value = "UPDATE prescription SET approved = :approved, nurse_id = :nurseId WHERE id = :id", nativeQuery = true)
+	public int updateApprovePrescription(@Param("approved") boolean approved,@Param("nurseId") Long nurseId,@Param("id") Long id);
+
 }

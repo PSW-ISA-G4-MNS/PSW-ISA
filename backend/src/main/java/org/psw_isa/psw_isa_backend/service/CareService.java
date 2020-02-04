@@ -118,9 +118,6 @@ public class CareService {
 			careDTO.getStartTime(), careDTO.getEndTime(),careDTO.getPrice(),careDTO.getComment(),diagnosisRepository.findOneByid(careDTO.getDiagnosisId()),prescriptionRepository.findOneByid(careDTO.getPrescriptionId()),false));
 	}
 	
-	public int updateCareApprovePrescription(boolean approved,Long id){
-		return careRepository.updateCareApprovePrescription(approved, id);
-	}
 	
 	public int updateCareReview(CareDTO careDTO) {
 		return careRepository.updateCareReview(careDTO.getComment(),careDTO.getDiagnosisId(), careDTO.getPrescriptionId(),careDTO.getMedicalRecordId(), false,careDTO.getCareId());

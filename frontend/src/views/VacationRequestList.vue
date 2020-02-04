@@ -2,6 +2,9 @@
 
 
 // import widgets for this view here
+import Form from "../widgets/VacationRequest/VacationRequestForm.vue";
+import List from "../widgets/VacationRequest/multi-VacationRequest.vue";
+
 
 export default {
     name: "VacationRequestList",
@@ -10,6 +13,7 @@ export default {
 		data: {},
 		role: localStorage.getItem("role"),
 		user: localStorage.getItem("user_id"),
+		create: false,
 	    };
 	},
     mounted: function () 
@@ -22,14 +26,20 @@ export default {
         }
     },
     components: {
+    	Form,
+	List
     }
 }
 </script>
 
 <template>
 <div class="scheduling">
-<router-link to="/vrm/create">New Vacation Request<router-link>
+<button v-if="this.role == 'DOCTOR' || this.role == 'NURSE'" @click="create = !create">New vacation request</button>
+<Form @submit="$refs.requests.reload()" v-if="this.create" />
 <p>Vacation Requests</p>
+
+<List ref="requests" v-if="this.role != 'CLINIC_ADMINISTRATOR'" :filter="x => x.user.id == this.user" />
+
 </div>
 </template>
 
