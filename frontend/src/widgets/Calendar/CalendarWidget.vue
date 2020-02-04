@@ -11,7 +11,8 @@ export default {
             data: {},
             pickDate:null,
             cares:{},
-            operations:{}
+            operations:{},
+            vacation:{}
         };
     },
 
@@ -25,6 +26,10 @@ export default {
 
    CalendarService.getOperations(this.pickDate).then(response => {
 		this.operations= response.data; 
+  });
+
+  CalendarService.getVacation(this.pickDate).then(response => {
+		this.vacation= response.data; 
   });
   
       }
@@ -75,7 +80,10 @@ export default {
 
         <h3>Timetable for : {{this.pickDate}}</h3>
 
-        <table>
+
+        <h1 v-if="this.vacation==1">VACATION</h1>
+
+        <table v-if="this.vacation==0">
     <tr>
         <th>Time </th>
         <th>Obligation </th>
