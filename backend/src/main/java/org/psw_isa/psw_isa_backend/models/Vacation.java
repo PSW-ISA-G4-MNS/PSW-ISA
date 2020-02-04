@@ -20,10 +20,10 @@ public class Vacation {
 
 	
 	
-	private LocalDateTime startTime; 
+	private LocalDate startTime; 
 	
 	
-	private LocalDateTime endTime; 
+	private LocalDate endTime; 
 	
 	@ManyToOne
     @JoinColumn
@@ -50,7 +50,7 @@ public class Vacation {
 	public Vacation() 
 	{
 	}
-	public Vacation(LocalDateTime _startTime, LocalDateTime _endTime, User _user, Boolean _approved, String _commentFromUser, String _commentFromAdministrator, VacationType _type, ClinicAdministrator _approver) {
+	public Vacation(LocalDate _startTime, LocalDate _endTime, User _user, Boolean _approved, String _commentFromUser, String _commentFromAdministrator, VacationType _type, ClinicAdministrator _approver) {
 		super();
 		 
 		this.startTime = _startTime;
@@ -72,22 +72,22 @@ public class Vacation {
 	}
 	
 	 
-	public LocalDateTime getStartTime() 
+	public LocalDate getStartTime() 
 	{
 		return this.startTime;
 	}
 
-	public void setStartTime(LocalDateTime newValue) 
+	public void setStartTime(LocalDate newValue) 
 	{
 		this.startTime = newValue;
 	}
 	 
-	public LocalDateTime getEndTime() 
+	public LocalDate getEndTime() 
 	{
 		return this.endTime;
 	}
 
-	public void setEndTime(LocalDateTime newValue) 
+	public void setEndTime(LocalDate newValue) 
 	{
 		this.endTime = newValue;
 	}

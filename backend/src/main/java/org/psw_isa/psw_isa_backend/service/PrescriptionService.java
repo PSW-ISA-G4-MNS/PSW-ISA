@@ -29,5 +29,9 @@ public class PrescriptionService {
 		return prescriptionRepository.findOneByid(id);
 	}
 	
+	public int updateApprovePrescription(boolean approved,Long nurseId,Long id){
+		return prescriptionRepository.updateApprovePrescription(approved,nurseId, id);
+	}
+	
 
 }

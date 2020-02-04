@@ -21,14 +21,19 @@ public class Prescription {
 	private ArrayList<Medicine> medicines;
 
 	
+	private Long nurseId;
+	
+	private boolean approved;
+	
 	public Prescription() {
 		
 	}
 	
-	public Prescription(Long id, ArrayList<Medicine> lista) {
+	public Prescription(Long id, ArrayList<Medicine> lista, boolean approved) {
 		super();
 		this.id=id;
 		this.medicines=lista;
+		this.approved=approved;
 		
 	}
 	public void setId(Long newValue) 
@@ -48,6 +53,22 @@ public class Prescription {
 
 	public void setMedicines(ArrayList<Medicine> medicines) {
 		this.medicines = medicines;
+	}
+
+	public Long getNurseId() {
+		return nurseId;
+	}
+
+	public void setNurseId(Long nurseId) {
+		this.nurseId = nurseId;
+	}
+
+	public boolean isApproved() {
+		return approved;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
 	}
 	
 	
