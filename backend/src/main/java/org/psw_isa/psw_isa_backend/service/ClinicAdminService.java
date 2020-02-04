@@ -29,6 +29,9 @@ public class ClinicAdminService {
 	@Autowired
 	CheckRoleService checkRoleService;
 
+	@Autowired
+	ClinicService clinicService;
+	
 	public String updateAdminClinic(Long clinic, Long id) {
 		
 		return adminClinicRepository.updateAdminClinic( clinic, id);
@@ -65,7 +68,19 @@ public class ClinicAdminService {
 		return getCurrent().getClinic();
 	}
 	
-	public List<AdminClinicDTO> findAllFree(){
+	public void AddClinic(AdminClinicDTO adminClinicDTO) {
+		
+		ClinicAdministrator admin=adminClinicRepository.findOneByid(adminClinicDTO.getAdmin_Id());
+		
+		Clinic klinika=clinicService.findOneByid(adminClinicDTO.getClinic_Id());
+		
+		admin.setClinic(klinika);
+		
+		
+		adminClinicRepository.save(admin);
+	}
+	
+	public List<ClinicAdministrator> findAllFree(){
 		List<ClinicAdministrator> all = adminClinicRepository.findAll();
 		List<ClinicAdministrator> free = new ArrayList<>();
 		List<AdminClinicDTO> adminClinicDTOs = new ArrayList<>();
@@ -76,12 +91,10 @@ public class ClinicAdminService {
 			}
 		}
 		
-		for(ClinicAdministrator clinicAdministrator : free) {
-			adminClinicDTOs.add(new AdminClinicDTO(clinicAdministrator));
-		}
 		
 		
-		return adminClinicDTOs;
+		
+		return free;
 	}
 
 	public List<Doctor> getDoctors() 

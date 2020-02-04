@@ -7,8 +7,10 @@ export default {
     data: function () {
         return {
           	care: {},
+
 		        success: false,
             role: localStorage.getItem('role')
+
 		        finalized: false,
 
 

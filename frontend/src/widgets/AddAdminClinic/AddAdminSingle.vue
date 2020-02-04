@@ -1,60 +1,87 @@
 <script>
-import CalendarService from './service';
+import AddAdminClinicService from "./service";
 
 
 export default {
-    name: "ReviewTimeTable",
-    props:[ "care","datum"],
+    name: "AddAdminSingle",
+    props: ["admin", "idKlinike"],
     data: function () {
         return {
             data: {},
+            success:false,
+            
+        }
+    },
+
+    methods:{
+
+    	add: function() {
+            
+            AddAdminClinicService.add(this.data).then(response => {
+
+
+      if (response.status == 200){ 
+        this.success = true;
         
+      }
+			else this.success = false;
 
-        };
+		});
+           
+    
+      }
+    
     },
-
-    
-        mounted: function() {
-
-		
-		
+    mounted: function () 
+    {
+        
+        
+       
+       
     },
+    watch: { 
     
-    methods: {
-    	start: function() 
-	{
-   
-    
-   this.$router.push("/review/" + this.care.patient.id + "/" +this.care.id);
-	}
-    }
+      idKlinike:function() {
+
+      
+    this.data.Clinic_Id=this.idKlinike;
+       this.data.Admin_Id=this.admin.id;
+      }
+    },
 }
 </script>
 
 <template>
-   
 
-<tr>
-      <td id="vreme">{{care.startTime.toString().replace(datum+"T", " ")}}</td>
-      <td id="obaveza">{{care.patient.id}} {{care.patient.user.firstname}} {{care.patient.user.lastname}}</td>
+     <tr >
       
-      <td id="dugme">
-              <button @click="start"   style="background-color:green;color:white;height:40px;width:200px">
-            Zapocni pregled
+      <td id="firstname">{{admin.user.firstname}}</td>
+      <td id="lastname">{{admin.user.lastname}}</td>
+      
+      
+      <td id="reservate">
+              <button  v-if="!success" v-on:click="add" style="background-color:green;color:white;height:40px;width:200px">
+              Add
               </button>
-              
-              
-
-              
         </td>
 
-        
-    </tr>
-
+      
+  </tr>
+  
 
 </template>
 
+
+
 <style scoped> 
+
+
+.widget-admin-single {
+	padding: 10px; 
+	background-color: #ffcccc; 
+	margin: 10px;
+}
+
 
 input{
 width: 50%;
@@ -128,4 +155,5 @@ th.active .arrow {
   border-right: 4px solid transparent;
   border-top: 4px solid #fff;
 }
+
 </style>
