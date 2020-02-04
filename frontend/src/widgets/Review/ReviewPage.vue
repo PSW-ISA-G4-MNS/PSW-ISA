@@ -11,7 +11,7 @@ export default {
         return {
             data: {
 		},
-		patientIdTest:0,
+		
 		medicalRecordObj:{},
 		medicalId:0,
 		
@@ -23,10 +23,8 @@ export default {
     },
 
     mounted: function() {
-	this.patientIdTest=2;
 	
-
-	ReviewService.getMedicalRecord(1).then(response => {
+	ReviewService.getMedicalRecord(this.patientId).then(response => {
 			this.medicalRecordObj=response.data;
 			
 		});
@@ -50,7 +48,8 @@ export default {
 <template>
     <div> 
 		
-		<PatientInformation style="float:left;"
+		<PatientInformation
+		 style="float:left;"
 		
 		:medicalRecord="this.medicalRecordObj"/>
 		
@@ -58,6 +57,7 @@ export default {
 		 :id="medicalRecordObj.id"
 		 :key="medicalRecordObj.id"
 		 :medicalRecordId="this.medicalRecordObj.id"
+		 :careId="this.careId"
 		 />
 		
 		

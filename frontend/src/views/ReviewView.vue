@@ -6,6 +6,7 @@ import ReviewPage from "../widgets/Review/ReviewPage.vue"
 
 export default {
     name: "ReviewView",
+    props: ["patientIdFromCalendar","careIdFromCalendar"],
     data: function () {
             return {
 		data: {}
@@ -28,7 +29,10 @@ export default {
 
 <template>
 
-<ReviewPage/>
+<ReviewPage
+:patientId="this.patientIdFromCalendar"
+:careId="this.careIdFromCalendar"
+/>
 
 </template>
 

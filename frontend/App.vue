@@ -57,16 +57,18 @@ export default {
         <router-link v-if="data.role == 'DOCTOR'" to='/doctor/myPatients'>My Patients</router-link>
         <router-link v-if="data.role == 'DOCTOR'" to='/schedule/care'>Schedule Care</router-link>
         <router-link v-if="data.role == 'DOCTOR'" to='/schedule/operation'>Schedule Operation</router-link>
+		<router-link v-if="data.role == 'ADMINISTRATOR' " to='/addAdminClinic'>Add Admin</router-link>
         <router-link v-if="data.role != 'NOT_LOGGED'" to='/clinics'>Show all clinics</router-link>
 		<router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/addMedicine'>Add Medicine</router-link>
 		<router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/addDiagnosis'>Add Diagnosis</router-link>
-		<router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/calendar'>Calendar</router-link>
+		<router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR" || data.role =="DOCTOR" || data.role =="NURSE"' to='/calendar'>Calendar</router-link>
 		<router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/review'></router-link>
 		<router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/changeoldReview'></router-link>
         <router-link v-if="data.role == 'CLINIC_ADMINISTRATOR'" to='/createCare'>Add new care time</router-link>
 	<router-link v-if="data.role == 'DOCTOR' || data.role == 'CLINIC_ADMINISTRATOR' || data.role == 'NURSE'" to="/vrm">Vacation Requests</router-link>
         <router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/reports'>My Clinic Reports</router-link>
         <router-link v-if="data.role != 'NOT_LOGGED'" to='/logout'>Log out</router-link>
+		<router-link v-if="data.role =='NURSE'" to='prescription'>Authenticate Prescriptions</router-link>
 
 
 	</div>

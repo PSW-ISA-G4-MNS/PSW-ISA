@@ -15,8 +15,18 @@ export default class AddAdminClinicService
 
     static list() 
     {
-        return axios.get(API_URL + "/adminClinic/all/");
+        return axios.get(API_URL + "/adminClinic/all");
     }
+    
+    static add(x){
+        return axios.post(API_URL+"/adminClinic/addClinic",x)
+    }
+
+    static getClinics(){
+        return axios.get(API_URL + "/clinic");
+    }
+
+
     static get(id) 
     {
         return axios.get(API_URL + "/adminClinic/" + id);
