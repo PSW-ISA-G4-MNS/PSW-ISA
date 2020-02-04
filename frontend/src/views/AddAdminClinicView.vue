@@ -2,10 +2,10 @@
 
 
 // import widgets for this view here
-import AddAdminClinicMulti from "../widgets/AddAdminClinic/AddAdminClinicMulti.vue"
+import AddAdminMulti from "../widgets/AddAdminClinic/AddAdminMulti.vue"
 
 export default {
-    name: "AddAdminClinic",
+    name: "AddAdminClinicView",
     data: function () {
             return {
 		data: {}
@@ -21,14 +21,14 @@ export default {
         }
     },
     components: {
-    	"AddAdminClinicMulti": AddAdminClinicMulti
+    	"AddAdminMulti": AddAdminMulti
     }
 }
 </script>>
 
 <template>
 
-<AddAdminClinicMulti/>
+<AddAdminMulti/>
 
 </template>
 
