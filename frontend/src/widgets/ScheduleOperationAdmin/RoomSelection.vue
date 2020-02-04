@@ -52,7 +52,7 @@ export default {
       <div class="modal-body">
         <div>
           <input type="text" placeholder="Room name" v-model="search.name" />
-          <RoomOption v-for="item in items.filter(x => x.clinic.id == this.operationRequest.clinic.id)" 
+          <RoomOption v-for="item in items.filter(x => x.clinic.id == this.operationRequest.clinic.id && x.title.includes(this.search.name))" 
             :operationRequest="operationRequest" :doctors="doctors" :key="item.id" :room="item.id" />
         </div>
       </div>
