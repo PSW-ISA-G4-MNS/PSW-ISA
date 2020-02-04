@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
+import java.time.LocalDateTime;
+
 
 @RestController
 @RequestMapping(value = "room")
@@ -56,4 +58,10 @@ public class RoomController {
 	{
 		return new ResponseEntity<>(roomService.delete(id), HttpStatus.OK);
 	}
+
+	@GetMapping(value="/{id}/next")
+	public ResponseEntity<LocalDateTime> findNextTimeForRoom(@PathVariable("id") Long roomId) {
+		return new ResponseEntity<>(roomService.findNextTimeForRoom(roomId), HttpStatus.OK);
+	}
+
 }

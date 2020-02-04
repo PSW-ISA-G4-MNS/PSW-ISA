@@ -41,4 +41,8 @@ export default class RoomService
     {
         return axios.delete(API_URL + "/room/" + id);
     }
+
+    static next(id) {
+        return axios.get(API_URL + "/room/" + id + "/next");
+    }
 }

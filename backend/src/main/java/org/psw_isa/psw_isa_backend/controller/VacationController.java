@@ -31,6 +31,16 @@ public class VacationController {
 		return new ResponseEntity<>(vacationService.findAll(), HttpStatus.OK);
 	}
 	
+	@GetMapping(value="/vacationUser/{date}")
+	public ResponseEntity<Long> getVacationDoctor(@PathVariable("date") String date){
+		
+		
+		
+		return new ResponseEntity<Long>(vacationService.findVacation(date),HttpStatus.OK);
+	}
+	
+	
+	
 	@GetMapping(value="/{id}")
 	public ResponseEntity<Vacation> findOneByid(@PathVariable("id") Long id){
 		return new ResponseEntity<>(vacationService.findOneByid(id), HttpStatus.OK);

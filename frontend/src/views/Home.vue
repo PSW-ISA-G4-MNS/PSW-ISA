@@ -20,6 +20,7 @@ export default {
         }
     },
     components: {
+        
     }
 }
 </script>
@@ -27,6 +28,8 @@ export default {
 <template>
 
 <p>Home</p>
+
+
 
 </template>
 

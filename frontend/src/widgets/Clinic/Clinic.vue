@@ -65,7 +65,7 @@ export default {
         },
         showDoctors: function()
         {
-            if(this.other.selectedDate !== undefined && this.other.selectedCareType !== undefined){
+            if(this.other.date !== undefined && this.other.careTypeId !== undefined){
                 localStorage.setItem('selectedClinic', this.Clinic);
                 window.location.href = "/frontend/#/ClinicDoctorsList";
             } else 
