@@ -8,6 +8,7 @@ import CareList from './src/views/CareList.vue';
 import ClinicList from './src/views/ClinicList.vue';
 
 import PatientMedicalRecord from './src/views/PatientMedicalRecord.vue';
+import CareHistory from './src/views/CareHistory.vue';
 
 import ClinicDoctorsList from './src/views/ClinicDoctorsList.vue';
 
@@ -28,7 +29,7 @@ import ScheduleOperation from './src/views/ScheduleOperation.vue';
 
 import DoctorPatients from "./src/views/DoctorPatients.vue"
 import ScheduleCare from "./src/views/ScheduleCare.vue";
-import ScheduleOperation from "./src/views/ScheduleOperation.vue";
+
 import VacationRequestList from "./src/views/VacationRequestList.vue";
 
 
@@ -42,6 +43,8 @@ import ChangeReviewView from './src/views/ChangeReviewView.vue';
 
 import System from './src/views/System.vue';
 import AuthenticatePrescriptionView from './src/views/AuthenticatePrescriptionView.vue';
+
+import AddAdminClinicView from './src/views/AddAdminClinicView.vue';
 
 
 import AllPatientsView from "./src/views/AllPatientsView.vue";
@@ -65,7 +68,7 @@ const routes = [
     
 
     { path: '/patientMedicalRecord', component: PatientMedicalRecord},
-
+    { path: '/patientCareHistory', component: CareHistory},
 
     { path: '/reports', component: ClinicReportView},
     { path: '/careTypes', component: CareTypeList},
@@ -77,8 +80,10 @@ const routes = [
     {path: '/changeoldReview', component:ChangeReviewView},
     {path: '/scheduleOperation', component:ScheduleOperation},
     {path: '/review', component: ReviewView},
+    {path: "/review/:patientIdFromCalendar/:careIdFromCalendar", component: ReviewView, props: true},
     {path: '/addDiagnosis', component: DiagnosisAdd},
     {path: '/addMedicine', component: MedicineAdd},
+    {path: '/addAdminClinic', component:AddAdminClinicView},
 
     { path: '/roomEdit/:room', component: RoomEditView, props: true},
    {path: '/sys', component: System},

@@ -11,7 +11,9 @@ export default {
             data: {},
             pickDate:null,
             cares:{},
-            operations:{}
+            operations:{},
+            vacation:{},
+			      role: localStorage.getItem("role")
         };
     },
 
@@ -19,12 +21,20 @@ export default {
     
       pickDate:function() {
 
+      if(this.role=="DOCTOR"){
+
       CalendarService.getCares(this.pickDate).then(response => {
 		this.cares= response.data; 
   });
 
    CalendarService.getOperations(this.pickDate).then(response => {
 		this.operations= response.data; 
+  });
+  
+      }
+
+  CalendarService.getVacation(this.pickDate).then(response => {
+		this.vacation= response.data; 
   });
   
       }
@@ -50,7 +60,14 @@ export default {
     	submit: function() 
 	{
 		
-	}
+  },
+  
+    annual: function()
+    {
+      this.$router.push("/vrm");
+   
+
+     }
     }
 }
 </script>
@@ -62,13 +79,16 @@ export default {
         &nbsp;
         &nbsp;
 
-        <button   style="background-color:purple;color:white;height:40px;width:200px;float:right;">
+        <button @click="annual"  style="background-color:purple;color:white;height:40px;width:200px;float:right;">
                Request an annual
         </button>
 
         <h3>Timetable for : {{this.pickDate}}</h3>
 
-        <table>
+
+        <h1 v-if="this.vacation==1">VACATION</h1>
+
+        <table v-if="this.vacation==0">
     <tr>
         <th>Time </th>
         <th>Obligation </th>

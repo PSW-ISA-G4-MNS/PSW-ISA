@@ -36,6 +36,7 @@ public class DoctorController {
 		return new ResponseEntity<>(doctorService.findOneByid(id), HttpStatus.OK);
 	}
 	
+
 	@GetMapping(value="/patients")
 	public ResponseEntity<List<Patient>> findPatients(){
 		return new ResponseEntity<>(clinicService.findPatientsForClinic(doctorService.getClinic()), HttpStatus.OK);

@@ -1,62 +1,36 @@
 <script>
-
-import PatientService from "./service";
-
+import CareHistoryService from "./service";
 
 export default {
-    name: "WidgetPatientSingleNurse",
-    props: ["patient"],
-    data: function(){
-        return{
-            data: {}
-        }
+	name: "WidgetAvailableCareSingle",
+	props: ["care"],
+    data: function () {
+        return {
+          	care: {},
+            role: localStorage.getItem("role")
+
+        };
     },
-    mounted: function()
-    {
-  
-    },
-    
+    methods: {
+      
+    }
 }
 </script>
 
-
-
 <template>
-   
     
-     <tr>
-      <td id="insurance">{{patient.insuranceID}}</td>
-      <td id="ime">{{ patient.user.firstname }}</td>
-      <td id="prezime">{{patient.user.lastname}}</td>
+
+  <tr>
+      <td id="name">{{ care.doctor.user.firstname }} {{ care.doctor.user.lastname}}</td>
+      <td id="caretype">{{ care.doctor.careType.name}}</td>
+      <td id="time">{{ care.startTime.replace("T", " ")}}</td>
+      <td id="diagnosis">{{ care.diagnosis}}</td>
       
-    </tr>
-    
-   
+  </tr>
+  
 </template>
 
-
-
 <style scoped>
-input{
-width: 50%;
-  padding: 12px 20px;
-  
-  box-sizing: border-box;
-}
-
-td{
-  width: 200px;
-  height: 50px;
- background-color: #f9f9f9;
-  
-}
-tr{
-  width: 200px;
-  height: 50px;
-  min-width: 120px;
-  padding: 10px 20px;
-}
-
 body {
   font-family: Helvetica Neue, Arial, sans-serif;
   font-size: 14px;
@@ -79,7 +53,14 @@ th {
   user-select: none;
 }
 
+td {
+  background-color: #f9f9f9;
+}
 
+th, td {
+  min-width: 120px;
+  padding: 10px 20px;
+}
 
 th.active {
   color: #fff;
@@ -109,4 +90,5 @@ th.active .arrow {
   border-right: 4px solid transparent;
   border-top: 4px solid #fff;
 }
-</style>
+
+</style>>
