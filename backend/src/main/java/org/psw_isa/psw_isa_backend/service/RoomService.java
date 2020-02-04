@@ -15,7 +15,13 @@ import org.psw_isa.psw_isa_backend.models.Clinic;
 import org.psw_isa.psw_isa_backend.dtos.RoomDTO;
 import org.psw_isa.psw_isa_backend.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+
 
 @Service
 public class RoomService {
@@ -68,6 +74,51 @@ public class RoomService {
 	public Long delete(Long id) {
 		roomRepository.delete(findOneByid(id));
 		return id;
+	}
+
+	public LocalDateTime findNextTimeForRoom(Long roomId) {
+		List<String> times = new ArrayList<String>() {{
+			add(" 07:00");
+			add(" 07:30");
+			add(" 08:00");
+			add(" 08:30");
+			add(" 09:00");
+			add(" 09:30");
+			add(" 10:00");
+			add(" 10:30");
+			add(" 11:00");
+			add(" 11:30");
+			add(" 12:00");
+			add(" 12:30");
+			add(" 13:00");
+			add(" 13:30");
+			add(" 14:00");
+			add(" 14:30");
+			add(" 15:00");
+			add(" 15:30");
+			add(" 16:00");
+			add(" 16:30");
+			add(" 17:00");
+			add(" 17:30");
+		}};
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		LocalDate date = LocalDate.now();
+		boolean found = false;
+		Room room = findOneByid(roomId);
+		while (!found) {
+			for(String time : times) {
+				String checkTimeStr = date.toString() + time;
+				LocalDateTime checkTime = LocalDateTime.parse(checkTimeStr, formatter);
+				if (!room.getSchedule().contains(checkTime)) {					
+					found = true;
+					return checkTime;
+				}
+			}
+			if (!found) {
+				date = date.plusDays(1);
+			}
+		}
+		return null;
 	}
 
 }

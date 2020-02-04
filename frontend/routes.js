@@ -26,7 +26,6 @@ import ScheduleOperation from './src/views/ScheduleOperation.vue';
 
 import DoctorPatients from "./src/views/DoctorPatients.vue"
 import ScheduleCare from "./src/views/ScheduleCare.vue";
-import ScheduleOperation from "./src/views/ScheduleOperation.vue";
 import VacationRequestList from "./src/views/VacationRequestList.vue";
 
 
