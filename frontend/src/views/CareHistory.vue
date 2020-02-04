@@ -1,10 +1,11 @@
 <script>
+import WidgetCareHistoryMulti from '../widgets/PatientCareHistory/WidgetCareHistoryMulti.vue';
 
 
 // import widgets for this view here
 
 export default {
-    name: "Login",
+    name: "CareHistory",
     data: function () {
             return {
 		data: {}
@@ -12,6 +13,7 @@ export default {
 	},
     mounted: function () 
     {
+
     },
     methods: {
         submit: function (event) 
@@ -20,15 +22,14 @@ export default {
         }
     },
     components: {
-        
+        "WidgetCareHistoryMulti": WidgetCareHistoryMulti
     }
 }
 </script>
 
 <template>
 
-<p>Home</p>
-
+<WidgetCareHistoryMulti/>
 
 
 </template>

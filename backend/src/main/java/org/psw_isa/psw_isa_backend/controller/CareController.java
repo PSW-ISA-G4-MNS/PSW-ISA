@@ -35,6 +35,28 @@ public class CareController {
 		return new ResponseEntity<>(careService.findAllUnassignedAndUpcoming(), HttpStatus.OK);
 	}
 	
+	@GetMapping(value="/history")
+	public ResponseEntity<List<Care>> getCareHistory(){
+		List<Care> res = careService.careHistory();
+		if(res == null) {
+			return new ResponseEntity<>(res, HttpStatus.FORBIDDEN);
+		} else {
+			return new ResponseEntity<>(res, HttpStatus.OK);
+		}
+			
+	}
+	
+	@GetMapping(value="/history/{careTypeID}/{date}")
+	public ResponseEntity<List<Care>> filterCareHistory(@PathVariable("careTypeID") Long careTypeID, @PathVariable("date") String date){
+		List<Care> res = careService.filterCareHistory(careTypeID, date);
+		if(res == null) {
+			return new ResponseEntity<>(res, HttpStatus.FORBIDDEN);
+		} else {
+			return new ResponseEntity<>(res, HttpStatus.OK);
+		}
+			
+	}
+	
 	@GetMapping(value="/getPredefindedCaresForClinic/{id}")
 	public ResponseEntity<List<Care>> findAllUnassignedAndUpcomingforClinic(@PathVariable("id") Long id){
 		return new ResponseEntity<>(careService.findAllUnassignedAndUpcomingForClinic(id), HttpStatus.OK);

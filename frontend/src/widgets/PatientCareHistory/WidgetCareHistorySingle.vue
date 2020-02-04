@@ -1,27 +1,18 @@
 <script>
-import AvailableCareService from "./service";
+import CareHistoryService from "./service";
 
 export default {
 	name: "WidgetAvailableCareSingle",
-	props: ["availableCare"],
+	props: ["care"],
     data: function () {
         return {
-          	availableCare: {},
-		        success: false,
+          	care: {},
             role: localStorage.getItem("role")
 
         };
     },
     methods: {
-      sendCareRequest: function()
-      {
-          AvailableCareService.sendCareRequest(this.availableCare).then(response => {
-					if (response.status < 300){
-              this.success = true;
-          }
-				});
-          
-      }
+      
     }
 }
 </script>
@@ -29,15 +20,12 @@ export default {
 <template>
     
 
-  <tr v-if="!success">
-      <td id="name">{{ availableCare.doctor.user.firstname }} {{ availableCare.doctor.user.lastname}}</td>
-      <td id="caretype">{{ availableCare.doctor.careType.name}}</td>
-      <td id="time">{{ availableCare.startTime.replace("T", " ")}}</td>
-      <td v-if="role == 'PATIENT' " id="availableCares">
-              <button v-on:click="sendCareRequest" style="background-color:green;color:white;height:40px;width:200px">
-                Send care request
-              </button>
-        </td>
+  <tr>
+      <td id="name">{{ care.doctor.user.firstname }} {{ care.doctor.user.lastname}}</td>
+      <td id="caretype">{{ care.doctor.careType.name}}</td>
+      <td id="time">{{ care.startTime.replace("T", " ")}}</td>
+      <td id="diagnosis">{{ care.diagnosis}}</td>
+      
   </tr>
   
 </template>

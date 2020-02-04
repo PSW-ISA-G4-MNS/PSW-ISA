@@ -27,9 +27,14 @@ export default {
 </script>
 
 <template>
+<div>
+    <input type="text" class="form-control" placeholder="Type name"  v-model="data.nameSearch" style="width:250px;"/>
 
-<WidgetDoctorMulti/>
+    <WidgetDoctorMulti v-if = "this.data.nameSearch !== '' && this.data.nameSearch !== undefined" :filter = "x => (x.user.firstname + ' ' + x.user.lastname).match(this.data.nameSearch)"/>
+    <WidgetDoctorMulti v-if = "this.data.nameSearch === ''"/>
+    <WidgetDoctorMulti v-if = "this.data.nameSearch === undefined"/>
 
+</div>
 </template>
 
 <style scoped> 
