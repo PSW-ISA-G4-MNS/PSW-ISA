@@ -21,7 +21,7 @@ public class ServiceController {
 	public ResponseEntity<String> schedule()
 	  {
 		      
-		systemService.systemSchedule();     
+		systemService.systemSchedule();    
 		
 		        return new ResponseEntity<>("OK",HttpStatus.OK); 
 		    }

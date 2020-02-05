@@ -7,9 +7,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.psw_isa.psw_isa_backend.models.Doctor;
 import org.psw_isa.psw_isa_backend.models.Operation;
 import org.psw_isa.psw_isa_backend.models.OperationRequest;
 import org.psw_isa.psw_isa_backend.models.Room;
+import org.psw_isa.psw_isa_backend.repository.DoctorRepository;
 import org.psw_isa.psw_isa_backend.repository.OperationRepository;
 import org.psw_isa.psw_isa_backend.repository.OperationRequestRepository;
 import org.psw_isa.psw_isa_backend.repository.RoomRepository;
@@ -27,6 +29,14 @@ public class SystemService {
 	
 	@Autowired
 	RoomRepository roomRepository;
+	
+	@Autowired
+	DoctorRepository doctorRepository;
+	
+	@Autowired
+	DoctorService doctorService;
+	
+	
 	
 	public void systemSchedule(){
 		
@@ -66,6 +76,8 @@ public class SystemService {
 			add(" 17:30");
 		}};
 		
+		
+		//IZBACI KADA SE BUDU RUCNO ZAKAZIVALI 
 		for(Room room : allRooms) {
 			room.setSchedule(new ArrayList<LocalDateTime>());
 			roomRepository.save(room);
@@ -101,15 +113,12 @@ public class SystemService {
 							}
 							else {
 								if(brojZahteva-1>=0) {
-								System.out.println("USOOO U ELSE 1  ");
 								Operation operacija=new Operation();
 								operacija.setRoom(allRooms.get(i));
 								operacija.setStartTime(checkTime);
-								System.out.println("PRE PUCANJA ");
+								ArrayList<Doctor> doctors=doctorService.listAvailableDoctors((allRequests.get(brojZahteva-1)).getClinic().getId(), checkTime);
+								operacija.setDoctors(doctors);
 								operacija.setPatient(allRequests.get(brojZahteva-1).getPatient());
-								System.out.println("POSLE PUCANJA ");
-								
-								System.out.println("Dodao novi raspored");
 								allRooms.get(i).getSchedule().add(checkTime);
 								roomRepository.save(allRooms.get(i));
 								operationRepository.save(operacija);
@@ -125,14 +134,12 @@ public class SystemService {
 					
 					else {
 						if(brojZahteva-1>=0) {
-							System.out.println("USOOO U ELSE 3 ");
 							Operation operacija=new Operation();
 							operacija.setRoom(allRooms.get(i));
 							operacija.setStartTime(checkTime);
-							System.out.println("PRE PUCANJA ");
+							ArrayList<Doctor> doctors=doctorService.listAvailableDoctors((allRequests.get(brojZahteva-1)).getClinic().getId(), checkTime);
+							operacija.setDoctors(doctors);
 							operacija.setPatient(allRequests.get(brojZahteva-1).getPatient());
-							System.out.println("POSLE PUCANJA ");
-							System.out.println(checkTime);
 							allRooms.get(i).getSchedule().add(checkTime);
 						
 							roomRepository.save(allRooms.get(i));
@@ -147,15 +154,12 @@ public class SystemService {
 					}
 					else {
 						if(brojZahteva-1>=0) {
-						System.out.println("USOOO U ELSE 2  ");
 						Operation operacija=new Operation();
 						operacija.setRoom(allRooms.get(i));
 						operacija.setStartTime(checkTime);
-						System.out.println("PRE PUCANJA ");
+						ArrayList<Doctor> doctors=doctorService.listAvailableDoctors((allRequests.get(brojZahteva-1)).getClinic().getId(), checkTime);
+						operacija.setDoctors(doctors);
 						operacija.setPatient(allRequests.get(brojZahteva-1).getPatient());
-						System.out.println("POSLE PUCANJA ");
-						
-						System.out.println("Dodao novi raspored");
 						allRooms.get(i).getSchedule().add(checkTime);
 						operationRepository.save(operacija);
 						
