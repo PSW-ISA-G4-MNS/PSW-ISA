@@ -31,6 +31,8 @@ public class Vacation {
 	
 	
 	private Boolean approved; 
+
+	private Boolean processed;
 	
 	
 	private String commentFromUser; 
@@ -50,10 +52,12 @@ public class Vacation {
 	public Vacation() 
 	{
 	}
-	public Vacation(LocalDate _startTime, LocalDate _endTime, User _user, Boolean _approved, String _commentFromUser, String _commentFromAdministrator, VacationType _type, ClinicAdministrator _approver) {
+	public Vacation(LocalDate _startTime, LocalDate _endTime, User _user, Boolean _approved, String _commentFromUser, String _commentFromAdministrator, VacationType _type, ClinicAdministrator _approver, Boolean _processed) {
 		super();
 		 
 		this.startTime = _startTime;
+
+		this.processed = _processed;
 		 
 		this.endTime = _endTime;
 		 
@@ -162,4 +166,11 @@ public class Vacation {
 		this.id = id;
 	}
 	
+	public void setProcessed(Boolean processed) {
+		this.processed = processed;
+	}
+
+	public Boolean getProcessed() {
+		return this.processed;
+	}
 }
