@@ -2,6 +2,7 @@ package org.psw_isa.psw_isa_backend.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.psw_isa.psw_isa_backend.dtos.CareDTO;
 import org.psw_isa.psw_isa_backend.models.Care;
@@ -32,6 +33,29 @@ public class OperationController {
 		Operation operation2=operationService.save(operation);
 		
 		return new ResponseEntity<>(operation2.getId(),HttpStatus.OK);
+	}
+	
+	
+	@GetMapping(value="/history")
+	public ResponseEntity<List<Operation>> getCareHistory(){
+		List<Operation> res = operationService.operationHistory();
+		if(res == null) {
+			return new ResponseEntity<>(res, HttpStatus.FORBIDDEN);
+		} else {
+			return new ResponseEntity<>(res, HttpStatus.OK);
+		}
+			
+	}
+	
+	@GetMapping(value="/history/{date}")
+	public ResponseEntity<List<Operation>> filterCareHistory(@PathVariable("date") String date){
+		List<Operation> res = operationService.filterOperationHistory(date);
+		if(res == null) {
+			return new ResponseEntity<>(res, HttpStatus.FORBIDDEN);
+		} else {
+			return new ResponseEntity<>(res, HttpStatus.OK);
+		}
+			
 	}
 	
 	
