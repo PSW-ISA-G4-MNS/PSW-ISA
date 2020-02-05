@@ -82,8 +82,12 @@ public class SystemService {
 		
 		//IZBACI KADA SE BUDU RUCNO ZAKAZIVALI 
 		for(Room room : allRooms) {
+			
+			if(room.getSchedule()==null) {
+			
 			room.setSchedule(new ArrayList<LocalDateTime>());
 			roomRepository.save(room);
+		}
 		}
 		
 		
