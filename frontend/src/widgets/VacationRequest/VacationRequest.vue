@@ -52,7 +52,8 @@ export default {
           placeholder="Comment from administrator" 
           v-if="!this.data.processed && this.role == 'CLINIC_ADMINISTRATOR'" 
         />
-        <p> Comment from approver: {{ data.commentFromAdministrator }}</p>
+        <p v-if="this.role != 'CLINIC_ADMINISTRATOR'"> Comment from approver: {{ data.commentFromAdministrator }}</p>
+        <p v-else>Comment from employee {{ data.commentFromUser}}</p>
       </div>
 
     

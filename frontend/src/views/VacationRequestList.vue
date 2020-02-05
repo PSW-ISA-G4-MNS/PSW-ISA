@@ -39,7 +39,7 @@ export default {
 <p>Vacation Requests</p>
 
 <List ref="requests" v-if="this.role != 'CLINIC_ADMINISTRATOR'" :filter="x => x.user.id == this.user" />
-<List ref="requests" v-if="this.role == 'CLINIC_ADMINISTRATOR'" />
+<List ref="requests" v-if="this.role == 'CLINIC_ADMINISTRATOR'" :filter="x => !x.processed"/>
 
 
 </div>
