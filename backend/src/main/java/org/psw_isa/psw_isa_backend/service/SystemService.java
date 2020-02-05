@@ -36,6 +36,9 @@ public class SystemService {
 	@Autowired
 	DoctorService doctorService;
 	
+	@Autowired
+	OperationRequestService operationRequestService;
+	
 	
 	
 	public void systemSchedule(){
@@ -116,10 +119,12 @@ public class SystemService {
 								Operation operacija=new Operation();
 								operacija.setRoom(allRooms.get(i));
 								operacija.setStartTime(checkTime);
+								operacija.setEndTime(checkTime.plusMinutes(30));
 								ArrayList<Doctor> doctors=doctorService.listAvailableDoctors((allRequests.get(brojZahteva-1)).getClinic().getId(), checkTime);
 								operacija.setDoctors(doctors);
 								operacija.setPatient(allRequests.get(brojZahteva-1).getPatient());
 								allRooms.get(i).getSchedule().add(checkTime);
+								operationRequestService.deleteOneById(allRequests.get(brojZahteva-1).getId());
 								roomRepository.save(allRooms.get(i));
 								operationRepository.save(operacija);
 								
@@ -137,11 +142,12 @@ public class SystemService {
 							Operation operacija=new Operation();
 							operacija.setRoom(allRooms.get(i));
 							operacija.setStartTime(checkTime);
+							operacija.setEndTime(checkTime.plusMinutes(30));
 							ArrayList<Doctor> doctors=doctorService.listAvailableDoctors((allRequests.get(brojZahteva-1)).getClinic().getId(), checkTime);
 							operacija.setDoctors(doctors);
 							operacija.setPatient(allRequests.get(brojZahteva-1).getPatient());
 							allRooms.get(i).getSchedule().add(checkTime);
-						
+							operationRequestService.deleteOneById(allRequests.get(brojZahteva-1).getId());
 							roomRepository.save(allRooms.get(i));
 							operationRepository.save(operacija);
 							
@@ -157,10 +163,13 @@ public class SystemService {
 						Operation operacija=new Operation();
 						operacija.setRoom(allRooms.get(i));
 						operacija.setStartTime(checkTime);
+						operacija.setEndTime(checkTime.plusMinutes(30));
 						ArrayList<Doctor> doctors=doctorService.listAvailableDoctors((allRequests.get(brojZahteva-1)).getClinic().getId(), checkTime);
 						operacija.setDoctors(doctors);
 						operacija.setPatient(allRequests.get(brojZahteva-1).getPatient());
 						allRooms.get(i).getSchedule().add(checkTime);
+						operationRequestService.deleteOneById(allRequests.get(brojZahteva-1).getId());
+						roomRepository.save(allRooms.get(i));
 						operationRepository.save(operacija);
 						
 						brojZahteva--;
