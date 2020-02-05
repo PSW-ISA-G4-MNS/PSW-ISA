@@ -35,6 +35,14 @@ public class OperationController {
 		return new ResponseEntity<>(operation2.getId(),HttpStatus.OK);
 	}
 	
+	@PostMapping(value="/adminSave", consumes = "application/json")
+	public ResponseEntity<Long> saveAdmin(@RequestBody Operation operation){
+		
+		Operation operation2=operationService.saveAdmin(operation);
+		
+		return new ResponseEntity<>(operation2.getId(),HttpStatus.OK);
+	}
+	
 	
 	@GetMapping(value="/history")
 	public ResponseEntity<List<Operation>> getCareHistory(){
