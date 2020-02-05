@@ -50,8 +50,8 @@ public class DoctorController {
 	
   @GetMapping(value="/getFreeDoctorsForClinic/{clinicID}/{careTypeID}/{date}") 
   	public ResponseEntity<List<Doctor>>listFreeDoctorsForClinic(@PathVariable("clinicID") Long clinicID, @PathVariable("careTypeID") Long careTypeID, @PathVariable("date") String date){
-  
-	  return new ResponseEntity<>(doctorService.listFreeDoctorsForClinic(clinicID, careTypeID, date), HttpStatus.OK);
+	  List<Doctor> res = doctorService.listFreeDoctorsForClinic(clinicID, careTypeID, date);
+	  return new ResponseEntity<>(res, HttpStatus.OK);
 	  }
   
   

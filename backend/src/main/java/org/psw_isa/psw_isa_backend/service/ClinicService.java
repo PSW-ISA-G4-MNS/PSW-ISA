@@ -123,79 +123,96 @@ public class ClinicService {
 	
 public List<Clinic> findClinicsWithFreeDoctors(Long id, String date){
 		List<Clinic> res = new ArrayList<>();
-		List<Clinic> allClinics = clinicRepository.findAll(); 
+		List<Clinic> allClinics = new ArrayList<Clinic>(); 
+		allClinics = clinicRepository.findAll(); 
 		List<Care> allCares = careRepository.findAll();
-		List<Operation> allOperations = operationRepository.findAll();
+		List<Operation> allOperations = new ArrayList<Operation>();
+		if(operationRepository.findAll() != null) {
+			allOperations = operationRepository.findAll();
+		}
 		List<Doctor> allDoctors = doctorRepository.findAll(); 
 		List<Care> doctorsCaresForDate = new ArrayList<>();
 		List<Operation> doctorsOperationsForDate = new ArrayList<>();
-		List<Vacation> allVacations = vacationRepository.findAll();
+		List<Vacation> allVacations = new ArrayList<Vacation>();
+		if(vacationRepository.findAll() != null) {
+			allVacations = vacationRepository.findAll();
+		}
 		List<Vacation> doctorsVacations = new ArrayList<Vacation>();
 		LocalDate wantedDate = LocalDate.parse(date);
 		LocalDate startTime = null;
 		Boolean hasDoctor = false;
 		int onVacation = 0;
 
-		for(Doctor doctor : allDoctors) {
-			onVacation = 0;
-			doctorsVacations.clear();
-			doctorsCaresForDate.clear();
-			doctorsOperationsForDate.clear();
-			
-			
-			for(Vacation vacation : allVacations) {
-				if(vacation.getUser().getId() == doctor.getUser().getId()) {
-					doctorsVacations.add(vacation);
-				}
-			}
-			
-			
-			for(Vacation vacation : doctorsVacations) {
-				if(wantedDate.isAfter(vacation.getStartTime()) && wantedDate.isBefore(vacation.getEndTime())) {
-					onVacation = 1;
-				}
-			}
-			
-			if(onVacation == 0) {
-				if(doctor.getCareType().getId() == id) {
-					for(Care care : allCares) {	
-						if(care.getDoctor().getId() == doctor.getId()) {
-							startTime = care.getStartTime().toLocalDate();
-							if((care.getPatient() != null) && (startTime.isEqual(wantedDate))) {
-								System.out.println("nasao za taj dan");
-								doctorsCaresForDate.add(care);
-							}
-						}
-					}
-					for(Operation operation : allOperations) {
-						if(operation.getDoctors().contains(doctor)) {
-							startTime = operation.getStartTime().toLocalDate();
-							if(startTime.isEqual(wantedDate)) {
-								doctorsOperationsForDate.add(operation);
-							}
-						}
-					}
-				}
-			}
+		if(wantedDate.isAfter(LocalDate.now()) || wantedDate.isEqual(LocalDate.now())) {
+			for(Doctor doctor : allDoctors) {
+				onVacation = 0;
+				doctorsVacations.clear();
+				doctorsCaresForDate.clear();
+				doctorsOperationsForDate.clear();
 				
-			if(doctorsCaresForDate.size() + doctorsOperationsForDate.size() < 22 && onVacation == 0) {
-				System.out.println("nasao da je manje od dva : " + doctorsCaresForDate.size());
-				if(!res.contains(doctor.getClinic())) {
-		//			for(Clinic clinic : allClinics) {
-						for(Doctor doctorClinic : allDoctors) {
-							if(doctorClinic.getClinic().getId() == doctor.getClinic().getId()) {
-								if(doctorClinic.getCareType().getId() == id) {
-									System.out.println("dodaje ga");
-									res.add(doctor.getClinic());
+				if(allVacations.size() > 0) {
+					for(Vacation vacation : allVacations) {
+						if(vacation.getUser().getId() == doctor.getUser().getId()) {
+							doctorsVacations.add(vacation);
+						}
+					}
+					
+					
+					for(Vacation vacation : doctorsVacations) {
+						if(wantedDate.isAfter(vacation.getStartTime()) && wantedDate.isBefore(vacation.getEndTime())) {
+							onVacation = 1;
+						}
+					}
+				}
+				
+				if(onVacation == 0) {
+					if(doctor.getCareType().getId() == id) {
+						if(allCares.size() > 0) {
+							for(Care care : allCares) {	
+								if(care.getDoctor().getId() == doctor.getId()) {
+									startTime = care.getStartTime().toLocalDate();
+									if((care.getPatient() != null) && (startTime.isEqual(wantedDate))) {
+										System.out.println("nasao za taj dan");
+										doctorsCaresForDate.add(care);
+									}
 								}
 							}
 						}
-				//	}
-//					System.out.println("dodaje ga");
-//					res.add(doctor.getClinic());
+						if(allOperations.size() > 0) {
+							for(Operation operation : allOperations) {
+								if(operation.getDoctors().contains(doctor)) {
+									startTime = operation.getStartTime().toLocalDate();
+									if(startTime.isEqual(wantedDate)) {
+										doctorsOperationsForDate.add(operation);
+									}
+								}
+							}
+						}
+					}
+				}
+					
+				if(doctorsCaresForDate.size() + doctorsOperationsForDate.size() < 22 && onVacation == 0) {
+					System.out.println("nasao da je manje od dva : " + doctorsCaresForDate.size());
+					if(!res.contains(doctor.getClinic())) {
+			//			for(Clinic clinic : allClinics) {
+							for(Doctor doctorClinic : allDoctors) {
+								if(doctorClinic.getClinic().getId() == doctor.getClinic().getId()) {
+									if(doctorClinic.getCareType().getId() == id) {
+										System.out.println("dodaje ga");
+										res.add(doctor.getClinic());
+									}
+								}
+							}
+					//	}
+	//					System.out.println("dodaje ga");
+	//					res.add(doctor.getClinic());
+					}
 				}
 			}
+		} else {
+			res = new ArrayList<Clinic>();
 		}
+		
 		
 		System.out.println("broj klinika: " + res.size());
 		
