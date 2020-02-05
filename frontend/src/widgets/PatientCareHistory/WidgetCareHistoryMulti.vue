@@ -40,7 +40,7 @@ export default {
                 CareHistoryService.filterCareHistory(this.data.careTypeId, this.data.date).then(response => this.items = response.data);
                 console.log("kliknuto");
             } else {
-                alert('Please select preffered date and care type to filter clinics.');
+                alert('Please select preffered date and care type to filter care history.');
             }
         }
     },

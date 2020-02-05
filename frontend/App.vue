@@ -53,6 +53,7 @@ export default {
         <router-link v-if="data.role != 'NOT_LOGGED'" to='/updateUser'>Update profile</router-link>
 		<router-link v-if="data.role == 'PATIENT'" to='/patientMedicalRecord'>Medical record</router-link>
 		<router-link v-if="data.role == 'PATIENT'" to='/patientCareHistory'>Care history</router-link>
+		<router-link v-if="data.role == 'PATIENT'" to='/patientOperationHistory'>Operation history</router-link>
         <router-link v-if="data.role == 'ADMINISTRATOR'" to='/clinic-new'>Create Clinic</router-link>
         <router-link v-if="data.role == 'DOCTOR'" to='/doctor/myPatients'>My Patients</router-link>
         <router-link v-if="data.role == 'DOCTOR'" to='/schedule/care'>Schedule Care</router-link>
