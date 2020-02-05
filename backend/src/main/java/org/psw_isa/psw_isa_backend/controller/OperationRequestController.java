@@ -40,6 +40,13 @@ public class OperationRequestController {
 	}
 
 	
+	@GetMapping(value="/forClinic")
+	public ResponseEntity<List<OperationRequest>> findAllForClinic(){
+		
+		return new ResponseEntity<>(operationRequestService.operationRequestForClinic(), HttpStatus.OK);
+	}
+	
+	
 	@GetMapping(value="/delete/{id}")
 	public ResponseEntity<String> deleteOperationRequest(@PathVariable("id") Long id){
 		

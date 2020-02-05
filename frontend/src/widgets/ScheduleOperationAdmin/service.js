@@ -9,11 +9,11 @@ export default class ScheduleOperationService
     }
     static list() 
     {
-        return axios.get(API_URL + "/operationRequest");
+        return axios.get(API_URL + "/operationRequest/forClinic");
     }
 
     static doctors(){
-        return axios.get(API_URL + "/doctor/");
+        return axios.get(API_URL + "/doctor/forClinic");
     }
 
     static reservate(x){

@@ -15,8 +15,10 @@ import org.psw_isa.psw_isa_backend.dtos.CareRequestDTO;
 import org.psw_isa.psw_isa_backend.dtos.ClinicFilterDTO;
 import org.psw_isa.psw_isa_backend.models.Care;
 import org.psw_isa.psw_isa_backend.models.Clinic;
+import org.psw_isa.psw_isa_backend.models.ClinicAdministrator;
 import org.psw_isa.psw_isa_backend.models.Doctor;
 import org.psw_isa.psw_isa_backend.models.Operation;
+import org.psw_isa.psw_isa_backend.models.OperationRequest;
 import org.psw_isa.psw_isa_backend.models.Vacation;
 import org.psw_isa.psw_isa_backend.repository.CareRepository;
 import org.psw_isa.psw_isa_backend.repository.CareTypeRepository;
@@ -47,6 +49,11 @@ public class DoctorService {
 	
 	@Autowired
 	VacationRepository vacationRepository;
+	
+	@Autowired
+	ClinicAdminService clinicAdminService;
+	
+	
 	
 	
 	public List<Doctor> findAll() {
@@ -354,6 +361,36 @@ public class DoctorService {
 		}
 		
 		return res;
+	}
+	
+
+	public ArrayList<Doctor>doctorForClinic(){
+		
+		Long userId=checkRoleService.getUser().getId();
+		List<ClinicAdministrator> clinicAdministrators=clinicAdminService.findAll();
+		List<Doctor> allDoctors=doctorRepository.findAll();
+		ArrayList<Doctor> doctorsForClinic=new ArrayList<Doctor>();
+		
+		
+for(ClinicAdministrator admin: clinicAdministrators) {
+			
+			if(admin.getUser().getId()==userId) {
+				
+				
+				for(Doctor doctor : allDoctors) {
+					
+					if(admin.getClinic().getId()==doctor.getClinic().getId()) {
+						doctorsForClinic.add(doctor);
+					}
+					
+				}
+			}
+		}
+		
+		
+		
+		
+		return doctorsForClinic;
 	}
 	
 	
