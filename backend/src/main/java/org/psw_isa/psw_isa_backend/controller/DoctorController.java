@@ -1,12 +1,16 @@
 package org.psw_isa.psw_isa_backend.controller;
 
 import org.psw_isa.psw_isa_backend.service.DoctorService;
+import org.psw_isa.psw_isa_backend.service.CheckRoleService;
+import org.psw_isa.psw_isa_backend.service.ClinicAdminService;
 import org.psw_isa.psw_isa_backend.service.ClinicService;
 import org.psw_isa.psw_isa_backend.models.Patient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.psw_isa.psw_isa_backend.dtos.CareRequestDTO;
+import org.psw_isa.psw_isa_backend.models.ClinicAdministrator;
 import org.psw_isa.psw_isa_backend.models.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,9 +30,21 @@ public class DoctorController {
 	@Autowired
 	ClinicService clinicService;
 	
+	@Autowired
+	CheckRoleService checkRoleService;
+	
+	@Autowired
+	ClinicAdminService clinicAdminService;
+	
 	@GetMapping(value="/")
 	public ResponseEntity<List<Doctor>> findAll(){
 		return new ResponseEntity<>(doctorService.findAll(), HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/forClinic")
+	public ResponseEntity<List<Doctor>> findAllInClinic(){
+		
+		return new ResponseEntity<>(doctorService.doctorForClinic(), HttpStatus.OK);
 	}
 	
 	@GetMapping(value="/{id}")

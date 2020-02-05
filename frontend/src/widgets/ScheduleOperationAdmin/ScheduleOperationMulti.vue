@@ -58,7 +58,7 @@ export default {
     <div class="dropdown">
 		  
 		  <div class="dropdown-menu" aria-labelledby="dropdownMenuDiagnosis">
-		    <a :key="doctor.id" :id="doctor.id" @click="selectDoctor(index)" v-for="(doctor, index) in this.doctorsForOperation" class="dropdown-item" href="#">{{doctor.user.firstname}} {{doctor.user.firstname}}</a>
+		    <a :key="doctor.id" :id="doctor.id" @click="selectDoctor(index)" v-for="(doctor, index) in this.doctorsForOperation" class="dropdown-item" href="#">{{doctor.user.firstname}} {{doctor.user.lastname}}</a>
 		  </div>
 		  <button style="height:40px;width:180px" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuDoctorButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 		    Select Doctors

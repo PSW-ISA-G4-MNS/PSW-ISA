@@ -15,8 +15,10 @@ import org.psw_isa.psw_isa_backend.dtos.CareRequestDTO;
 import org.psw_isa.psw_isa_backend.dtos.ClinicFilterDTO;
 import org.psw_isa.psw_isa_backend.models.Care;
 import org.psw_isa.psw_isa_backend.models.Clinic;
+import org.psw_isa.psw_isa_backend.models.ClinicAdministrator;
 import org.psw_isa.psw_isa_backend.models.Doctor;
 import org.psw_isa.psw_isa_backend.models.Operation;
+import org.psw_isa.psw_isa_backend.models.OperationRequest;
 import org.psw_isa.psw_isa_backend.models.Vacation;
 import org.psw_isa.psw_isa_backend.repository.CareRepository;
 import org.psw_isa.psw_isa_backend.repository.CareTypeRepository;
@@ -47,6 +49,11 @@ public class DoctorService {
 	
 	@Autowired
 	VacationRepository vacationRepository;
+	
+	@Autowired
+	ClinicAdminService clinicAdminService;
+	
+	
 	
 	
 	public List<Doctor> findAll() {
@@ -257,7 +264,134 @@ public class DoctorService {
 	}
 	
 	
+	public ArrayList<Doctor> listAvailableDoctors(Long clinicId,LocalDateTime date){
+		ArrayList<Doctor> res = new ArrayList<Doctor>();
+		List<Care> allCares = careRepository.findAll();
+		List<Care> doctorsCares = new ArrayList<Care>();
+		List<Doctor> allDoctors=doctorRepository.findAll();
+		List<Doctor> clinicDoctors= new ArrayList<Doctor>();
+		List<Operation> allOperations = operationRepository.findAll();
+		List<Operation> doctorsOperations = new ArrayList<Operation>();
 	
+		List<Vacation> allVacations = vacationRepository.findAll();
+		List<Vacation> doctorsVacations = new ArrayList<Vacation>();
+	
+
+		LocalDate wantedDate=date.toLocalDate();
+		int onVacation = 0;
+		int zauzet=0;
+		int brojacDoktora=0;
+		
+		for(Doctor doctor: allDoctors) {
+			
+			if(doctor.getClinic().getId()==clinicId) {
+				
+			}
+		}
+		
+		
+		for(Doctor doctor : clinicDoctors) {
+			
+			zauzet=0;
+			doctorsVacations.clear();
+			onVacation=0;
+			doctorsCares.clear();
+			doctorsOperations.clear();
+			
+		
+			for(Vacation vacation : allVacations) {
+				if(vacation.getUser().getId() == doctor.getUser().getId()) {
+					doctorsVacations.add(vacation);
+				}
+			}
+			
+			
+			for(Vacation vacation : doctorsVacations) {
+				if(wantedDate.isAfter(vacation.getStartTime()) && wantedDate.isBefore(vacation.getEndTime())) {
+					onVacation = 1;
+				}
+			}
+			
+			if(onVacation == 0) {	
+				for(Care care : allCares) {
+					if(care.getDoctor().getId() ==doctor.getId() && care.getPatient() != null) {
+						doctorsCares.add(care);
+					}
+				}
+				
+				for(Care care : doctorsCares) {
+					
+					if(care.getStartTime().isBefore(date) && care.getEndTime().isAfter(date)) {
+						
+						zauzet=1;
+					}
+					
+					
+				}
+				
+				
+				for(Operation operation : allOperations) {
+					if(operation.getDoctors().contains(doctor)) {
+						doctorsOperations.add(operation);
+					}
+				}
+				
+				for(Operation operation : doctorsOperations) {
+
+					
+				if(operation.getStartTime().isBefore(date) && operation.getEndTime().isAfter(date)) {
+						
+						zauzet=1;
+					}
+					
+				}
+			
+			if(zauzet==0) {
+				if(brojacDoktora<3) {
+				
+				res.add(doctor);
+				brojacDoktora++;
+				}
+				
+			}
+			
+			
+			}
+		
+		}
+		
+		return res;
+	}
+	
+
+	public ArrayList<Doctor>doctorForClinic(){
+		
+		Long userId=checkRoleService.getUser().getId();
+		List<ClinicAdministrator> clinicAdministrators=clinicAdminService.findAll();
+		List<Doctor> allDoctors=doctorRepository.findAll();
+		ArrayList<Doctor> doctorsForClinic=new ArrayList<Doctor>();
+		
+		
+for(ClinicAdministrator admin: clinicAdministrators) {
+			
+			if(admin.getUser().getId()==userId) {
+				
+				
+				for(Doctor doctor : allDoctors) {
+					
+					if(admin.getClinic().getId()==doctor.getClinic().getId()) {
+						doctorsForClinic.add(doctor);
+					}
+					
+				}
+			}
+		}
+		
+		
+		
+		
+		return doctorsForClinic;
+	}
 	
 	
 	public Clinic getClinic() {
