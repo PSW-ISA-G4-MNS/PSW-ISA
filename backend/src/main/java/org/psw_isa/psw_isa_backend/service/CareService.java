@@ -97,6 +97,14 @@ public class CareService {
 				}
 			}
 			
+			
+			Collections.sort(res, new Comparator<Care>()  {
+				  @Override
+				  public int compare(Care c1, Care c2) {
+				    return c1.getStartTime().compareTo(c2.getStartTime());
+				  }
+				});
+			
 		}
 		
 		
@@ -152,6 +160,13 @@ public class CareService {
 					}
 				}
 			}
+			
+			Collections.sort(res, new Comparator<Care>()  {
+				  @Override
+				  public int compare(Care c1, Care c2) {
+				    return c1.getStartTime().compareTo(c2.getStartTime());
+				  }
+				});
 			
 		}
 		
