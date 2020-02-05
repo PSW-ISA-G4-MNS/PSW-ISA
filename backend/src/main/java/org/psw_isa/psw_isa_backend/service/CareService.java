@@ -37,6 +37,7 @@ import org.psw_isa.psw_isa_backend.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.psw_isa.psw_isa_backend.dtos.CareDTO;
+import org.psw_isa.psw_isa_backend.dtos.EmailDTO;
 
 @Service
 public class CareService {
@@ -63,6 +64,9 @@ public class CareService {
 
 	@Autowired 
 	PrescriptionRepository prescriptionRepository;
+	
+	@Autowired
+	SendEmailService sendEmailService;
 
 	
 	public List<Care> careHistory(){
@@ -316,10 +320,17 @@ public class CareService {
 		
 		Long userID = checkRoleService.getUser().getId();
 		Long patientID = null;
+		EmailDTO mail=new EmailDTO();
 		for(Patient patient : patientRepository.findAll()) {
 			if(patient.getUser().getId() == userID) {
 				patientID = patient.getId();
-
+				
+				mail.setTo(patient.getUser().getEmail());
+				mail.setSubject("Potvrda o zakazivanju pregleda");
+				mail.setMessage("Uspesno ste zakazali pregled na nasoj klinici");
+				
+				sendEmailService.sendMail(mail);
+				
 				break;
 			}
 		}

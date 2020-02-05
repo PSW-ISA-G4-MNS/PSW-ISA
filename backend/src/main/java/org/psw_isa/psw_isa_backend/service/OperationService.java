@@ -9,6 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.psw_isa.psw_isa_backend.dtos.CareDTO;
+import org.psw_isa.psw_isa_backend.dtos.EmailDTO;
 import org.psw_isa.psw_isa_backend.models.Care;
 import org.psw_isa.psw_isa_backend.models.Doctor;
 import org.psw_isa.psw_isa_backend.models.Operation;
@@ -17,6 +18,7 @@ import org.psw_isa.psw_isa_backend.models.User;
 import org.psw_isa.psw_isa_backend.repository.DoctorRepository;
 import org.psw_isa.psw_isa_backend.repository.OperationRepository;
 import org.psw_isa.psw_isa_backend.repository.PatientRepository;
+import org.psw_isa.psw_isa_backend.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,12 @@ public class OperationService {
 	
 	@Autowired
 	PatientRepository patientRepository;
+	
+	@Autowired
+	SendEmailService sendEmailService;
+	
+	@Autowired
+	RoomRepository roomRepository;
 	
 	public List<Operation> operationHistory(){
 		User user = checkRoleService.getUser();
@@ -151,6 +159,37 @@ public class OperationService {
 	
 	
 	public Operation save(Operation operation) {
+		
+		EmailDTO mail=new EmailDTO();
+		
+		for(Doctor doctor : operation.getDoctors()) {
+			
+			mail.setTo(doctor.getUser().getEmail());
+			mail.setSubject("Dodeljena operacija");
+			mail.setMessage("Dodeljena vam je operacija u sali"+ " "+ operation.getRoom().getTitle()+" u vreme:"+ operation.getStartTime() );
+		}
+		
+		
+		
+		return operationRepository.save(operation);
+	}
+	
+	
+	public Operation saveAdmin(Operation operation) {
+		
+		EmailDTO mail=new EmailDTO();
+		operation.getRoom().getSchedule().add(operation.getStartTime());
+		roomRepository.save(operation.getRoom());
+		
+		for(Doctor doctor : operation.getDoctors()) {
+			
+			mail.setTo(doctor.getUser().getEmail());
+			mail.setSubject("Dodeljena operacija");
+			mail.setMessage("Dodeljena vam je operacija u sali"+ " "+ operation.getRoom().getTitle()+" u vreme:"+ operation.getStartTime() );
+		}
+		
+		
+		
 		return operationRepository.save(operation);
 	}
 	

@@ -24,7 +24,7 @@ export default class RegistrationRequestService
 
     static email(id)
     {
-        return axios.post(API_URL + "/email/sendReject/",id);
+        return axios.post(API_URL + "/email/",id);
     }
 
     static get(id) 
