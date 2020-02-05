@@ -70,74 +70,88 @@ public class DoctorService {
 	public List<Doctor> listFreeDoctorsForClinic(Long clinicID, Long careTypeID, String date){
 		List<Doctor> res = new ArrayList<>();
 		List<Care> allCares = careRepository.findAll();
-		List<Operation> allOperations = operationRepository.findAll();
+		List<Operation> allOperations = new ArrayList<Operation>();
+		if(operationRepository.findAll() != null) {
+			allOperations = operationRepository.findAll();
+		}
 		List<Doctor> allDoctors = doctorRepository.findAll(); 
 		List<Care> doctorsCaresForDate = new ArrayList<>();
 		List<Operation> doctorsOperationsForDate = new ArrayList<>();
-		List<Vacation> allVacations = vacationRepository.findAll();
+		List<Vacation> allVacations = new ArrayList<Vacation>();
+		if(vacationRepository.findAll() != null) {
+			allVacations = vacationRepository.findAll();
+		}
 		List<Vacation> doctorsVacations = new ArrayList<Vacation>();
 		LocalDate wantedDate = LocalDate.parse(date);
 		LocalDate startTime = null;
 		int onVacation = 0;
 		
-
-		for(Doctor doctor : allDoctors) {
-			doctorsVacations.clear();
-			doctorsCaresForDate.clear();
-			doctorsOperationsForDate.clear();
-			onVacation = 0;
-			
-			for(Vacation vacation : allVacations) {
-				if(vacation.getUser().getId() == doctor.getUser().getId()) {
-					doctorsVacations.add(vacation);
-				}
-			}
-			
-			
-			for(Vacation vacation : doctorsVacations) {
-				if(wantedDate.isAfter(vacation.getStartTime()) && wantedDate.isBefore(vacation.getEndTime())) {
-					onVacation = 1;
-				}
-			}
-			
-			
-			
-			
-			
-			if(onVacation == 0) {
-				if(doctor.getClinic().getId() == clinicID) {
-					if(doctor.getCareType().getId() == careTypeID) {
-						for(Care care : allCares) {	
-							if(care.getDoctor().getId() == doctor.getId()) {
-								startTime = care.getStartTime().toLocalDate();
-								if((care.getPatient() != null) && (startTime.isEqual(wantedDate))) {
-									System.out.println("nasao za taj dan");
-									doctorsCaresForDate.add(care);
-								}
-							}
-						}
-						for(Operation operation : allOperations) {
-							if(operation.getDoctors().contains(doctor)) {
-								startTime = operation.getStartTime().toLocalDate();
-								if(startTime.isEqual(wantedDate)) {
-									doctorsOperationsForDate.add(operation);
-								}
-							}
+		if(wantedDate.isAfter(LocalDate.now()) || wantedDate.isEqual(LocalDate.now())) {
+			for(Doctor doctor : allDoctors) {
+				doctorsVacations.clear();
+				doctorsCaresForDate.clear();
+				doctorsOperationsForDate.clear();
+				onVacation = 0;
+				
+				if(allVacations.size() > 0) {
+					for(Vacation vacation : allVacations) {
+						if(vacation.getUser().getId() == doctor.getUser().getId()) {
+							doctorsVacations.add(vacation);
 						}
 					}
 					
-					if(doctorsCaresForDate.size() + doctorsOperationsForDate.size() < 22) {
-						System.out.println("nasao da je manje od dva : " + doctorsCaresForDate.size());
-						if(!res.contains(doctor)) {
-							res.add(doctor);
+					
+					for(Vacation vacation : doctorsVacations) {
+						if(wantedDate.isAfter(vacation.getStartTime()) && wantedDate.isBefore(vacation.getEndTime())) {
+							onVacation = 1;
 						}
 					}
 				}
+				
+				
+				
+				
+				if(onVacation == 0) {
+					if(doctor.getClinic().getId() == clinicID) {
+						if(doctor.getCareType().getId() == careTypeID) {
+							if(allCares.size() > 0) {
+								for(Care care : allCares) {	
+									if(care.getDoctor().getId() == doctor.getId()) {
+										startTime = care.getStartTime().toLocalDate();
+										if((care.getPatient() != null) && (startTime.isEqual(wantedDate))) {
+											System.out.println("nasao za taj dan");
+											doctorsCaresForDate.add(care);
+										}
+									}
+								}
+							}
+							if(allOperations.size() > 0) {
+								for(Operation operation : allOperations) {
+									if(operation.getDoctors().contains(doctor)) {
+										startTime = operation.getStartTime().toLocalDate();
+										if(startTime.isEqual(wantedDate)) {
+											doctorsOperationsForDate.add(operation);
+										}
+									}
+								}
+							}
+						}
+						
+						if(doctorsCaresForDate.size() + doctorsOperationsForDate.size() < 22) {
+							System.out.println("nasao da je manje od dva : " + doctorsCaresForDate.size());
+							if(!res.contains(doctor)) {
+								res.add(doctor);
+							}
+						}
+					}
+				}
+				
 			}
-			
-			
-			
+		} else {
+			res = new ArrayList<Doctor>();
 		}
+				
+		
 		
 		System.out.println("broj slobodnih doktora u klinici: " + res.size());
 		
@@ -190,75 +204,82 @@ public class DoctorService {
 		}};
 		
 		
-		for(Vacation vacation : allVacations) {
-			if(vacation.getUser().getId() == doctorRepository.findOneByid(doctorID).getUser().getId()) {
-				doctorsVacations.add(vacation);
-			}
-		}
-		
-		
-		for(Vacation vacation : doctorsVacations) {
-			if(wantedDate.isAfter(vacation.getStartTime()) && wantedDate.isBefore(vacation.getEndTime())) {
-				onVacation = 1;
-			}
-		}
-		
-		if(onVacation == 0) {	
-			for(Care care : allCares) {
-				if(care.getDoctor().getId() == doctorID && care.getPatient() != null) {
-					doctorsCares.add(care);
-				}
-			}
-			
-			for(Care care : doctorsCares) {
-				startTime = care.getStartTime().toLocalDate();
-				if(wantedDate.equals(startTime)) {
-					doctorsCaresForDate.add(care);
-				}
-			}
-			
-			
-			for(Operation operation : allOperations) {
-				if(operation.getDoctors().contains(doctorRepository.findOneByid(doctorID))) {
-					doctorsOperations.add(operation);
-				}
-			}
-			
-			for(Operation operation : doctorsOperations) {
-				startTime = operation.getStartTime().toLocalDate();
-				if(wantedDate.equals(startTime)) {
-					doctorsOperationsForDate.add(operation);
-				}
-			}
-			
-			
-			for(String time : times) {
-				int ind = 0;
-				checkTimeStr = date + time;
-				checkTime = LocalDateTime.parse(checkTimeStr, formatter);
-				
-				for(Care care : doctorsCaresForDate) {
-					if(care.getStartTime().equals(checkTime)) {
-						System.out.println("NASAO ISTI: " + care.getStartTime() + " = " + checkTime);
-						ind = 1;
+		if(wantedDate.isAfter(LocalDate.now()) || wantedDate.isEqual(LocalDate.now())) {
+			if(allVacations.size() > 0) {
+				for(Vacation vacation : allVacations) {
+					if(vacation.getUser().getId() == doctorRepository.findOneByid(doctorID).getUser().getId()) {
+						doctorsVacations.add(vacation);
 					}
 				}
 				
-				for(Operation operation : doctorsOperationsForDate) {
-					if(operation.getStartTime().equals(checkTime)) {
-						System.out.println("NASAO ISTI: " + operation.getStartTime() + " = " + checkTime);
-						ind = 1;
+				
+				for(Vacation vacation : doctorsVacations) {
+					if(wantedDate.isAfter(vacation.getStartTime()) && wantedDate.isBefore(vacation.getEndTime())) {
+						onVacation = 1;
+					}
+				}
+			}
+			
+			if(onVacation == 0) {	
+				for(Care care : allCares) {
+					if(care.getDoctor().getId() == doctorID && care.getPatient() != null) {
+						doctorsCares.add(care);
 					}
 				}
 				
-				if(ind == 0) {
-					res.add(new CareRequestDTO(checkTime, doctorRepository.findOneByid(doctorID), careTypeRepository.findOneByid(careTypeID))); 
-				} 
+				for(Care care : doctorsCares) {
+					startTime = care.getStartTime().toLocalDate();
+					if(wantedDate.equals(startTime)) {
+						doctorsCaresForDate.add(care);
+					}
+				}
 				
+				if(allOperations.size() > 0) {
+					for(Operation operation : allOperations) {
+						if(operation.getDoctors().contains(doctorRepository.findOneByid(doctorID))) {
+							doctorsOperations.add(operation);
+						}
+					}
+					
+					for(Operation operation : doctorsOperations) {
+						startTime = operation.getStartTime().toLocalDate();
+						if(wantedDate.equals(startTime)) {
+							doctorsOperationsForDate.add(operation);
+						}
+					}
+				}
+				
+				for(String time : times) {
+					int ind = 0;
+					checkTimeStr = date + time;
+					checkTime = LocalDateTime.parse(checkTimeStr, formatter);
+					
+					for(Care care : doctorsCaresForDate) {
+						if(care.getStartTime().equals(checkTime)) {
+							System.out.println("NASAO ISTI: " + care.getStartTime() + " = " + checkTime);
+							ind = 1;
+						}
+					}
+					
+					for(Operation operation : doctorsOperationsForDate) {
+						if(operation.getStartTime().equals(checkTime)) {
+							System.out.println("NASAO ISTI: " + operation.getStartTime() + " = " + checkTime);
+							ind = 1;
+						}
+					}
+					
+					if(ind == 0) {
+						res.add(new CareRequestDTO(checkTime, doctorRepository.findOneByid(doctorID), careTypeRepository.findOneByid(careTypeID))); 
+					} 
+					
+				}
+			
 			}
-		
+		} else {
+			res = new ArrayList<CareRequestDTO>();
 		}
-		
+			
+
 		
 		return res;
 	}
