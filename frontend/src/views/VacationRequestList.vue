@@ -34,11 +34,13 @@ export default {
 
 <template>
 <div class="scheduling">
-<button v-if="this.role == 'DOCTOR' || this.role == 'NURSE'" @click="create = !create">New vacation request</button>
+<button v-if="this.role == 'DOCTOR' || this.role == 'NURSE' || this.role == 'CLINIC_ADMINISTRATOR'" @click="create = !create">New vacation request</button>
 <Form @submit="$refs.requests.reload()" v-if="this.create" />
 <p>Vacation Requests</p>
 
 <List ref="requests" v-if="this.role != 'CLINIC_ADMINISTRATOR'" :filter="x => x.user.id == this.user" />
+<List ref="requests" v-if="this.role == 'CLINIC_ADMINISTRATOR'" />
+
 
 </div>
 </template>
