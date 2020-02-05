@@ -27,4 +27,8 @@ export default class CareService
         return axios.get(API_URL + "/care/" + id);
     }
 
+    static scheduleForPatient(data, patientId) {
+        return axios.post(API_URL + "/care/scheduleForPatient/" + patientId, data);
+    }
+
 }

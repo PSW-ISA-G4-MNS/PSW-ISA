@@ -74,6 +74,11 @@ public class CareController {
 		return new ResponseEntity<>(care.getId(),HttpStatus.OK);
 	}
 	
+	@PostMapping(value="/scheduleForPatient/{id}", consumes = "application/json")
+	public ResponseEntity<Long> saveWithPatient(@PathVariable("id") Long patientId, @RequestBody CareDTO careDTO){
+		
+		return new ResponseEntity<>(careService.saveWithPatient(careDTO, patientId).getId(),HttpStatus.OK);
+	}
 	
 	@PostMapping(value="/change", consumes = "application/json")
 	public ResponseEntity<Long> saveWithReview(@RequestBody CareDTO careDTO){

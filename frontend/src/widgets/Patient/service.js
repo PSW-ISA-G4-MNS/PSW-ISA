@@ -22,4 +22,12 @@ export default class PatientService
         return  axios.get(API_URL + "/patients/"+id);
     }
 
+    static  careRequest(id, x) {
+        return axios.post(API_URL + "/care/scheduleForPatient/" + id, x);
+    } 
+    
+    static  operationRequest(x) {
+        return axios.post(API_URL + "/operationRequest", x);
+    } 
+
 }

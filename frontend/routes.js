@@ -35,7 +35,6 @@ import ScheduleCare from "./src/views/ScheduleCare.vue";
 
 import VacationRequestList from "./src/views/VacationRequestList.vue";
 
-import ScheduleOperation from"./src/views/ScheduleOperation.vue";
 
 import CalendarView from './src/views/CalendarView.vue';
 import MedicineAdd from './src/views/MedicineAdd.vue';
