@@ -4,7 +4,7 @@ import RoomSingleService from "../Room/service";
 
 export default {
 	name: "RoomOption",
-	props: ["operationRequest","room", "doctors"],
+	props: ["room",],
     data: function () {
         return {
             data: {

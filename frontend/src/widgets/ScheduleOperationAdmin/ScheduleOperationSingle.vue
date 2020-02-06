@@ -49,7 +49,7 @@ export default {
       <td v-if="operationRequest.startTime!=null">{{operationRequest.startTime.toString().replace("T", " ")}}</td>
       <td  v-else>{{"No time"}}</td>      
       <td>
-          <RoomSelection @select="reservate" :doctors="doctors" :operationRequest="operationRequest" />
+          <RoomSelection :filter="x => x.clinic.id == this.operationRequest.clinic.id" @select="reservate" />
       </td>
   </tr>
 
