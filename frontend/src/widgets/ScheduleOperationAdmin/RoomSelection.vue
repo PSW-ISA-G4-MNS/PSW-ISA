@@ -25,10 +25,11 @@ export default {
 	
 	mounted: function () 
     {
-      this.randomId - Math.floor(Math.random() * 1000000);
+      this.randomId = Math.floor(Math.random() * 1000000);
       RoomService.list().then(response => {
           this.items = response.data;
           this.success = true;
+          console.log("Assigned ModalID: " + this.randomId);
       })
     },
     components: {
@@ -46,7 +47,7 @@ export default {
 <div>
 <!-- Button trigger modal -->
 <button v-if="this.success" type="button" class="btn btn-primary" data-toggle="modal" :data-target="'#Modal-' + this.randomId">
-  Schedule
+  Select Room
 </button>
 
 <!-- Modal -->
