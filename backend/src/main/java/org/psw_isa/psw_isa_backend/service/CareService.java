@@ -229,6 +229,11 @@ public class CareService {
 			careDTO.getStartTime(), careDTO.getEndTime(),careDTO.getPrice(),careDTO.getComment(),diagnosisRepository.findOneByid(careDTO.getDiagnosisId()),prescriptionRepository.findOneByid(careDTO.getPrescriptionId()),false));
 	}
 	
+	public Care saveWithPatient(CareDTO dto, Long patientId) {
+		Care care = save(dto);
+		care.setPatient(patientRepository.findOneByid(patientId));
+		return careRepository.save(care);
+	}
 	
 	public int updateCareReview(CareDTO careDTO) {
 		return careRepository.updateCareReview(careDTO.getComment(),careDTO.getDiagnosisId(), careDTO.getPrescriptionId(),careDTO.getMedicalRecordId(), false,careDTO.getCareId());

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import org.psw_isa.psw_isa_backend.dtos.OperationRequestDTO;
 
+import java.util.stream.*; 
+
 @Service
 public class OperationRequestService {
 
@@ -29,6 +31,9 @@ public class OperationRequestService {
 	
 	@Autowired
 	ClinicAdminService clinicAdminService;
+
+	@Autowired
+	DoctorService doctorService;
 	
 	
 
@@ -52,37 +57,24 @@ public class OperationRequestService {
 
 	}
 	
-	public ArrayList<OperationRequest> operationRequestForClinic(){
-		
-		Long userId=checkRoleService.getUser().getId();
-		List<ClinicAdministrator> clinicAdministrators=clinicAdminService.findAll();
-		List<OperationRequest> allOperationRequest=operationRequestRepository.findAll();
-		ArrayList<OperationRequest> operationRequestClinic=new ArrayList<OperationRequest>();
-		
-		for(ClinicAdministrator admin: clinicAdministrators) {
-			
-			if(admin.getUser().getId()==userId) {
-				
-				
-				for(OperationRequest operationRequest : allOperationRequest) {
-					
-					
-					
-					if(admin.getClinic().getId()==operationRequest.getClinic().getId()) {
-						operationRequestClinic.add(operationRequest);
-					}
-					
-				}
-			}
+	public List<OperationRequest> operationRequestForClinic(){
+		if (clinicAdminService.getClinic() != null) {
+			return findAll().stream()
+				.filter(x -> x.getClinic().getId() == clinicAdminService.getClinic().getId())
+				.collect(Collectors.toList());
 		}
-		
-		
-		
+		else if (checkRoleService.checkIfDoctor()){
+			Long clinicId = doctorService.findAll().stream()
+				.filter(x -> x.getUser().getId() == checkRoleService.getUser().getId())
+				.findFirst().get().getClinic().getId();
+			return findAll().stream()
+				.filter(x -> x.getClinic().getId() == clinicId)
+				.collect(Collectors.toList());
 			
-		
-		
-		return operationRequestClinic;
-		
-		
+
+		}
+		else {
+			return new ArrayList<>();
+		}
 	}
 }
