@@ -111,7 +111,6 @@ public class RegistrationRequestService {
 		mail.setTo(registrationRequest.getPatient().getUser().getEmail());
 		mail.setSubject("Prihvacen zahtev za registraciju");
 		String hesovan="neuspelo";
-		String dehesovan="neuspelo";
 		try {
 		hesovan=hashService.encrypt(registrationRequest.getPatient().getInsuranceID());
 		

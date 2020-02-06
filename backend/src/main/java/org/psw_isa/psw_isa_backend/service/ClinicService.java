@@ -45,7 +45,7 @@ public class ClinicService {
 
 	@Autowired
 	OperationRepository operationRepository;
-	
+
 	@Autowired
 	VacationRepository vacationRepository;
 
@@ -60,11 +60,11 @@ public class ClinicService {
 
 	@Autowired
 	ClinicRatingService clinicRatingService;
-	
+
 	@Autowired
 	RoomService roomService;
 
-	@Autowired 
+	@Autowired
 	ClinicAdminService clinicAdminService;
 
 	@Autowired
@@ -80,8 +80,7 @@ public class ClinicService {
 	}
 
 	public List<Clinic> findAll() {
-		if (clinicAdminService.getClinic() != null) 
-		{
+		if (clinicAdminService.getClinic() != null) {
 			ArrayList<Clinic> result = new ArrayList<>();
 			result.add(clinicRepository.findOneByid(clinicAdminService.getClinic().getId()));
 			return result;
@@ -120,21 +119,21 @@ public class ClinicService {
 	 * } return res; }
 	 * 
 	 */
-	
-public List<Clinic> findClinicsWithFreeDoctors(Long id, String date){
+
+	public List<Clinic> findClinicsWithFreeDoctors(Long id, String date) {
 		List<Clinic> res = new ArrayList<>();
-		List<Clinic> allClinics = new ArrayList<Clinic>(); 
-		allClinics = clinicRepository.findAll(); 
+		List<Clinic> allClinics = new ArrayList<Clinic>();
+		allClinics = clinicRepository.findAll();
 		List<Care> allCares = careRepository.findAll();
 		List<Operation> allOperations = new ArrayList<Operation>();
-		if(operationRepository.findAll() != null) {
+		if (operationRepository.findAll() != null) {
 			allOperations = operationRepository.findAll();
 		}
-		List<Doctor> allDoctors = doctorRepository.findAll(); 
+		List<Doctor> allDoctors = doctorRepository.findAll();
 		List<Care> doctorsCaresForDate = new ArrayList<>();
 		List<Operation> doctorsOperationsForDate = new ArrayList<>();
 		List<Vacation> allVacations = new ArrayList<Vacation>();
-		if(vacationRepository.findAll() != null) {
+		if (vacationRepository.findAll() != null) {
 			allVacations = vacationRepository.findAll();
 		}
 		List<Vacation> doctorsVacations = new ArrayList<Vacation>();
@@ -143,46 +142,46 @@ public List<Clinic> findClinicsWithFreeDoctors(Long id, String date){
 		Boolean hasDoctor = false;
 		int onVacation = 0;
 
-		if(wantedDate.isAfter(LocalDate.now()) || wantedDate.isEqual(LocalDate.now())) {
-			for(Doctor doctor : allDoctors) {
+		if (wantedDate.isAfter(LocalDate.now()) || wantedDate.isEqual(LocalDate.now())) {
+			for (Doctor doctor : allDoctors) {
 				onVacation = 0;
 				doctorsVacations.clear();
 				doctorsCaresForDate.clear();
 				doctorsOperationsForDate.clear();
-				
-				if(allVacations.size() > 0) {
-					for(Vacation vacation : allVacations) {
-						if(vacation.getUser().getId() == doctor.getUser().getId()) {
+
+				if (allVacations.size() > 0) {
+					for (Vacation vacation : allVacations) {
+						if (vacation.getUser().getId() == doctor.getUser().getId()) {
 							doctorsVacations.add(vacation);
 						}
 					}
-					
-					
-					for(Vacation vacation : doctorsVacations) {
-						if(wantedDate.isAfter(vacation.getStartTime()) && wantedDate.isBefore(vacation.getEndTime())) {
+
+					for (Vacation vacation : doctorsVacations) {
+						if (wantedDate.isAfter(vacation.getStartTime()) && wantedDate.isBefore(vacation.getEndTime())) {
 							onVacation = 1;
 						}
 					}
 				}
-				
-				if(onVacation == 0) {
-					if(doctor.getCareType().getId() == id) {
-						if(allCares.size() > 0) {
-							for(Care care : allCares) {	
-								if(care.getDoctor().getId() == doctor.getId()) {
+
+				if (onVacation == 0) {
+					if (doctor.getCareType().getId() == id) {
+						if (allCares.size() > 0) {
+							for (Care care : allCares) {
+								if (care.getDoctor().getId() == doctor.getId()) {
 									startTime = care.getStartTime().toLocalDate();
-									if((care.getPatient() != null) && (startTime.isEqual(wantedDate))) {
+									if (care.isApproved() && (care.getPatient() != null)
+											&& (startTime.isEqual(wantedDate))) {
 										System.out.println("nasao za taj dan");
 										doctorsCaresForDate.add(care);
 									}
 								}
 							}
 						}
-						if(allOperations.size() > 0) {
-							for(Operation operation : allOperations) {
-								if(operation.getDoctors().contains(doctor)) {
+						if (allOperations.size() > 0) {
+							for (Operation operation : allOperations) {
+								if (operation.getDoctors().contains(doctor)) {
 									startTime = operation.getStartTime().toLocalDate();
-									if(startTime.isEqual(wantedDate)) {
+									if (startTime.isEqual(wantedDate)) {
 										doctorsOperationsForDate.add(operation);
 									}
 								}
@@ -190,37 +189,34 @@ public List<Clinic> findClinicsWithFreeDoctors(Long id, String date){
 						}
 					}
 				}
-					
-				if(doctorsCaresForDate.size() + doctorsOperationsForDate.size() < 22 && onVacation == 0) {
+
+				if (doctorsCaresForDate.size() + doctorsOperationsForDate.size() < 22 && onVacation == 0) {
 					System.out.println("nasao da je manje od dva : " + doctorsCaresForDate.size());
-					if(!res.contains(doctor.getClinic())) {
-			//			for(Clinic clinic : allClinics) {
-							for(Doctor doctorClinic : allDoctors) {
-								if(doctorClinic.getClinic().getId() == doctor.getClinic().getId()) {
-									if(doctorClinic.getCareType().getId() == id) {
-										System.out.println("dodaje ga");
-										res.add(doctor.getClinic());
-									}
+					if (!res.contains(doctor.getClinic())) {
+						// for(Clinic clinic : allClinics) {
+						for (Doctor doctorClinic : allDoctors) {
+							if (doctorClinic.getClinic().getId() == doctor.getClinic().getId()) {
+								if (doctorClinic.getCareType().getId() == id) {
+									System.out.println("dodaje ga");
+									res.add(doctor.getClinic());
 								}
 							}
-					//	}
-	//					System.out.println("dodaje ga");
-	//					res.add(doctor.getClinic());
+						}
+						// }
+						// System.out.println("dodaje ga");
+						// res.add(doctor.getClinic());
 					}
 				}
 			}
 		} else {
 			res = new ArrayList<Clinic>();
 		}
-		
-		
+
 		System.out.println("broj klinika: " + res.size());
-		
+
 		return res;
 	}
-	
-	
-	
+
 	public List<Care> findCaresForClinic(Clinic clinic) {
 		List<Care> cares = new ArrayList<Care>();
 		for (Care care : careService.findAll()) {
@@ -231,19 +227,19 @@ public List<Clinic> findClinicsWithFreeDoctors(Long id, String date){
 		}
 		return cares;
 	}
-	
+
 	public List<Patient> findPatientsForClinic(Clinic clinic) {
 		List<Patient> res = new ArrayList<>();
 		List<Patient> patients = patientService.findAll();
 		List<Care> cares = findCaresForClinic(clinic);
-		for (Patient patient : patientService.findAll()) 
-		{
+		for (Patient patient : patientService.findAll()) {
 			boolean found = false;
-			for (Care care : cares) 
-			{
-				if (care.getPatient() != null && patient.getId() == care.getPatient().getId()) found = true;
+			for (Care care : cares) {
+				if (care.getPatient() != null && patient.getId() == care.getPatient().getId())
+					found = true;
 			}
-			if (found) res.add(patient);
+			if (found)
+				res.add(patient);
 		}
 		return res;
 	}
@@ -276,16 +272,13 @@ public List<Clinic> findClinicsWithFreeDoctors(Long id, String date){
 
 	}
 
-
 	public List<Room> getRoomsForClinic(Clinic clinic) {
 		List<Room> rooms = new ArrayList<>();
 		for (Room room : roomService.findAll()) {
-			if (room.getClinic().getId() == clinic.getId()) rooms.add(room);
+			if (room.getClinic().getId() == clinic.getId())
+				rooms.add(room);
 		}
 		return rooms;
 	}
-
-
-
 
 }

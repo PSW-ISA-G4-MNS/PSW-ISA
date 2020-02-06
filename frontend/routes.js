@@ -47,6 +47,9 @@ import System from './src/views/System.vue';
 import AuthenticatePrescriptionView from './src/views/AuthenticatePrescriptionView.vue';
 
 import PatientDetail from "./src/views/PatientDetail.vue";
+import CareConfirm from "./src/views/CareConfirm.vue";
+import CareDecline from "./src/views/CareDecline.vue";
+
 
 
 import AddAdminClinicView from './src/views/AddAdminClinicView.vue';
@@ -94,6 +97,8 @@ const routes = [
 
     { path: '/roomEdit/:room', component: RoomEditView, props: true},
     { path: "/patients/:patient", component: PatientDetail, props: true},
+    { path: "/confirm/:careId", component: CareConfirm, props: true},
+    { path: "/decline/:careId", component: CareDecline, props: true},
    {path: '/sys', component: System},
    {path: '/prescription', component: AuthenticatePrescriptionView},
    
