@@ -9,7 +9,11 @@ export default {
         filter: {
             type: Function,
             default: (x => true)
-        }
+        },
+        all: {
+          type: Boolean,
+          default: true
+        },
     },
     data: function () {
         return {
@@ -19,7 +23,8 @@ export default {
     },
     mounted: function () 
     {
-        CareService.listPredefinedCaresForClinic(localStorage.getItem("selectedClinic")).then(response => this.items = response.data);
+        if (!this.all) CareService.listPredefinedCaresForClinic(localStorage.getItem("selectedClinic")).then(response => this.items = response.data);
+        else CareService.all().then(response => this.items = response.data);
     },
     components: {
     	"WidgetCareSingle": WidgetCareSingle
@@ -37,7 +42,7 @@ export default {
 </h2>
 <div v-else = "items.length != 0">
 <h1>
-    Predefined cares for {{items[0].doctor.clinic.name}}
+    Cares
 </h1>
   <table >
     <tr>
@@ -45,7 +50,7 @@ export default {
         <th>Doctor </th>
         <th>Care type </th>
         <th>Price </th>
-        <th v-if="role == 'PATIENT' ">Reservation </th>
+        <th>Reservation </th>
     </tr>
     
       <WidgetCareSingle 

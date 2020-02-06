@@ -28,7 +28,12 @@ public class CareController {
 	
 	@Autowired 
 	CareService careService;
-		
+	
+	
+	@GetMapping()
+	public ResponseEntity<List<Care>> findAll(){
+		return new ResponseEntity<>(careService.findAll(), HttpStatus.OK);
+	}
 	
 	@GetMapping(value="/all")
 	public ResponseEntity<List<Care>> findAllUnassignedAndUpcoming(){
@@ -67,6 +72,12 @@ public class CareController {
 		return new ResponseEntity<>(careService.findOneByid(id), HttpStatus.OK);
 	}
 	
+
+	@PostMapping(value="/{id}")
+	public ResponseEntity<Care> update(@PathVariable("id") Long id, @RequestBody Care care){
+		return new ResponseEntity<>(careService.update(id, care), HttpStatus.OK);
+	}
+
 	@PostMapping(consumes = "application/json")
 	public ResponseEntity<Long> save(@RequestBody CareDTO careDTO){
 		

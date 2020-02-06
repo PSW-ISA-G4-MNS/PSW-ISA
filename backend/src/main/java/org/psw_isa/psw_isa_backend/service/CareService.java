@@ -176,9 +176,10 @@ public class CareService {
 	public List<Care> findAllUnassignedAndUpcoming() {
 		List<Care> all = careRepository.findAll();
 		List<Care> unassigned = new ArrayList<>();
+    
+		for(Care care : all) {
+			if((care.getPatient() == null) && (care.getStartTime() == null || care.getStartTime().isAfter(LocalDateTime.now()))) {
 
-		for (Care care : all) {
-			if ((care.getPatient() == null) && (care.getStartTime().isAfter(LocalDateTime.now()))) {
 				unassigned.add(care);
 			}
 		}
@@ -331,6 +332,11 @@ public class CareService {
 		System.out.println("patient: " + patientID + " care: " + careID);
 		careRepository.carePatientUpdate(patientID, careID);
 
+	}
+
+	public Care update(Long id, Care care) {
+		care.setId(id);
+		return careRepository.save(care);
 	}
 
 	public void sendConfirmationMail(Care care) {

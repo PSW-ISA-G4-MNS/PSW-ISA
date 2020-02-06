@@ -3,31 +3,42 @@ import RoomService from "../Room/service";
 import RoomOption from "./RoomOption.vue";
 
 export default {
-	name: "RoomSelection",
-	props: ["operationRequest","doctors"],
+    name: "RoomSelection",
+    props: {
+      filter: {
+              type: Function,
+              default: (x => true)
+      }
+    },
     data: function () {
         return {
             items: [],
           	care: {},
-            search: "",
+            search: {
+              name: "",
+            },
             success: false,
             
 
         };
     },
-    methods: {
-  
-
-	},
 	
 	mounted: function () 
     {
+      this.randomId = Math.floor(Math.random() * 1000000);
       RoomService.list().then(response => {
           this.items = response.data;
+          this.success = true;
+          console.log("Assigned ModalID: " + this.randomId);
       })
     },
     components: {
         RoomOption
+    },
+    methods: {
+      reservate: function(room) {
+        this.$emit("select", room);
+      }
     }
 }
 </script>
@@ -35,16 +46,16 @@ export default {
 <template>
 <div>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" :data-target="'#Modal-' + operationRequest.id">
-  Schedule
+<button v-if="this.success" type="button" class="btn btn-primary" data-toggle="modal" :data-target="'#Modal-' + this.randomId">
+  Select Room
 </button>
 
 <!-- Modal -->
-<div class="modal fade" :id="'Modal-' + operationRequest.id" tabindex="-1" role="dialog" :aria-labelledby="'ModalLabel' + operationRequest.id" aria-hidden="true">
+<div v-if="this.success" class="modal fade" :id="'Modal-' + this.randomId" tabindex="-1" role="dialog" :aria-labelledby="'ModalLabel' + this.randomId" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" :id="'ModalLabel' + operationRequest.id">Choose room</h5>
+        <h5 class="modal-title" :id="'ModalLabel' + this.randomId">Choose room</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -52,8 +63,8 @@ export default {
       <div class="modal-body">
         <div>
           <input type="text" placeholder="Room name" v-model="search.name" />
-          <RoomOption v-for="item in items.filter(x => x.clinic.id == this.operationRequest.clinic.id && x.title.includes(this.search.name))" 
-            :operationRequest="operationRequest" :doctors="doctors" :key="item.id" :room="item.id" />
+          <RoomOption @select="reservate" v-for="item in items.filter(x =>  x.title.includes(this.search.name) && this.filter(x))" 
+             :key="item.id" :room="item.id" />
         </div>
       </div>
       <div class="modal-footer">
