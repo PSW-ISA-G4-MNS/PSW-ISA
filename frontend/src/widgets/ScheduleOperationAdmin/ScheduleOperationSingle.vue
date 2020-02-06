@@ -1,5 +1,5 @@
 <script>
-import RoomSelection from "./RoomSelection.vue";
+import RoomSelection from "../Room/RoomSelection.vue";
 import ScheduleOperationService from "./service";
 
 export default {
