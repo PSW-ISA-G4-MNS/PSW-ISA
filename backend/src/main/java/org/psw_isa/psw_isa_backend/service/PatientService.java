@@ -22,6 +22,9 @@ public class PatientService {
 	
 	@Autowired 
 	UserRepository userRepository;
+	
+	@Autowired
+	HashService hashService;
 
 	public List<Patient> findAll(){
 		return patientRepository.findAll();
@@ -50,6 +53,34 @@ public class PatientService {
 		return patientRepository.save(patient);
 	}
 	
+	
+	public void activateAccount(String hash) {
+		String insurance="no";
+		List<Patient> allPatients=patientRepository.findAll();
+		
+		try {
+		insurance=hashService.decrypt(hash);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		for(Patient patient : allPatients) {
+			
+			if(patient.getInsuranceID().equals(insurance)) {
+				
+				patient.setActivated(true);
+				patientRepository.save(patient);
+				
+			}
+			
+		}
+		
+		
+		
+	}
 	
 	
 	public Patient getBySession() {

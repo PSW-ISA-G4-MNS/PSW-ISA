@@ -37,6 +37,18 @@ export default class CareService
         return axios.post(API_URL + "/care/" + id, data);
     }
 
+    static confirmation(id){
+
+        return axios.post(API_URL + "/care/confirm/"+id);
+
+    }
+
+    static decline(id){
+
+        return axios.post(API_URL + "/care/decline/"+id);
+
+    }
+
     static scheduleForPatient(data, patientId) {
         return axios.post(API_URL + "/care/scheduleForPatient/" + patientId, data);
     }

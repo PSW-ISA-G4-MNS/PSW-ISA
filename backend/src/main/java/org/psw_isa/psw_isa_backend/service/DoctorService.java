@@ -118,7 +118,7 @@ public class DoctorService {
 								for(Care care : allCares) {	
 									if(care.getDoctor().getId() == doctor.getId()) {
 										startTime = care.getStartTime().toLocalDate();
-										if((care.getPatient() != null) && (startTime.isEqual(wantedDate))) {
+										if((care.isApproved())&&(care.getPatient() != null) && (startTime.isEqual(wantedDate))) {
 											System.out.println("nasao za taj dan");
 											doctorsCaresForDate.add(care);
 										}
@@ -222,7 +222,7 @@ public class DoctorService {
 			
 			if(onVacation == 0) {	
 				for(Care care : allCares) {
-					if(care.getDoctor().getId() == doctorID && care.getPatient() != null) {
+					if(care.isApproved() && care.getDoctor().getId() == doctorID && care.getPatient() != null) {
 						doctorsCares.add(care);
 					}
 				}
@@ -335,7 +335,7 @@ public class DoctorService {
 			
 			if(onVacation == 0) {	
 				for(Care care : allCares) {
-					if(care.getDoctor().getId() ==doctor.getId() && care.getPatient() != null) {
+					if(care.isApproved() && care.getDoctor().getId() ==doctor.getId() && care.getPatient() != null) {
 						doctorsCares.add(care);
 					}
 				}

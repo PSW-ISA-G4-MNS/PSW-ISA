@@ -23,6 +23,8 @@ public class Patient {
     @JoinColumn
 	private User user; 
 	
+	private boolean activated;
+	
 	
 	private String insuranceID; 
 	
@@ -62,6 +64,12 @@ public class Patient {
 	public void setInsuranceID(String newValue) 
 	{
 		this.insuranceID = newValue;
+	}
+	public boolean isActivated() {
+		return activated;
+	}
+	public void setActivated(boolean activated) {
+		this.activated = activated;
 	}
 	
 }
