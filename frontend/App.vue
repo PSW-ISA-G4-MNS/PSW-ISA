@@ -46,6 +46,8 @@ export default {
         <router-link v-if='data.role == "NOT_LOGGED"' to='/login'>Login</router-link>
         <router-link v-if='data.role == "NOT_LOGGED"' to='/register'>Registration</router-link>
         <router-link v-if='data.role == "DOCTOR" || data.role == "NURSE"' to='/patients'>Patients</router-link>
+        <router-link v-if='data.role == "DOCTOR" || data.role == "NURSE" || data.role == "CLINIC_ADMINISTRATOR"' to='/CareList'>Cares</router-link>
+
 
         <router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/regreq'>Registration Requests</router-link>
         <router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/careTypes'>Care Types</router-link>

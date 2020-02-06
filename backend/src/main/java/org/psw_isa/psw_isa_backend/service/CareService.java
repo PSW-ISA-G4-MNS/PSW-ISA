@@ -187,7 +187,7 @@ public class CareService {
 		List<Care> unassigned = new ArrayList<>();
 		
 		for(Care care : all) {
-			if((care.getPatient() == null) && (care.getStartTime().isAfter(LocalDateTime.now()))) {
+			if((care.getPatient() == null) && (care.getStartTime() == null || care.getStartTime().isAfter(LocalDateTime.now()))) {
 				unassigned.add(care);
 			}
 		}

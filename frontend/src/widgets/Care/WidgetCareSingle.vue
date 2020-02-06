@@ -1,51 +1,70 @@
 <script>
 import CareService from "./service";
 import ReviewPage from "../Review/ReviewPage.vue";
+
+import RoomSelection from "../Room/RoomSelection.vue";
+import DoctorSelection from "../Doctor/DoctorSelection.vue";
+import ClinicService from "../Clinic/service";
+
+
 export default {
 	name: "WidgetCareSingle",
 	props: ["care"],
     data: function () {
         return {
-          	care: {},
+          	data: {},
 
 		        success: false,
             role: localStorage.getItem('role'),
 
 		        finalized: false,
+            clinic: null,
 
 
         };
     },
     methods: {
     	reservate: function() 
-	{
-		CareService.reservate(this.care.id).then(response => {
+      {
+        CareService.reservate(this.data.id).then(response => {
 
 
-			if (response.status == 200)this.success = true;
-			else this.success = false;
+          if (response.status == 200)this.success = true;
+          else this.success = false;
 
-    return {
-        renderComponent: true,
-      };
+        return {
+            renderComponent: true,
+          };
 
 
-		});
-  
+        });
+      
 
-	},
-	finalizeCare: function () {
-		this.finalized = true;
-	},
+      },
+      finalizeCare: function () {
+        this.finalized = true;
+      },
 
-	decline: function() 
-	{
-		CareService.decline(this.care).then(response => {
-			if (response.status == 200) this.success = true;
-			else this.success = false;
+      decline: function() 
+      {
+        CareService.decline(this.data).then(response => {
+          if (response.status == 200) this.success = true;
+          else this.success = false;
 
-		});
-	}
+        });
+      },
+      selectDoctor: function(doctor) {
+        this.data.doctor = doctor;
+        CareService.update(this.care, this.data).then(response => {
+          alert("Doctor assigned");
+        });
+      },
+      selectRoom: function(room) {
+        this.data.room = room;
+        CareService.update(this.care, this.data).then(response => {
+          alert("Room assigned");
+        });
+      }
 	
 
 	},
@@ -54,16 +73,24 @@ export default {
     {
         CareService.get(this.care).then(
 
-	response => {
-		console.log(response.data);;
-		this.care = response.data;
-    
-		console.log(this.data);
-	}
-	);
+          response => {
+            console.log(response.data);;
+            this.data = response.data;
+            
+            console.log(this.data);
+          }
+        );
+
+        if (this.role == "DOCTOR" || this.role == "CLINIC_ADMINISTRATOR") {
+          ClinicService.list().then(response => {
+            this.clinic = response.data[0];
+          });
+        }
     },
     components: {
-	ReviewPage
+	ReviewPage,
+  RoomSelection,
+  DoctorSelection
     }
 
 }
@@ -73,16 +100,19 @@ export default {
     
 
   <tr v-if="!success">
-      <td id="time">{{care.startTime.toString().replace("T", " ")}}</td>
-      <td id="doctor">{{ care.doctor.user.firstname }} {{ care.doctor.user.lastname}}</td>
-      <td id="caretype">{{ care.careType.name}}</td>
-      <td id="price">{{ care.price}}</td>
-      <td v-if="role == 'PATIENT' " id="reservate">
-              <button v-on:click="reservate" style="background-color:green;color:white;height:40px;width:200px">
+      <td id="time">{{ data.startTime == null ? "No time" : data.startTime.toString().replace("T", " ")}}</td>
+      <td id="doctor">{{ data.doctor == null ? "" : data.doctor.user.firstname + " " + data.doctor.user.lastname}}</td>
+      <td id="caretype">{{ data.careType == null ? "" : data.careType.name}}</td>
+      <td id="price">{{ data.price}}</td>
+      <td id="reservate">
+              <button v-if="this.role == 'PATIENT'" v-on:click="reservate" style="background-color:green;color:white;height:40px;width:200px">
               Reservate
               </button>
 	      <button v-if="this.role == 'DOCTOR' && !this.finalized" @click="finalizeCare">Finalize</button>
 	      <ReviewPage v-if="this.finalized" :careId="care.id" :patientId="care.patient.id" />
+        <RoomSelection v-if="this.clinic != null" @select="selectRoom" :filter="x => x.clinic.id == this.clinic.id"/>
+        <DoctorSelection v-if="this.clinic != null" @select="selectDoctor" :filter="x => x.clinic.id == this.clinic.id"/>
+
         </td>
   </tr>
   

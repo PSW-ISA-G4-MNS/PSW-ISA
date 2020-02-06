@@ -7,8 +7,9 @@ import WidgetCareMulti from "../widgets/Care/WidgetCareMulti.vue"
 export default {
     name: "CareList",
     data: function () {
-            return {
-		data: {}
+        return {
+		    data: {},
+            role: localStorage.getItem("role")
 	    };
 	},
     mounted: function () 
@@ -28,7 +29,8 @@ export default {
 
 <template>
 
-<WidgetCareMulti/>
+<WidgetCareMulti v-if="this.role == 'PATIENT'" all="false"/>
+<WidgetCareMulti v-else  :filter="x => x.room == null || x.doctor == null"/>
 
 </template>
 

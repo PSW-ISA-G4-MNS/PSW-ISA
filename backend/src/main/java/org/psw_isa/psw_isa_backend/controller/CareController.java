@@ -28,7 +28,12 @@ public class CareController {
 	
 	@Autowired 
 	CareService careService;
-		
+	
+	
+	@GetMapping()
+	public ResponseEntity<List<Care>> findAll(){
+		return new ResponseEntity<>(careService.findAll(), HttpStatus.OK);
+	}
 	
 	@GetMapping(value="/all")
 	public ResponseEntity<List<Care>> findAllUnassignedAndUpcoming(){

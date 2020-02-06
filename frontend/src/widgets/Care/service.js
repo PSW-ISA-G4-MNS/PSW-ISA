@@ -7,6 +7,11 @@ export default class CareService
     {
         this.self = self;
     }
+
+    static all() {
+        return axios.get(API_URL + "/care/");
+    }
+
     static list() 
     {
         return axios.get(API_URL + "/care/all/");
@@ -25,6 +30,11 @@ export default class CareService
     static get(id) 
     {
         return axios.get(API_URL + "/care/" + id);
+    }
+    
+    static update(id, data) 
+    {
+        return axios.post(API_URL + "/care/" + id, data);
     }
 
     static scheduleForPatient(data, patientId) {
