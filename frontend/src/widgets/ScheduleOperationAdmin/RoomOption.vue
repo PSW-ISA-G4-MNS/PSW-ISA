@@ -19,16 +19,8 @@ export default {
     methods: {
     	reservate: function() 
 	    {
-        this.request.patient=this.operationRequest.patient;
-        this.request.startTime=this.data.newStartTime;
-        this.request.doctors=this.doctors;
-        this.request.room = this.data;
-        ScheduleOperationService.reservate(this.request).then(response => {
-          console.log("Proslo")
-        });
-      
-
-	  },
+        this.$emit("select", this.data);
+	    },
 		decline: function() 
 	{
 	}
@@ -43,6 +35,7 @@ export default {
       RoomSingleService.get(this.room).then(response => {
           this.data = response.data;
           RoomSingleService.next(this.room).then(response => {
+              console.log("Getting next available time slot for room " + this.room);
               this.data.newStartTime = response.data;
               this.success = true;
           });
@@ -61,7 +54,7 @@ export default {
 
 <template>
     <p v-if="this.success">{{data.title + " at" + data.newStartTime.replace("T", "")}}
-    <button @click="reservate">Schedule</button>
+    <button @click="reservate">Select</button>
     </p>
 </template>
 

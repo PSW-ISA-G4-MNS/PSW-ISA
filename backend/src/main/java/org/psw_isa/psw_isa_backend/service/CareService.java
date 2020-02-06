@@ -348,5 +348,10 @@ public class CareService {
 
 	}
 
+	public Care update(Long id, Care care) {
+		care.setId(id);
+		return careRepository.save(care);
+	}
+
 }
 

@@ -1,43 +1,18 @@
 <script>
 import RoomSelection from "./RoomSelection.vue";
+import ScheduleOperationService from "./service";
 
 export default {
 	name: "ScheduleOperationSingle",
 	props: ["operationRequest","newDate", "doctors"],
-    data: function () {
-        return {
-            data: {},
-          	care: {},
-            success: false,
-            
-
-        };
-    },
-    methods: {
-    	reservate: function() 
-
-	{
-		ScheduleOperationService.reservate(this.data).then(response => {
-      
-      ScheduleOperationService.deleteOperationRequest(this.operationRequest.id).then(response => {
-      console.log("Proslo")
-		});
-      
-		});
-  
-
-
-      },
-		decline: function() 
-	{
+  data: function () {
+      return {
+          data: {},
+          care: {},
+          success: false,
+          request: {}
+      };
   },
-  
- 
-  
-  
-
-	},
-	
 	mounted: function () 
     {
       this.data.patient=this.operationRequest.patient;
@@ -45,9 +20,22 @@ export default {
       this.data.doctors=this.doctors;
     
     },
-    components: {
-      RoomSelection
+  components: {
+    RoomSelection
+  },
+  methods: {
+    reservate: function(room) 
+    {
+      this.request.patient=this.operationRequest.patient;
+      this.request.startTime=this.data.newStartTime;
+      this.request.doctors=this.doctors;
+      this.request.room = room;
+      ScheduleOperationService.reservate(this.request).then(response => {
+        console.log("Proslo");
+        ScheduleOperationService.deleteOperationRequest(this.operationRequest.id);
+      });
     }
+  }
 }
 </script>
 
@@ -61,7 +49,7 @@ export default {
       <td v-if="operationRequest.startTime!=null">{{operationRequest.startTime.toString().replace("T", " ")}}</td>
       <td  v-else>{{"No time"}}</td>      
       <td>
-          <RoomSelection :doctors="doctors" :operationRequest="operationRequest" />
+          <RoomSelection @select="reservate" :doctors="doctors" :operationRequest="operationRequest" />
       </td>
   </tr>
 

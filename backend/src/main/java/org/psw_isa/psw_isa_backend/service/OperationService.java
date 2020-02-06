@@ -178,6 +178,9 @@ public class OperationService {
 	public Operation saveAdmin(Operation operation) {
 		
 		EmailDTO mail=new EmailDTO();
+		if (operation.getRoom().getSchedule() == null) {
+			operation.getRoom().setSchedule(new ArrayList<>());
+		}
 		operation.getRoom().getSchedule().add(operation.getStartTime());
 		roomRepository.save(operation.getRoom());
 		
