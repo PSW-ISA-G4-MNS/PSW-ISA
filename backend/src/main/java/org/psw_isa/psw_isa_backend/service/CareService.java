@@ -225,6 +225,7 @@ public class CareService {
 	public Care saveWithPatient(CareDTO dto, Long patientId) {
 		Care care = save(dto);
 		care.setPatient(patientRepository.findOneByid(patientId));
+		sendConfirmationMail(care);
 		return careRepository.save(care);
 	}
 
@@ -336,6 +337,11 @@ public class CareService {
 
 	public Care update(Long id, Care care) {
 		care.setId(id);
+		if (care.getPatient() != null && care.getRoom() != null && care.getStartTime() != null && 
+			care.getDoctor() != null
+		) {
+			sendConfirmationMail(care);
+		}
 		return careRepository.save(care);
 	}
 
