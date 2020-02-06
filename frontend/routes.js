@@ -21,7 +21,7 @@ import LogOut from './src/views/Logout.vue';
 
 import AvailableCaresForDoctor from './src/views/AvailableCaresForDoctor.vue';
 
-
+import ScheduleOperation from './src/views/ScheduleOperation.vue';
 import RoomEditView from './src/views/RoomEditView.vue';
 import CareTypeList from './src/views/CareTypeList.vue';
 
@@ -36,6 +36,8 @@ import VacationRequestList from "./src/views/VacationRequestList.vue";
 
 import CalendarView from './src/views/CalendarView.vue';
 import MedicineAdd from './src/views/MedicineAdd.vue';
+
+import ActivateView from './src/views/ActivateView.vue';
 
 import ReviewView from './src/views/ReviewView.vue';
 import DiagnosisAdd from './src/views/DiagnosisAdd.vue';
@@ -85,6 +87,7 @@ const routes = [
     {path: '/scheduleOperation', component:ScheduleOperation},
     {path: '/review', component: ReviewView},
     {path: "/review/:patientIdFromCalendar/:careIdFromCalendar", component: ReviewView, props: true},
+    {path: "/activate/:hash", component: ActivateView, props:true},
     {path: '/addDiagnosis', component: DiagnosisAdd},
     {path: '/addMedicine', component: MedicineAdd},
     {path: '/addAdminClinic', component:AddAdminClinicView},

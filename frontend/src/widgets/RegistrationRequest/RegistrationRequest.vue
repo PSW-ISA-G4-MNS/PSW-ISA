@@ -9,7 +9,8 @@ export default {
             registrationrequest: {},
             declineResponse:{},
 		        success: false,
-            Dresponse: false
+            Dresponse: false,
+            returnResponse:{}
         };
     },
     methods: {
@@ -17,14 +18,12 @@ export default {
 	{
 		RegistrationRequestService.accept(this.request.id).then(response => {
 
-        this.declineResponse.to=this.request.patient.user.email;
-        this.declineResponse.subject="Prihvacen zahtev za registraciju";
-        this.declineResponse.message="Prihvacen vam je zahtev koji ste podneli za koriscenje sajta klinike"
+        
 
       if (response.status == 200){ 
         this.success = true;
         
-        RegistrationRequestService.email(this.declineResponse);
+
         
       }
 			else this.success = false;
@@ -42,23 +41,16 @@ export default {
 
 		email: function() 
 	{
-		RegistrationRequestService.email(this.declineResponse).then(response => {
-			if (response.status == 200) this.Dresponse = false;
-      else this.Dresponse = true;
-      
-      console.log("poslalo se");
-    
-   
-		});
+		
   },
   
   	decline: function() 
 	{
-		RegistrationRequestService.decline(this.request.id).then(response => {
+		RegistrationRequestService.decline(this.returnResponse).then(response => {
 			if (response.status == 200) this.Dresponse = false;
 			else this.Dresponse = true;
     
-      RegistrationRequestService.email(this.declineResponse);
+     
 		});
 	}
 	
@@ -68,8 +60,7 @@ export default {
 	mounted: function () 
     {
       
-  this.declineResponse.to=this.request.patient.user.email;
-  this.declineResponse.subject="Odbijenica za registraciju klinike";
+      this.returnResponse.id=this.request.id;
   
 
     }
@@ -98,7 +89,7 @@ export default {
 
         <td v-if="this.Dresponse">
           <p>
-		        <input v-if="this.Dresponse" type="text" class="form-control" placeholder="Type reason " v-model="declineResponse.message" />
+		        <input v-if="this.Dresponse" type="text" class="form-control" placeholder="Type reason " v-model="returnResponse.comment" />
 		      </p>
 
           <button v-if="this.Dresponse" v-on:click="decline"  style="background-color:blue;color:white;height:40px;width:200px">
