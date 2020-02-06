@@ -5,12 +5,16 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.naming.factory.SendMailFactory;
+import org.psw_isa.psw_isa_backend.dtos.DeclineRegistrationRequestDTO;
+import org.psw_isa.psw_isa_backend.dtos.EmailDTO;
 import org.psw_isa.psw_isa_backend.dtos.RegistrationDTO;
 import org.psw_isa.psw_isa_backend.dtos.RegistrationRequestDTO;
 import org.psw_isa.psw_isa_backend.models.Patient;
 import org.psw_isa.psw_isa_backend.models.RegistrationRequest;
 import org.psw_isa.psw_isa_backend.models.User;
 import org.psw_isa.psw_isa_backend.repository.PatientRepository;
+
 import org.psw_isa.psw_isa_backend.repository.RegistrationRequestRepository;
 import org.psw_isa.psw_isa_backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -26,6 +30,12 @@ public class RegistrationRequestService {
 	private UserRepository userRepository;
 	@Autowired
 	private PatientRepository patientRepository;
+	
+	@Autowired
+	private HashService hashService;
+	
+	@Autowired
+	private SendEmailService sendEmailService;
 	
 	public List<RegistrationRequestDTO> findAllNotApproved(){
 		List<RegistrationRequest> registrationRequests = registrationRequestRepository.findAll();
@@ -97,16 +107,38 @@ public class RegistrationRequestService {
 		RegistrationRequest registrationRequest = registrationRequestRepository.findOneById(id);
 		
 		registrationRequest.setApproved(true);
+		EmailDTO mail=new EmailDTO();
+		mail.setTo(registrationRequest.getPatient().getUser().getEmail());
+		mail.setSubject("Prihvacen zahtev za registraciju");
+		String hesovan="neuspelo";
+		try {
+		hesovan=hashService.encrypt(registrationRequest.getPatient().getInsuranceID());
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		mail.setMessage("Vas zahtev za registraciju je odobren, molimo vas potvrdite klikom na sledeci link: "
+				+ "127.0.0.1:300/frontend/#/activate/"+hesovan);
+		
+		sendEmailService.sendMail(mail);
 		registrationRequestRepository.save(registrationRequest);
 		
 		return registrationRequest.getId();
 	}
 	
-	public Long decline(Long id) {
-		RegistrationRequest registrationRequest = registrationRequestRepository.findOneById(id);
+	public Long decline(DeclineRegistrationRequestDTO declineRegistrationRequestDTO) {
+		RegistrationRequest registrationRequest = registrationRequestRepository.findOneById(declineRegistrationRequestDTO.getId());
+		
+		EmailDTO mail=new EmailDTO();
+		mail.setTo(registrationRequest.getPatient().getUser().getEmail());
+		mail.setSubject("Odbijen zahtev za registraciju");
+		mail.setMessage(declineRegistrationRequestDTO.getComment());
 		
 		registrationRequest.setRejected(true);
 		registrationRequestRepository.save(registrationRequest);
+		sendEmailService.sendMail(mail);
 		
 		return registrationRequest.getId();
 	}

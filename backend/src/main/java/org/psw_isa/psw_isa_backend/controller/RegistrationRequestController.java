@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.websocket.server.PathParam;
 
+import org.psw_isa.psw_isa_backend.dtos.DeclineRegistrationRequestDTO;
 import org.psw_isa.psw_isa_backend.dtos.RegistrationDTO;
 import org.psw_isa.psw_isa_backend.dtos.RegistrationRequestDTO;
 import org.psw_isa.psw_isa_backend.models.Patient;
@@ -72,11 +73,12 @@ public class RegistrationRequestController {
 	}
 	
 	
-	@PutMapping(value = "/decline/{id}")
-	public ResponseEntity<Long> decline(@PathVariable("id") Long id){		
+	@PutMapping(value = "/decline",consumes = "application/json" )
+	public ResponseEntity<Long> decline(@RequestBody DeclineRegistrationRequestDTO declineRegistrationRequestDTO){		
 		
 		
-		Long retID = registrationRequestService.decline(id);
+		Long retID = registrationRequestService.decline(declineRegistrationRequestDTO);
+		
 		
 		return new ResponseEntity<>(retID, HttpStatus.OK);
 	}

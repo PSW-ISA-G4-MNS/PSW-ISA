@@ -21,7 +21,7 @@ import LogOut from './src/views/Logout.vue';
 
 import AvailableCaresForDoctor from './src/views/AvailableCaresForDoctor.vue';
 
-
+import ScheduleOperation from './src/views/ScheduleOperation.vue';
 import RoomEditView from './src/views/RoomEditView.vue';
 import CareTypeList from './src/views/CareTypeList.vue';
 
@@ -37,6 +37,8 @@ import VacationRequestList from "./src/views/VacationRequestList.vue";
 import CalendarView from './src/views/CalendarView.vue';
 import MedicineAdd from './src/views/MedicineAdd.vue';
 
+import ActivateView from './src/views/ActivateView.vue';
+
 import ReviewView from './src/views/ReviewView.vue';
 import DiagnosisAdd from './src/views/DiagnosisAdd.vue';
 import ChangeReviewView from './src/views/ChangeReviewView.vue';
@@ -45,6 +47,9 @@ import System from './src/views/System.vue';
 import AuthenticatePrescriptionView from './src/views/AuthenticatePrescriptionView.vue';
 
 import PatientDetail from "./src/views/PatientDetail.vue";
+import CareConfirm from "./src/views/CareConfirm.vue";
+import CareDecline from "./src/views/CareDecline.vue";
+
 
 
 import AddAdminClinicView from './src/views/AddAdminClinicView.vue';
@@ -85,12 +90,15 @@ const routes = [
     {path: '/scheduleOperation', component:ScheduleOperation},
     {path: '/review', component: ReviewView},
     {path: "/review/:patientIdFromCalendar/:careIdFromCalendar", component: ReviewView, props: true},
+    {path: "/activate/:hash", component: ActivateView, props:true},
     {path: '/addDiagnosis', component: DiagnosisAdd},
     {path: '/addMedicine', component: MedicineAdd},
     {path: '/addAdminClinic', component:AddAdminClinicView},
 
     { path: '/roomEdit/:room', component: RoomEditView, props: true},
     { path: "/patients/:patient", component: PatientDetail, props: true},
+    { path: "/confirm/:careId", component: CareConfirm, props: true},
+    { path: "/decline/:careId", component: CareDecline, props: true},
    {path: '/sys', component: System},
    {path: '/prescription', component: AuthenticatePrescriptionView},
    

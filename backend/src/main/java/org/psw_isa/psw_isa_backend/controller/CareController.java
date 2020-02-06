@@ -80,6 +80,7 @@ public class CareController {
 		return new ResponseEntity<>(careService.saveWithPatient(careDTO, patientId).getId(),HttpStatus.OK);
 	}
 	
+	
 	@PostMapping(value="/change", consumes = "application/json")
 	public ResponseEntity<Long> saveWithReview(@RequestBody CareDTO careDTO){
 		
@@ -125,6 +126,24 @@ public class CareController {
 		
 		
 		return new ResponseEntity<>(careService.findAllOldCares(), HttpStatus.OK);
+	}
+	
+	
+	@PostMapping(value="/confirm/{id}")
+	public ResponseEntity<Long> confirmCare(@PathVariable("id") Long careId){
+		
+		careService.confirmCare(careId);
+		
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	
+	@PostMapping(value="/decline/{id}")
+	public ResponseEntity<Long> declineCare(@PathVariable("id") Long careId){
+		
+		careService.declineCare(careId);
+		
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 }
