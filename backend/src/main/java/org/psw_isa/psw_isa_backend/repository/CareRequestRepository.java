@@ -9,5 +9,7 @@ public interface CareRequestRepository extends JpaRepository<CareRequest, Long> 
 
 	
 	List<CareRequest> findAll();
+
+	CareRequest findOneByid(Long id);
 	
 }

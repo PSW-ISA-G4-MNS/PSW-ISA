@@ -54,6 +54,14 @@ public class CareRequestService {
 	ClinicAdminRepository clinicAdminRepository;
 	
 	
+	public List<CareRequest> findAll() {
+		return careRequestRepository.findAll();
+	}
+
+	public void delete(Long id) {
+		careRequestRepository.delete(careRequestRepository.findOneByid(id));
+	}
+
 	public int createRequest(CareRequestDTO careRequestDTO) {
 		User user = checkRoleService.getUser();
 		List<Patient> allPatients = patientRepository.findAll();
