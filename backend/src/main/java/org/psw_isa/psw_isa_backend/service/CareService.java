@@ -282,8 +282,8 @@ public class CareService {
 		for (Care care : all) {
 			if (care.getDoctor().getClinic().getId() == doctorID && care.isApproved()) {
 				startTime = care.getStartTime().toLocalDate();
-				// (care.getPatient() != null) &&
-				if ((startTime.isEqual(date))) {
+				
+				if ((care.getPatient() != null) &&(startTime.isEqual(date))) {
 					assigned.add(care);
 				}
 			}
