@@ -19,7 +19,6 @@ import ClinicReportView from './src/views/ClinicReportView.vue';
 import CareFormView from './src/views/CareFormView.vue';
 import LogOut from './src/views/Logout.vue';
 
-import ScheduleOperation from "./src/views/ScheduleOperation.vue";
 
 import AvailableCaresForDoctor from './src/views/AvailableCaresForDoctor.vue';
 

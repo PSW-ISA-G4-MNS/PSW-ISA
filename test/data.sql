@@ -14,7 +14,7 @@ insert into administrator ("id", "user_id") values (10, 1);
 insert into clinic_administrator ("id", "user_id", "clinic_id") values (10, 2, 1);
 insert into doctor ("id", "user_id", "years_of_experience", "care_type_id", "clinic_id") values (10, 3, 5, 100, 1);
 insert into nurse ("id", "user_id") values (10, 4);
-insert into patient ("id", "insuranceid", "user_id") values (10, '156156156', 5);
+insert into patient ("id", "activated", "insuranceid", "user_id") values (10, true, '156156156', 5);
 
 insert into registration_request ("approved", "time", "patient_id") values (true, '2019-10-10', 10);
 insert into room ("title", "capacity", "clinic_id") values ('Soba 23', 10, 1);
