@@ -40,7 +40,7 @@ export default {
       
       <td id="dugme">
               <button @click="start"   style="background-color:green;color:white;height:40px;width:200px">
-            Zapocni pregled
+            Start care
               </button>
               
               
