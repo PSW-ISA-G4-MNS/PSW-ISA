@@ -1,6 +1,8 @@
 <script>
 import RoomSelection from "../Room/RoomSelection.vue";
 import ScheduleOperationService from "./service";
+import TimeSelection from "../Care/TimeSelection.vue";
+
 
 export default {
 	name: "ScheduleOperationSingle",

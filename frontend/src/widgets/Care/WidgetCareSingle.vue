@@ -4,6 +4,7 @@ import ReviewPage from "../Review/ReviewPage.vue";
 
 import RoomSelection from "../Room/RoomSelection.vue";
 import DoctorSelection from "../Doctor/DoctorSelection.vue";
+import TimeSelection from "./TimeSelection.vue";
 import ClinicService from "../Clinic/service";
 
 
@@ -64,6 +65,13 @@ export default {
         CareService.update(this.care, this.data).then(response => {
           alert("Room assigned");
         });
+      },
+      selectTime: function (time) {
+        time = time.replace(" ", "T");
+        this.data.startTime = time;
+         CareService.update(this.care, this.data).then(response => {
+          alert("time assigned");
+        });
       }
 	
 
@@ -90,6 +98,7 @@ export default {
     components: {
 	ReviewPage,
   RoomSelection,
+  TimeSelection,
   DoctorSelection
     }
 
@@ -112,6 +121,7 @@ export default {
 	      <ReviewPage v-if="this.finalized" :careId="care.id" :patientId="care.patient.id" />
         <RoomSelection v-if="this.clinic != null" @select="selectRoom" :filter="x => x.clinic.id == this.clinic.id"/>
         <DoctorSelection v-if="this.clinic != null" @select="selectDoctor" :filter="x => x.clinic.id == this.clinic.id"/>
+        <TimeSelection v-if="this.clinic != null" @select="selectTime" />
 
         </td>
   </tr>

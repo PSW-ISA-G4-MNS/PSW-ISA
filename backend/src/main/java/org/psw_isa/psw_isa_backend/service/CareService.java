@@ -346,7 +346,9 @@ public class CareService {
 	}
 
 	public void sendConfirmationMail(Care care) {
-
+		if (care.getPatient() == null || care.getStartTime() == null || care.getDoctor() == null || care.getRoom() == null) {
+			return;
+		}
 		EmailDTO mail = new EmailDTO();
 		mail.setTo(care.getPatient().getUser().getEmail());
 		mail.setSubject("Potvrda o zakazanom pregledu");
