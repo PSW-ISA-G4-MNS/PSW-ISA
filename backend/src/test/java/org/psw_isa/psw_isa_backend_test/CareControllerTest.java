@@ -32,9 +32,9 @@ import java.io.IOException;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-integrationtest.properties")
-public class ClinicControllerTest {
+public class CareControllerTest {
 
-    public static final String URL_PREFIX = "/users/";
+    
 
 
     private MediaType contentType = new MediaType(
@@ -65,28 +65,73 @@ public class ClinicControllerTest {
 
 
     @Test
-    public void clinicListTest() throws Exception {
-        mockMvc.perform(get("/clinic/"))
+    public void careListTest() throws Exception {
+        mockMvc.perform(get("/care/"))
         .andExpect(status().isOk());
 
     }
 
 
     @Test
-    public void readTest() throws Exception {
-        mockMvc.perform(get("/clinic/"+1L))
+    public void findAllUnassignedAndUpcoming() throws Exception {
+        mockMvc.perform(get("/care"+"/all"))
         .andExpect(status().isOk());
     	
-        // /clinic/{id}
+        
     }
+
+   
   
 
 
     @Test
-    public void getClinicsWithFreeDoctorTest() throws Exception {
-        mockMvc.perform(get("/clinic/"+"/getClinicsWithFreeDoctors/"+1L+"/2020-10-08"))
+    public void findAllUnassignedAndUpcomingForClinicTest() throws Exception {
+        mockMvc.perform(get("/care/"+"/getPredefindedCaresForClinic/"+1L))
         .andExpect(status().isOk());
-    	
-        // /getClinicsWithFreeDoctors/{id}/{date}
+    	// value="/getPredefindedCaresForClinic/{id} ID KLINIKE"
+      
     }
+
+    @Test
+    public void updateTest() throws Exception {
+        mockMvc.perform(get("/care/"+1L))
+        .andExpect(status().isOk());
+        
+    //     @PostMapping(value="/{id}")
+	// public ResponseEntity<Care> update(@PathVariable("id") Long id, @RequestBody Care care){
+	// 	return new ResponseEntity<>(careService.update(id, care), HttpStatus.OK);
+	// }
+        
+    }
+
+    @Test
+    public void saveTest() throws Exception {
+        mockMvc.perform(get("/care/"))
+        .andExpect(status().isOk());
+        
+        // @PostMapping(consumes = "application/json")
+        // public ResponseEntity<Long> save(@RequestBody CareDTO careDTO){
+            
+        //     Care care = careService.save(careDTO);
+        //     return new ResponseEntity<>(care.getId(),HttpStatus.OK);
+        // }
+        
+    }
+
+
+    @Test
+    public void saveWithPatientTest() throws Exception {
+        mockMvc.perform(get("/care/"+"scheduleForPatient/"+1L))
+        .andExpect(status().isOk());
+        
+    //     @PostMapping(value="/scheduleForPatient/{id}", consumes = "application/json")
+	// public ResponseEntity<Long> saveWithPatient(@PathVariable("id") Long patientId, @RequestBody CareDTO careDTO){
+		
+	// 	return new ResponseEntity<>(careService.saveWithPatient(careDTO, patientId).getId(),HttpStatus.OK);
+	// }
+	
+        
+    }
+   
+   
 }

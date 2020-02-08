@@ -32,7 +32,7 @@ import java.io.IOException;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-integrationtest.properties")
-public class ClinicControllerTest {
+public class PatientControllerTest {
 
     public static final String URL_PREFIX = "/users/";
 
@@ -66,27 +66,12 @@ public class ClinicControllerTest {
 
     @Test
     public void clinicListTest() throws Exception {
-        mockMvc.perform(get("/clinic/"))
+        mockMvc.perform(get("/patients/"))
         .andExpect(status().isOk());
 
     }
 
 
-    @Test
-    public void readTest() throws Exception {
-        mockMvc.perform(get("/clinic/"+1L))
-        .andExpect(status().isOk());
-    	
-        // /clinic/{id}
-    }
-  
+   
 
-
-    @Test
-    public void getClinicsWithFreeDoctorTest() throws Exception {
-        mockMvc.perform(get("/clinic/"+"/getClinicsWithFreeDoctors/"+1L+"/2020-10-08"))
-        .andExpect(status().isOk());
-    	
-        // /getClinicsWithFreeDoctors/{id}/{date}
-    }
 }

@@ -32,9 +32,9 @@ import java.io.IOException;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-integrationtest.properties")
-public class ClinicControllerTest {
+public class RoomControllerTest {
 
-    public static final String URL_PREFIX = "/users/";
+  
 
 
     private MediaType contentType = new MediaType(
@@ -65,28 +65,30 @@ public class ClinicControllerTest {
 
 
     @Test
-    public void clinicListTest() throws Exception {
-        mockMvc.perform(get("/clinic/"))
+    public void roomTest() throws Exception {
+        mockMvc.perform(get("/room/"))
         .andExpect(status().isOk());
 
     }
 
 
     @Test
-    public void readTest() throws Exception {
-        mockMvc.perform(get("/clinic/"+1L))
+    public void updateTest() throws Exception {
+        mockMvc.perform(get("/room/"+1L))
         .andExpect(status().isOk());
-    	
-        // /clinic/{id}
+        
+        
+        // (value="/{id}", consumes = "application/json"
+       
     }
   
 
 
     @Test
-    public void getClinicsWithFreeDoctorTest() throws Exception {
-        mockMvc.perform(get("/clinic/"+"/getClinicsWithFreeDoctors/"+1L+"/2020-10-08"))
+    public void findNextTimeForRoomTest() throws Exception {
+        mockMvc.perform(get("/room/"+1L+"/next"))
         .andExpect(status().isOk());
-    	
-        // /getClinicsWithFreeDoctors/{id}/{date}
+    	// value="/{roomId}/next"
+      
     }
 }

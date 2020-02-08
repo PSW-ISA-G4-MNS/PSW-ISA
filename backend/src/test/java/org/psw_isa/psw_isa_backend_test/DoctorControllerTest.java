@@ -32,9 +32,9 @@ import java.io.IOException;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-integrationtest.properties")
-public class ClinicControllerTest {
+public class DoctorControllerTest {
 
-    public static final String URL_PREFIX = "/users/";
+   
 
 
     private MediaType contentType = new MediaType(
@@ -66,27 +66,28 @@ public class ClinicControllerTest {
 
     @Test
     public void clinicListTest() throws Exception {
-        mockMvc.perform(get("/clinic/"))
+        mockMvc.perform(get("/doctor/"))
         .andExpect(status().isOk());
 
     }
 
 
     @Test
-    public void readTest() throws Exception {
-        mockMvc.perform(get("/clinic/"+1L))
+    public void listFreeDoctorsForClinicTest() throws Exception {
+        mockMvc.perform(get("/doctor/getFreeDoctorsForClinic/"+1L+"/"+1L+"/"+"2020-05-05"))
         .andExpect(status().isOk());
     	
-        // /clinic/{id}
+        // value="/getFreeDoctorsForClinic/{clinicID}/{careTypeID}/{date}"
     }
-  
 
 
-    @Test
-    public void getClinicsWithFreeDoctorTest() throws Exception {
-        mockMvc.perform(get("/clinic/"+"/getClinicsWithFreeDoctors/"+1L+"/2020-10-08"))
+   @Test
+    public void listAvailableCaresForDoctorTest() throws Exception {
+        mockMvc.perform(get("/doctor/getAvailableCaresForDoctor/"+1L+"/"+1L+"/"+"2020-05-05"))
         .andExpect(status().isOk());
     	
-        // /getClinicsWithFreeDoctors/{id}/{date}
+        // value="/getAvailableCaresForDoctor/{careTypeID}/{doctorID}/{date}"
     }
+
+
 }
