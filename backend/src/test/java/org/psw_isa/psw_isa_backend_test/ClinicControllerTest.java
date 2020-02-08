@@ -1,59 +1,74 @@
-package org.psw_isa.psw_isa_backend_test;
+package org.psw_isa.psw_isa_backend.test;
 
-import org.junit.jupiter.api.*;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.junit4.SpringRunner;
+
+import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.runner.RunWith;
-import javax.annotation.PostConstruct;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasSize;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 
-import org.psw_isa.psw_isa_backend.BackendApplication;
-import org.psw_isa.psw_isa_backend.controller.ClinicControler;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest(
-  classes = BackendApplication.class)
-@AutoConfigureMockMvc
-@TestPropertySource(
-  locations = "classpath:application-integrationtest.properties")
-  public class ClinicControllerTest {
- 
-  private static final String URL_PREFIX = "/clinic";
-  
-    @Autowired
+import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
+
+import java.io.IOException;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@TestPropertySource("classpath:application-integrationtest.properties")
+public class ClinicControllerTest {
+
+    public static final String URL_PREFIX = "/users/";
+
+
+    private MediaType contentType = new MediaType(
+            MediaType.APPLICATION_JSON.getType(),
+            MediaType.APPLICATION_JSON.getSubtype());
+
     private MockMvc mockMvc;
 
     @Autowired
     private WebApplicationContext webApplicationContext;
- 
-    @Autowired
-    private ClinicControler clinicControler;
- 
 
-   @PostConstruct
-    public void setup() {
-    	this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+    @Autowired
+    private DataSource dataSource;
+
+    @PostConstruct
+    public void setUp() {
+        this.mockMvc = MockMvcBuilders
+                .webAppContextSetup(webApplicationContext)
+                .build();
     }
+
+    @AfterEach
+    public void rollback() {
+        Resource resource = new ClassPathResource("data-h2.sql");
+        ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator(resource);
+        resourceDatabasePopulator.execute(dataSource);
+    }
+
 
     @Test
-    public void testGetAllClinics() throws Exception {
-      mockMvc.perform(get(URL_PREFIX))
-      .andExpect(status().isOk());
-      
+    public void clinicListTest() throws Exception {
+        mockMvc.perform(get("/clinic/"))
+        .andExpect(status().isOk());
+
     }
 
-    
-  }
+}
