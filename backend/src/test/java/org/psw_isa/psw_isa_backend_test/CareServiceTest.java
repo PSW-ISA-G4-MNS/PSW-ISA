@@ -102,9 +102,7 @@ public class CareServiceTest {
     private ArrayList<User> data;
     @BeforeEach
     public void setUp() {
-    	data = new ArrayList<User>();
-	data.add(new User());
-	when(userRepository.findOneByemail(any(String.class))).thenReturn((User) data.get(0));
+    
     }
 
     @AfterEach
@@ -120,7 +118,7 @@ public class CareServiceTest {
   
 
 
-@Test
+    @Test
     public void findAllUnassignedAndUpcomingForClinicTest(){
     	care = new Care();
         doctor = new Doctor();
@@ -128,12 +126,14 @@ public class CareServiceTest {
         clinic.setId(1L);
         doctor.setId(1L);
         doctor.setClinic(clinic);
+        care.setId(1L);
         care.setDoctor(doctor);
 
-        String str = "2020-04-08 12:30:00";
+        String str = "2021-08-08 19:30:00";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
         care.setStartTime(dateTime);
+        care.setPatient(null);
         cares.add(care);
         when(careRepository.findAll()).thenReturn(cares);
 
@@ -141,6 +141,7 @@ public class CareServiceTest {
     	
     }
 
+    @Test
 	public void updateTest(Long careID) {
 
 	
