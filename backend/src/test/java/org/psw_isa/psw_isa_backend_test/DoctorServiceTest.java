@@ -23,6 +23,7 @@ import org.psw_isa.psw_isa_backend.repository.DoctorRepository;
 import org.psw_isa.psw_isa_backend.repository.OperationRepository;
 import org.psw_isa.psw_isa_backend.repository.VacationRepository;
 import org.psw_isa.psw_isa_backend.service.ClinicService;
+import org.psw_isa.psw_isa_backend.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -34,22 +35,29 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @ContextConfiguration(classes=BackendApplication.class)
-public class ClinicServiceTest {
+public class DoctorServiceTest {
 
 	 @TestConfiguration
 	    static class UserServiceImplTestContextConfiguration {
 	  
 	        @Bean
-	        public ClinicService clinicService() {
-	            return new ClinicService();
+	        public DoctorService doctorService() {
+	            return new DoctorService();
 	        }
 	    }
-	 @Autowired
-	 ClinicService clinicService;
-	 
-	 @Autowired
-	 @MockBean
+
+
+    @Autowired 
+    DoctorService doctorService;
+
+     @Autowired
+     @MockBean
 	 DoctorRepository doctorRepository;
+
+	 @Autowired
+     @MockBean
+	 ClinicService clinicService;
+	
 	 
 	 @Autowired
 	 @MockBean
@@ -87,8 +95,8 @@ public class ClinicServiceTest {
 	 
 	
 	 
-	 	@Test 
-	public void findClinicWithFreeDoctorsTest() {
+	@Test 
+	public void listFreeDoctorsForClinicTest() {
 		doctor = new Doctor();
 		careType = new CareType();
 		clinic = new Clinic();
@@ -112,9 +120,38 @@ public class ClinicServiceTest {
 		when(vacationRepository.findAll()).thenReturn(vacations);
 		when(careRepository.findAll()).thenReturn(cares);
 		when(clinicRepository.findAll()).thenReturn(clinics);
-		assertEquals(1,clinicService.findClinicsWithFreeDoctors(1L, "2020-06-09").size());
+		assertEquals(1,doctorService.listFreeDoctorsForClinic(1L, 1L, "2020-06-09").size());
 
 	}
 
+
+    @Test 
+	public void listAvailableCaresForDoctorTest() {
+		doctor = new Doctor();
+		careType = new CareType();
+		clinic = new Clinic();
+		ArrayList<CareType> careTypes = new ArrayList<CareType>();
+		ArrayList<Doctor> doctors= new ArrayList<Doctor>();
+		ArrayList<Clinic> clinics = new ArrayList<Clinic>();
+		ArrayList<Operation> operations = new ArrayList<Operation>();
+		ArrayList<Care> cares = new ArrayList<Care>();
+		ArrayList<Vacation> vacations = new ArrayList<Vacation>();
+		careType.setId(1L);
+		careTypes.add(careType);
+		clinic.setId(1L);
+		clinics.add(clinic);
+		doctor.setId(1L);
+		doctor.setCareType(careType);
+		doctor.setClinic(clinic);	
+		doctors.add(doctor);	
+		when(careTypeRepository.findAll()).thenReturn(careTypes);
+		when(doctorRepository.findAll()).thenReturn(doctors);
+		when(operationRepository.findAll()).thenReturn(operations);
+		when(vacationRepository.findAll()).thenReturn(vacations);
+		when(careRepository.findAll()).thenReturn(cares);
+		when(clinicRepository.findAll()).thenReturn(clinics);
+		assertEquals(22,doctorService.listAvailableCaresForDoctor(1L, 1L, "2020-06-09").size());
+
+	}
 	
 }

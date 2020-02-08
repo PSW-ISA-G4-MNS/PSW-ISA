@@ -25,25 +25,29 @@ public class CareRequestRepositoryTest {
 
 	private Long id = Long.valueOf(1);
 
+	@Autowired
 	private CareRequestRepository careRequestRepository;
+
+	private CareRequest careRequest;
 
 	@BeforeEach
 	public void setUp() {
-		CareRequest careRequest=new CareRequest();
-		
-		entityManager.merge(careRequest);
+		careRequest=new CareRequest();
+		entityManager.persist(careRequest);
+		id = entityManager.getId(careRequest, Long.class);
 		entityManager.flush();
 	}
 
 	@AfterEach
 	public void tearDown() {
-		entityManager.clear();
+		entityManager.flush();
 	}
 
 	@Test
 	public void testFindAll() {
 
 		assertEquals(1, careRequestRepository.findAll().size());
+		entityManager.remove(careRequest);
 
 	}
 }

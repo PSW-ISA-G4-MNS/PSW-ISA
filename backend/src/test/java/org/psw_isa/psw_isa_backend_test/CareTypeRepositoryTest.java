@@ -26,32 +26,37 @@ public class CareTypeRepositoryTest {
 
 	private Long id = Long.valueOf(1);
 
+	@Autowired
 	private CareTypeRepository careTypeRepository;
+
+	CareType careType;
 
 	@BeforeEach
 	public void setUp() {
-		CareType careType= new CareType();
-		entityManager.merge(careType);
+		careType= new CareType();
+		entityManager.persist(careType);
+		id = entityManager.getId(careType,Long.class);
 		entityManager.flush();
 	}
 
 	@AfterEach
 	public void tearDown() {
-		entityManager.clear();
+		entityManager.flush();
 	}
 
 	@Test
 	public void testFindAll() {
 
 		assertEquals(1, careTypeRepository.findAll().size());
+		entityManager.remove(careType);
 
 	}
-	/*
+	
 	@Test
 	public void testFindOneById() {
 		
 		assertEquals(id,careTypeRepository.findOneByid(id).getId() );
-		
+		entityManager.remove(careType);
 	}
-	*/
+	
 }

@@ -28,33 +28,38 @@ public class VacationRepositoryTest {
 
 	
 	private Long id = Long.valueOf(1);
-
+	
+	@Autowired
 	private VacationRepository vacationRepository;
+
+	
+	private Vacation vacation;
 
 	@BeforeEach
 	public void setUp() {
-		Vacation vacation= new Vacation();
-		entityManager.merge(vacation);
+		vacation= new Vacation();
+		entityManager.persist(vacation);
+		id = entityManager.getId(vacation, Long.class);
 		entityManager.flush();
 	}
 
 	@AfterEach
 	public void tearDown() {
-		entityManager.clear();
+		entityManager.flush();
 	}
 
 	@Test
 	public void testFindAll() {
 
 		assertEquals(1, vacationRepository.findAll().size());
-
+		entityManager.remove(vacation);
 	}
-	/*
+	
 	@Test
 	public void testFindOneById() {
 		
 		assertEquals(id,vacationRepository.findOneByid(id).getId() );
-		
+		entityManager.remove(vacation);
 	}
-	*/
+	
 }
