@@ -280,6 +280,7 @@ public class CareService {
 
 		LocalDate startTime = null;
 		for (Care care : all) {
+			if (care.getDoctor() == null || care.getStartTime() == null) continue;
 			if (care.getDoctor().getId() == doctorID && care.isApproved()) {
 				startTime = care.getStartTime().toLocalDate();
 				// (care.getPatient() != null) &&
