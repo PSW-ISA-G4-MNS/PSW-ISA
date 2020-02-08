@@ -69,7 +69,7 @@ export default {
                 prescription: null,
                 approved: false
             }).then(response => {
-                console.log("Care sent");
+                this.$router.push("/CareList");
             });
         }
     },

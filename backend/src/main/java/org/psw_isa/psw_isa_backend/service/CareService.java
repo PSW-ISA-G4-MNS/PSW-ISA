@@ -280,7 +280,8 @@ public class CareService {
 
 		LocalDate startTime = null;
 		for (Care care : all) {
-			if (care.getDoctor().getClinic().getId() == doctorID && care.isApproved()) {
+			if (care.getDoctor() == null || care.getStartTime() == null) continue;
+			if (care.getDoctor().getId() == doctorID && care.isApproved()) {
 				startTime = care.getStartTime().toLocalDate();
 				// (care.getPatient() != null) &&
 				if ((startTime.isEqual(date))) {
@@ -346,7 +347,9 @@ public class CareService {
 	}
 
 	public void sendConfirmationMail(Care care) {
-
+		if (care.getPatient() == null || care.getStartTime() == null || care.getDoctor() == null || care.getRoom() == null) {
+			return;
+		}
 		EmailDTO mail = new EmailDTO();
 		mail.setTo(care.getPatient().getUser().getEmail());
 		mail.setSubject("Potvrda o zakazanom pregledu");

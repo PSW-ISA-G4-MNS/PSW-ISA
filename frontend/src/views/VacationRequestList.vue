@@ -4,6 +4,7 @@
 // import widgets for this view here
 import Form from "../widgets/VacationRequest/VacationRequestForm.vue";
 import List from "../widgets/VacationRequest/multi-VacationRequest.vue";
+import fullCalendar from 'vue-fullcalendar'
 
 
 export default {
@@ -27,7 +28,7 @@ export default {
     },
     components: {
     	Form,
-	List
+	    List
     }
 }
 </script>

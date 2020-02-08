@@ -3,6 +3,9 @@ import CareFormService from "./service";
 import DoctorService from "../Doctor/service";
 import RoomService from "../Room/service";
 
+import flatPickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
+
 export default {
     name: "CareForm",
     data: function () {
@@ -15,6 +18,9 @@ export default {
 
         };
     },
+	components: {
+		flatPickr,
+	},
     mounted: function() {
     	DoctorService.list().then(response => {
 		this.doctors = response.data; 
@@ -26,10 +32,10 @@ export default {
     methods: {
     	submit: function() 
 	{
+		this.data.startTime = this.data.startTime.replace(" ", "T");
+		this.data.endTime = this.data.endTime.replace(" ", "T");
 		CareFormService.submit(this.data).then(response => {
-			if (response.data.code == 0) this.data.success = true;
-			else this.data.success = false;
-
+			alert("Care time successfully added");
 		});
 	},
 	selectDoctor: function(index) {
@@ -76,11 +82,11 @@ export default {
 		</p>
 		
 		<p>
-		<input type="datetimet" class="form-control" placeholder="Start" v-model="data.startTime" />
+		<flatPickr :config="{enableTime: true}" v-model="data.startTime" />
 		</p>
 		
 		<p>
-		<input type="datetime" class="form-control" placeholder="End" v-model="data.endTime" />
+		<flatPickr  :config="{enableTime: true}" v-model="data.endTime" />
 		</p>
 		
 
@@ -91,22 +97,5 @@ export default {
 </template>
 
 <style scoped> 
-
-.form-CareForm {
-position:fixed;
-    top:20%;
-    left:40%;
-	padding: 10px; 
-	margin: 10px;
-	text-align: center;
-	width: 20%;
-}
-
-.success-box 
-{
-	background-color: #dfd;
-	color: #0f0;
-	padding: 5px;
-}
 
 </style>
