@@ -58,7 +58,6 @@ export default {
 		<router-link v-if="data.role == 'PATIENT'" to='/patientOperationHistory'>Operation history</router-link>
         <router-link v-if="data.role == 'ADMINISTRATOR'" to='/clinic-new'>Create Clinic</router-link>
         <router-link v-if="data.role == 'DOCTOR'" to='/doctor/myPatients'>My Patients</router-link>
-        <router-link v-if="data.role == 'DOCTOR'" to='/schedule/care'>Schedule Care</router-link>
         <router-link v-if='data.role == "DOCTOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/schedule/operation'>Schedule Operation</router-link>
 
 		<router-link v-if="data.role == 'ADMINISTRATOR' " to='/addAdminClinic'>Add Admin</router-link>
