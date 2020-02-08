@@ -39,24 +39,28 @@ public class PatientRepositoryTest {
 	 
 	 private Long id=Long.valueOf(1);
 	 
+	 private Patient patient;
+
 	 @BeforeEach
 	    public void setUp() {
 		// given
-		Patient patient = new Patient();
+		patient = new Patient();
 		patient.setInsuranceID("1234567891234");
-		entityManager.merge(patient);
+		entityManager.persist(patient);
+		id = entityManager.getId(patient, Long.class);
 		entityManager.flush();
 	    }
 
 	    @AfterEach
 	    public void tearDown() {
-	    	entityManager.clear();
+			entityManager.flush();
 	    }
 	    
 	    @Test 
 	    public void testFindAll() {
 
 		assertEquals( 1,patientRepository.findAll().size());
+		entityManager.remove(patient);
 	
 	    }
 	    
@@ -64,21 +68,23 @@ public class PatientRepositoryTest {
 	    public void testfindOneByIdNotNull() {
 	    	
 	    	assertNotNull(patientRepository.findOneByid(id));
+			entityManager.remove(patient);
 	    }
 	    
 	    
-	    /*
+	    
 	    @Test
 	    public void testfindOneById() {
 	    	
-	    	assertEquals(1,patientRepository.findOneByid(id).getId());
+	    	assertEquals(id,patientRepository.findOneByid(id).getId());
+			entityManager.remove(patient);
 	    }
-	    */
 	    
 	    @Test
 	    public void testsave() {
 	    	patientRepository.save(new Patient());
 	    	assertEquals( 2,patientRepository.findAll().size());
+			entityManager.remove(patient);
 	    }
 	    
 	    @Test
