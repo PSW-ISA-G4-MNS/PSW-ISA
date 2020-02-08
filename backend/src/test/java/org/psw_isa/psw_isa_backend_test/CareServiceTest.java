@@ -157,9 +157,17 @@ public class CareServiceTest {
     public void saveTest() {
        
         Care care = new Care();
-        when(doctorRepository.findOneByid(any(Long.class))).thenReturn(new Doctor());
-        when(careRepository.save(care)).thenReturn(care);
-        assertEquals(care, careService.save(careDTO));
+        CareDTO dto = new CareDTO();
+        dto.setDoctorId(5L);
+        dto.setRoomId(1L);
+        dto.setDiagnosisId(5L);
+        dto.setPrescriptionId(5L);
+        Doctor doc = new Doctor();
+        doc.setId(5L);
+        care.setDoctor(doc);
+        when(doctorRepository.findOneByid(any(Long.class))).thenReturn(doc);
+        when(careRepository.save(any(Care.class))).thenReturn(care);
+        assertEquals(5L,  careService.save(dto).getDoctor().getId());
 	
 	}
 
