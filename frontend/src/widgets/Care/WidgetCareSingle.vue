@@ -31,7 +31,7 @@ export default {
 
           if (response.status == 200)this.success = true;
           else this.success = false;
-
+          
         return {
             renderComponent: true,
           };

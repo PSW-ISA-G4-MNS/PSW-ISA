@@ -35,9 +35,7 @@ export default {
 		this.data.startTime = this.data.startTime.replace(" ", "T");
 		this.data.endTime = this.data.endTime.replace(" ", "T");
 		CareFormService.submit(this.data).then(response => {
-			if (response.data.code == 0) this.data.success = true;
-			else this.data.success = false;
-
+			alert("Care time successfully added");
 		});
 	},
 	selectDoctor: function(index) {

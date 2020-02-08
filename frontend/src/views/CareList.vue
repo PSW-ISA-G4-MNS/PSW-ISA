@@ -29,7 +29,7 @@ export default {
 
 <template>
 
-<WidgetCareMulti v-if="this.role == 'PATIENT'" all="false"/>
+<WidgetCareMulti v-if="this.role == 'PATIENT'" all="false" :filter="x => x.patient == null"/>
 <WidgetCareMulti v-else  :filter="x => x.room == null || x.doctor == null"/>
 
 </template>
