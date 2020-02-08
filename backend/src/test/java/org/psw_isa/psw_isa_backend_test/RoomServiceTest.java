@@ -13,17 +13,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.psw_isa.psw_isa_backend.BackendApplication;
-import org.psw_isa.psw_isa_backend.dtos.CareDTO;
+import org.psw_isa.psw_isa_backend.dtos.RoomDTO;
 import org.psw_isa.psw_isa_backend.models.Care;
 import org.psw_isa.psw_isa_backend.models.Clinic;
-import org.psw_isa.psw_isa_backend.models.Diagnosis;
 import org.psw_isa.psw_isa_backend.models.Doctor;
 import org.psw_isa.psw_isa_backend.models.Patient;
 import org.psw_isa.psw_isa_backend.models.Room;
 import org.psw_isa.psw_isa_backend.models.User;
 import org.psw_isa.psw_isa_backend.repository.CareRepository;
-import org.psw_isa.psw_isa_backend.repository.DiagnosisRepository;
-import org.psw_isa.psw_isa_backend.repository.DoctorRepository;
+import org.psw_isa.psw_isa_backend.repository.RoomRepository;
 import org.psw_isa.psw_isa_backend.repository.UserRepository;
 import org.psw_isa.psw_isa_backend.service.CareService;
 import org.psw_isa.psw_isa_backend.service.CheckRoleService;
@@ -40,19 +38,24 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @ContextConfiguration(classes=BackendApplication.class)
-public class CareServiceTest {
+public class RoomServiceTest {
 
     @TestConfiguration
     static class UserServiceImplTestContextConfiguration {
   
         @Bean
-        public CareService careService() {
-            return new CareService();
+        public RoomService roomService() {
+            return new RoomService();
         }
     }
 
     @Autowired
-    private CareService careService;
+    private RoomService roomService;
+
+
+    @Autowired
+    @MockBean
+    private RoomRepository roomRepository;
    
     @Autowired
     @MockBean
@@ -68,96 +71,63 @@ public class CareServiceTest {
 
     @Autowired
     @MockBean
-    private CareService careService2;
+    private RoomService roomService2;
 
-    @Autowired
-    @MockBean
-    private DoctorRepository doctorRepository;
-
-    @Autowired
-    @MockBean
-    private RoomService roomService;
-
-    @Autowired
-    @MockBean
-    private DiagnosisRepository diagnosisRepository;
-  
+    private Room room;
+    
     private ArrayList<Care> cares=new ArrayList<Care>();
+
+    private ArrayList<Room> rooms=new ArrayList<Room>();
+
+    private RoomDTO roomDTO;
 
     private Clinic clinic;
 	 
     private Doctor doctor;
-
-    private Room room;
     
     private Care care;
 
-    private Diagnosis diagnosis;
-
     private Patient patient;
+      
 
-    private CareDTO careDTO;
-
-
-    private ArrayList<User> data;
-    @BeforeEach
-    public void setUp() {
-    	data = new ArrayList<User>();
-	data.add(new User());
-	when(userRepository.findOneByemail(any(String.class))).thenReturn((User) data.get(0));
-    }
-
-    @AfterEach
-    public void tearDown() {
-    }
-   /* 
-    @Test 
-    public void testFindAll() {
-    	assertEquals(userService.findOneByemail("").getEmail(), data.get(0).getEmail());
-    }
-    */
-    
-  
-
-
-@Test
+    @Test
     public void findAllUnassignedAndUpcomingForClinicTest(){
-    	care = new Care();
-        doctor = new Doctor();
-        clinic = new Clinic();
-        clinic.setId(1L);
-        doctor.setId(1L);
-        doctor.setClinic(clinic);
-        care.setDoctor(doctor);
-
-        String str = "2020-04-08 12:30:00";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime dateTime = LocalDateTime.parse(str, formatter);
-        care.setStartTime(dateTime);
-        cares.add(care);
-        when(careRepository.findAll()).thenReturn(cares);
-
-        assertEquals(1, careService.findAllUnassignedAndUpcomingForClinic(1L).size());
+    	
     	
     }
 
-	public void updateTest(Long careID) {
-
-	
-	}
-
     @Test
-    public void saveTest(Long careID) {
-       
+	public void updateTest() {
+
         
-        when(careRepository.save(care)).thenReturn(care);
-        assertEquals(care, careService.save(careDTO));
-	
+        roomDTO=new RoomDTO();
+        room = new Room();
+        room.setId(1L);
+        
+        when(roomService2.findOneByid(any(Long.class))).thenReturn(room);
+        assertEquals(1L, roomService.update(roomDTO).getId());
 	}
 
+    public void findAllInClinicTest() {
+        room = new Room();
+        clinic = new Clinic();
+        clinic.setId(1L);
+        room.setId(1L);
+        room.setClinic(clinic);
+        when(roomRepository.findAll()).thenReturn(rooms);
+        assertEquals(1, roomService.findAllInClinic(clinic).size());
+    }
+    
     @Test
-    public void saveWithPatientTest(Long careID) {
+    public void findNextTimeForRoomTest() {
+        room=new Room();
+        room.setId(1L);
+        String checkTimeStr ="2020-02-08" + " 07:00";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime checkTime = LocalDateTime.parse(checkTimeStr, formatter);
 
+        when(roomService2.findOneByid(any(Long.class))).thenReturn(room);
+        assertEquals(checkTime,roomService.findNextTimeForRoom(1L));
 	
 	}
 

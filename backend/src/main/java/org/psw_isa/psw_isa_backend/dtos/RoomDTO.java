@@ -14,6 +14,9 @@ public class RoomDTO {
 	
 	private Integer capacity;
 	
+	public RoomDTO(){
+		
+	}
 	
 	public RoomDTO(Room room) {
 		clinicId = room.getClinic().getId();
