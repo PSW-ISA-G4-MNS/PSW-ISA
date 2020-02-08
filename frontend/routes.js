@@ -22,7 +22,6 @@ import LogOut from './src/views/Logout.vue';
 
 import AvailableCaresForDoctor from './src/views/AvailableCaresForDoctor.vue';
 
-import ScheduleOperation from './src/views/ScheduleOperation.vue';
 import RoomEditView from './src/views/RoomEditView.vue';
 import CareTypeList from './src/views/CareTypeList.vue';
 
