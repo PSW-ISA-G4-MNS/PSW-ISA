@@ -2,13 +2,14 @@ package org.psw_isa.psw_isa_backend_test;
 
 import org.psw_isa.psw_isa_backend.repository.UserRepository;
 import org.psw_isa.psw_isa_backend.service.UserService;
+import org.psw_isa.psw_isa_backend.BackendApplication;
 import org.psw_isa.psw_isa_backend.models.User;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.beans.factory.annotation.*;
-
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -34,6 +35,7 @@ import java.util.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
+@ContextConfiguration(classes=BackendApplication.class)
 public class UserServiceTest {
 
     @TestConfiguration

@@ -32,7 +32,7 @@ import java.io.IOException;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-integrationtest.properties")
-public class UserControllerTest {
+public class ClinicControllerTest {
 
     public static final String URL_PREFIX = "/users/";
 
@@ -65,8 +65,8 @@ public class UserControllerTest {
 
 
     @Test
-    public void patientListTest() throws Exception {
-        mockMvc.perform(get("/patients/"))
+    public void clinicListTest() throws Exception {
+        mockMvc.perform(get("/clinic/"))
         .andExpect(status().isOk());
 
     }
