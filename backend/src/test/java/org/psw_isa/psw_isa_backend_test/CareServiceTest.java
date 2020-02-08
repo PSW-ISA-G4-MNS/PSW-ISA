@@ -26,6 +26,7 @@ import org.psw_isa.psw_isa_backend.repository.DiagnosisRepository;
 import org.psw_isa.psw_isa_backend.repository.DoctorRepository;
 import org.psw_isa.psw_isa_backend.repository.UserRepository;
 import org.psw_isa.psw_isa_backend.service.CareService;
+import org.psw_isa.psw_isa_backend.service.SendEmailService;
 import org.psw_isa.psw_isa_backend.service.CheckRoleService;
 import org.psw_isa.psw_isa_backend.service.RoomService;
 import org.psw_isa.psw_isa_backend.service.UserService;
@@ -68,10 +69,6 @@ public class CareServiceTest {
 
     @Autowired
     @MockBean
-    private CareService careService2;
-
-    @Autowired
-    @MockBean
     private DoctorRepository doctorRepository;
 
     @Autowired
@@ -81,6 +78,10 @@ public class CareServiceTest {
     @Autowired
     @MockBean
     private DiagnosisRepository diagnosisRepository;
+
+    @Autowired
+    @MockBean
+    private SendEmailService sendEmailService;
   
     private ArrayList<Care> cares=new ArrayList<Care>();
 
@@ -142,22 +143,28 @@ public class CareServiceTest {
     }
 
     @Test
-	public void updateTest(Long careID) {
+	public void updateTest() {
+        care = new Care();
+        care.setId(5L);
+        when(careRepository.save(care)).thenReturn(care);
+        care.setPatient(new Patient());
 
+        assertEquals(care, careService.update(5L, care));
 	
 	}
 
     @Test
-    public void saveTest(Long careID) {
+    public void saveTest() {
        
-        
+        Care care = new Care();
+        when(doctorRepository.findOneByid(any(Long.class))).thenReturn(new Doctor());
         when(careRepository.save(care)).thenReturn(care);
         assertEquals(care, careService.save(careDTO));
 	
 	}
 
     @Test
-    public void saveWithPatientTest(Long careID) {
+    public void saveWithPatientTest() {
 
 	
 	}

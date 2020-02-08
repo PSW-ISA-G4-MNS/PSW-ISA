@@ -69,10 +69,6 @@ public class RoomServiceTest {
     @MockBean
     private UserRepository userRepository;
 
-    @Autowired
-    @MockBean
-    private RoomService roomService2;
-
     private Room room;
     
     private ArrayList<Care> cares=new ArrayList<Care>();
@@ -101,10 +97,11 @@ public class RoomServiceTest {
 
         
         roomDTO=new RoomDTO();
+        roomDTO.setId(1L);
         room = new Room();
         room.setId(1L);
         
-        when(roomService2.findOneByid(any(Long.class))).thenReturn(room);
+        when(roomRepository.findOneByid(any(Long.class))).thenReturn(room);
         assertEquals(1L, roomService.update(roomDTO).getId());
 	}
 
@@ -126,7 +123,7 @@ public class RoomServiceTest {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime checkTime = LocalDateTime.parse(checkTimeStr, formatter);
 
-        when(roomService2.findOneByid(any(Long.class))).thenReturn(room);
+        when(roomRepository.findOneByid(any(Long.class))).thenReturn(room);
         assertEquals(checkTime,roomService.findNextTimeForRoom(1L));
 	
 	}
