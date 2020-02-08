@@ -24,6 +24,7 @@ import org.psw_isa.psw_isa_backend.models.User;
 import org.psw_isa.psw_isa_backend.repository.CareRepository;
 import org.psw_isa.psw_isa_backend.repository.DiagnosisRepository;
 import org.psw_isa.psw_isa_backend.repository.DoctorRepository;
+import org.psw_isa.psw_isa_backend.repository.PatientRepository;
 import org.psw_isa.psw_isa_backend.repository.UserRepository;
 import org.psw_isa.psw_isa_backend.service.CareService;
 import org.psw_isa.psw_isa_backend.service.SendEmailService;
@@ -55,6 +56,10 @@ public class CareServiceTest {
     @Autowired
     private CareService careService;
    
+    @Autowired
+    @MockBean
+    PatientRepository patientRepository;
+
     @Autowired
     @MockBean
     private CheckRoleService checkRoleService;
@@ -173,8 +178,37 @@ public class CareServiceTest {
 
     @Test
     public void saveWithPatientTest() {
-
-	
+        User user = new User();
+        user.setEmail("");
+        user.setId(5L);
+        user.setFirstname("");
+        user.setLastname("");
+        Patient patient = new Patient();
+        patient.setId(10L);
+        when(patientRepository.findOneByid(any(Long.class))).thenReturn(patient);
+        Care care = new Care();
+        CareDTO dto = new CareDTO();
+        dto.setDoctorId(5L);
+        dto.setRoomId(1L);
+        dto.setDiagnosisId(5L);
+        dto.setPrescriptionId(5L);
+        care.setPatient(patient);
+        Doctor doc = new Doctor();
+        doc.setId(5L);
+        dto.setStartTime(LocalDateTime.now());
+        dto.setEndTime(LocalDateTime.now());
+        care.setDoctor(doc);
+        care.setStartTime(LocalDateTime.now());
+        care.setEndTime(LocalDateTime.now());
+        Room room = new Room();
+        room.setTitle("");
+        care.setRoom(room);
+        doc.setUser(user);
+        patient.setUser(user);
+        when(doctorRepository.findOneByid(any(Long.class))).thenReturn(doc);
+        when(careRepository.save(any(Care.class))).thenReturn(care);
+        careService.saveWithPatient(dto, 10L);
+        assertEquals(10L,  careService.saveWithPatient(dto, 10L).getPatient().getId());
 	}
 
 }
