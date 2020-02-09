@@ -1,4 +1,4 @@
-package org.psw_isa.psw_isa_backend_test;
+package org.psw_isa.psw_isa_backend.test;
 
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
