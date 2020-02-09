@@ -16,6 +16,10 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import javax.persistence.LockModeType;
+
+import org.springframework.transaction.annotation.Transactional;
+
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
