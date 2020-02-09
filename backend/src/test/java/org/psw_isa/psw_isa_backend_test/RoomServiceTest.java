@@ -5,6 +5,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -119,7 +120,7 @@ public class RoomServiceTest {
     public void findNextTimeForRoomTest() {
         room=new Room();
         room.setId(1L);
-        String checkTimeStr ="2020-02-08" + " 07:00";
+        String checkTimeStr = LocalDate.now().toString() + " 07:00";
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime checkTime = LocalDateTime.parse(checkTimeStr, formatter);
 

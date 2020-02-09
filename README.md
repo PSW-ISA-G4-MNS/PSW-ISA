@@ -25,3 +25,4 @@ In Powershell then type:
 
 	./runBackend.ps1 -BackendPath ../../backend
 	./runFrontend.ps1 -FrontendPath ../../frontend
+./runBackendTest.ps1 -BackendPath ../../backend

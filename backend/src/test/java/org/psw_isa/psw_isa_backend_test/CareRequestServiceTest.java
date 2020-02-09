@@ -110,13 +110,5 @@ public class CareRequestServiceTest {
     
 	}
 
-
-
-
-    @Test 
-	public void listAvailableCaresForDoctorTest() {
-		
-
-	}
 	
 }

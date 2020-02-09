@@ -23,6 +23,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -32,9 +35,9 @@ import java.io.IOException;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource("classpath:application-integrationtest.properties")
-public class ClinicControllerTest {
+public class CareControllerTest {
 
-    public static final String URL_PREFIX = "/users/";
+    
 
 
     private MediaType contentType = new MediaType(
@@ -65,28 +68,53 @@ public class ClinicControllerTest {
 
 
     @Test
-    public void clinicListTest() throws Exception {
-        mockMvc.perform(get("/clinic/"))
+    public void careListTest() throws Exception {
+        mockMvc.perform(get("/care/"))
         .andExpect(status().isOk());
 
     }
 
 
     @Test
-    public void readTest() throws Exception {
-        mockMvc.perform(get("/clinic/"+1L))
+    public void findAllUnassignedAndUpcoming() throws Exception {
+        mockMvc.perform(get("/care"+"/all"))
         .andExpect(status().isOk());
     	
-        // /clinic/{id}
+        
     }
-  
+
+    @Test
+    public void updateTest() throws Exception {
+        mockMvc.perform(post("/care/1")
+        .contentType("application/json")
+        .content("{\"doctor\": null, \"patient\": null, \"room\": null, \"startTime\": \"2020-02-02T12:00:00\", \"endTime\": \"2020-02-02T12:30:00\"}")
+        )
+        .andExpect(status().isOk());
+        
+    }
+
+    @Test
+    public void saveTest() throws Exception {
+        mockMvc.perform(post("/care/")
+        .contentType("application/json")
+        .content("{\"careId\": 1, \"roomId\": null, \"doctorId\": null, \"startTime\": \"2020-02-02T12:12:12\", \"endTime\": \"2020-02-02T12:50:12\"}")
+        )
+        .andExpect(status().isOk());
+        
+        
+    }
 
 
     @Test
-    public void getClinicsWithFreeDoctorTest() throws Exception {
-        mockMvc.perform(get("/clinic/"+"/getClinicsWithFreeDoctors/"+1L+"/2020-10-08"))
+    public void saveWithPatientTest() throws Exception {
+        mockMvc.perform(post("/care/"+"scheduleForPatient/"+"1")
+            .contentType("application/json")
+            .content("{\"careId\": 1, \"roomId\": null, \"doctorId\": null, \"startTime\": \"2020-02-02T12:12:12\", \"endTime\": \"2020-02-02T12:50:12\"}")
+        )
         .andExpect(status().isOk());
-    	
-        // /getClinicsWithFreeDoctors/{id}/{date}
+	
+        
     }
+   
+   
 }
