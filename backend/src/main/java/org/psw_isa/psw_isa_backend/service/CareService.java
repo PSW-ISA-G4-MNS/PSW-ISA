@@ -235,7 +235,7 @@ public class CareService {
 
 	public int updateCareReview(CareDTO careDTO) {
 		return careRepository.updateCareReview(careDTO.getComment(), careDTO.getDiagnosisId(),
-				careDTO.getPrescriptionId(), careDTO.getMedicalRecordId(), false, careDTO.getCareId());
+				careDTO.getPrescriptionId(), careDTO.getMedicalRecordId(), true, careDTO.getCareId());
 	}
 
 	public int updateOldCareReview(CareDTO careDTO) {
@@ -258,7 +258,7 @@ public class CareService {
 		}
 
 		for (Care care : all) {
-			if (care.getDoctor().getClinic().getId() == doctorID && care.isApproved()) {
+			if (care.getDoctor().getClinic().getId() == doctorID && care.isApproved() && (care.getStartTime().isBefore(LocalDateTime.now()))) {
 				if (care.getComment() != "")
 					assigned.add(care);
 			}
@@ -285,7 +285,7 @@ public class CareService {
 		LocalDate startTime = null;
 		for (Care care : all) {
 			if (care.getDoctor() == null || care.getStartTime() == null) continue;
-			if (care.getDoctor().getId() == doctorID && care.isApproved()) {
+			if (care.getDoctor().getId() == doctorID && care.isApproved() && (care.getStartTime().isAfter(LocalDateTime.now()))) {
 				startTime = care.getStartTime().toLocalDate();
 				
 				if ((care.getPatient() != null) &&(startTime.isEqual(date))) {

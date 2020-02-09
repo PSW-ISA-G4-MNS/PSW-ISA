@@ -13,8 +13,9 @@ export default {
     methods: {
     	change: function() 
 	{
-		localStorage.setItem('oldReviewSelected', this.oldCare.id);
-    window.location.href = "/frontend/#/changeoldReview";
+
+    this.$router.push("/changeSingleReview/" + this.oldCare.id);
+		
   },
 
 	

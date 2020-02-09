@@ -226,10 +226,10 @@ public class OperationService {
 		for(Operation operation : all) {
 			
 			for(Doctor doc :operation.getDoctors()) {
-			if(doc.getClinic().getId() == doctorID) {
+			if(doc.getClinic().getId() == doctorID && (operation.getStartTime().isAfter(LocalDateTime.now()))) {
 				startTime = operation.getStartTime().toLocalDate();
-				//(care.getPatient() != null) &&
-				if( (startTime.isEqual(date))) {
+				
+				if((operation.getPatient() != null) && (startTime.isEqual(date))) {
 					assigned.add(operation);
 				}
 			}

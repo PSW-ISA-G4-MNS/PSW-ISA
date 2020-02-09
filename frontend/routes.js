@@ -50,6 +50,7 @@ import AuthenticatePrescriptionView from './src/views/AuthenticatePrescriptionVi
 import PatientDetail from "./src/views/PatientDetail.vue";
 import CareConfirm from "./src/views/CareConfirm.vue";
 import CareDecline from "./src/views/CareDecline.vue";
+import ChangeSingleReviewView from "./src/views/ChangeSingleReviewView.vue";
 
 
 
@@ -88,6 +89,7 @@ const routes = [
 
     { path: '/calendar', component: CalendarView},
     {path: '/changeoldReview', component:ChangeReviewView},
+    {path: '/changeSingleReview/:stari', component:ChangeSingleReviewView, props: true},
     
     {path: '/review', component: ReviewView},
     {path: "/review/:patientIdFromCalendar/:careIdFromCalendar", component: ReviewView, props: true},

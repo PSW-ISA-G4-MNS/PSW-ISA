@@ -6,6 +6,7 @@ import ChangeOld from "../widgets/OldReviewChange/ChangeOld.vue"
 
 export default {
     name: "ChangeSingleReviewView",
+    props: ["stari"],
     data: function () {
             return {
 		data: {}
@@ -28,7 +29,10 @@ export default {
 
 <template>
 
-<ChangeOld/>
+<ChangeOld
+:key="stari"
+:id="stari"
+:old="stari"/>
 
 </template>
 
