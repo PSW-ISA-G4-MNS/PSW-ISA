@@ -17,6 +17,7 @@ export default {
 		allDiagnosis: [],
 	    success: false,
 		idOfPrescription:0,
+		prescriptionAdded:false,
         };
     },
     mounted: function() {
@@ -39,6 +40,7 @@ export default {
 	{
 		ReviewService.submit(this.data).then(response => {
 			alert("Review is complete!");
+			this.$router.push("/calendar/");
 
 		});
 	},
@@ -49,16 +51,16 @@ export default {
 			if (response.status == 200) {
 				console.log("nice");
 				this.data.prescriptionId=response.data;
+				this.prescriptionAdded=true;
 			}
 
 		});
 	},
 	selectMedicine: function(index) {
 		console.log("Called with id = " + index);
-		//this.data.medicine=this.medicines[index].id;
 		 $("#dropdownMenuMedicineButton").html(this.allMedicines[index].medicine);
 		 this.medicinesForPrescription.push(this.allMedicines[index]);
-	//	this.Prescription.medicines=this.medicinesForPrescription;
+	
 		
 		
 	},
@@ -117,7 +119,7 @@ export default {
 			</tr>
 		</table>
 
-		<button type="button" @click="accept" style="background-color:green;color:white;height:40px;width:180px">Confirm  prescription</button>
+		<button v-if="!this.prescriptionAdded" type="button" @click="accept" style="background-color:green;color:white;height:40px;width:180px">Confirm  prescription</button>
 		
 		<div class="dropdown">
 		  

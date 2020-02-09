@@ -4,8 +4,8 @@ import MedicineService from "../Medicine/service";
 import DiagnosisService from "../Diagnosis/service";
 
 export default {
-	name: "ReviewForm",
-	props: ["Review","medicalRecordId"],
+	name: "Change",
+	props: ["old"],
     data: function () {
         return {
             data: {
@@ -18,6 +18,7 @@ export default {
 		allDiagnosis: [],
 	    success: false,
 		idOfPrescription:0,
+		prescriptionAdded:false,
         };
     },
 	mounted:
@@ -29,21 +30,19 @@ export default {
     	DiagnosisService.list().then(response => {
 		this.allDiagnosis = response.data; 
 	});
-//, citace samo id,  koji ce da se nalazi u Review
-//ovo se stavi >>>>>
-//this.data.careID=Review;
+
    
 
 		this.Prescription.medicines=this.medicinesForPrescription;
 		
 		
 
-		this.oldReviewSelected=localStorage.getItem('oldReviewSelected');
+		
 
-		OldReviewChangeService .getOld(this.oldReviewSelected).then(response =>{
+		OldReviewChangeService .getOld(this.old).then(response =>{
 			this.Care= response.data;
 			this.data.comment=response.data.comment;
-			this.data.careId=1;
+			this.data.careId=this.old;
 			this.Prescription.id=response.data.prescription.id;
 		});
 	
@@ -55,6 +54,7 @@ export default {
 	{
 		 OldReviewChangeService.submit(this.data).then(response => {
 			alert("Review is changed!");
+			this.$router.push("/changeoldReview/");
 
 		});
 	},
@@ -65,6 +65,7 @@ export default {
 			if (response.status == 200) {
 				console.log("nice");
 				this.data.prescriptionId=response.data;
+				this.prescriptionAdded=true;
 			}
 
 		});
@@ -89,8 +90,11 @@ export default {
 </script>
 
 <template>
+<div v-if="this.Care.comment=!null && this.Care.comment!=undefined && this.Care.presciption!=null && this.Care.prescription!=undefined && this.Care.diagnosis!=null && this.Care.diagnosis!=undefined">
+	
+	
     <div class="form"> 
-        <div class="success-box" v-if="success">Review Started</div>
+        
 	<div v-if="!success"> 
 		
 		<p>
@@ -107,13 +111,13 @@ export default {
 		  </button>
 		</div>
 
-		<div>
+		<div v-if="this.Care.prescritpion!=null && this.Care.prescription!=undefined">
 		<table v-if="this.Care.prescription.medicines.length!=0" style="float:left;">
 			<tr>
 				<th>Old Prescription</th>
 			</tr>
 
-			<tr>
+			<tr  >
 				<th v-for="item in this.Care.prescription.medicines"
 				:id="item"
       			:key="item.medicine">
@@ -148,7 +152,7 @@ export default {
 		</table>
 		</div>
 	
-	<button type="button" @click="accept" style="background-color:green;color:white;height:40px;width:180px">Confirm  prescription</button>
+	<button v-if="!this.prescriptionAdded" type="button" @click="accept" style="background-color:green;color:white;height:40px;width:180px">Confirm  prescription</button>
 		
 
 
@@ -168,6 +172,14 @@ export default {
 		<button type="button" class="btn btn-primary btn-lg btn-block" v-on:click="submit">Coplete the review</button>
 	</div>
     </div>
+	
+	
+    
+	
+</div>
+<div v-else>
+	<h2>Na ovaj pregled ste zakasnili, nije obavljen</h2>
+</div>
 
 </template>
 
