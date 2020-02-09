@@ -30,7 +30,10 @@ public class OperationService {
 	OperationRepository operationRepository;
 	
 	@Autowired
-    CheckRoleService checkRoleService;
+	CheckRoleService checkRoleService;
+	
+	@Autowired
+	RoomService  roomService;
 	
 	@Autowired
 	DoctorRepository doctorRepository;
@@ -177,9 +180,14 @@ public class OperationService {
 	
 	public Operation saveAdmin(Operation operation) {
 		
+		if (operation.getRoom() == null) return null;
+		
 		EmailDTO mail=new EmailDTO();
 		if (operation.getRoom().getSchedule() == null) {
 			operation.getRoom().setSchedule(new ArrayList<>());
+		}
+		if (operation.getStartTime() == null) {
+			operation.setStartTime(roomService.findNextTimeForRoom(operation.getRoom().getId()));
 		}
 		if (operation.getRoom() != null) {
 			if (operation.getRoom().getSchedule() != null) {
