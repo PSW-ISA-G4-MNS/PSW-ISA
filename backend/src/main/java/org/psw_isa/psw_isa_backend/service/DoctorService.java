@@ -140,7 +140,9 @@ public class DoctorService {
 						if(doctorsCaresForDate.size() + doctorsOperationsForDate.size() < 22) {
 							System.out.println("nasao da je manje od dva : " + doctorsCaresForDate.size());
 							if(!res.contains(doctor)) {
-								res.add(doctor);
+								if(doctor.getCareType().getId() == careTypeID) {
+									res.add(doctor);
+								}
 							}
 						}
 					}

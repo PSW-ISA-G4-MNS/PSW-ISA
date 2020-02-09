@@ -30,7 +30,10 @@ export default {
         CareService.reservate(this.data.id).then(response => {
 
 
-          if (response.status == 200)this.success = true;
+          if (response.status == 200){
+            this.success = true;
+            alert("You have successfully reserved a care.");
+          }
           else this.success = false;
           
         return {

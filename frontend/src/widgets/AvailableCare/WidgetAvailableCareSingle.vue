@@ -18,6 +18,7 @@ export default {
           AvailableCareService.sendCareRequest(this.availableCare).then(response => {
 					if (response.status < 300){
               this.success = true;
+              alert("You have successfully sent care request.");
           }
 				});
           
