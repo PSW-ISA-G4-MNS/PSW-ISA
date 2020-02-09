@@ -17,7 +17,8 @@ export default {
         return {
             data: {},
 	    map: null,
-        other: {}
+        other: {},
+        randomId: Math.floor(Math.random() * 100000)
         }
     },
     mounted: function () 
@@ -29,7 +30,7 @@ export default {
         ClinicService.get(this.Clinic).then(response => {
 		this.data = response.data
 		this.map = new Map({
-        		target: 'map',
+        		target: 'map' + this.randomId,
         		layers: [
           			new TileLayer({
             				source: new OSM()
@@ -102,7 +103,7 @@ export default {
     <div class="card-body">
     </div>
     </div>
-    <div id="map" class="map"></div>
+    <div :id="'map' + this.randomId" class="map"></div>
     </div>
 
 </template>
