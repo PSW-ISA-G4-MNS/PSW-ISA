@@ -22,12 +22,12 @@ import LogOut from './src/views/Logout.vue';
 
 import AvailableCaresForDoctor from './src/views/AvailableCaresForDoctor.vue';
 
-import ScheduleOperation from './src/views/ScheduleOperation.vue';
 import RoomEditView from './src/views/RoomEditView.vue';
 import CareTypeList from './src/views/CareTypeList.vue';
 
 import UpdateProfile from './src/views/UpdateProfile.vue';
 
+import ScheduleOperation from './src/views/ScheduleOperation.vue';
 
 import DoctorPatients from "./src/views/DoctorPatients.vue"
 import ScheduleCare from "./src/views/ScheduleCare.vue";
@@ -88,7 +88,7 @@ const routes = [
 
     { path: '/calendar', component: CalendarView},
     {path: '/changeoldReview', component:ChangeReviewView},
-    {path: '/scheduleOperation', component:ScheduleOperation},
+    
     {path: '/review', component: ReviewView},
     {path: "/review/:patientIdFromCalendar/:careIdFromCalendar", component: ReviewView, props: true},
     {path: "/activate/:hash", component: ActivateView, props:true},
