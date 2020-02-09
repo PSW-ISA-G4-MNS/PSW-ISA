@@ -24,7 +24,10 @@ import java.time.LocalDate;
 
 import org.psw_isa.psw_isa_backend.Logger;
 
+import org.springframework.transaction.annotation.Transactional;
+
 @Service
+@Transactional
 public class RoomService {
 	
 	@Autowired
