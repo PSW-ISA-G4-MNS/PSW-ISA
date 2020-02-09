@@ -25,6 +25,7 @@ import org.psw_isa.psw_isa_backend.models.Prescription;
 import org.psw_isa.psw_isa_backend.repository.CareRepository;
 import org.psw_isa.psw_isa_backend.repository.DiagnosisRepository;
 import org.psw_isa.psw_isa_backend.repository.DoctorRepository;
+import org.psw_isa.psw_isa_backend.repository.RoomRepository;
 
 import org.psw_isa.psw_isa_backend.repository.PatientRepository;
 
@@ -42,6 +43,9 @@ public class CareService {
 
 	@Autowired
 	CareRepository careRepository;
+
+	@Autowired
+	RoomRepository roomRepository;
 
 	@Autowired
 	DoctorRepository doctorRepository;
@@ -342,6 +346,20 @@ public class CareService {
 			care.getDoctor() != null
 		) {
 			sendConfirmationMail(care);
+		}
+		if (care.getRoom() != null) {
+			if (care.getRoom().getSchedule() != null) {
+				if (care.getRoom().getSchedule().stream().filter(x -> x.equals(care.getStartTime()))
+					.count() == 0) {
+						care.getRoom().getSchedule().add(care.getStartTime());
+						roomRepository.save(care.getRoom());
+				}
+				else {
+					// we are trying to schedule already scheduled room
+					return null;
+				}
+
+			}
 		}
 		return careRepository.save(care);
 	}
