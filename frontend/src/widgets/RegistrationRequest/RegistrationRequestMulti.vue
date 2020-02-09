@@ -27,7 +27,7 @@ export default {
 </script>
 
 <template>
-<table>
+<table class='form'>
     <tr>
         <th>Insurance ID </th>
         <th>First Name </th>
@@ -50,14 +50,83 @@ export default {
 
 <style scoped> 
 
-table,td,tr,th {
-   border: 1px solid black;
-  border-collapse: collapse;
+.form {
+position:relative;
+    top:20%;
+    left:20%;
+	padding: 40px; 
+	margin: 40px;
+	text-align: center;
+	width: 60%;
+}
 
+
+input{
+width: 50%;
+  padding: 12px 20px;
+  
+  box-sizing: border-box;
 }
-td,th{
-  width: 200px;
-  height: 80px;
+
+body {
+  font-family: Helvetica Neue, Arial, sans-serif;
+  font-size: 14px;
+  color: #444;
 }
+
+table {
+  border: 2px solid #49bcf6;
+  border-radius: 3px;
+  background-color: #fff;
+}
+
+th {
+  background-color: #49bcf6;
+  color: rgba(255,255,255,0.66);
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+td {
+  background-color: #49bcf6;
+}
+
+th, td {
+  min-width: 120px;
+  padding: 10px 20px;
+}
+
+th.active {
+  color: #fff;
+}
+
+th.active .arrow {
+  opacity: 1;
+}
+
+.arrow {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  opacity: 0.66;
+}
+
+.arrow.asc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 4px solid #fff;
+}
+
+.arrow.dsc {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #fff;
+}
+
 
 </style>
