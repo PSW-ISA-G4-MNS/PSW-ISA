@@ -1,0 +1,7 @@
+digraph G {
+    ZAHTEV_U_PRIPREMI -> ZAHTEV_NAPRAVLJEN [label="Zaposleni pravi zahtev za odsustvo"];
+    ZAHTEV_NAPRAVLJEN -> ZAHTEV_ODOBREN [label = "Administrator 1 odobrava zahtev"];
+    ZAHTEV_ODOBREN -> ZAHTEV_PROCESIRAN;
+    ZAHTEV_NAPRAVLJEN -> ZAHTEV_ODBIJEN [label="Administrator 2 odbija zahtev"];
+    ZAHTEV_ODBIJEN -> ZAHTEV_PROCESIRAN;
+}

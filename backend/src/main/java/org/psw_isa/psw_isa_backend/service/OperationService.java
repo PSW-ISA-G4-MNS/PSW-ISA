@@ -181,9 +181,20 @@ public class OperationService {
 		if (operation.getRoom().getSchedule() == null) {
 			operation.getRoom().setSchedule(new ArrayList<>());
 		}
-		operation.getRoom().getSchedule().add(operation.getStartTime());
-		roomRepository.save(operation.getRoom());
-		
+		if (operation.getRoom() != null) {
+			if (operation.getRoom().getSchedule() != null) {
+				if (operation.getRoom().getSchedule().stream().filter(x -> x.equals(operation.getStartTime()))
+					.count() == 0) {
+						operation.getRoom().getSchedule().add(operation.getStartTime());
+						roomRepository.save(operation.getRoom());
+				}
+				else {
+					// we are trying to schedule already scheduled room
+					return null;
+				}
+
+			}
+		}
 		for(Doctor doctor : operation.getDoctors()) {
 			
 			mail.setTo(doctor.getUser().getEmail());

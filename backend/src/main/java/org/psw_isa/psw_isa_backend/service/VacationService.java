@@ -37,6 +37,9 @@ public class VacationService {
 	public Long update(Long id, Vacation vacation) 
 	{
 		vacation.setId(id);
+		Vacation that = findOneByid(id);
+		System.out.println(that);
+		if (that.getProcessed() != null && that.getProcessed() == true) return id;
 		Vacation v = vacationRepository.save(vacation);
 		return v.getId();
 	}
