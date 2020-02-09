@@ -23,6 +23,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -80,55 +83,35 @@ public class CareControllerTest {
         
     }
 
-   
-  
-
-
-    @Test
-    public void findAllUnassignedAndUpcomingForClinicTest() throws Exception {
-        mockMvc.perform(get("/care/"+"/getPredefindedCaresForClinic/"+1L))
-        .andExpect(status().isOk());
-    	// value="/getPredefindedCaresForClinic/{id} ID KLINIKE"
-      
-    }
-
     @Test
     public void updateTest() throws Exception {
-        mockMvc.perform(get("/care/"+1L))
+        mockMvc.perform(post("/care/1")
+        .contentType("application/json")
+        .content("{\"doctor\": null, \"patient\": null, \"room\": null, \"startTime\": \"2020-02-02T12:00:00\", \"endTime\": \"2020-02-02T12:30:00\"}")
+        )
         .andExpect(status().isOk());
-        
-    //     @PostMapping(value="/{id}")
-	// public ResponseEntity<Care> update(@PathVariable("id") Long id, @RequestBody Care care){
-	// 	return new ResponseEntity<>(careService.update(id, care), HttpStatus.OK);
-	// }
         
     }
 
     @Test
     public void saveTest() throws Exception {
-        mockMvc.perform(get("/care/"))
+        mockMvc.perform(post("/care/")
+        .contentType("application/json")
+        .content("{\"careId\": 1, \"roomId\": null, \"doctorId\": null, \"startTime\": \"2020-02-02T12:12:12\", \"endTime\": \"2020-02-02T12:50:12\"}")
+        )
         .andExpect(status().isOk());
         
-        // @PostMapping(consumes = "application/json")
-        // public ResponseEntity<Long> save(@RequestBody CareDTO careDTO){
-            
-        //     Care care = careService.save(careDTO);
-        //     return new ResponseEntity<>(care.getId(),HttpStatus.OK);
-        // }
         
     }
 
 
     @Test
     public void saveWithPatientTest() throws Exception {
-        mockMvc.perform(get("/care/"+"scheduleForPatient/"+1L))
+        mockMvc.perform(post("/care/"+"scheduleForPatient/"+"1")
+            .contentType("application/json")
+            .content("{\"careId\": 1, \"roomId\": null, \"doctorId\": null, \"startTime\": \"2020-02-02T12:12:12\", \"endTime\": \"2020-02-02T12:50:12\"}")
+        )
         .andExpect(status().isOk());
-        
-    //     @PostMapping(value="/scheduleForPatient/{id}", consumes = "application/json")
-	// public ResponseEntity<Long> saveWithPatient(@PathVariable("id") Long patientId, @RequestBody CareDTO careDTO){
-		
-	// 	return new ResponseEntity<>(careService.saveWithPatient(careDTO, patientId).getId(),HttpStatus.OK);
-	// }
 	
         
     }

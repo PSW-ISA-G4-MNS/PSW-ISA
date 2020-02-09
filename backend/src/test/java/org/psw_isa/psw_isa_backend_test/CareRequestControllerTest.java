@@ -65,33 +65,13 @@ public class CareRequestControllerTest {
 
 
     @Test
-    public void careRequestTest() throws Exception {
-        mockMvc.perform(get("/careRequest/"))
-        .andExpect(status().isOk());
-
+    public void careRequestUnauthorizedTest() throws Exception {
+        mockMvc.perform(post("/careRequest/")
+        .contentType("application/json")
+        .content("{\"startTime\": \"2020-02-02T12:12:12\"}")
+        )
+        .andExpect(status().isForbidden());
+    
     }
-
-
-    @Test
-    public void createRequestTest() throws Exception {
-        mockMvc.perform(get("/careRequest/"))
-        .andExpect(status().isOk());
-        
-    //     @PostMapping(consumes = "application/json")
-	// public ResponseEntity<Long> createCareRequest(@RequestBody CareRequestDTO careRequestDTO){
-	// 	int i = careRequestService.createRequest(careRequestDTO);
-		
-	// 	if(i == 0) {
-	// 		return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
-	// 	} else {
-	// 		return new ResponseEntity<>(null, HttpStatus.OK);
-	// 	}
-		
-	// }
-        
-    }
-
-  
-   
    
 }
