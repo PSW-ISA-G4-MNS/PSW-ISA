@@ -24,5 +24,5 @@ class ClinicAdminTest(unittest.TestCase):
         login(self.driver, "clinic_admin@office.com", "XXX")
         self.driver.find_element_by_link_text("Cares").click()
         time.sleep(2)
-        self.assertGreaterEqual(len(self.driver.find_elements_by_xpath('//*[@id="reservate"]/div[1]/button')), 3)
+        self.assertGreaterEqual(len(self.driver.find_elements_by_xpath('//*[@id="reservate"]/div[1]/button')), 1)
         
