@@ -68,7 +68,7 @@ insert into room ("id","title", "capacity", "clinic_id") values ('108','Soba 17'
 
 insert into registration_request ("approved", "time","rejected", "patient_id") values (false, '2020-10-10',false, 105);
 insert into registration_request ("approved", "time","rejected", "patient_id") values (false, '2020-10-10',false, 102);
-
+insert into registration_request ("approved", "time","rejected", "patient_id") values (true, '2020-10-10',false, 101);
 
 insert into public.operation_request (id,time,clinic_id,patient_id) values (101,null,101,103);
 insert into public.operation_request (id,time,clinic_id,patient_id) values (102,null,102,101);
@@ -110,10 +110,9 @@ insert into public.care (id, price, start_time, end_time, care_type_id,  doctor_
 insert into public.care (id, price, start_time, end_time, care_type_id, doctor_id,approved,patient_id) values ( 108, 400, CAST(N'2020-03-10 12:00:00.000' AS timestamp), CAST(N'2020-03-10 12:30:00.000' AS timestamp),102, 102,true,103);
 
 
-insert into public.care (id, price, start_time, end_time, care_type_id,  doctor_id,approved,patient_id) values (109, 200,CAST(N'2020-01-10 10:30:00.000' AS timestamp), CAST(N'2020-01-10 11:00:00.000' AS timestamp), 101, 101,true,101);
-insert into public.care (id, price, start_time, end_time, care_type_id, doctor_id,approved,patient_id) values ( 110, 400, CAST(N'2020-01-09 11:00:00.000' AS timestamp), CAST(N'2020-01-09 11:30:00.000' AS timestamp),101, 101,true,101);
-insert into public.care (id, price, start_time, end_time, care_type_id,  doctor_id,approved,patient_id) values (111, 200,CAST(N'2020-01-07 10:30:00.000' AS timestamp), CAST(N'2020-01-07 11:00:00.000' AS timestamp), 101, 101,true,101);
-
+insert into public.care (id, price, start_time, end_time, care_type_id,  doctor_id,approved,patient_id, diagnosis_id) values (109, 200,CAST(N'2020-01-10 10:30:00.000' AS timestamp), CAST(N'2020-01-10 11:00:00.000' AS timestamp), 101, 101,true,101 , 101);
+insert into public.care (id, price, start_time, end_time, care_type_id, doctor_id,approved,patient_id , diagnosis_id) values ( 110, 400, CAST(N'2020-01-09 11:00:00.000' AS timestamp), CAST(N'2020-01-09 11:30:00.000' AS timestamp),101, 101,true,101, 101);
+insert into public.care (id, price, start_time, end_time, care_type_id,  doctor_id,approved,patient_id, diagnosis_id) values (111, 200,CAST(N'2020-01-07 10:30:00.000' AS timestamp), CAST(N'2020-01-07 11:00:00.000' AS timestamp), 101, 101,true,101 , 101);
 
 
 insert into public.care (id, price, start_time, end_time, care_type_id, doctor_id,approved,patient_id) values (112, 400, CAST(N'2020-03-04 11:00:00.000' AS timestamp), CAST(N'2020-03-04 11:30:00.000' AS timestamp),102, 102,true,null);

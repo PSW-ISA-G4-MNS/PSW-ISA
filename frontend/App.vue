@@ -51,7 +51,7 @@ export default {
 
         <router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/regreq'>Registration Requests</router-link>
         <router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR"' to='/careTypes'>Care Types</router-link>
-        <router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR" ||  data.role == "DOCTOR"|| data.role == "NURSE"|| data.role == "PATIENT"' to='/profile'>My Profile</router-link>
+        <router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR" ||  data.role == "DOCTOR"|| data.role == "NURSE"' to='/profile'>My Profile</router-link>
         <router-link v-if='data.role == "ADMINISTRATOR" || data.role == "CLINIC_ADMINISTRATOR" ||  data.role == "DOCTOR"|| data.role == "NURSE"|| data.role == "PATIENT"' to='/updateUser'>Update profile</router-link>
 		<router-link v-if="data.role == 'PATIENT'" to='/patientMedicalRecord'>Medical record</router-link>
 		<router-link v-if="data.role == 'PATIENT'" to='/patientCareHistory'>Care history</router-link>
