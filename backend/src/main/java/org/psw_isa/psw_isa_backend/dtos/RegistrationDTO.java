@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class RegistrationDTO {
 
-	private String name;
+	private String firstname;
 	private String lastname;
 	private String email;
 	private String mobile_phone;
@@ -14,10 +14,10 @@ public class RegistrationDTO {
 	private String insuranceid;
 	private LocalDate birthday;
 	
-	public RegistrationDTO(String name, String lastname, String email, String password, String password2, String address,
+	public RegistrationDTO(String firstname, String lastname, String email, String password, String password2, String address,
 			String insuranceid, String mobile_phone, LocalDate birthday) {
 		super();
-		this.name = name;
+		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
 		this.mobile_phone = mobile_phone;
@@ -28,12 +28,12 @@ public class RegistrationDTO {
 		this.birthday = birthday;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstname(String name) {
+		this.firstname = name;
 	}
 
 	public String getLastname() {
